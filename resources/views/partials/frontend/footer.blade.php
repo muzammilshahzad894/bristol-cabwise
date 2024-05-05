@@ -12,7 +12,7 @@
                                 </div>
                                 <div class="footer-contact-link-content">
                                     <h6>Call us</h6>
-                                    <p>+971 52-333-4444</p>
+                                    <p>123 45-678-9123</p>
                                 </div>
                             </div>
                             <div class="footer-contact-links-divider"></div>
