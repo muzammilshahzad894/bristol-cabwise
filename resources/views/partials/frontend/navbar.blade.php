@@ -4,7 +4,7 @@
         <div class="logo-wrapper">
             <!-- <a class="logo" href="index-2.html"> <img src="img/logo-light.png" class="logo-img" alt=""> </a> -->
             <!-- <a class="logo" href="index.html"><h2>Renta<span>x</span></h2></a> -->
-            <a class="logo" href="index-2.html">
+            <a class="logo" href="{{ route('frontend.index') }}">
                 <img src="{{ asset('frontend-assets/img/logo-light.png') }}" class="logo-img" alt="" />
             </a>
             <!-- <div class="footer-logo">
@@ -20,10 +20,10 @@
         <!-- Menu -->
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.index') ? 'active' : '' }}" href="{{ route('frontend.index') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.about') ? 'active' : '' }}" href="{{ route('frontend.about') }}">About</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.services') ? 'active' : '' }}" href="{{ route('frontend.services') }}">Services</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.contact') ? 'active' : '' }}" href="{{ route('frontend.contact') }}">Contact</a></li>
             </ul>
             <div class="navbar-right">
                 <div class="wrap">

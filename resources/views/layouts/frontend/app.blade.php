@@ -54,6 +54,7 @@
     <script>
         var logoLightUrl = "{{ asset('frontend-assets/img/logo-light.png') }}";
     </script>
+	@yield('scripts')
 </body>
 
 </html>
