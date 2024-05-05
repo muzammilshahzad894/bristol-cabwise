@@ -24,6 +24,9 @@
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Email <span class="text-danger">*</span></label>
                                     <input type="email" name="email" class="form-control" placeholder="Email" value="{{ $user->email }}">
+                                    @error('email')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Password</label>
