@@ -1,6 +1,7 @@
 @extends('layouts.frontend.app')
 
 @section('content')
+
 <style>
     .new_forms {
 		max-width: 400px;
@@ -46,25 +47,41 @@
     button[type="submit"]:hover {
       background-color: #f5b754;
     }
-
+    .header{
+        height: 700px !important;
+    }
+    @media (max-width: 768px) {
+        .header{
+            height: 1000px !important;
+        }
+        .video-fullscreen-wrap {
+    height: 1000px !important;
+    overflow: hidden;
+}
+.v-middle{
+    margin-top: 130px !important;
+}
+    }
    
   </style>
+
+
 <header class="header">
 	<div class="video-fullscreen-wrap">
 		<!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
 		<div class="video-fullscreen-video" data-overlay-dark="2">
-			<video playsinline="" autoplay="" loop="" muted="">
+			{{-- <video playsinline="" autoplay="" loop="" muted="">
 				<source src="https://duruthemes.com/demo/html/renax/video.mp4" type="video/mp4" autoplay="" loop="" muted="">
 				<source src="https://duruthemes.com/demo/html/renax/video.webm" type="video/webm" autoplay="" loop="" muted="">
-			</video>
+			</video> --}}
 		</div>
-		<div class="v-middle">
+		<div class="v-middle" style="margin-top: 90px;">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 text-center">
+					<div class="col-md-6 text-center" style="display: flex;flex-direction: column; justify-content: center;">
 						<h6>* Premium</h6>
-						<h1>Rental Car</h1>
-						<h5>Bugatti Mistral W16 <span>$800 <i>/ day</i></span></h5>
+						<h1 style="font-size: 60px;">Bristol Cabwise </h1>
+						<h5></h5>
 						<a href="#0" class="button-1 mt-15 mb-15 mr-15">View Details <span class="ti-arrow-top-right"></span></a>
 						<a href="#0" class="button-2 mt-15 mb-15">Rent Now <span class="ti-arrow-top-right"></span></a>
 					</div>
