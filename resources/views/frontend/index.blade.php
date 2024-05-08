@@ -1,7 +1,54 @@
 @extends('layouts.frontend.app')
 
 @section('content')
-<!-- Header Video -->
+<style>
+    .new_forms {
+		max-width: 400px;
+      background-color: rgb(255 255 255 / 20%);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .cutom_button{
+        width: 100%;
+    }
+
+    label {
+      display: block;
+      color: white;
+      font-family: emoji;
+      font-size: 21px;
+      /* margin-bottom: 5px; */
+      margin-top: 5px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      background-color: white;
+    }
+
+    button[type="submit"] {
+      background-color: #f5b754;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 40px !important;
+      margin-left: 10px;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #f5b754;
+    }
+
+   
+  </style>
 <header class="header">
 	<div class="video-fullscreen-wrap">
 		<!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
@@ -14,13 +61,110 @@
 		<div class="v-middle">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12 text-center">
+					<div class="col-md-6 text-center">
 						<h6>* Premium</h6>
 						<h1>Rental Car</h1>
 						<h5>Bugatti Mistral W16 <span>$800 <i>/ day</i></span></h5>
 						<a href="#0" class="button-1 mt-15 mb-15 mr-15">View Details <span class="ti-arrow-top-right"></span></a>
 						<a href="#0" class="button-2 mt-15 mb-15">Rent Now <span class="ti-arrow-top-right"></span></a>
 					</div>
+					<div class="col-md-1"></div>
+					<div class="col-lg-5 col-md-12 mb-30">
+						<form class="new_forms">
+						  <div>
+							<label for="carType">Book Car:</label>
+							<select
+							  name="carType"
+							  id="carType"
+							  class="form-control"
+							  style="color: gray"
+							>
+							  <option value="">Choose Car Type</option>
+							  <option value="1">Luxury Cars</option>
+							  <option value="2">Business Cars</option>
+							  <option value="3">Standard</option>
+							</select>
+						  </div>
+						  <div class="gap-3">
+							<div>
+							  <label for="pickupLocation">Pickup Location:</label>
+							  <input
+								type="text"
+								id="pickupLocation"
+								name="pickupLocation"
+	  
+								placeholder="Enter pickup location"
+								class="form-control pickupLocation"
+							  />
+							</div>
+							<div>
+							  <label for="dropLocation">Drop Location:</label>
+							  <input
+								type="text"
+								id="dropLocation"
+								name="dropLocation"
+								placeholder="Enter drop location"
+								class="form-control pickupLocation"
+							  />
+							</div>
+							<div>
+							  <label for="date">Date:</label>
+							  <input
+							  type="text"
+							  class="form-control input datepicker"
+							  placeholder="Return Date"
+							/>
+							</div>
+						  </div>
+						  <div class="align-items-center">
+							<label for="time">Time:</label>
+							<div class="d-flex gap-2">
+							  <select name="hours" id="" class="w-100">
+								<option value="01">01</option>
+								<option value="02">02</option>
+								<option value="03">03</option>
+								<option value="04">04</option>
+								<option value="05">05</option>
+								<option value="06">06</option>
+								<option value="07">07</option>
+								<option value="08">08</option>
+								<option value="09">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
+								<option value="23">23</option>
+							  </select>
+							  <select name="minutes" id="" class="w-100">
+								<option value="00">00</option>
+								<option value="05">05</option>
+								<option value="10">10</option>
+								<option value="15">15</option>
+								<option value="20">20</option>
+								<option value="25">25</option>
+								<option value="30">30</option>
+								<option value="35">35</option>
+								<option value="40">40</option>
+								<option value="45">45</option>
+								<option value="50">50</option>
+								<option value="55">55</option>
+							  </select>
+							</div>
+						   <button type="submit" class="button-1 mt-15 mb-15 cutom_button">
+							  Submit
+							</button>
+						  </div>
+						</form>
+					  </div>
 				</div>
 			</div>
 		</div>
