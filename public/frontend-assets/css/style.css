@@ -178,6 +178,64 @@ textarea {
     border: none;
     border-radius: 30px;
 }
+
+.new_form {
+    max-width: 500px;
+    background-color: rgb(255 255 255 / 20%);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.both_btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.previous_btn {
+    background: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.new_form label {
+    display: block;
+    color: black;
+    font-family: emoji;
+    font-size: 21px;
+    margin-top: 5px;
+}
+
+/* .new_form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: white;
+} */
+
+.new_form button[type="submit"] {
+    background-color: #f5b754;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.new_form button[type="submit"]:hover {
+    background-color: #f5b754;
+}
+
+
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
