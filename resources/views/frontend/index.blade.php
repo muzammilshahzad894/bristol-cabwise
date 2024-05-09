@@ -61,6 +61,9 @@
 .v-middle{
     margin-top: 130px !important;
 }
+.video-fullscreen-video{
+	height: 1020px !important;
+}
     }
    
   </style>
