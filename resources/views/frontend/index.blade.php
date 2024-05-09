@@ -70,10 +70,10 @@
 	<div class="video-fullscreen-wrap">
 		<!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
 		<div class="video-fullscreen-video" data-overlay-dark="2">
-			{{-- <video playsinline="" autoplay="" loop="" muted="">
+			<video playsinline="" autoplay="" loop="" muted="">
 				<source src="https://duruthemes.com/demo/html/renax/video.mp4" type="video/mp4" autoplay="" loop="" muted="">
 				<source src="https://duruthemes.com/demo/html/renax/video.webm" type="video/webm" autoplay="" loop="" muted="">
-			</video> --}}
+			</video>
 		</div>
 		<div class="v-middle" style="margin-top: 90px;">
 			<div class="container">
