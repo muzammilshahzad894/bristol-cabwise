@@ -14,159 +14,49 @@
         </div>
     </div>
 </section>
-<!-- divider line -->
-<div class="line-vr-section"></div>
-<!-- Team -->
-<section class="team section-padding">
+<section class="about-us section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 text-center mb-30">
-                <div class="section-subtitle">Certified Team</div>
-                <div class="section-title">Our Experts Team</div>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md-12">
-                <div class="owl-carousel owl-theme">
-                    <div class="item"> <img src="{{ asset('frontend-assets/img/team/1.jpg') }}" class="img-fluid" alt="">
-                        <div class="bottom-fade"></div>
-                        <div class="butn icon-bg">
-                            <a href="team-single.html" class="vid">
-                                <div class="icon"> <i class="ti-info"></i> </div>
-                            </a>
-                            <div class="br-left-top">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                            <div class="br-right-bottom">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="title">
-                            <h4>Dan Martin</h4>
-                            <h6>Sales Consultant</h6>
-                        </div>
-                    </div>
-                    <div class="item"> <img src="{{ asset('frontend-assets/img/team/4.jpg') }}" class="img-fluid" alt="">
-                        <div class="bottom-fade"></div>
-                        <div class="info">
-                            <div class="butn icon-bg">
-                                <a href="team-single.html" class="vid">
-                                    <div class="icon"> <i class="ti-info"></i> </div>
-                                </a>
-                                <div class="br-left-top">
-                                    <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                        <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                    </svg>
-                                </div>
-                                <div class="br-right-bottom">
-                                    <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                        <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="title">
-                                <h4>Emily Arla</h4>
-                                <h6>Sales Consultant</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item"> <img src="{{ asset('frontend-assets/img/team/5.jpg') }}" class="img-fluid" alt="">
-                        <div class="bottom-fade"></div>
-                        <div class="info">
-                            <div class="butn icon-bg">
-                                <a href="team-single.html" class="vid">
-                                    <div class="icon"> <i class="ti-info"></i> </div>
-                                </a>
-                                <div class="br-left-top">
-                                    <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                        <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                    </svg>
-                                </div>
-                                <div class="br-right-bottom">
-                                    <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                        <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="title">
-                                <h4>Oliva White</h4>
-                                <h6>Sales Consultant</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item"> <img src="{{ asset('frontend-assets/img/team/2.jpg') }}" class="img-fluid" alt="">
-                        <div class="bottom-fade"></div>
-                        <div class="butn icon-bg">
-                            <a href="team-single.html" class="vid">
-                                <div class="icon"> <i class="ti-info"></i> </div>
-                            </a>
-                            <div class="br-left-top">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                            <div class="br-right-bottom">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="title">
-                            <h4>Margaret Nancy</h4>
-                            <h6>Sales Department</h6>
-                        </div>
-                    </div>
-                    <div class="item"> <img src="{{ asset('frontend-assets/img/team/6.jpg') }}" class="img-fluid" alt="">
-                        <div class="bottom-fade"></div>
-                        <div class="butn icon-bg">
-                            <a href="team-single.html" class="vid">
-                                <div class="icon"> <i class="ti-info"></i> </div>
-                            </a>
-                            <div class="br-left-top">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                            <div class="br-right-bottom">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="title">
-                            <h4>Mia Jane</h4>
-                            <h6>Finance Department</h6>
-                        </div>
-                    </div>
-                    <div class="item"> <img src="{{ asset('frontend-assets/img/team/3.jpg') }}" class="img-fluid" alt="">
-                        <div class="bottom-fade"></div>
-                        <div class="butn icon-bg">
-                            <a href="team-single.html" class="vid">
-                                <div class="icon"> <i class="ti-info"></i> </div>
-                            </a>
-                            <div class="br-left-top">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                            <div class="br-right-bottom">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="title">
-                            <h4>Micheal Brown</h4>
-                            <h6>Sales Consultant</h6>
-                        </div>
-                    </div>
-                </div>
+                <div class="section-subtitle"></div>
+                <h4 class="section-title">Convenient Transportation  <span>Solutions:</span></h4>
+                <p>Our car service offers convenient transportation solutions tailored to your needs. Whether you need a ride to the airport, a business meeting, or a night out in the city, we've got you covered. Our professional drivers will ensure you arrive at your destination safely and on time.
+                </p>
+                <p>Our car service offers convenient transportation solutions tailored to your needs. Whether you need a ride to the airport, a business meeting, or a night out in the city, we've got you covered. Our professional drivers will ensure you arrive at your destination safely and on time.
+                </p>
+            </div>
+            <div class="col-md-12">
+                <div class="section-subtitle"></div>
+                <h4 class="section-title">Reliable and Professional <span>Drivers:</span></h4>
+                <p>Our team of drivers is highly trained, experienced, and dedicated to providing you with the best possible service. You can trust us to get you where you need to go safely and efficiently. Our drivers are courteous, punctual, and knowledgeable about the area, ensuring a smooth and comfortable ride every time.
+                </p>
+                <p>Our team of drivers is highly trained, experienced, and dedicated to providing you with the best possible service. You can trust us to get you where you need to go safely and efficiently. Our drivers are courteous, punctual, and knowledgeable about the area, ensuring a smooth and comfortable ride every time.
+                </p>
+            </div>
+            
+            <div class="col-md-12">
+                <div class="section-subtitle"></div>
+                <h4 class="section-title">Comfortable and Well-Maintained <span>Vehicles:</span></h4>
+                <p>We take pride in maintaining a fleet of comfortable and well-maintained vehicles to meet your transportation needs. From sedans and SUVs to luxury cars, we have a vehicle to suit every occasion. Sit back, relax, and enjoy the ride in one of our clean and spacious vehicles.
+                </p>
+                <p>We take pride in maintaining a fleet of comfortable and well-maintained vehicles to meet your transportation needs. From sedans and SUVs to luxury cars, we have a vehicle to suit every occasion. Sit back, relax, and enjoy the ride in one of our clean and spacious vehicles.
+                </p>
+            </div>
+            <div class="col-md-12">
+                <div class="section-subtitle"></div>
+                <h4 class="section-title">24/7 Customer <span>Support:</span></h4>
+                <p>Our dedicated customer support team is available 24/7 to assist you with any questions or concerns you may have. Whether you need to make a reservation, modify your booking, or request additional services, we're here to help. Your satisfaction is our top priority, and we'll go above and beyond to ensure you have a pleasant experience with us.
+                </p>
+                <p>Our dedicated customer support team is available 24/7 to assist you with any questions or concerns you may have. Whether you need to make a reservation, modify your booking, or request additional services, we're here to help. Your satisfaction is our top priority, and we'll go above and beyond to ensure you have a pleasant experience with us.
+                </p>
             </div>
         </div>
+
     </div>
 </section>
+<style>
+    .first-footer{
+        padding: 0px !important;
+    }
+</style>
 @endsection

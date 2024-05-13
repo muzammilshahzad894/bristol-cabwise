@@ -16,125 +16,207 @@
 <!-- divider line -->
 <div class="line-vr-section"></div>
 <!-- Services Box 2 -->
-<section class="services-box2 section-padding">
+
+<section class="testimonials ">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 mb-45">
-                <div class="item">
-                    <div class="text">
-                        <h5>Airport transfers</h5>
-                        <p>Lorem ipsum dolor sit amet the consectetur adipiscing elit entesque hendrerit elit nisan lacinia feugiat nunc eu aucton.</p>
-                    </div>
-                    <div class="numb">
-                        <div class="numb-curv">
-                            <div class="number">01.</div>
-                            <div class="shap-left-top">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                            <div class="shap-right-bottom">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-12 text-center mb-30">
+                <div class="section-subtitle"></div>
+                    <h1 class="section-title">Our <span>Services</span></h1>
+                
             </div>
-            <div class="col-md-4 mb-45">
-                <div class="item">
-                    <div class="text">
-                        <h5>City ti city transfers</h5>
-                        <p>Lorem ipsum dolor sit amet the consectetur adipiscing elit entesque hendrerit elit nisan lacinia feugiat nunc eu aucton.</p>
-                    </div>
-                    <div class="numb">
-                        <div class="numb-curv">
-                            <div class="number">02.</div>
-                            <div class="shap-left-top">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
+            <div class="col-md-12">
+                <div class="owl-carousel owl-theme">
+                    <div class="item" style="padding:10px;">
+                        <div class="cars_details_view">
+                            <div>
+                                 <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
+                                <h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
+                                <p style="color: #f5b754">Moderline</p>
+                                <p style="color: white ;" class="truncate">
+                                    Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                <div class="">
+                                    <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
+                                </div>
                             </div>
-                            <div class="shap-right-bottom">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
+                            
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-45">
-                <div class="item">
-                    <div class="text">
-                        <h5>Business Transfer</h5>
-                        <p>Lorem ipsum dolor sit amet the consectetur adipiscing elit entesque hendrerit elit nisan lacinia feugiat nunc eu aucton.</p>
-                    </div>
-                    <div class="numb">
-                        <div class="numb-curv">
-                            <div class="number">03.</div>
-                            <div class="shap-left-top">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
+                    <div class="item" style="padding:10px;">
+                        <div class="cars_details_view">
+                            <div>
+                                 <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
+                                <h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
+                                <p style="color: #f5b754">Moderline</p>
+                                <p style="color: white ;" class="truncate" >
+                                    Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                <div class="">
+                                    <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
+                                </div>
                             </div>
-                            <div class="shap-right-bottom">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
+                            
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-45">
-                <div class="item">
-                    <div class="text">
-                        <h5>Events Transfer</h5>
-                        <p>Lorem ipsum dolor sit amet the consectetur adipiscing elit entesque hendrerit elit nisan lacinia feugiat nunc eu aucton.</p>
-                    </div>
-                    <div class="numb">
-                        <div class="numb-curv">
-                            <div class="number">04.</div>
-                            <div class="shap-left-top">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
+                    <div class="item" style="padding:10px;">
+                        <div class="cars_details_view">
+                            <div>
+                                 <img src="{{ asset('frontend-assets/img/slider/9.jpg') }}" alt="" />
+                                <h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
+                                <p style="color: #f5b754">Moderline</p>
+                                <p style="color: white"  class="truncate" >
+                                    Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                <div class="">
+                                    <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
+                                </div>
                             </div>
-                            <div class="shap-right-bottom">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
+                            
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-45">
-                <div class="item">
-                    <div class="text">
-                        <h5>Private Transfer</h5>
-                        <p>Lorem ipsum dolor sit amet the consectetur adipiscing elit entesque hendrerit elit nisan lacinia feugiat nunc eu aucton.</p>
-                    </div>
-                    <div class="numb">
-                        <div class="numb-curv">
-                            <div class="number">05.</div>
-                            <div class="shap-left-top">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                            <div class="shap-right-bottom">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
+<style>
+    .img-fluid {
+        width: 100%;
+        height: 390px !important;
+    }
+
+    .new_forms {
+        max-width: 400px;
+        background-color: rgb(255 255 255 / 20%);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .cutom_button {
+        width: 100%;
+    }
+
+    label {
+        display: block;
+        color: white;
+        font-family: emoji;
+        font-size: 21px;
+        /* margin-bottom: 5px; */
+        margin-top: 5px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: white;
+    }
+
+    .cutom_button {
+        background-color: #f5b754;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 40px !important;
+        margin-left: 10px;
+    }
+
+    .cutom_button:hover {
+        background-color: #f5b754;
+    }
+
+    .header {
+        height: 700px !important;
+    }
+
+    .view_details {
+        color: white;
+        background: #ff8120;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 10px;
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .view_details:hover {
+        background: #ff8120;
+        color: wheat;
+        cursor: pointer;
+    }
+
+    .cars_details_view {
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        border-radius: 10px;
+        background: #222222;
+        margin-top: 20px;
+    }
+
+    .special_rate {
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0);
+        padding: 25px;
+        border-radius: 10px;
+        background: #222222;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .special_rate h4 {
+        color: white;
+    }
+
+    .icon_bg i {
+        background: #ff8120;
+        margin: 5px;
+        border-radius: 10px;
+        font-size: 25px;
+        color: white;
+        height: 50px;
+        width: 50px;
+        padding-top: 10px;
+    }
+
+    .truncate {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        /* Number of lines to show */
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+    }
+
+    .right_border {
+        border-right: 1px solid rgb(237, 235, 235);
+        height: 40px;
+        padding-right: 30px;
+    }
+
+    @media (max-width: 768px) {
+        .header {
+            height: 1000px !important;
+        }
+
+        .video-fullscreen-wrap {
+            height: 1000px !important;
+            overflow: hidden;
+        }
+
+        .v-middle {
+            margin-top: 130px !important;
+        }
+
+        .video-fullscreen-video {
+            height: 1020px !important;
+        }
+    }
+</style>
 @endsection

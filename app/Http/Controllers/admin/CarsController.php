@@ -16,6 +16,7 @@ class CarsController extends Controller
     {
         try {
             $cars = Car::orderBy('id', 'desc')->paginate(10);
+            // dd($cars);
             return view('admin.cars.index', compact('cars'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());

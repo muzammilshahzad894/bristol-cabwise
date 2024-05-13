@@ -58,6 +58,14 @@
     border: none;
     padding: 5px 10px;
     border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+.view_details:hover{
+    background: #ff8120;
+    color: wheat;
+    cursor: pointer;
 }
 .cars_details_view{
 	box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
@@ -88,6 +96,13 @@
     height: 50px;
     width: 50px;
     padding-top: 10px;
+}
+.truncate {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
 }
 .right_border{
 	border-right: 1px solid rgb(237, 235, 235);
@@ -128,99 +143,135 @@
             <div class="v-middle" style="margin-top: 90px;">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 text-center"
-                            style="display: flex;flex-direction: column; justify-content: center;">
+                        <div class="col-md-12 text-center"
+                            style="">
                             <h6>* Premium</h6>
                             <h1 style="font-size: 60px;">Bristol Cabwise </h1>
-                            <h5></h5>
+                            <p style="max-width: 600px; margin: 0 auto; color:white;">
+                                Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat.
+                            </p>
                             <a href="#0" class="button-1 mt-15 mb-15 mr-15">View Details <span
                                     class="ti-arrow-top-right"></span></a>
                             <a href="#0" class="button-2 mt-15 mb-15">Rent Now <span
                                     class="ti-arrow-top-right"></span></a>
                         </div>
-                        <div class="col-md-1"></div>
-                        <div class="col-lg-5 col-md-12 mb-30">
-                            <form class="new_forms">
-                                <div>
-                                    <label for="carType">Book Car:</label>
-                                    <select name="carType" id="carType" class="form-control" style="color: gray">
-                                        <option value="">Choose Car Type</option>
-                                        <option value="1">Luxury Cars</option>
-                                        <option value="2">Business Cars</option>
-                                        <option value="3">Standard</option>
-                                    </select>
-                                </div>
-                                <div class="gap-3">
-                                    <div>
-                                        <label for="pickupLocation">Pickup Location:</label>
-                                        <input type="text" id="pickupLocation" name="pickupLocation"
-                                            placeholder="Enter pickup location" class="form-control pickupLocation" />
-                                    </div>
-                                    <div>
-                                        <label for="dropLocation">Drop Location:</label>
-                                        <input type="text" id="dropLocation" name="dropLocation"
-                                            placeholder="Enter drop location" class="form-control pickupLocation" />
-                                    </div>
-                                    <div>
-                                        <label for="date">Date:</label>
-                                        <input type="text" class="form-control input datepicker"
-                                            placeholder="Return Date" />
-                                    </div>
-                                </div>
-                                <div class="align-items-center">
-                                    <label for="time">Time:</label>
-                                    <div class="d-flex gap-2">
-                                        <select name="hours" id="" class="w-100">
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                            <option value="07">07</option>
-                                            <option value="08">08</option>
-                                            <option value="09">09</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                            <option value="13">13</option>
-                                            <option value="14">14</option>
-                                            <option value="15">15</option>
-                                            <option value="16">16</option>
-                                            <option value="17">17</option>
-                                            <option value="18">18</option>
-                                            <option value="19">19</option>
-                                            <option value="20">20</option>
-                                            <option value="21">21</option>
-                                            <option value="22">22</option>
-                                            <option value="23">23</option>
-                                        </select>
-                                        <select name="minutes" id="" class="w-100">
-                                            <option value="00">00</option>
-                                            <option value="05">05</option>
-                                            <option value="10">10</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                            <option value="25">25</option>
-                                            <option value="30">30</option>
-                                            <option value="35">35</option>
-                                            <option value="40">40</option>
-                                            <option value="45">45</option>
-                                            <option value="50">50</option>
-                                            <option value="55">55</option>
-                                        </select>
-                                    </div>
-                                    <button type="button" class="button-1 mt-15 mb-15 cutom_button">
-                                        Submit
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                    
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    {{-- Additional Section  --}}
+
+	{{-- <section class="process section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="cars_details_view">
+						<div>
+							 <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
+							<h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
+							<p style="color: #f5b754">Moderline</p>
+							<div class="">
+								<button class="view_details">View Details</button>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="cars_details_view">
+						<div>
+							 <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
+							<h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
+							<p style="color: #f5b754">Moderline</p>
+							<div class="">
+								<button class="view_details">View Details</button>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="cars_details_view">
+						<div>
+							 <img src="{{ asset('frontend-assets/img/slider/9.jpg') }}" alt="" />
+							<h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
+							<p style="color: #f5b754">Moderline</p>
+							<div class="">
+								<button class="view_details">View Details</button>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section> --}}
+    
+    
+    <section class="testimonials section-padding mt-15">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center mb-30">
+                    <div class="section-subtitle"></div>
+                        <h1 class="section-title">Our <span>Services</span></h1>
+                    
+                </div>
+                <div class="col-md-12">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item" style="padding:10px;">
+                            <div class="cars_details_view">
+                                <div>
+                                     <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
+                                    <h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
+                                    <p style="color: #f5b754">Moderline</p>
+                                    <p style="color: white ;" class="truncate">
+                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                    <div class="">
+                                        <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="item" style="padding:10px;">
+                            <div class="cars_details_view">
+                                <div>
+                                     <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
+                                    <h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
+                                    <p style="color: #f5b754">Moderline</p>
+                                    <p style="color: white ;" class="truncate" >
+                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                    <div class="">
+                                        <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="item" style="padding:10px;">
+                            <div class="cars_details_view">
+                                <div>
+                                     <img src="{{ asset('frontend-assets/img/slider/9.jpg') }}" alt="" />
+                                    <h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
+                                    <p style="color: #f5b754">Moderline</p>
+                                    <p style="color: white"  class="truncate" >
+                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                    <div class="">
+                                        <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
 
     <!-- Car Category -->
     <section class="car-types1 section-padding">
@@ -228,7 +279,7 @@
             <div class="row">
                 <div class="col-md-12 text-center mb-30">
                     <div class="section-subtitle">Categories</div>
-                    <div class="section-title">Rental <span>Car Types</span></div>
+                    <div class="section-title">Our <span>Fleets</span></div>
                 </div>
             </div>
             <div class="row">
@@ -278,7 +329,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-12 text-center mb-30">
                     <div class="section-subtitle">Steps</div>
-                    <div class="section-title white">Car Rental <span>Process</span></div>
+                    <div class="section-title white">Car Booking <span>Process</span></div>
                 </div>
             </div>
             <div class="row">
@@ -372,102 +423,11 @@
             </div>
         </div>
     </section>
-	{{-- Additional Section  --}}
-
-	<section class="process section-padding">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="cars_details_view">
-						<div>
-							 <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
-							<h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
-							<p style="color: #f5b754">Moderline</p>
-							<div class="d-flex justify-content-around">
-								<div class="right_border">
-									<i class="fas fa-car"></i>
-									<p>4</p>
-								</div>
-								<div class="right_border">
-									<i class="fas fa-chair"></i>
-									<p>4</p>
-								</div>
-								<div class="right_border">
-									<i class="fas fa-suitcase"></i>
-									<p>2 bags</p>
-								</div>
-							</div>
-							<div class="d-flex justify-content-between mt-4 align-items-center">
-								<p class="text-white pt-2"> $100/day</p>
-								<button class="view_details">View Details</button>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="cars_details_view">
-						<div>
-							 <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
-							<h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
-							<p style="color: #f5b754">Moderline</p>
-							<div class="d-flex justify-content-around">
-								<div class="right_border">
-									<i class="fas fa-car"></i>
-									<p>4</p>
-								</div>
-								<div class="right_border">
-									<i class="fas fa-chair"></i>
-									<p>4</p>
-								</div>
-								<div class="right_border">
-									<i class="fas fa-suitcase"></i>
-									<p>2 bags</p>
-								</div>
-							</div>
-							<div class="d-flex justify-content-between mt-4 align-items-center">
-								<p class="text-white pt-2"> $100/day</p>
-								<button class="view_details">View Details</button>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="cars_details_view">
-						<div>
-							 <img src="{{ asset('frontend-assets/img/slider/9.jpg') }}" alt="" />
-							<h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
-							<p style="color: #f5b754">Moderline</p>
-							<div class="d-flex justify-content-around">
-								<div class="right_border">
-									<i class="fas fa-car"></i>
-									<p>4</p>
-								</div>
-								<div class="right_border">
-									<i class="fas fa-chair"></i>
-									<p>4</p>
-								</div>
-								<div class="right_border">
-									<i class="fas fa-suitcase"></i>
-									<p>2 bags</p>
-								</div>
-							</div>
-							<div class="d-flex justify-content-between mt-4 align-items-center">
-								<p class="text-white pt-2"> $100/day</p>
-								<button class="view_details">View Details</button>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	
 
 	{{-- second addtional section  --}}
 	
-	<section class="process">
+	<section class="process d-none">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
