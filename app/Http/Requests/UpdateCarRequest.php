@@ -26,7 +26,7 @@ class UpdateCarRequest extends FormRequest
         return [
             'type' => 'required',
             'price' => 'required',
-            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'status' => 'required',
         ];
     }

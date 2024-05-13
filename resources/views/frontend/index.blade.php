@@ -84,8 +84,8 @@
 						<h6>* Premium</h6>
 						<h1 style="font-size: 60px;">Bristol Cabwise </h1>
 						<h5></h5>
-						<a href="#0" class="button-1 mt-15 mb-15 mr-15">View Details <span class="ti-arrow-top-right"></span></a>
-						<a href="#0" class="button-2 mt-15 mb-15">Rent Now <span class="ti-arrow-top-right"></span></a>
+						<a href="#0" class="button-1 mt-15 mb-15 mr-15">Get Quotes <span class="ti-arrow-top-right"></span></a>
+						<a href="#0" class="button-2 mt-15 mb-15">Book Now <span class="ti-arrow-top-right"></span></a>
 					</div>
 					<div class="col-md-1"></div>
 					<div class="col-lg-5 col-md-12 mb-30">
@@ -196,7 +196,7 @@
 		<div class="row">
 			<div class="col-md-12 text-center mb-30">
 				<div class="section-subtitle">Categories</div>
-				<div class="section-title">Rental <span>Car Types</span></div>
+				<div class="section-title">Our <span>Fleets</span></div>
 			</div>
 		</div>
 		<div class="row">

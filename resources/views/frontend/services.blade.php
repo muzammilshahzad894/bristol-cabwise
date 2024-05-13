@@ -22,7 +22,7 @@
             <div class="col-md-4 mb-45">
                 <div class="item">
                     <div class="text">
-                        <h5>Corporate Car Rental</h5>
+                        <h5>Airport transfers</h5>
                         <p>Lorem ipsum dolor sit amet the consectetur adipiscing elit entesque hendrerit elit nisan lacinia feugiat nunc eu aucton.</p>
                     </div>
                     <div class="numb">
@@ -45,7 +45,7 @@
             <div class="col-md-4 mb-45">
                 <div class="item">
                     <div class="text">
-                        <h5>Car Rental with Driver</h5>
+                        <h5>City ti city transfers</h5>
                         <p>Lorem ipsum dolor sit amet the consectetur adipiscing elit entesque hendrerit elit nisan lacinia feugiat nunc eu aucton.</p>
                     </div>
                     <div class="numb">
@@ -68,7 +68,7 @@
             <div class="col-md-4 mb-45">
                 <div class="item">
                     <div class="text">
-                        <h5>Airport Transfer</h5>
+                        <h5>Business Transfer</h5>
                         <p>Lorem ipsum dolor sit amet the consectetur adipiscing elit entesque hendrerit elit nisan lacinia feugiat nunc eu aucton.</p>
                     </div>
                     <div class="numb">
@@ -91,7 +91,7 @@
             <div class="col-md-4 mb-45">
                 <div class="item">
                     <div class="text">
-                        <h5>Fleet Leasing</h5>
+                        <h5>Events Transfer</h5>
                         <p>Lorem ipsum dolor sit amet the consectetur adipiscing elit entesque hendrerit elit nisan lacinia feugiat nunc eu aucton.</p>
                     </div>
                     <div class="numb">
@@ -114,35 +114,12 @@
             <div class="col-md-4 mb-45">
                 <div class="item">
                     <div class="text">
-                        <h5>VIP Transfer</h5>
-                        <p>Lorem ipsum dolor sit amet the consectetur adipiscing elit entesque hendrerit elit nisan lacinia feugiat nunc eu aucton.</p>
-                    </div>
-                    <div class="numb">
-                        <div class="numb-curv">
-                            <div class="number">05.</div>
-                            <div class="shap-left-top">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                            <div class="shap-right-bottom">
-                                <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
-                                    <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-45">
-                <div class="item">
-                    <div class="text">
                         <h5>Private Transfer</h5>
                         <p>Lorem ipsum dolor sit amet the consectetur adipiscing elit entesque hendrerit elit nisan lacinia feugiat nunc eu aucton.</p>
                     </div>
                     <div class="numb">
                         <div class="numb-curv">
-                            <div class="number">06.</div>
+                            <div class="number">05.</div>
                             <div class="shap-left-top">
                                 <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
                                     <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
