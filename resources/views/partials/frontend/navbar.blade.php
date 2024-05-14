@@ -24,6 +24,8 @@
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.about') ? 'active' : '' }}" href="{{ route('frontend.about') }}">About</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.services') ? 'active' : '' }}" href="{{ route('frontend.services') }}">Services</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.contact') ? 'active' : '' }}" href="{{ route('frontend.contact') }}">Contact</a></li>
+                <li class="nav-item">
+                    <a href="{{ route('frontend.services') }}" class="booking_online_btn">Book Now</a></li>
             </ul>
             <div class="navbar-right">
                 <div class="wrap">
@@ -32,6 +34,7 @@
                         <p>Need help?</p>
                         <h5><a href="tel:8551004444">123 456 67890</a></h5>
                     </div>
+
                 </div>
             </div>
         </div>

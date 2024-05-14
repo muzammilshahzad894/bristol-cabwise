@@ -10,6 +10,33 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+        .modal-body {
+    padding: 20px;
+}
+
+#countdown {
+    margin-bottom: 20px;
+}
+
+.coupon-code {
+    margin-bottom: 20px;
+}
+
+.coupon-heading {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.coupon {
+    font-size: 36px;
+    color: #f00; /* Red color for emphasis */
+}
+
+.modal-footer {
+    /* justify-content: center; */
+    padding: 20px;
+}
+
 
         .cutom_button {
             width: 100%;
@@ -52,110 +79,128 @@
         .header {
             height: 700px !important;
         }
-.view_details{
-	color: white;
-    background: #ff8120;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 10px;
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-}
-.view_details:hover{
-    background: #ff8120;
-    color: wheat;
-    cursor: pointer;
-}
-.cars_details_view{
-	box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
-	padding: 10px;
-	border-radius: 10px;
-	background: #222222;
-	margin-top: 20px;
-}
-.special_rate{
-	box-shadow: 0 0 10px 0 rgba(0,0,0,0);
-	padding: 25px;
-	border-radius: 10px;
-	background: #222222;
-	margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-.special_rate h4{
-	color: white;
-}
-.icon_bg i{
-	background: #ff8120;
-    margin: 5px;
-    border-radius: 10px;
-    font-size: 25px;
-    color: white;
-    height: 50px;
-    width: 50px;
-    padding-top: 10px;
-}
-.truncate {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Number of lines to show */
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-}
-.right_border{
-	border-right: 1px solid rgb(237, 235, 235);
-	height: 40px;
-	padding-right: 30px;
-}
+        .modal{
+            background: rgb(0 0 0 / 75%);
+        }
+        .view_details {
+            color: white;
+            background: #ff8120;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 10px;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .view_details:hover {
+            background: #ff8120;
+            color: wheat;
+            cursor: pointer;
+        }
+
+        .cars_details_view {
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            background: #222222;
+            margin-top: 20px;
+        }
+
+        .special_rate {
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0);
+            padding: 25px;
+            border-radius: 10px;
+            background: #222222;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .special_rate h4 {
+            color: white;
+        }
+
+        .icon_bg i {
+            background: #ff8120;
+            margin: 5px;
+            border-radius: 10px;
+            font-size: 25px;
+            color: white;
+            height: 50px;
+            width: 50px;
+            padding-top: 10px;
+        }
+
+        .truncate {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Number of lines to show */
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+        }
+
+        .right_border {
+            border-right: 1px solid rgb(237, 235, 235);
+            height: 40px;
+            padding-right: 30px;
+        }
+        .video-fullscreen-wrap video{
+            object-fit: fill !important;
+        }
+
         @media (max-width: 768px) {
             .header {
-                height: 1000px !important;
+                height: 100% !important;
+            }.video-fullscreen-video{
+                height: 700px !important;
             }
 
             .video-fullscreen-wrap {
-                height: 1000px !important;
+                height: 100% !important;
                 overflow: hidden;
             }
 
             .v-middle {
-                margin-top: 130px !important;
+                margin-top: 0px !important;
             }
 
             .video-fullscreen-video {
-                height: 1020px !important;
+                height: 100%;
             }
         }
     </style>
-
     <header class="header">
         <div class="video-fullscreen-wrap">
             <!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
             <div class="video-fullscreen-video" data-overlay-dark="2" style="height: 800px;">
-                <video playsinline="" autoplay="" loop="" muted="">
-                    <source src="https://duruthemes.com/demo/html/renax/video.mp4" type="video/mp4" autoplay=""
-                        loop="" muted="">
-                    <source src="https://duruthemes.com/demo/html/renax/video.webm" type="video/webm" autoplay=""
-                        loop="" muted="">
-                </video>
+
+                <video preload="auto"  autoplay muted playsinline loop
+                    alt="Senior Adult, People, Lifestyles, Lu"
+                    poster="https://artgrid.imgix.net/footage-graded-thumbnail/0fdf7ba525_1226027_0-second_w800px.jpeg"
+                    src="https://artlist.io/968d3017-97b2-450b-ac81-c2dc84720588"
+                    style="width: 100%; height: 100%;"></video>
+
             </div>
             <div class="v-middle" style="margin-top: 90px;">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12 text-center"
-                            style="">
+                        <div class="col-md-12 text-center" style="">
                             <h6>* Premium</h6>
                             <h1 style="font-size: 60px;">Bristol Cabwise </h1>
                             <p style="max-width: 600px; margin: 0 auto; color:white;">
-                                Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat.
+                                Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus
+                                consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices
+                                euismon sit amet id lacus. Sed a imperdiet erat.
                             </p>
                             <a href="#0" class="button-1 mt-15 mb-15 mr-15">View Details <span
                                     class="ti-arrow-top-right"></span></a>
-                            <a href="#0" class="button-2 mt-15 mb-15">Rent Now <span
-                                    class="ti-arrow-top-right"></span></a>
+                          
+                    <a href="{{ route('frontend.services') }}" class="button-2 mt-15 mb-15">Book Online</a>
                         </div>
-                    
+
                     </div>
                 </div>
             </div>
@@ -163,7 +208,7 @@
     </header>
     {{-- Additional Section  --}}
 
-	{{-- <section class="process section-padding">
+    {{-- <section class="process section-padding">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
@@ -208,61 +253,70 @@
 			</div>
 		</div>
 	</section> --}}
-    
-    
+
+
     <section class="testimonials section-padding mt-15">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mb-30">
                     <div class="section-subtitle"></div>
-                        <h1 class="section-title">Our <span>Services</span></h1>
-                    
+                    <h1 class="section-title">Our <span>Services</span></h1>
+
                 </div>
                 <div class="col-md-12">
                     <div class="owl-carousel owl-theme">
                         <div class="item" style="padding:10px;">
                             <div class="cars_details_view">
                                 <div>
-                                     <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
+                                    <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
                                     <h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
                                     <p style="color: #f5b754">Moderline</p>
                                     <p style="color: white ;" class="truncate">
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
-                                    <div class="">
-                                        <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                    </div>
+                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
+                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
+                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                        <div class="d-flex justify-content-between gap-4">
+                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
+                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
+                                        </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="item" style="padding:10px;">
                             <div class="cars_details_view">
                                 <div>
-                                     <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
+                                    <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
                                     <h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
                                     <p style="color: #f5b754">Moderline</p>
-                                    <p style="color: white ;" class="truncate" >
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
-                                    <div class="">
-                                        <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                    </div>
+                                    <p style="color: white ;" class="truncate">
+                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
+                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
+                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                        <div class="d-flex justify-content-between gap-4">
+                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
+                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
+                                        </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="item" style="padding:10px;">
                             <div class="cars_details_view">
                                 <div>
-                                     <img src="{{ asset('frontend-assets/img/slider/9.jpg') }}" alt="" />
+                                    <img src="{{ asset('frontend-assets/img/slider/9.jpg') }}" alt="" />
                                     <h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
                                     <p style="color: #f5b754">Moderline</p>
-                                    <p style="color: white"  class="truncate" >
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
-                                    <div class="">
-                                        <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                    </div>
+                                    <p style="color: white" class="truncate">
+                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
+                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
+                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                        <div class="d-flex justify-content-between gap-4">
+                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
+                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
+                                        </div>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -271,7 +325,7 @@
             </div>
         </div>
     </section>
-    
+
 
     <!-- Car Category -->
     <section class="car-types1 section-padding">
@@ -287,8 +341,8 @@
                     <div class="owl-carousel owl-theme">
                         @if ($cars->count() > 0)
                             @foreach ($cars as $car)
-                                <div class="item"> <img src="{{ asset('uploads/cars/' . $car->image) }}"
-                                        class="img-fluid" alt="">
+                                <div class="item"> <img src="{{ asset('uploads/cars/' . $car->image) }}" class="img-fluid"
+                                        alt="">
                                     <div class="title">
                                         <h4>{{ $car->type }}</h4>
                                     </div>
@@ -423,61 +477,61 @@
             </div>
         </div>
     </section>
-	
 
-	{{-- second addtional section  --}}
-	
-	<section class="process d-none">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="special_rate">
-						<div class="icon_bg">
-							<i class="fas fa-phone-alt"></i>
-						</div>
-						<h4>Phone reservation</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="special_rate">
-						<div class="icon_bg">
-							<i class="fas fa-dollar-sign"></i>
-						</div>
-						<h4>Speical Rates</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="special_rate">
-						<div class="icon_bg">
-							<i class="fas fa-road"></i>
-						</div>
-						<h4>On Way Rental</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="special_rate">
-						<div class="icon_bg">
-							<i class="fas fa-umbrella"></i>
-						</div>
-						<h4>Life Insurance</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="special_rate">
-						<div class="icon_bg">
-							<i class="fas fa-car"></i>
-						</div>
-						<h4>Free Rides</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>	
+
+    {{-- second addtional section  --}}
+
+    <section class="process d-none">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="special_rate">
+                        <div class="icon_bg">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h4>Phone reservation</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="special_rate">
+                        <div class="icon_bg">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h4>Speical Rates</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="special_rate">
+                        <div class="icon_bg">
+                            <i class="fas fa-road"></i>
+                        </div>
+                        <h4>On Way Rental</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="special_rate">
+                        <div class="icon_bg">
+                            <i class="fas fa-umbrella"></i>
+                        </div>
+                        <h4>Life Insurance</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="special_rate">
+                        <div class="icon_bg">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h4>Free Rides</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Testimonials -->
     <section class="testimonials section-padding mt-15">
@@ -681,4 +735,75 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Get 10% Off Now!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="countdown">
+                        <h4>This coupon is valid for the next 12 hours.</h4>
+                    </div>
+                    <div class="coupon-code">
+                        <h2 class="coupon-heading">Your Coupon Code:</h2>
+                        <h1 class="coupon" id="couponCode">123456</h1>
+                        <button class="view_details" onclick="copyToClipboard()">Copy copoun</button>
+                    </div>
+                    <div id="copyAlert" class="alert alert-success mt-3" style="display: none;">Coupon code copied to clipboard!</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            // Get the video element
+            const video = document.getElementById('fullscreen-video');
+    
+            // Play the video
+            video.play().then(() => {
+                // Autoplay started successfully
+                console.log('Video autoplay started successfully');
+            }).catch((error) => {
+                // Autoplay failed
+                console.error('Video autoplay failed:', error);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+  // Check if modal should be opened
+  if (localStorage.getItem('modalClosed')) {
+    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    myModal.show();
+  }
+});
+
+// Listen for modal close event
+var myModalEl = document.getElementById('exampleModal');
+myModalEl.addEventListener('hidden.bs.modal', function () {
+
+  localStorage.setItem('modalClosed', true);
+});
+function copyToClipboard() {
+    var couponCode = document.getElementById('couponCode').innerText;
+    navigator.clipboard.writeText(couponCode).then(function() {
+        // Show copy success alert
+        var copyAlert = document.getElementById('copyAlert');
+        copyAlert.style.display = 'block';
+        setTimeout(function() {
+            copyAlert.style.display = 'none';
+        }, 2000); // Hide the alert after 2 seconds
+    }, function(err) {
+        console.error('Failed to copy: ', err);
+    });
+}
+
+    </script>
 @endsection
