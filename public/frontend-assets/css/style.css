@@ -4986,8 +4986,8 @@ height: 100% !important;
 }
 .button-1:hover {
     border: 1px solid #fff;
-    background-color: #fff;
-    color: #1b1b1b;
+    background-color: black;
+    color: #fff;
     transform: translate3d(0px, -6px, 0.01px);
 }
 .button-1:hover span {

@@ -269,7 +269,7 @@
                             <div class="cars_details_view">
                                 <div>
                                     <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
+                                    <h4 class="text-white mb-0 pt-2">Airport transfers</h4>
                                     <p style="color: #f5b754">Moderline</p>
                                     <p style="color: white ;" class="truncate">
                                         Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
@@ -287,7 +287,7 @@
                             <div class="cars_details_view">
                                 <div>
                                     <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
+                                    <h4 class="text-white mb-0 pt-2">City ti city transfers </h4>
                                     <p style="color: #f5b754">Moderline</p>
                                     <p style="color: white ;" class="truncate">
                                         Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
@@ -305,7 +305,43 @@
                             <div class="cars_details_view">
                                 <div>
                                     <img src="{{ asset('frontend-assets/img/slider/9.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
+                                    <h4 class="text-white mb-0 pt-2">Business </h4>
+                                    <p style="color: #f5b754">Moderline</p>
+                                    <p style="color: white" class="truncate">
+                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
+                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
+                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                        <div class="d-flex justify-content-between gap-4">
+                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
+                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
+                                        </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="item" style="padding:10px;">
+                            <div class="cars_details_view">
+                                <div>
+                                    <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
+                                    <h4 class="text-white mb-0 pt-2">Private </h4>
+                                    <p style="color: #f5b754">Moderline</p>
+                                    <p style="color: white" class="truncate">
+                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
+                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
+                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                        <div class="d-flex justify-content-between gap-4">
+                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
+                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
+                                        </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="item" style="padding:10px;">
+                            <div class="cars_details_view">
+                                <div>
+                                    <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
+                                    <h4 class="text-white mb-0 pt-2">Events  </h4>
                                     <p style="color: #f5b754">Moderline</p>
                                     <p style="color: white" class="truncate">
                                         Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
@@ -726,7 +762,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h6>Rent Your Car</h6>
-                    <h5>Interested in Renting?</h5>
+                    <h5>Interested in booking?</h5>
                     <p>Don't hesitate and send us a message.</p> <a href="tel:+8001234567"
                         class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a
                         href="contact.html" class="button-2 mt-15 mb-15">Contact Us <span

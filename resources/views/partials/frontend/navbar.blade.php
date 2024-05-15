@@ -32,7 +32,7 @@
                     <div class="icon"> <i class="flaticon-phone-call"></i> </div>
                     <div class="text">
                         <p>Need help?</p>
-                        <h5><a href="tel:8551004444">123 456 67890</a></h5>
+                        <h5><a href="tel:07533225970">07533225970</a></h5>
                     </div>
 
                 </div>

@@ -392,7 +392,7 @@
                                 <option value="2">Paypal</option>
                             </select>
                         </div> --}}
-                        <h3 class="color">Select the car.</h3>
+                        <h3 class="color">Please select</h3>
 
                         <div class="main-div">
                             <div class="col-md-6 form-container">

@@ -12,7 +12,7 @@
                                 </div>
                                 <div class="footer-contact-link-content">
                                     <h6>Call us</h6>
-                                    <p>123 45-678-9123</p>
+                                    <p>07533225970</p>
                                 </div>
                             </div>
                             <div class="footer-contact-links-divider"></div>
@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="footer-contact-link-content">
                                     <h6>Write to us</h6>
-                                    <p>dummy@gmail.com</p>
+                                    <p>info@bristolcabwise.com</p>
                                 </div>
                             </div>
                             <div class="footer-contact-links-divider"></div>
@@ -32,7 +32,9 @@
                                 </div>
                                 <div class="footer-contact-link-content">
                                     <h6>Address</h6>
-                                    <p>USA address</p>
+                                    <p>81 Blackberry Hill 
+                                        Bristol 
+                                        Bs161df</p>
                                 </div>
                             </div>
                         </div>
@@ -55,13 +57,13 @@
                         <!-- <div class="footer-logo"><h2>CARE<span>X</span></h2></div> -->
                         <div class="widget-text">
                             <p>Rent a car imperdiet sapien porttito the bibenum ellentesue the commodo erat nesuen.</p>
-                            <div class="social-icons">
+                            {{-- <div class="social-icons">
                                 <ul class="list-inline">
                                     <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
                                     <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
                                     <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
                                 </ul>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -69,12 +71,14 @@
                 <div class="col-md-3 offset-md-1 widget-area">
                     <div class="widget clearfix usful-links">
                         <h3 class="widget-title">Quick Links</h3>
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.index') ? 'active' : '' }}" href="{{ route('frontend.index') }}">Home</a></li>
+              
                         <ul>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="cars.html">Cars</a></li>
-                            <li><a href="car-types.html">Car Types</a></li>
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="{{ route('frontend.index') }}">Home</a></li>
+                            <li><a href="{{ route('frontend.about') }}">About</a></li>
+                            <li><a href="{{ route('frontend.services') }}">Services</a></li>
+                            <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
+                            <li><a href="{{ route('frontend.services') }}" class="booking_online_btn">Book Now</a></li>
                         </ul>
                     </div>
                 </div>
