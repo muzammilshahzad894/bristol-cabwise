@@ -5,12 +5,17 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\CarsController;
 use App\Http\Controllers\admin\ServicesController;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/optimize', function () {
+    Artisan::call('optimize:clear');
+    return 'Cache cleared';
+});
 
 // check if user is already logged in then redirect to dashboard
 Route::middleware(['guest'])->group(function () {
     Route::match(['get', 'post'], '/admin/login', [AdminLoginController::class, 'login'])->name('admin.login');
 });
-
 
 // protected routes
 Route::middleware(['admin'])->group(function () {
