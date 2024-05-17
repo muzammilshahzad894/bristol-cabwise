@@ -26,7 +26,7 @@
                                 <tr>
                                     <td>{{ $service->name }}</td>
                                     <td><img src="{{ asset('uploads/services/'.$service->image) }}" alt="{{ $service->image }}" class="img-fluid" width="70"></td>
-                                    <td>
+                                    <td class="text-left">
                                         <a href="{{ route('admin.services.edit', $service->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                         <a href="{{ route('admin.services.delete', $service->id) }}" 
                                         class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash"></i></a>

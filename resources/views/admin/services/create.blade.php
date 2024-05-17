@@ -31,7 +31,7 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Image <span class="text-danger">*</span></label>
-                                    <input type="file" name="image" class="form-control" placeholder="Image" value="{{ old('image') }}">
+                                    <input type="file" name="image" class="form-control" placeholder="Image" value="{{ old('image') }}" required>
                                     @error('image')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror

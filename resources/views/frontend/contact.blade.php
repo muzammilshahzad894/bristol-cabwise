@@ -1,8 +1,17 @@
 @extends('layouts.frontend.app')
-
+<style>
+    @media (max-width: 767px) {
+       .button-1{
+        padding : 14px 30px !important;
+       }
+       .button-2{
+        padding : 14px 30px !important;
+       }
+    }
+</style>
 @section('content')
 <!-- Header Banner -->
-<section class="banner-header middle-height section-padding bg-img" data-overlay-dark="5" data-background="{{ asset('frontend-assets/img/slider/3.jpg') }}">
+<section class="banner-header middle-height section-padding bg-img" data-overlay-dark="5" data-background="{{ asset('frontend-assets/img/slider/about.jpg') }}">
     <div class="v-middle">
         <div class="container">
             <div class="row">
@@ -21,25 +30,25 @@
             <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                 <div class="item"> <span class="icon omfi-envelope"></span>
                     <h5>Email us</h5>
-                    <p>dummy@gmail.com</p> <i class="numb omfi-envelope"></i>
+                    <p>info@bristolcabwise.com</p> <i class="numb omfi-envelope"></i>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                 <div class="item"> <span class="icon omfi-location"></span>
                     <h5>Our address</h5>
-                    <p>USA address</p> <i class="numb omfi-location"></i>
+                    <p>81 Blackberry Hill Bristol Bs161df</p> <i class="numb omfi-location"></i>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                 <div class="item"> <span class="icon ti-time"></span>
                     <h5>Opening Hours</h5>
-                    <p>Mon-Sun: 8 AM - 7 PM</p> <i class="numb ti-time"></i>
+                    <p>Open Hours 24/7</p> <i class="numb ti-time"></i>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                 <div class="item active"> <span class="icon omfi-phone"></span>
                     <h5>Call us</h5>
-                    <p>123 45-678-9012</p> <i class="numb omfi-phone"></i>
+                    <p> +44 7533 225970</p> <i class="numb omfi-phone"></i>
                 </div>
             </div>
         </div>

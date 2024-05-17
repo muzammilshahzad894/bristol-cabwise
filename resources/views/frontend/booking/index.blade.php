@@ -8,15 +8,35 @@
         color: white;
         background: #f0901d;
         padding: 5;
+        border-bottom-right-radius : 10px;
 
+    }
+    .meet_greet input[type="checkbox"] {
+        height: 25px;
+        width: 25px;
+        margin-top: 6px;
+    }
+    .meet_greet{
+        padding-top: 20px;
+    }
+    .meet_greet label {
+       cursor: pointer;
     }
 
     .color {
-        color: white;
+        color: #f8941d;
+        display: inline-block;
+        border-bottom: 1px solid white;
+    }
+    .p-6 strong {
+        font-weight: bolder;
+        font-size: 19px;
+        color: #f0901d;
     }
 
     .footer-box p {
         margin-bottom: 0px !important;
+        color: white !important;
     }
 
     .proceed {
@@ -28,18 +48,19 @@
     }
 
     .p-6 {
-        padding: 20px;
+        padding: 10px 10px 0 10px;
+        height: 89%;
     }
 
     .form-container {
-        background-color: #fff;
+        background-color: black;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         /* padding: 20px; */
         margin-bottom: 20px;
         /* Adjust as needed */
         margin-right: 10px;
-        max-width: 200px;
+        max-width: 195px;
     }
 
     .main-div {
@@ -48,13 +69,16 @@
     }
 
     .new_form {
-        max-width: 550px;
+        max-width: 100% !important;
+        margin-right: 10px;
         background-color: rgb(255 255 255 / 20%);
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-
+    .button-1{
+        padding: 14px 40px !important;
+    }
     .button-1:hover {
         background: #f0901d !important;
         color: white !important;
@@ -93,7 +117,7 @@
 
     .new_form label {
         display: block;
-        color: black;
+        color: white !important;
         font-family: emoji;
         font-size: 21px;
         margin-top: 5px;
@@ -129,8 +153,11 @@
 
     .heading-border-bottom {
         margin-bottom: 10px;
-        border-bottom: 1px solid #000;
+        /* border-bottom: 1px solid #000; */
     }
+    .section-padding {
+    padding: 70px 0px 0px 0px;
+}
 
     .progress-bar_main {
         display: flex;
@@ -149,13 +176,14 @@
     }
 
     .progress-step.active {
-        color: #007bff;
+        color: #f0901d;
         font-size: 19px;
     }
+
     .p-6 img {
-    height: 160px;
-    width: 100%;
-}
+        height: 160px;
+        width: 100%;
+    }
 
     .progress-step.active::after {
         content: "";
@@ -165,7 +193,7 @@
         transform: translateX(-50%);
         width: 20px;
         height: 20px;
-        background-color: #007bff;
+        background-color: #f0901d;
         border-radius: 50%;
     }
 
@@ -178,6 +206,7 @@
 
     .p-6 {
         background: black;
+        border-radius: 10px;
     }
 
     .col-md-7,
@@ -213,17 +242,82 @@
         color: white;
         /* Set p tag color to white */
     }
+
     .icon_text i {
+        color: white;
+        background: orange;
+        padding: 5px;
+        border-radius: 14px;
+    }
+
+    .icon_text {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+    }
+   /* Common styles for both input fields */
+.styled-input {
+    background: #222222;
     color: white;
-    background: orange;
-    padding: 5px;
-    border-radius: 14px;
+    border: none;
+    border-radius: 21px;
+    height: 45px;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;  /* Make sure the input fields take the full width of their container */
 }
-.icon_text {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
+
+.styled-input::placeholder {
+    color: white;
 }
+
+/* Common styles for both input fields */
+.styled-input {
+    background: #222222;
+    color: white;
+    border: none;
+    border-radius: 21px;
+    height: 45px;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Ensuring the placeholder text is also white */
+.styled-input::placeholder {
+    color: white;
+}
+
+/* Styling the clock and calendar icons for webkit browsers (e.g., Chrome, Safari) */
+.styled-input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    background-color: #222222; /* Optional: adjust based on design preference */
+    border-radius: 50%;
+    padding: 5px; /* Adjust the padding if necessary */
+}
+
+/* Removing the default webkit appearance */
+.styled-input::-webkit-inner-spin-button,
+.styled-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Custom popup styles (limited by browser capabilities) */
+.styled-input::-webkit-datetime-edit,
+.styled-input::-webkit-datetime-edit-text,
+.styled-input::-webkit-datetime-edit-month-field,
+.styled-input::-webkit-datetime-edit-day-field,
+.styled-input::-webkit-datetime-edit-year-field,
+.styled-input::-webkit-datetime-edit-hour-field,
+.styled-input::-webkit-datetime-edit-minute-field,
+.styled-input::-webkit-datetime-edit-ampm-field {
+    color: white; /* Text color inside the popup */
+    background-color: #222222; /* Background color of the popup */
+}
+
+
+
 
     @media (max-width: 768px) {
         .form-container {
@@ -245,12 +339,18 @@
         input[type=number] {
             width: 100% !important;
         }
+        .color_theme{
+            font-size: 23px !important;
+        }
+        .p-6{
+            height: auto !important;
+        }
 
     }
 </style>
 @section('content')
     <section class="banner-header section-padding bg-img" data-overlay-dark="4"
-        data-background="{{ asset('frontend-assets/img/slider/1.jpg') }}">
+        data-background="{{ asset('frontend-assets/img/slider/booking_img.jpeg') }}">
         <div class="v-middle">
             <div class="container">
                 <div class="row">
@@ -262,7 +362,7 @@
                             <div class="divider"></div>
                             <div class="text-white"><a href="#">book online</a></div>
                         </div>
-                        <h1>Rental cost of sport and other cars</h1>
+                        <h1>Book Your Ride.</h1>
                     </div>
                 </div>
             </div>
@@ -304,7 +404,7 @@
                 </ul>
                 <div class="col-md-8">
                     <div class="new_form step1" id="forms">
-                        <h2 class="color">Journey Details</h2>
+                        <h2 class="color color_theme">Journey Details</h2>
                         <div>
                             <label for="carType">Select Type:</label>
                             <select id="carType" class="select2 select" style="width: 100%" name="carType"
@@ -319,9 +419,11 @@
                         <div class="gap-3">
 
                             <div id="flightId" style="display: none">
-                                <label for="pickupLocation">Flight ID:</label>
-                                <input type="text" name="flightId" placeholder="Enter flight ID"
+                                <label for="pickupLocation">Flight Name:</label>
+                                <input type="text" name="flightName" placeholder="Enter flight Name"
                                     class="form-control pickupLocation" />
+                                <label for="arrival time ">Arrival Time:</label>
+                                <input type="time" class="input timepicker styled-input" id="arrival_time" placeholder="Arrival Time" />
                             </div>
                             <div>
                                 <label for="pickupLocation">Pickup Location:</label>
@@ -335,7 +437,8 @@
                             </div>
                             <div>
                                 <label for="date">Date:</label>
-                                <input type="text" class="form-control input datepicker" placeholder="Return Date" />
+                                <input type="datetime-local" class=" input location styled-input" 
+                                 placeholder="Return Date" />
                             </div>
                         </div>
                         <div class="align-items-center">
@@ -392,25 +495,26 @@
                                 <option value="2">Paypal</option>
                             </select>
                         </div> --}}
-                        <h3 class="color">Please select</h3>
+                        <h3 class="color color_theme">Please select Fleets:</h3>
 
                         <div class="main-div">
                             <div class="col-md-6 form-container">
                                 <div class="p-6">
                                     <img src="{{ asset('frontend-assets/img/carPic/1.jpg') }}" alt="" />
+                                    <Strong>Economy  saloon</Strong>
                                     <div class="d-flex gap-2 align-items-center">
-                                        <i class="fa-solid fa-user"></i>
-                                        <p style="margin-bottom: 0px">Max Passenger:</p>
+                                        <i class="fa fa-users"></i>
+                                        <p style="margin-bottom: 0px">max.</p>
                                         <span>4</span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center">
                                         <i class="fa-solid fa-suitcase"></i>
-                                        <p style="margin-bottom: 0;">Max Luggage:</p>
+                                        <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center">
-                                        <i class="fa-solid fa-suitcase"></i>
-                                        <p style="margin-bottom: 0;">Max Luggage:</p>
+                                        <i class="fa fa-briefcase"></i>
+                                        <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
                                 </div>
@@ -424,19 +528,20 @@
                             <div class="col-md-6 form-container">
                                 <div class="p-6">
                                     <img src="{{ asset('frontend-assets/img/carPic/2.jpg') }}" alt="" />
+                                    <strong>Business/ executive  saloon</strong>
                                     <div class="d-flex gap-2 align-items-center">
-                                        <i class="fa-solid fa-user"></i>
-                                        <p style="margin-bottom: 0px">Max Passenger:</p>
+                                        <i class="fa fa-users"></i>
+                                        <p style="margin-bottom: 0px">max.</p>
                                         <span>4</span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center">
                                         <i class="fa-solid fa-suitcase"></i>
-                                        <p style="margin-bottom: 0;">Max Luggage:</p>
+                                        <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center">
-                                        <i class="fa-solid fa-suitcase"></i>
-                                        <p style="margin-bottom: 0;">Max Luggage:</p>
+                                        <i class="fa fa-briefcase"></i>
+                                        <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
                                 </div>
@@ -450,19 +555,20 @@
                             <div class="col-md-6 form-container">
                                 <div class="p-6">
                                     <img src="{{ asset('frontend-assets/img/carPic/3.jpeg') }}" alt="" />
+                                    <strong>MPV</strong>
                                     <div class="d-flex gap-2 align-items-center">
-                                        <i class="fa-solid fa-user"></i>
-                                        <p style="margin-bottom: 0px">Max Passenger:</p>
+                                        <i class="fa fa-users"></i>
+                                        <p style="margin-bottom: 0px">max.</p>
                                         <span>4</span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center">
                                         <i class="fa-solid fa-suitcase"></i>
-                                        <p style="margin-bottom: 0;">Max Luggage:</p>
+                                        <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center">
-                                        <i class="fa-solid fa-suitcase"></i>
-                                        <p style="margin-bottom: 0;">Max Luggage:</p>
+                                        <i class="fa fa-briefcase"></i>
+                                        <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
                                 </div>
@@ -476,19 +582,74 @@
                             <div class="col-md-6 form-container">
                                 <div class="p-6">
                                     <img src="{{ asset('frontend-assets/img/carPic/1.jpg') }}" alt="" />
+                                    <strong>7 seater MPV</strong>
                                     <div class="d-flex gap-2 align-items-center">
-                                        <i class="fa-solid fa-user"></i>
-                                        <p style="margin-bottom: 0px">Max Passenger:</p>
+                                        <i class="fa fa-users"></i>
+                                        <p style="margin-bottom: 0px">max.</p>
                                         <span>4</span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center">
                                         <i class="fa-solid fa-suitcase"></i>
-                                        <p style="margin-bottom: 0;">Max Luggage:</p>
+                                        <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center">
+                                        <i class="fa fa-briefcase"></i>
+                                        <p style="margin-bottom: 0;">max.</p>
+                                        <span>2</span>
+                                    </div>
+                                </div>
+
+                                <div class="footer-box">
+                                    <p class="color">price: <strong> 600$ </strong></p>
+                                    <button class="proceed">Proceed</button>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-container">
+                                <div class="p-6">
+                                    <img src="{{ asset('frontend-assets/img/carPic/1.jpg') }}" alt="" />
+                                    <strong>BUSINESS / executive MPV</strong>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <i class="fa fa-users"></i>
+                                        <p style="margin-bottom: 0px">max.</p>
+                                        <span>4</span>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center">
                                         <i class="fa-solid fa-suitcase"></i>
-                                        <p style="margin-bottom: 0;">Max Luggage:</p>
+                                        <p style="margin-bottom: 0;">max.</p>
+                                        <span>2</span>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <i class="fa fa-briefcase"></i>
+                                        <p style="margin-bottom: 0;">max.</p>
+                                        <span>2</span>
+                                    </div>
+                                </div>
+
+                                <div class="footer-box">
+                                    <p class="color">price: <strong> 600$ </strong></p>
+                                    <button class="proceed">Proceed</button>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-container">
+                                <div class="p-6">
+                                    <img src="{{ asset('frontend-assets/img/carPic/1.jpg') }}" alt="" />
+                                    <strong>8 seater minibus</strong>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <i class="fa fa-users"></i>
+                                        <p style="margin-bottom: 0px">max.</p>
+                                        <span>4</span>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <i class="fa-solid fa-suitcase"></i>
+                                        <p style="margin-bottom: 0;">max.</p>
+                                        <span>2</span>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <i class="fa fa-briefcase"></i>
+                                        <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
                                 </div>
@@ -504,7 +665,7 @@
                     <div class="step3 new_form">
                         <div class="heading-border-bottom">
 
-                            <h3 class="color">Fill all the fields.</h3>
+                            <h3 class="color color_theme">Fill all the fields.</h3>
                         </div>
                         <div class="d-flex  column_type">
                             <label for="name" class="passenger_lebals">Name</label>
@@ -550,7 +711,14 @@
                                     name="hand_lauggage" value="0">
                                 <div id="luggage" class="error-message"></div>
                             </div>
+                            <div class="d-flex meet_greet" style="gap:10px;align-items:center">
+                                <input type="checkbox" id="meet_greet" name="meet_greet" value="meet_greet">
+                                <label for="meet_greet">Meet & Greet (£12 extra)</label>
+
+                                </label>
+                            </div>
                         </div>
+                       
                         <div class="mt-2">
                             <label for="comment">Comment (optional):</label>
                             <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
@@ -563,7 +731,7 @@
                         <div class="summary">
                             <div class="heading-border-bottom">
 
-                                <h3 class="color">Summary.</h3>
+                                <h3 class="color color_theme">Summary.</h3>
                             </div>
                             <div class="d-flex gap-4">
                                 <strong>Car Type:</strong>
@@ -615,11 +783,11 @@
                             </div>
                             <div class="d-flex gap-4">
                                 <strong>summary:</strong>
-                                <p>HEllo this is testing purpose</p>
+                                <p>You need any help!.</p>
                             </div>
                         </div>
                         <div class="payment_section_main">
-                            <h3 class="color">Book ride payment.</h3>
+                            {{-- <h3 class="color color_theme">Payment for Booking.</h3> --}}
                             <div>
                                 <label for="payment_type">payment type</label>
                                 <select class="select2 select" style="width: 100%" name="payment_type"
@@ -635,70 +803,73 @@
 
 
 
-                    <div class="both_btn" style="max-width: 500px;">
+                    <div class="both_btn" >
                         <button class="previous_btn button-1 mt-15 mb-15" onclick="prevStep()">
                             Previous
                         </button>
-                        <button type="submit" class="button-1 mt-15 mb-15 cutom_button" id="next_btn" onclick="nextStep()">
+                        <button type="submit" class="button-1 mt-15 mb-15 cutom_button" id="next_btn"
+                            onclick="nextStep()">
                             Next
                         </button>
-                        
-                        <button type="submit" class="button-1 mt-15 mb-15 cutom_button" id="form_submit"  style="display: none">
+
+                        <button type="submit" class="button-1 mt-15 mb-15 cutom_button" id="form_submit"
+                            style="display: none">
                             Book Now
                         </button>
 
                     </div>
                 </div>
                 <div class="col-md-4" style="border-left: 1px solid #ccc">
-                   
-                    <h3 class="color">Location</h3>
+
+                    <h3 class="color color_theme">Location</h3>
                     <div class="google-map">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1573147.7480448114!2d-74.84628175962355!3d41.04009641088412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25856139b3d33%3A0xb2739f33610a08ee!2s1616%20Broadway%2C%20New%20York%2C%20NY%2010019%2C%20Amerika%20Birle%C5%9Fik%20Devletleri!5e0!3m2!1str!2str!4v1646760525018!5m2!1str!2str"
                             width="100%" height="100%" style="border: 0" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                     <div style="padding: 10px;margin-top:10px">
-                       <h5 class="color">All classes include:</h5>
-                       <div class="icon_text">
-                        <i class="fa-solid fa-check"></i>
-                        <p>
-                            Free cancellation up to 24 hours before your pick-up
-                        </p>
-                       </div>
-                       <div class="icon_text">
-                        <i class="fa-solid fa-check"></i>
-                        <p>
-                            Free 45 minutes waiting time
-                        </p>
-                       </div>
-                       <div class="icon_text">
-                        <i class="fa-solid fa-check"></i>
-                        <p>
-                            Meet & Greet 
-                        </p>
-                       </div>
-                       <div class="icon_text">
-                        <i class="fa-solid fa-check"></i>
-                        <p>
-                            Complimentary water bottle & Wi-Fi 
-                        </p>
-                       </div>
+                        <h5 class="color">All classes include:</h5>
+                        <div class="icon_text">
+                            <i class="fa-solid fa-check"></i>
+                            <p>
+                                Free cancellation up to 24 hours before your pick-up
+                            </p>
+                        </div>
+                        <div class="icon_text">
+                            <i class="fa-solid fa-check"></i>
+                            <p>
+                                Free 45 minutes waiting time
+                            </p>
+                        </div>
+                        <div class="icon_text">
+                            <i class="fa-solid fa-check"></i>
+                            <p>
+                                Meet & Greet
+                            </p>
+                        </div>
+                        <div class="icon_text">
+                            <i class="fa-solid fa-check"></i>
+                            <p>
+                                Complimentary water bottle & Wi-Fi
+                            </p>
+                        </div>
                     </div>
                     <div style="padding: 10px;margin-top:10px">
-                       <h5 class="color">Please Note:</h5>
-                       <div class="icon_text">
-                        <i class="fa-solid fa-exclamation"></i>
-                        <p>
-                            Guest/laggage capacities must be abided by for safety reasons. if you are unsure select a large class as chauffeurs may turn down service when they are exceeded.
-                        </p>
-                       </div>
-                       <div class="icon_text">
-                        <i class="fa-solid fa-exclamation"></i>
-                        <p>
-                            The Vichle images above are examples.You may get a different vehicle of the similar quality.
-                        </p>
-                       </div>
-                      
+                        <h5 class="color">Please Note:</h5>
+                        <div class="icon_text">
+                            <i class="fa-solid fa-exclamation"></i>
+                            <p>
+                                Guest/laggage capacities must be abided by for safety reasons. if you are unsure select a
+                                large class as chauffeurs may turn down service when they are exceeded.
+                            </p>
+                        </div>
+                        <div class="icon_text">
+                            <i class="fa-solid fa-exclamation"></i>
+                            <p>
+                                The Vichle images above are examples.You may get a different vehicle of the similar quality.
+                            </p>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -715,7 +886,7 @@
                 updateFormVisibility();
                 updateButtonVisibility();
             }
-             if (currentStep == 4) { 
+            if (currentStep == 4) {
                 document.querySelector("#next_btn").style.display = "none";
                 document.getElementById("form_submit").style.display = "block";
             }
@@ -728,7 +899,7 @@
                 updateFormVisibility();
                 updateButtonVisibility();
             }
-            if (currentStep < 4){
+            if (currentStep < 4) {
                 document.querySelector("#next_btn").style.display = "block";
                 document.getElementById("form_submit").style.display = "none";
             }

@@ -98,6 +98,9 @@
             color: wheat;
             cursor: pointer;
         }
+        .section-padding {
+    padding: 70px 0px 0px 0px;
+}
 
         .cars_details_view {
             box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
@@ -106,6 +109,10 @@
             background: #222222;
             margin-top: 20px;
         }
+        .cars_details_view div img {
+    height: 200px;
+}
+
 
         .special_rate {
             box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0);
@@ -148,8 +155,12 @@
             padding-right: 30px;
         }
         .video-fullscreen-wrap video{
-            object-fit: fill !important;
+            object-fit: cover !important;
         }
+        
+        .home_p{
+                font-size: 17px !important;
+            }
 
         @media (max-width: 768px) {
             .header {
@@ -157,14 +168,36 @@
             }.video-fullscreen-video{
                 height: 700px !important;
             }
+            .home_heading{
+                font-size: 47px !important;
+            }
+            .cars_details_view div img {
+                height: 300px;
+                object-fit: cover;
+            }
+            .button-2{
+                padding: 10px 32px !important;
+            }
+            .button-1{
+                padding: 10px 32px !important;
+            }
+            .lets-talk[data-overlay-dark] h5, .lets-talk h5 {
+                font-size: 32px !important;
+            }
 
             .video-fullscreen-wrap {
                 height: 100% !important;
                 overflow: hidden;
             }
+            .section-padding {
+                padding: 40px 0 !important;
+            }
+            .section-title{
+                font-size: 30px !important;
+            }
 
             .v-middle {
-                margin-top: 0px !important;
+                margin-top: 70px !important;
             }
 
             .video-fullscreen-video {
@@ -179,21 +212,19 @@
 
                 <video preload="auto"  autoplay muted playsinline loop
                     alt="Senior Adult, People, Lifestyles, Lu"
-                    poster="https://artgrid.imgix.net/footage-graded-thumbnail/0fdf7ba525_1226027_0-second_w800px.jpeg"
-                    src="https://artlist.io/968d3017-97b2-450b-ac81-c2dc84720588"
+                    poster="{{ asset('frontend-assets/img/home-video.jpg') }}"
+                    src="{{ asset('frontend-assets/img/home-video.mp4') }}"
                     style="width: 100%; height: 100%;"></video>
 
             </div>
             <div class="v-middle" style="margin-top: 90px;">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12 text-center" style="">
+                        <div class="col-md-12 text-center " style="">
                             <h6>* Premium</h6>
-                            <h1 style="font-size: 60px;">Bristol Cabwise </h1>
-                            <p style="max-width: 600px; margin: 0 auto; color:white;">
-                                Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi consequat risus
-                                consequat, porttitor orci sit amet, iaculis nisl. Integer quis sapien nec elit ultrices
-                                euismon sit amet id lacus. Sed a imperdiet erat.
+                            <h1 style="font-size: 60px;" class="home_heading">Bristol Cabwise </h1>
+                            <p class="home_p" style="max-width: 600px; margin: 0 auto; color:#ffc107;">
+                            Welcome to Bristol Cabwise, your premier pre-booking platform for reliable taxi services in Bristol, UK. Enjoy seamless travel from airport transfers to city tours. Book now for stress-free journeys!
                             </p>
                             <a href="#0" class="button-1 mt-15 mb-15 mr-15">View Details <span
                                     class="ti-arrow-top-right"></span></a>
@@ -208,7 +239,7 @@
     </header>
     {{-- Additional Section  --}}
 
-    {{-- <section class="process section-padding">
+    <!-- {{-- <section class="process section-padding">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
@@ -252,8 +283,28 @@
 				</div>
 			</div>
 		</div>
-	</section> --}}
+	</section> --}} -->
 
+    <section class="about section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-30">
+                    <div class="content">
+                        <div class="section-subtitle">Booking car</div>
+                        <div class="section-title">RELIABLE CAB <span>SERVICE IN BRISTOL</span></div>
+                        <p class="mb-30">Introducing Bristol Cabwise, your one-stop solution for reliable taxi services in Bristol, United Kingdom. From airport transfers to city tours, corporate rides to in-city journeys, Bristol Cabwise offers seamless pre-booking options at competitive rates. Experience convenience and comfort with our trusted transportation services. Book your ride with Bristol Cabwise today for a stress-free travel experience..</p>
+                   
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1 col-md-12">
+                    <div class="item"> <img style="max-height:350px;" src="{{ asset('frontend-assets/img/slider/chaufer.jpg') }}" alt="about"
+                            class="img-fluid">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="testimonials section-padding mt-15">
         <div class="container">
@@ -268,13 +319,11 @@
                         <div class="item" style="padding:10px;">
                             <div class="cars_details_view">
                                 <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">Airport transfers</h4>
+                                    <img src="{{ asset('frontend-assets/img/slider/aiport.jpg') }}" alt="" />
+                                    <h4 class="text-white mb-0 pt-2" style="font-size:24px;">Airport transfers</h4>
                                     <p style="color: #f5b754">Moderline</p>
                                     <p style="color: white ;" class="truncate">
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                       Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
                                         <div class="d-flex justify-content-between gap-4">
                                             <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
                                             <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
@@ -286,13 +335,11 @@
                         <div class="item" style="padding:10px;">
                             <div class="cars_details_view">
                                 <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">City ti city transfers </h4>
+                                    <img src="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" alt="" />
+                                    <h4 class="text-white mb-0 pt-2" style="font-size:24px;">City ti city transfers </h4>
                                     <p style="color: #f5b754">Moderline</p>
                                     <p style="color: white ;" class="truncate">
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                       Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
                                         <div class="d-flex justify-content-between gap-4">
                                             <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
                                             <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
@@ -304,13 +351,11 @@
                         <div class="item" style="padding:10px;">
                             <div class="cars_details_view">
                                 <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/9.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">Business </h4>
+                                    <img src="{{ asset('frontend-assets/img/slider/business.jpg') }}" alt="" />
+                                    <h4 class="text-white mb-0 pt-2" style="font-size:24px;">Business </h4>
                                     <p style="color: #f5b754">Moderline</p>
                                     <p style="color: white" class="truncate">
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                       Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
                                         <div class="d-flex justify-content-between gap-4">
                                             <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
                                             <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
@@ -322,13 +367,11 @@
                         <div class="item" style="padding:10px;">
                             <div class="cars_details_view">
                                 <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">Private </h4>
+                                    <img src="{{ asset('frontend-assets/img/slider/private.jpg') }}" alt="" />
+                                    <h4 class="text-white mb-0 pt-2" style="font-size:24px;">Private </h4>
                                     <p style="color: #f5b754">Moderline</p>
                                     <p style="color: white" class="truncate">
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                       Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
                                         <div class="d-flex justify-content-between gap-4">
                                             <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
                                             <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
@@ -340,13 +383,11 @@
                         <div class="item" style="padding:10px;">
                             <div class="cars_details_view">
                                 <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">Events  </h4>
+                                    <img src="{{ asset('frontend-assets/img/slider/event.jpg') }}" alt="" />
+                                    <h4 class="text-white mb-0 pt-2" style="font-size:24px;">Events  </h4>
                                     <p style="color: #f5b754">Moderline</p>
                                     <p style="color: white" class="truncate">
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                       Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
                                         <div class="d-flex justify-content-between gap-4">
                                             <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
                                             <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
@@ -412,7 +453,6 @@
         </div>
     </section>
     <!-- divider line -->
-    <div class="line-vr-section"></div>
     <!-- Process -->
     <section class="process section-padding">
         <div class="container">
@@ -543,7 +583,7 @@
                         <div class="icon_bg">
                             <i class="fas fa-road"></i>
                         </div>
-                        <h4>On Way Rental</h4>
+                        <h4>On Way booking</h4>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
                     </div>
                 </div>
@@ -754,14 +794,13 @@
         </div>
     </section>
     <!-- divider line -->
-    <div class="line-vr-section"></div>
     <!-- Lets Talk -->
     <section class="lets-talk bg-img bg-fixed section-padding" data-overlay-dark="5"
         data-background="{{ asset('frontend-assets/img/slider/3.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h6>Rent Your Car</h6>
+                    <h6>Book Your Car</h6>
                     <h5>Interested in booking?</h5>
                     <p>Don't hesitate and send us a message.</p> <a href="tel:+8001234567"
                         class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a

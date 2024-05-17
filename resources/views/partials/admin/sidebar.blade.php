@@ -13,6 +13,12 @@
                     <span class="nav-text">Services</span>
                 </a>
             </li>
+            <li class="{{ request()->routeIs('admin.fleets.index') ? 'mm-active' : '' }}">
+                <a href="{{ route('admin.fleets.index') }}" class="" aria-expanded="false">
+                    <i class="fa fa-list-ul"></i>
+                    <span class="nav-text">Fleets</span>
+                </a>
+            </li>
             <li class="{{ request()->routeIs('admin.car.index') ? 'mm-active' : '' }}">
                 <a href="{{ route('admin.cars.index') }}" class="" aria-expanded="false">
                     <i class="flaticon-086-star"></i>

@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\CarsController;
 use App\Http\Controllers\admin\ServicesController;
+use App\Http\Controllers\admin\FleetController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/optimize', function () {
@@ -42,5 +43,14 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/edit/{id}', [ServicesController::class, 'edit'])->name('admin.services.edit');
         Route::post('/update/{id}', [ServicesController::class, 'update'])->name('admin.services.update');
         Route::get('/delete/{id}', [ServicesController::class, 'delete'])->name('admin.services.delete');
+    });
+
+    Route::prefix('admin/fleets')->group(function () {
+        Route::get('/', [FleetController::class, 'index'])->name('admin.fleets.index');
+        Route::get('/create', [FleetController::class, 'create'])->name('admin.fleets.create');
+        Route::post('/create', [FleetController::class, 'store'])->name('admin.fleets.store');
+        Route::get('/edit/{id}', [FleetController::class, 'edit'])->name('admin.fleets.edit');
+        Route::post('/update/{id}', [FleetController::class, 'update'])->name('admin.fleets.update');
+        Route::get('/delete/{id}', [FleetController::class, 'delete'])->name('admin.fleets.delete');
     });
 });

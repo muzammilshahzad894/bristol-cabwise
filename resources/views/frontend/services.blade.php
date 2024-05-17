@@ -31,13 +31,11 @@
                     <div class="item" style="padding:10px;">
                         <div class="cars_details_view">
                             <div>
-                                <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
-                                <h4 class="text-white mb-0 pt-2">Airport transfers</h4>
+                                <img src="{{ asset('frontend-assets/img/slider/aiport.jpg') }}" alt="" />
+                                <h4 class="text-white mb-0 pt-2" style="font-size:24px;">Airport transfers</h4>
                                 <p style="color: #f5b754">Moderline</p>
                                 <p style="color: white ;" class="truncate">
-                                    Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                    consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                    sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                   Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
                                     <div class="d-flex justify-content-between gap-4">
                                         <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
                                         <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
@@ -49,13 +47,11 @@
                     <div class="item" style="padding:10px;">
                         <div class="cars_details_view">
                             <div>
-                                <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
-                                <h4 class="text-white mb-0 pt-2">City ti city transfers </h4>
+                                <img src="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" alt="" />
+                                <h4 class="text-white mb-0 pt-2" style="font-size:24px;">City ti city transfers </h4>
                                 <p style="color: #f5b754">Moderline</p>
                                 <p style="color: white ;" class="truncate">
-                                    Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                    consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                    sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                   Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
                                     <div class="d-flex justify-content-between gap-4">
                                         <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
                                         <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
@@ -67,13 +63,11 @@
                     <div class="item" style="padding:10px;">
                         <div class="cars_details_view">
                             <div>
-                                <img src="{{ asset('frontend-assets/img/slider/9.jpg') }}" alt="" />
-                                <h4 class="text-white mb-0 pt-2">Business </h4>
+                                <img src="{{ asset('frontend-assets/img/slider/business.jpg') }}" alt="" />
+                                <h4 class="text-white mb-0 pt-2" style="font-size:24px;">Business </h4>
                                 <p style="color: #f5b754">Moderline</p>
                                 <p style="color: white" class="truncate">
-                                    Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                    consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                    sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                   Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
                                     <div class="d-flex justify-content-between gap-4">
                                         <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
                                         <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
@@ -85,13 +79,11 @@
                     <div class="item" style="padding:10px;">
                         <div class="cars_details_view">
                             <div>
-                                <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
-                                <h4 class="text-white mb-0 pt-2">Private </h4>
+                                <img src="{{ asset('frontend-assets/img/slider/private.jpg') }}" alt="" />
+                                <h4 class="text-white mb-0 pt-2" style="font-size:24px;">Private </h4>
                                 <p style="color: #f5b754">Moderline</p>
                                 <p style="color: white" class="truncate">
-                                    Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                    consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                    sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                   Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
                                     <div class="d-flex justify-content-between gap-4">
                                         <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
                                         <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
@@ -103,13 +95,11 @@
                     <div class="item" style="padding:10px;">
                         <div class="cars_details_view">
                             <div>
-                                <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
-                                <h4 class="text-white mb-0 pt-2">Events  </h4>
+                                <img src="{{ asset('frontend-assets/img/slider/event.jpg') }}" alt="" />
+                                <h4 class="text-white mb-0 pt-2" style="font-size:24px;">Events  </h4>
                                 <p style="color: #f5b754">Moderline</p>
                                 <p style="color: white" class="truncate">
-                                    Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                    consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                    sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
+                                   Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
                                     <div class="d-flex justify-content-between gap-4">
                                         <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
                                         <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
@@ -129,7 +119,9 @@
         width: 100%;
         height: 390px !important;
     }
-
+    .cars_details_view div img {
+    height: 300px;
+}
     .new_forms {
         max-width: 400px;
         background-color: rgb(255 255 255 / 20%);
@@ -245,6 +237,9 @@
         height: 40px;
         padding-right: 30px;
     }
+    .section-padding {
+    padding: 70px 0px 0px 0px;
+}
 
     @media (max-width: 768px) {
         .header {
@@ -255,14 +250,19 @@
             height: 1000px !important;
             overflow: hidden;
         }
+        
+        .cars_details_view div img {
+                height: 300px;
+            }
 
         .v-middle {
-            margin-top: 130px !important;
+            /* margin-top: 130px !important; */
         }
 
         .video-fullscreen-video {
             height: 1020px !important;
         }
+        
     }
 </style>
 @endsection

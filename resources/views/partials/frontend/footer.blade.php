@@ -12,7 +12,7 @@
                                 </div>
                                 <div class="footer-contact-link-content">
                                     <h6>Call us</h6>
-                                    <p>07533225970</p>
+                                    <p> +44 7533 225970</p>
                                 </div>
                             </div>
                             <div class="footer-contact-links-divider"></div>
@@ -56,7 +56,7 @@
 
                         <!-- <div class="footer-logo"><h2>CARE<span>X</span></h2></div> -->
                         <div class="widget-text">
-                            <p>Rent a car imperdiet sapien porttito the bibenum ellentesue the commodo erat nesuen.</p>
+                            <p>Book a car imperdiet sapien porttito the bibenum ellentesue the commodo erat nesuen.</p>
                             {{-- <div class="social-icons">
                                 <ul class="list-inline">
                                     <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
@@ -71,8 +71,6 @@
                 <div class="col-md-3 offset-md-1 widget-area">
                     <div class="widget clearfix usful-links">
                         <h3 class="widget-title">Quick Links</h3>
-                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.index') ? 'active' : '' }}" href="{{ route('frontend.index') }}">Home</a></li>
-              
                         <ul>
                             <li><a href="{{ route('frontend.index') }}">Home</a></li>
                             <li><a href="{{ route('frontend.about') }}">About</a></li>
