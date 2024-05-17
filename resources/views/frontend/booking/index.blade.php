@@ -123,6 +123,32 @@
         margin-top: 5px;
         min-width: 140px;
     }
+    .new_form.step2.row {
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* Styling for webkit browsers */
+.new_form.step2.row::-webkit-scrollbar {
+    width: 4px;
+    border-radius: 10px;
+}
+
+.new_form.step2.row::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border-radius: 5px;
+}
+
+.new_form.step2.row::-webkit-scrollbar-track {
+    background-color: #333333; /* Track background color */
+}
+
+/* Styling for Firefox */
+.new_form.step2.row {
+    scrollbar-width: thin;
+    scrollbar-color: #000000 #333333; /* Thumb and track colors for Firefox */
+}
+
 
     .payment_section_main {
         margin: 10px 0;
@@ -202,6 +228,12 @@
         justify-content: space-between;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         background: rgb(0 0 0 / 77%);
+    }
+    .car_name{
+        color: white;
+        font-size: 15px;
+        padding: 0%;
+        margin: 0%;
     }
 
     .p-6 {
@@ -283,24 +315,91 @@
     width: 100%;
 }
 
-/* Ensuring the placeholder text is also white */
+/* Common styles for both input fields */
+/* .styled-input {
+    background: #222222;
+    color: white;
+    border: none;
+    border-radius: 21px;
+    height: 45px;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
 .styled-input::placeholder {
     color: white;
 }
-
-/* Styling the clock and calendar icons for webkit browsers (e.g., Chrome, Safari) */
 .styled-input::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(2); 
+    background: none; 
+}
+
+.styled-input::-webkit-inner-spin-button,
+.styled-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.styled-input::-webkit-datetime-edit,
+.styled-input::-webkit-datetime-edit-text,
+.styled-input::-webkit-datetime-edit-month-field,
+.styled-input::-webkit-datetime-edit-day-field,
+.styled-input::-webkit-datetime-edit-year-field,
+.styled-input::-webkit-datetime-edit-hour-field,
+.styled-input::-webkit-datetime-edit-minute-field,
+.styled-input::-webkit-datetime-edit-ampm-field {
+    color: white;
+    background-color: #222222; 
+} */
+/* Styling the time input */
+input[type="time"].timepicker {
+    background: #222222;
+    color: white;
+    border: none;
+    border-radius: 21px;
+    height: 45px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Ensuring the placeholder text is also white */
+input[type="time"].timepicker::placeholder {
+    color: white;
+}
+.plus_icon{
+    color: #f5b754;
+    margin-top: -16px;
+    background: transparent;
+    border: none;
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    padding-right: 14px;
+}
+
+/* Styling the clock icon for webkit browsers (e.g., Chrome, Safari) */
+input[type="time"].timepicker::-webkit-calendar-picker-indicator {
     filter: invert(1);
-    background-color: #222222; /* Optional: adjust based on design preference */
+    background-color: white; /* This can be adjusted or removed based on your design preference */
+    border-radius: 50%;
+    padding: 5px; /* Adjust the padding if necessary */
+}
+input[type="datetime-local"].timepicker::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    background-color: white; /* This can be adjusted or removed based on your design preference */
     border-radius: 50%;
     padding: 5px; /* Adjust the padding if necessary */
 }
 
 /* Removing the default webkit appearance */
-.styled-input::-webkit-inner-spin-button,
-.styled-input::-webkit-outer-spin-button {
+input[type="time"].timepicker::-webkit-inner-spin-button,
+input[type="time"].timepicker::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+/* Styling the date and time picker popup for WebKit browsers */
+.styled-input::-webkit-calendar-picker-indicator {
+    /* Apply styles to the picker popup icon */
 }
 
 /* Custom popup styles (limited by browser capabilities) */
@@ -312,8 +411,61 @@
 .styled-input::-webkit-datetime-edit-hour-field,
 .styled-input::-webkit-datetime-edit-minute-field,
 .styled-input::-webkit-datetime-edit-ampm-field {
-    color: white; /* Text color inside the popup */
+    /* Apply styles to the popup elements */
+}
+
+/* Styling the header of the date and time picker popup */
+.styled-input::-webkit-datetime-edit-fields-wrapper {
     background-color: #222222; /* Background color of the popup */
+}
+
+/* Styling the text color inside the date and time picker popup */
+.styled-input::-webkit-datetime-edit,
+.styled-input::-webkit-datetime-edit-text {
+    color: white; /* Text color inside the popup */
+}
+
+.date-time-picker {
+    position: relative;
+}
+
+.picker-popup {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+}
+
+.date-time-picker.open .picker-popup {
+    display: block;
+}
+
+.close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .date-time-picker {
+        width: 100%;
+    }
+
+    .picker-popup {
+        width: 100%;
+        left: 0;
+        top: calc(100% + 5px);
+    }
 }
 
 
@@ -432,57 +584,19 @@
                             </div>
                             <div>
                                 <label for="dropLocation">Drop Location:</label>
-                                <input type="text" id="dropLocation" name="dropLocation"
-                                    placeholder="Enter drop location" class="form-control pickupLocation" />
+                                <div id="dropLocations">
+                                    <div class="drop-location">
+                                        <input type="text" name="dropLocation[]" placeholder="Enter drop location" class="form-control pickupLocation" />
+                                    </div>
+                                </div>
+                                {{-- <input type="text" id="dropLocation" name="dropLocation"
+                                    placeholder="Enter drop location" class="form-control pickupLocation" /> --}}
+                                <button  class="plus_icon" id="addLocation" onclick="addMore();">Add More location</button>
                             </div>
                             <div>
-                                <label for="date">Date:</label>
-                                <input type="datetime-local" class=" input location styled-input" 
+                                <label for="date">Date & Time:</label>
+                                <input type="datetime-local" class=" input location styled-input timepicker" 
                                  placeholder="Return Date" />
-                            </div>
-                        </div>
-                        <div class="align-items-center">
-                            <label for="time">Time:</label>
-                            <div class="d-flex gap-2">
-                                <select name="hours" class="select2 select" style="width: 50%">
-                                    <option value="01">01</option>
-                                    <option value="02">02</option>
-                                    <option value="03">03</option>
-                                    <option value="04">04</option>
-                                    <option value="05">05</option>
-                                    <option value="06">06</option>
-                                    <option value="07">07</option>
-                                    <option value="08">08</option>
-                                    <option value="09">09</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
-                                    <option value="19">19</option>
-                                    <option value="20">20</option>
-                                    <option value="21">21</option>
-                                    <option value="22">22</option>
-                                    <option value="23">23</option>
-                                </select>
-                                <select name="minutes" id="" class="select2 select" style="width: 50%">
-                                    <option value="00">00</option>
-                                    <option value="05">05</option>
-                                    <option value="10">10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
-                                    <option value="25">25</option>
-                                    <option value="30">30</option>
-                                    <option value="35">35</option>
-                                    <option value="40">40</option>
-                                    <option value="45">45</option>
-                                    <option value="50">50</option>
-                                    <option value="55">55</option>
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -502,6 +616,8 @@
                                 <div class="p-6">
                                     <img src="{{ asset('frontend-assets/img/carPic/1.jpg') }}" alt="" />
                                     <Strong>Economy  saloon</Strong>
+                                <p class="car_name">car name l</p>
+                                <div style="display: flex;flex-direction:column;justify-content:center;">
                                     <div class="d-flex gap-2 align-items-center">
                                         <i class="fa fa-users"></i>
                                         <p style="margin-bottom: 0px">max.</p>
@@ -517,6 +633,8 @@
                                         <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
+                                
+                                </div>
                                 </div>
 
                                 <div class="footer-box">
@@ -529,6 +647,8 @@
                                 <div class="p-6">
                                     <img src="{{ asset('frontend-assets/img/carPic/2.jpg') }}" alt="" />
                                     <strong>Business/ executive  saloon</strong>
+                                <p class="car_name">car name l</p>
+                                <div style="display: flex;flex-direction:column;justify-content:center;">
                                     <div class="d-flex gap-2 align-items-center">
                                         <i class="fa fa-users"></i>
                                         <p style="margin-bottom: 0px">max.</p>
@@ -544,6 +664,8 @@
                                         <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
+                                
+                                </div>
                                 </div>
 
                                 <div class="footer-box">
@@ -556,6 +678,8 @@
                                 <div class="p-6">
                                     <img src="{{ asset('frontend-assets/img/carPic/3.jpeg') }}" alt="" />
                                     <strong>MPV</strong>
+                                <p class="car_name">car name l</p>
+                                <div style="display: flex;flex-direction:column;justify-content:center;">
                                     <div class="d-flex gap-2 align-items-center">
                                         <i class="fa fa-users"></i>
                                         <p style="margin-bottom: 0px">max.</p>
@@ -571,6 +695,8 @@
                                         <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
+                                
+                                </div>
                                 </div>
 
                                 <div class="footer-box">
@@ -583,6 +709,8 @@
                                 <div class="p-6">
                                     <img src="{{ asset('frontend-assets/img/carPic/1.jpg') }}" alt="" />
                                     <strong>7 seater MPV</strong>
+                                <p class="car_name">car name l</p>
+                                <div style="display: flex;flex-direction:column;justify-content:center;">
                                     <div class="d-flex gap-2 align-items-center">
                                         <i class="fa fa-users"></i>
                                         <p style="margin-bottom: 0px">max.</p>
@@ -598,6 +726,8 @@
                                         <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
+                                
+                                </div>
                                 </div>
 
                                 <div class="footer-box">
@@ -610,6 +740,8 @@
                                 <div class="p-6">
                                     <img src="{{ asset('frontend-assets/img/carPic/1.jpg') }}" alt="" />
                                     <strong>BUSINESS / executive MPV</strong>
+                                <p class="car_name">car name l</p>
+                                <div style="display: flex;flex-direction:column;justify-content:center;">
                                     <div class="d-flex gap-2 align-items-center">
                                         <i class="fa fa-users"></i>
                                         <p style="margin-bottom: 0px">max.</p>
@@ -625,6 +757,8 @@
                                         <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
+                                
+                                </div>
                                 </div>
 
                                 <div class="footer-box">
@@ -637,6 +771,8 @@
                                 <div class="p-6">
                                     <img src="{{ asset('frontend-assets/img/carPic/1.jpg') }}" alt="" />
                                     <strong>8 seater minibus</strong>
+                                <p class="car_name">car name l</p>
+                                <div style="display: flex;flex-direction:column;justify-content:center;">
                                     <div class="d-flex gap-2 align-items-center">
                                         <i class="fa fa-users"></i>
                                         <p style="margin-bottom: 0px">max.</p>
@@ -652,6 +788,8 @@
                                         <p style="margin-bottom: 0;">max.</p>
                                         <span>2</span>
                                     </div>
+                                
+                                </div>
                                 </div>
 
                                 <div class="footer-box">
@@ -948,5 +1086,17 @@
                 flightIdDiv.style.display = 'none';
             }
         }
+        function addMore(){
+            const dropLocationsContainer = document.getElementById("dropLocations");
+            const dropLocationCount = dropLocationsContainer.children.length;
+            const newDropLocation = document.createElement("div");
+            newDropLocation.classList.add("drop-location");
+            newDropLocation.innerHTML = `
+                <label for="dropLocation${dropLocationCount + 1}">Drop Location ${dropLocationCount + 1}:</label>
+                <input type="text" name="dropLocation[]" placeholder="Enter drop location" class="form-control pickupLocation" />
+            `;
+            dropLocationsContainer.appendChild(newDropLocation);
+        }
+
     </script>
 @endsection
