@@ -601,14 +601,6 @@ input[type="time"].timepicker::-webkit-outer-spin-button {
                         </div>
                     </div>
                     <div class="new_form step2 row">
-                        {{-- <div>
-                            <label for="payment_type">payment type</label>
-                            <select class="select2 select" style="width: 100%" name="payment_type" id="payment_type">
-                                <option value="0">Choose payment type</option>
-                                <option value="1">Debit card</option>
-                                <option value="2">Paypal</option>
-                            </select>
-                        </div> --}}
                         <h3 class="color color_theme">Please select Fleets:</h3>
 
                         <div class="main-div">
@@ -831,12 +823,7 @@ input[type="time"].timepicker::-webkit-outer-spin-button {
                                     name="no_passenger" value="1">
                                 <div id="passenger-error" class="error-message"></div>
                             </div>
-                            <div class="d-flex  column_type">
-                                <label for="child_seat" class="passenger_lebals">Child Seat</label>
-                                <input type="number" class="" style="width: 70px;" id="child_seat"
-                                    name="child_seat" value="0">
-                                <div id="child-error" class="error-message"></div>
-                            </div>
+                        
                             <div class="d-flex  column_type">
                                 <label for="suit_case" class="passenger_lebals">SuitCases</label>
                                 <input type="number" class="" style="width: 70px;" id="suit_case"
@@ -848,6 +835,11 @@ input[type="time"].timepicker::-webkit-outer-spin-button {
                                 <input type="number" class="" style="width: 70px;" id="hand_lauggage"
                                     name="hand_lauggage" value="0">
                                 <div id="luggage" class="error-message"></div>
+                            </div>
+                            <div class="d-flex  meet_greet" style="gap:10px;align-items:center">
+                                <input type="checkbox" id="child_seat" name="child_seat" value="child_seat">
+                                <label for="child_seat" class="passenger_lebals">Child Seat</label>
+                                <div id="child-error" class="error-message"></div>
                             </div>
                             <div class="d-flex meet_greet" style="gap:10px;align-items:center">
                                 <input type="checkbox" id="meet_greet" name="meet_greet" value="meet_greet">

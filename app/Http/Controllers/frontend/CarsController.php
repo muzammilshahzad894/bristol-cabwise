@@ -28,4 +28,13 @@ class CarsController extends Controller
             return redirect()->back()->with('error', 'An error occurred while fetching car details');
         }
     }
+    public function trustVoilet()
+    {
+        try {
+            return view('frontend.truestVoilet');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while fetching car details');
+        }
+    }
 }

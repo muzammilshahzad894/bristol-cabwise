@@ -12,3 +12,4 @@ Route::get('/services', [FrontendController::class, 'services'])->name('frontend
 
 Route::get('/book-online', [BookingController::class, 'index'])->name('frontend.book-online');
 Route::get('/car-details', [CarsController::class, 'carDetails'])->name('frontend.carDetails');
+Route::get('/trust-violet', [CarsController::class, 'trustVoilet'])->name('frontend.trustVoilet');
