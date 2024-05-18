@@ -7,19 +7,19 @@
                     <span class="nav-text">Dashboard</span>
                 </a>
             </li>
-            <li class="{{ request()->routeIs('admin.services.index') ? 'mm-active' : '' }}">
+            <li class="{{ request()->routeIs('admin.services.index') || request()->routeIs('admin.services.create') ? 'mm-active' : '' }}">
                 <a href="{{ route('admin.services.index') }}" class="" aria-expanded="false">
                     <i class="flaticon-381-networking"></i>
                     <span class="nav-text">Services</span>
                 </a>
             </li>
-            <li class="{{ request()->routeIs('admin.fleets.index') ? 'mm-active' : '' }}">
+            <li class="{{ request()->routeIs('admin.fleets.index') || request()->routeIs('admin.fleets.create') ? 'mm-active' : '' }}">
                 <a href="{{ route('admin.fleets.index') }}" class="" aria-expanded="false">
                     <i class="fa fa-list-ul"></i>
                     <span class="nav-text">Fleets</span>
                 </a>
             </li>
-            <li class="{{ request()->routeIs('admin.car.index') ? 'mm-active' : '' }}">
+            <li class="{{ request()->routeIs('admin.car.index') || request()->routeIs('admin.car.create') ? 'mm-active' : '' }}">
                 <a href="{{ route('admin.cars.index') }}" class="" aria-expanded="false">
                     <i class="flaticon-086-star"></i>
                     <span class="nav-text">Cars</span>

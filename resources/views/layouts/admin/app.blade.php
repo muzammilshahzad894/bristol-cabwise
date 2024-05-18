@@ -22,6 +22,8 @@
     <!-- Globle CSS -->
     <link href="{{ asset('admin-assets/css/style.css') }}" rel="stylesheet">
 
+    @yield('styles')
+
 </head>
 
 <body>
@@ -57,10 +59,10 @@
                         <path id="Path_2002" data-name="Path 2002" d="M192.859,115.547a4.523,4.523,0,0,0,.7-2.415v-2.284a4.55,4.55,0,0,0-9.1,0v2.284a4.523,4.523,0,0,0,.7,2.415,4.954,4.954,0,0,0-3.708,4.788v1.623a2.4,2.4,0,0,0,2.4,2.4h10.323a2.4,2.4,0,0,0,2.4-2.4v-1.623a4.954,4.954,0,0,0-3.708-4.788Zm-6.114-4.7a2.259,2.259,0,0,1,4.518,0v2.284a2.259,2.259,0,1,1-4.518,0Zm7.53,11.111a.11.11,0,0,1-.11.11H183.843a.11.11,0,0,1-.11-.11v-1.623a2.656,2.656,0,0,1,2.653-2.653h5.237a2.656,2.656,0,0,1,2.653,2.653Zm0,0" transform="translate(-168.591 -98.178)" fill="#fff" stroke="#fff" stroke-width="1" />
                     </g>
                 </svg> -->
-                <svg class="brand-title" xmlns="http://www.w3.org/2000/svg" width="134.01" height="96.365" viewBox="0 0 134.01 96.365">
+                <!-- <svg class="brand-title" xmlns="http://www.w3.org/2000/svg" width="134.01" height="96.365" viewBox="0 0 134.01 96.365">
                     <text x="10" y="50" fill="#464646" font-size="30" font-family="Poppins-Light, Poppins" font-weight="700">B.C</text>
                     <text x="10" y="70" fill="#787878" font-size="12" font-family="Poppins-Light, Poppins" font-weight="500">Bristol Cabwise</text>
-                </svg>
+                </svg> -->
             </a>
             <div class="nav-control">
                 <div class="hamburger">
@@ -188,6 +190,7 @@
             }, 1000);
         });
     </script>
+    @yield('scripts')
 </body>
 
 </html>
