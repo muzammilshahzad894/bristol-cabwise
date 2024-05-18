@@ -26,7 +26,7 @@
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.contact') ? 'active' : '' }}" href="{{ route('frontend.contact') }}">Contact</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.trustVoilet') ? 'active' : '' }}" href="{{ route('frontend.trustVoilet') }}">Trust Violet</a></li>
                 <li class="nav-item">
-                    <a href="{{ route('frontend.services') }}" class="booking_online_btn">Book Now</a></li>
+                    <a href="{{ route('frontend.book-online') }}" class="booking_online_btn">Book Now</a></li>
             </ul>
             <div class="navbar-right">
                 <div class="wrap">

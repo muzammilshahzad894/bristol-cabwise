@@ -22,6 +22,15 @@
     <!-- Globle CSS -->
     <link href="{{ asset('admin-assets/css/style.css') }}" rel="stylesheet">
 
+    <!-- Multiple Input Tags -->
+    <link rel="stylesheet" href="http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+
+    <style>
+        .btn-primary {
+            padding: 0.625rem 1rem !important;
+        }
+    </style>
+
     @yield('styles')
 
 </head>
@@ -190,6 +199,9 @@
             }, 1000);
         });
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
     @yield('scripts')
 </body>
 

@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="banner-header section-padding bg-img" data-overlay-dark="6"
-        data-background="{{ asset('frontend-assets/img/slider/11.jpg') }}">
+        data-background="{{ asset('uploads/services/'.$service->image) }}">
         <div class="v-middle">
             <div class="container">
                 <div class="row">
@@ -19,27 +19,23 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12 mb-30">
                     <div class="content">
-                        <div class="section-subtitle">Booking car</div>
-                        <div class="section-title">We Are More Than <span>A Car Booking Company</span></div>
-                        <p class="mb-30">Introducing Bristol Cabwise, your one-stop solution for reliable taxi services in Bristol, United Kingdom. From airport transfers to city tours, corporate rides to in-city journeys, Bristol Cabwise offers seamless pre-booking options at competitive rates. Experience convenience and comfort with our trusted transportation services. Book your ride with Bristol Cabwise today for a stress-free travel experience.</p>
+                        <div class="section-subtitle">{{ $service->detail_page_tag }}</div>
+                        <div class="section-title">{{ $service->detail_page_first_heading }} <span>{{ $service->detail_page_second_heading }}</span></div>
+                        <p class="mb-30">{{$service->detail_page_description}}</p>
                         <ul class="list-unstyled list mb-30">
-                            <li>
-                                <div class="list-icon"> <span class="ti-check"></span> </div>
-                                <div class="list-text">
-                                    <p>Sports and Luxury Cars</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="list-icon"> <span class="ti-check"></span> </div>
-                                <div class="list-text">
-                                    <p>Economy Cars</p>
-                                </div>
-                            </li>
+                            @foreach(explode(',', $service->detail_page_features) as $feature)
+                                <li>
+                                    <div class="list-icon"> <span class="ti-check"></span> </div>
+                                    <div class="list-text">
+                                        <p>{{ $feature }}</p>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-5 offset-lg-1 col-md-12">
-                    <div class="item"> <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="about"
+                    <div class="item"> <img src="{{ asset('uploads/services/'.$service->image) }}" alt="about"
                             class="img-fluid">
 
                     </div>
@@ -59,97 +55,26 @@
                 </div>
                 <div class="col-md-12">
                     <div class="owl-carousel owl-theme">
-                        <div class="item" style="padding:10px;">
-                            <div class="cars_details_view">
-                                <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">Airport transfers</h4>
-                                    <p style="color: #f5b754">Moderline</p>
-                                    <p style="color: white ;" class="truncate">
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
-                                        <div class="d-flex justify-content-between gap-4">
-                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
+                        @if($services->count() > 0)
+                            @foreach($services as $service)
+                                <div class="item" style="padding:10px;">
+                                    <div class="cars_details_view">
+                                        <div>
+                                            <img src="{{ asset('uploads/services/'.$service->image) }}" alt="" />
+                                            <h4 class="text-white mb-0 pt-2" style="font-size:24px;">{{ $service->name }}</h4>
+                                            <p style="color: #f5b754">{{ $service->tag }}</p>
+                                            <p style="color: white;" class="truncate">
+                                                {{ $service->short_description }}
+                                            </p>
+                                            <div class="d-flex justify-content-between gap-4">
+                                                <a class="view_details" href="{{ route('frontend.carDetails', $service->id) }}">View Details</a>
+                                                <a class="view_details" href="{{ route('frontend.book-online', $service->id) }}">Book Now</a>
+                                            </div>
                                         </div>
+                                    </div>
                                 </div>
-
-                            </div>
-                        </div>
-                        <div class="item" style="padding:10px;">
-                            <div class="cars_details_view">
-                                <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">City ti city transfers </h4>
-                                    <p style="color: #f5b754">Moderline</p>
-                                    <p style="color: white ;" class="truncate">
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
-                                        <div class="d-flex justify-content-between gap-4">
-                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
-                                        </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="item" style="padding:10px;">
-                            <div class="cars_details_view">
-                                <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/9.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">Business </h4>
-                                    <p style="color: #f5b754">Moderline</p>
-                                    <p style="color: white" class="truncate">
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
-                                        <div class="d-flex justify-content-between gap-4">
-                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
-                                        </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="item" style="padding:10px;">
-                            <div class="cars_details_view">
-                                <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">Private </h4>
-                                    <p style="color: #f5b754">Moderline</p>
-                                    <p style="color: white" class="truncate">
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
-                                        <div class="d-flex justify-content-between gap-4">
-                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
-                                        </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="item" style="padding:10px;">
-                            <div class="cars_details_view">
-                                <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2">Events  </h4>
-                                    <p style="color: #f5b754">Moderline</p>
-                                    <p style="color: white" class="truncate">
-                                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin vel. Morbi
-                                        consequat risus consequat, porttitor orci sit amet, iaculis nisl. Integer quis
-                                        sapien nec elit ultrices euismon sit amet id lacus. Sed a imperdiet erat. </p>
-                                        <div class="d-flex justify-content-between gap-4">
-                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
-                                        </div>
-                                </div>
-
-                            </div>
-                        </div>
-
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
@@ -280,6 +205,10 @@
             border-right: 1px solid rgb(237, 235, 235);
             height: 40px;
             padding-right: 30px;
+        }
+
+        .owl-carousel .owl-item img {
+            height: 200px !important;
         }
 
         @media (max-width: 768px) {

@@ -29,7 +29,7 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
                 <div class="section-title">What Clients Say</div>
             </div>
            
-                    <div class="col-md-4 ">
+                    <div class="col-md-4 mb-4">
                         <div class="item">
                             <div class="stars"> <span class="rate">
                                 <i class="fa-solid fa-star"></i>
@@ -88,7 +88,7 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
                         </div>
                         
                     </div>
-                    <div class="col-md-4 ">
+                    <div class="col-md-4 mb-4">
                         <div class="item">
                             <div class="stars"> <span class="rate">
                                 <i class="fa-solid fa-star"></i>
@@ -148,7 +148,7 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
                         </div>
                        
                     </div>
-                    <div class="col-md-4 ">
+                    <div class="col-md-4 mb-4">
                         <div class="item">
                             <div class="stars"> <span class="rate">
                                 <i class="fa-solid fa-star"></i>
@@ -207,7 +207,7 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
                         </div>
                         
                     </div>
-                    <div class="col-md-4 ">
+                    <div class="col-md-4 mb-4">
                         <div class="item">
                             <div class="stars"> <span class="rate">
                                 <i class="fa-solid fa-star"></i>
@@ -266,7 +266,7 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
                         </div>
                         
                     </div>
-                    <div class="col-md-4 ">
+                    <div class="col-md-4 mb-4">
                         <div class="item">
                             <div class="stars"> <span class="rate">
                                 <i class="fa-solid fa-star"></i>
@@ -326,7 +326,7 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
                         </div>
                        
                     </div>
-                    <div class="col-md-4 ">
+                    <div class="col-md-4 mb-4">
                         <div class="item">
                             <div class="stars"> <span class="rate">
                                 <i class="fa-solid fa-star"></i>

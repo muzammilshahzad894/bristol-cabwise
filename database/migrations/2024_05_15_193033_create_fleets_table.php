@@ -15,7 +15,6 @@ class CreateFleetsTable extends Migration
     {
         Schema::create('fleets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('service_id');
             $table->string('name');
             $table->string('image');
             $table->string('price'); // per mile

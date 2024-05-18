@@ -33,7 +33,8 @@ class ServicesController extends Controller
         try {
             $service = new Service();
             $service->name = $request->name;
-            $service->description = $request->description;
+            $service->tag = $request->tag;
+            $service->short_description = $request->short_description;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $name = time() . '.' . $image->getClientOriginalExtension();
@@ -41,6 +42,11 @@ class ServicesController extends Controller
                 $image->move($destinationPath, $name);
                 $service->image = $name;
             }
+            $service->detail_page_tag = $request->detail_page_tag;
+            $service->detail_page_first_heading = $request->detail_page_first_heading;
+            $service->detail_page_second_heading = $request->detail_page_second_heading;
+            $service->detail_page_description = $request->detail_page_description;
+            $service->detail_page_features = $request->detail_page_features;
             $service->save();
             return redirect()->route('admin.services.index')->with('success', 'Service added successfully');
         } catch (Exception $e) {
@@ -65,7 +71,8 @@ class ServicesController extends Controller
         try {
             $service = Service::find($id);
             $service->name = $request->name;
-            $service->description = $request->description;
+            $service->tag = $request->tag;
+            $service->short_description = $request->short_description;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $name = time() . '.' . $image->getClientOriginalExtension();
@@ -73,6 +80,11 @@ class ServicesController extends Controller
                 $image->move($destinationPath, $name);
                 $service->image = $name;
             }
+            $service->detail_page_tag = $request->detail_page_tag;
+            $service->detail_page_first_heading = $request->detail_page_first_heading;
+            $service->detail_page_second_heading = $request->detail_page_second_heading;
+            $service->detail_page_description = $request->detail_page_description;
+            $service->detail_page_features = $request->detail_page_features;
             $service->save();
             return redirect()->route('admin.services.index')->with('success', 'Service updated successfully');
         } catch (Exception $e) {

@@ -10,7 +10,6 @@ use Exception;
 use App\Http\Requests\AddFleetRequest;
 use App\Http\Requests\UpdateFleetRequest;
 use App\Models\Fleet;
-use App\Models\Service;
 use App\Models\FleetTax;
 
 class FleetController extends Controller
@@ -18,7 +17,7 @@ class FleetController extends Controller
     public function index()
     {
         try {
-            $fleets = Fleet::with('service')->paginate(10);
+            $fleets = Fleet::paginate(10);
             return view('admin.fleets.index', compact('fleets'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
@@ -29,8 +28,7 @@ class FleetController extends Controller
     public function create()
     {
         try {
-            $services = Service::all();
-            return view('admin.fleets.create', compact('services'));
+            return view('admin.fleets.create');
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
@@ -43,7 +41,6 @@ class FleetController extends Controller
             DB::beginTransaction();
 
             $fleet = new Fleet();
-            $fleet->service_id = $request->service_id;
             $fleet->name = $request->name;
             $fleet->price = $request->price;
             if ($request->hasFile('image')) {
@@ -83,10 +80,9 @@ class FleetController extends Controller
     public function edit($id)
     {
         try {
-            $fleet = Fleet::with('service')->find($id);
-            $services = Service::all();
+            $fleet = Fleet::find($id);
             $fleetTaxes = FleetTax::where('fleet_id', $id)->get();
-            return view('admin.fleets.edit', compact('fleet', 'services', 'fleetTaxes'));
+            return view('admin.fleets.edit', compact('fleet', 'fleetTaxes'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
@@ -99,7 +95,6 @@ class FleetController extends Controller
             DB::beginTransaction();
 
             $fleet = Fleet::find($id);
-            $fleet->service_id = $request->service_id;
             $fleet->name = $request->name;
             $fleet->price = $request->price;
             if ($request->hasFile('image')) {

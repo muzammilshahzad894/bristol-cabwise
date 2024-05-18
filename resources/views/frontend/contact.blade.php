@@ -109,7 +109,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <h6>Rent Your Car</h6>
-                <h5>Interested in Renting?</h5>
+                <h5>Interested in Booking?</h5>
                 <p>Don't hesitate and send us a message.</p> <a href="tel:+8001234567" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a href="contact.html" class="button-2 mt-15 mb-15">Contact Us <span class="ti-arrow-top-right"></span></a>
             </div>
         </div>

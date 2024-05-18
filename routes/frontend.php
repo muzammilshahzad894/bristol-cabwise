@@ -11,5 +11,5 @@ Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.c
 Route::get('/services', [FrontendController::class, 'services'])->name('frontend.services');
 
 Route::get('/book-online', [BookingController::class, 'index'])->name('frontend.book-online');
-Route::get('/car-details', [CarsController::class, 'carDetails'])->name('frontend.carDetails');
-Route::get('/trust-violet', [CarsController::class, 'trustVoilet'])->name('frontend.trustVoilet');
+Route::get('/car-details/{id}', [CarsController::class, 'carDetails'])->name('frontend.carDetails');
+Route::get('/trust-violet', [FrontendController::class, 'trustVoilet'])->name('frontend.trustVoilet');

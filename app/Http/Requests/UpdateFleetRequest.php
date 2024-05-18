@@ -24,7 +24,6 @@ class UpdateFleetRequest extends FormRequest
     public function rules()
     {
         return [
-            'service_id' => 'required|exists:services,id',
             'name' => 'required',
             'price' => 'required|string',
             'image' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',

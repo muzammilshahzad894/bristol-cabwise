@@ -29,18 +29,6 @@
                             @csrf
                             <div class="row">
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Service Type <span class="text-danger">*</span></label>
-                                    <select name="service_id" class="form-control" required>
-                                        <option value="">Select Service</option>
-                                        @foreach($services as $service)
-                                            <option value="{{ $service->id }}" {{ $fleet->service_id == $service->id ? 'selected' : '' }}>{{ $service->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('service_id')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3 col-md-6">
                                     <label class="form-label">Name <span class="text-danger">*</span></label>
                                     <input type="text" name="name" class="form-control" placeholder="Name" value="{{ $fleet->name }}" required>
                                     @error('name')

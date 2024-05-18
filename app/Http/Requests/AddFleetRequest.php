@@ -24,7 +24,6 @@ class AddFleetRequest extends FormRequest
     public function rules()
     {
         return [
-            'service_id' => 'required|exists:services,id',
             'name' => 'required',
             'price' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',

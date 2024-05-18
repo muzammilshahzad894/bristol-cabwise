@@ -239,51 +239,7 @@
     </header>
     {{-- Additional Section  --}}
 
-    <!-- {{-- <section class="process section-padding">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="cars_details_view">
-						<div>
-							 <img src="{{ asset('frontend-assets/img/slider/5.jpg') }}" alt="" />
-							<h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
-							<p style="color: #f5b754">Moderline</p>
-							<div class="">
-								<button class="view_details">View Details</button>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="cars_details_view">
-						<div>
-							 <img src="{{ asset('frontend-assets/img/slider/11.jpg') }}" alt="" />
-							<h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
-							<p style="color: #f5b754">Moderline</p>
-							<div class="">
-								<button class="view_details">View Details</button>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="cars_details_view">
-						<div>
-							 <img src="{{ asset('frontend-assets/img/slider/9.jpg') }}" alt="" />
-							<h4 class="text-white mb-0 pt-2">BMW 3-Series</h4>
-							<p style="color: #f5b754">Moderline</p>
-							<div class="">
-								<button class="view_details">View Details</button>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> --}} -->
+    
 
     <section class="about section-padding">
         <div class="container">
@@ -316,87 +272,26 @@
                 </div>
                 <div class="col-md-12">
                     <div class="owl-carousel owl-theme">
-                        <div class="item" style="padding:10px;">
-                            <div class="cars_details_view">
-                                <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/aiport.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2" style="font-size:24px;">Airport transfers</h4>
-                                    <p style="color: #f5b754">Moderline</p>
-                                    <p style="color: white ;" class="truncate">
-                                       Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
-                                        <div class="d-flex justify-content-between gap-4">
-                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
+                        @if($services->count() > 0)
+                            @foreach($services as $service)
+                                <div class="item" style="padding:10px;">
+                                    <div class="cars_details_view">
+                                        <div>
+                                            <img src="{{ asset('uploads/services/'.$service->image) }}" alt="" />
+                                            <h4 class="text-white mb-0 pt-2" style="font-size:24px;">{{ $service->name }}</h4>
+                                            <p style="color: #f5b754">{{ $service->tag }}</p>
+                                            <p style="color: white;" class="truncate">
+                                                {{ $service->short_description }}
+                                            </p>
+                                            <div class="d-flex justify-content-between gap-4">
+                                                <a class="view_details" href="{{ route('frontend.carDetails', $service->id) }}">View Details</a>
+                                                <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
+                                            </div>
                                         </div>
+                                    </div>
                                 </div>
-
-                            </div>
-                        </div>
-                        <div class="item" style="padding:10px;">
-                            <div class="cars_details_view">
-                                <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2" style="font-size:24px;">City ti city transfers </h4>
-                                    <p style="color: #f5b754">Moderline</p>
-                                    <p style="color: white ;" class="truncate">
-                                       Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
-                                        <div class="d-flex justify-content-between gap-4">
-                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
-                                        </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="item" style="padding:10px;">
-                            <div class="cars_details_view">
-                                <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/business.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2" style="font-size:24px;">Business </h4>
-                                    <p style="color: #f5b754">Moderline</p>
-                                    <p style="color: white" class="truncate">
-                                       Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
-                                        <div class="d-flex justify-content-between gap-4">
-                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
-                                        </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="item" style="padding:10px;">
-                            <div class="cars_details_view">
-                                <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/private.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2" style="font-size:24px;">Private </h4>
-                                    <p style="color: #f5b754">Moderline</p>
-                                    <p style="color: white" class="truncate">
-                                       Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
-                                        <div class="d-flex justify-content-between gap-4">
-                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
-                                        </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="item" style="padding:10px;">
-                            <div class="cars_details_view">
-                                <div>
-                                    <img src="{{ asset('frontend-assets/img/slider/event.jpg') }}" alt="" />
-                                    <h4 class="text-white mb-0 pt-2" style="font-size:24px;">Events  </h4>
-                                    <p style="color: #f5b754">Moderline</p>
-                                    <p style="color: white" class="truncate">
-                                       Reliable and comfortable taxi fleet. Book now for stress-free travel! </p>
-                                        <div class="d-flex justify-content-between gap-4">
-                                            <a class="view_details" href="{{ route('frontend.carDetails') }}">View Details</a>
-                                            <a class="view_details" href="{{ route('frontend.book-online') }}">Book Now</a>
-                                        </div>
-                                </div>
-
-                            </div>
-                        </div>
-
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
@@ -416,12 +311,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="owl-carousel owl-theme">
-                        @if ($cars->count() > 0)
-                            @foreach ($cars as $car)
-                                <div class="item"> <img src="{{ asset('uploads/cars/' . $car->image) }}" class="img-fluid"
+                        @if ($fleets->count() > 0)
+                            @foreach ($fleets as $fleet)
+                                <div class="item"> <img src="{{ asset('uploads/fleets/' . $fleet->image) }}" class="img-fluid"
                                         alt="">
                                     <div class="title">
-                                        <h4>{{ $car->type }}</h4>
+                                        <h4>{{ $fleet->name }}</h4>
                                     </div>
                                     <div class="curv-butn icon-bg">
                                         <a href="{{ route('frontend.book-online') }}" class="vid">

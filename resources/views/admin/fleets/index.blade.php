@@ -15,7 +15,6 @@
                 <table class="table display mb-4 dataTablesCard job-table table-responsive-xl card-table" id="example5">
                     <thead>
                         <tr>
-                            <th>Service Name</th>
                             <th>Fleet Name</th>
                             <th>Image</th>
                             <th>Price <small>(per mile)</small></th>
@@ -26,7 +25,6 @@
                         @if($fleets->count())
                             @foreach($fleets as $fleet)
                                 <tr>
-                                    <td>{{ $fleet->service->name }}</td>
                                     <td>{{ $fleet->name }}</td>
                                     <td>
                                         <img src="{{ asset('uploads/fleets/'.$fleet->image) }}" alt="{{ $fleet->image }}" class="img-fluid" width="70">

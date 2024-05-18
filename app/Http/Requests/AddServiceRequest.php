@@ -25,8 +25,14 @@ class AddServiceRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'description' => 'required',
+            'tag' => 'required',
+            'short_description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'detail_page_tag' => 'required',
+            'detail_page_first_heading' => 'required',
+            'detail_page_second_heading' => 'required',
+            'detail_page_description' => 'required',
+            'detail_page_features' => 'required',
         ];
     }
 }
