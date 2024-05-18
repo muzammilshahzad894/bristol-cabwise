@@ -853,19 +853,33 @@
         });
 
         document.addEventListener('DOMContentLoaded', function () {
-  // Check if modal should be opened
-  if (localStorage.getItem('modalClosed')) {
-    var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-    myModal.show();
-  }
+    // Check if the modal has been closed before
+    // if (!localStorage.getItem('modalClosed')) {
+        var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        myModal.show();
+    // }
 });
 
-// Listen for modal close event
 var myModalEl = document.getElementById('exampleModal');
 myModalEl.addEventListener('hidden.bs.modal', function () {
-
-  localStorage.setItem('modalClosed', true);
+    // Set the modalClosed item in localStorage when the modal is closed
+    localStorage.setItem('modalClosed', 'true');
 });
+
+// Function to copy coupon code to clipboard
+function copyToClipboard() {
+    var couponCode = document.getElementById('couponCode').innerText;
+    navigator.clipboard.writeText(couponCode).then(function() {
+        var copyAlert = document.getElementById('copyAlert');
+        copyAlert.style.display = 'block';
+        setTimeout(function() {
+            copyAlert.style.display = 'none';
+        }, 2000);
+    }, function(err) {
+        console.error('Could not copy text: ', err);
+    });
+}
+
 function copyToClipboard() {
     var couponCode = document.getElementById('couponCode').innerText;
     navigator.clipboard.writeText(couponCode).then(function() {
