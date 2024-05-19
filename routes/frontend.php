@@ -13,3 +13,5 @@ Route::get('/services', [FrontendController::class, 'services'])->name('frontend
 Route::get('/book-online', [BookingController::class, 'index'])->name('frontend.book-online');
 Route::get('/car-details/{id}', [CarsController::class, 'carDetails'])->name('frontend.carDetails');
 Route::get('/trust-violet', [FrontendController::class, 'trustVoilet'])->name('frontend.trustVoilet');
+Route::get('/signIn', [FrontendController::class, 'login'])->name('frontend.login');
+Route::get('/signUp', [FrontendController::class, 'signup'])->name('frontend.signup');

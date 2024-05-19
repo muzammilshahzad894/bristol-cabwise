@@ -25,6 +25,11 @@
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.services') ? 'active' : '' }}" href="{{ route('frontend.services') }}">Services</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.contact') ? 'active' : '' }}" href="{{ route('frontend.contact') }}">Contact</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.trustVoilet') ? 'active' : '' }}" href="{{ route('frontend.trustVoilet') }}">Trust Violet</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.login') ||  request()->routeIs('frontend.signup') ? 'active' : '' }}" href="{{ route('frontend.login') }}">Sign In</a></li>
+
+                {{-- @if (Auth::check())
+                <li class="nav-item"><a class="nav-link" href="{{ route('frontend.logout') }}">Logout</a></li>
+                @else --}}
                 <li class="nav-item">
                     <a href="{{ route('frontend.book-online') }}" class="booking_online_btn">Book Now</a></li>
             </ul>

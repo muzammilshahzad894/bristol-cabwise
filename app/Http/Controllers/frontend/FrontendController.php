@@ -33,4 +33,22 @@ class FrontendController extends Controller
             return redirect()->back()->with('error', 'An error occurred while fetching car details');
         }
     }
+    public function login()
+    {
+        try {
+            return view('frontend.login.index');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while fetching car details');
+        }
+    }
+    public function signup()
+    {
+        try {
+            return view('frontend.login.signup');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while fetching car details');
+        }
+    }
 }

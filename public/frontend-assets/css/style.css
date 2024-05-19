@@ -3937,17 +3937,40 @@ height: 100% !important;
     background: transparent;
     border: 1px solid transparent;
 }
+.forget-password{
+    color: black;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: right;
+    display: block;
+
+}
+.forget-password:hover{
+    color: #f8941d;
+
+}
+.signup:hover{
+    color: white !important;
+}
+.col-md-12.forget_section {
+    margin-top: -10px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .booking-button {
     display: block;
     padding: 0;
     border: none;
     margin: 0;
     width: 100%;
-    background: #f5b754;
-    color: #1b1b1b;
+    background: #f8941d;
+    color: white;
     font-family: 'Outfit', sans-serif;
     font-size: 14px;
     text-decoration: none;
+    font-size: 21px;
     line-height: 60px;
     position: relative;
     cursor: pointer;
