@@ -49,6 +49,8 @@ class FleetController extends Controller
                 $image->move(public_path('uploads/fleets'), $imageName);
                 $fleet->image = $imageName;
             }
+            $fleet->meet_and_greet = $request->meet_and_greet ? 1 : 0;
+            $fleet->meet_and_greet_price = $request->meet_and_greet ? $request->meet_and_greet_price : 0;
             $fleet->save();
 
             $this->storeTaxes($request, $fleet);
@@ -103,6 +105,8 @@ class FleetController extends Controller
                 $image->move(public_path('uploads/fleets'), $imageName);
                 $fleet->image = $imageName;
             }
+            $fleet->meet_and_greet = $request->meet_and_greet ? 1 : 0;
+            $fleet->meet_and_greet_price = $request->meet_and_greet ? $request->meet_and_greet_price : 0;
             $fleet->save();
 
             FleetTax::where('fleet_id', $id)->delete();

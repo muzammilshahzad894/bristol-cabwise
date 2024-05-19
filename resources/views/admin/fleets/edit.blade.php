@@ -74,6 +74,22 @@
                                 </div>
                                 <hr>
                                 <!-- End tax fields section -->
+                                <!-- Meet and Greet Section -->
+                                <h4>Meet and Greet</h4>
+                                <div class="mb-3 col-md-6">
+                                    <div class="form-check custom-checkbox mb-3 checkbox-success">
+                                        <input type="checkbox" class="form-check-input" id="meetAndGreetCheckbox" name="meet_and_greet" {{ $fleet->meet_and_greet ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="meetAndGreetCheckbox">Meet and Greet</label>
+                                    </div>
+                                    <div id="meet_greet_price_sec" style="{{ $fleet->meet_and_greet ? '' : 'display: none;' }}">
+                                        <label class="form-label">Price <span class="text-danger">*</span></label>
+                                        <input type="number" name="meet_and_greet_price" class="form-control" placeholder="Meet and Greet Price" value="{{ $fleet->meet_and_greet_price }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                        @error('meet_and_greet_price')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- End Meet and Greet Section -->
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </form>
@@ -115,5 +131,10 @@
         const row = button.parentElement.parentElement;
         row.remove();
     }
+
+    document.getElementById('meetAndGreetCheckbox').addEventListener('change', function() {
+        const meetGreetPriceSec = document.getElementById('meet_greet_price_sec');
+        meetGreetPriceSec.style.display = this.checked ? '' : 'none';
+    });
 </script>
 @endsection

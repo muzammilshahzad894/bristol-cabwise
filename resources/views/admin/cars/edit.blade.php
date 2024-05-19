@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         @include('partials.messages')
-        <div class="col-xl-6 col-lg-12">
+        <div class="col-xl-12 col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Edit Car</h4>
@@ -15,33 +15,38 @@
                             @csrf
                             <div class="row">
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Type <span class="text-danger">*</span></label>
-                                    <input type="text" name="type" class="form-control" placeholder="Type" value="{{ old('type') ?? $car->type }}">
-                                    @error('type')
+                                    <label class="form-label">Name <span class="text-danger">*</span></label>
+                                    <input type="text" name="name" class="form-control" placeholder="Name" value="{{ old('name') ?? $car->name }}" required>
+                                    @error('name')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Image <span class="text-danger">*</span></label>
+                                    <label class="form-label">Image</label>
                                     <input type="file" name="image" class="form-control" placeholder="Image" value="{{ old('image') }}">
+                                    <img src="{{ asset('uploads/cars/'.$car->image) }}" alt="{{ $car->type }}" class="mt-2" width="70" height="70">
                                     @error('image')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Price / KM <span class="text-danger">*</span></label>
-                                    <input type="text" name="price" class="form-control" placeholder="Price" value="{{ old('price') ?? $car->price }}">
-                                    @error('price')
+                                    <label class="form-label">Max Passengers <span class="text-danger">*</span></label>
+                                    <input type="number" name="max_passengers" class="form-control" placeholder="Max Passengers" value="{{ old('max_passengers') ?? $car->max_passengers }}" required>
+                                    @error('max_passengers')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Status <span class="text-danger">*</span></label>
-                                    <select name="status" class="form-control">
-                                        <option value="1" {{ old('status') == '1' || $car->status == '1' ? 'selected' : '' }}>Active</option>
-                                        <option value="0" {{ old('status') == '0' || $car->status == '0' ? 'selected' : '' }}>Inactive</option>
-                                    </select>
-                                    @error('status')
+                                    <label class="form-label">Max Suitecases <span class="text-danger">*</span></label>
+                                    <input type="number" name="max_suitecases" class="form-control" placeholder="Max Suitecases" value="{{ old('max_suitecases') ?? $car->max_suitecases }}" required>
+                                    @error('max_suitecases')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Max Hand Luggage <span class="text-danger">*</span></label>
+                                    <input type="number" name="max_hand_luggage" class="form-control" placeholder="Max Hand Luggage" value="{{ old('max_hand_luggage') ?? $car->max_hand_luggage }}" required>
+                                    @error('max_hand_luggage')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>

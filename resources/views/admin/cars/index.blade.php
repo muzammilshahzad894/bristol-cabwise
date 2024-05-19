@@ -15,10 +15,11 @@
                 <table class="table display mb-4 dataTablesCard job-table table-responsive-xl card-table" id="example5">
                     <thead>
                         <tr>
-                            <th>Type</th>
+                            <th>Name</th>
                             <th>Image</th>
-                            <th>Price / KM</th>
-                            <th>Status</th>
+                            <th>Max Passengers</th>
+                            <th>Max Suitecases</th>
+                            <th>Max Hand Luggage</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -26,16 +27,11 @@
                         @if($cars->count())
                             @foreach($cars as $car)
                                 <tr>
-                                    <td>{{ $car->type }}</td>
+                                    <td>{{ $car->name }}</td>
                                     <td><img src="{{ asset('uploads/cars/'.$car->image) }}" alt="{{ $car->type }}" class="img-fluid" width="70"></td>
-                                    <td>$ {{ $car->price }}</td>
-                                    <td>
-                                        @if($car->status)
-                                            <span class="badge bg-success">Active</span>
-                                        @else
-                                            <span class="badge bg-danger">Inactive</span>
-                                        @endif
-                                    </td>
+                                    <td>{{ $car->max_passengers }}</td>
+                                    <td>{{ $car->max_suitecases }}</td>
+                                    <td>{{ $car->max_hand_luggage }}</td>
                                     <td>
                                         <a href="{{ route('admin.cars.edit', $car->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                         <a href="{{ route('admin.cars.delete', $car->id) }}" 

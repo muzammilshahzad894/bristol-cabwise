@@ -24,10 +24,11 @@ class UpdateCarRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'required',
-            'price' => 'required',
-            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'status' => 'required',
+            'name' => 'required',
+            'image' => 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'max_passengers' => 'required',
+            'max_suitecases' => 'required',
+            'max_hand_luggage' => 'required',
         ];
     }
 }

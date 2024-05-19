@@ -15,8 +15,7 @@ class CarsController extends Controller
     public function index()
     {
         try {
-            $cars = Car::orderBy('id', 'desc')->paginate(10);
-            // dd($cars);
+            $cars = Car::paginate(10);
             return view('admin.cars.index', compact('cars'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
@@ -38,9 +37,7 @@ class CarsController extends Controller
     {
         try {
             $car = new Car();
-            $car->type = $request->type;
-            $car->price = $request->price;
-            $car->status = $request->status;
+            $car->name = $request->name;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $name = time() . '.' . $image->getClientOriginalExtension();
@@ -48,6 +45,9 @@ class CarsController extends Controller
                 $image->move($destinationPath, $name);
                 $car->image = $name;
             }
+            $car->max_passengers = $request->max_passengers;
+            $car->max_suitecases = $request->max_suitecases;
+            $car->max_hand_luggage = $request->max_hand_luggage;
             $car->save();
             return redirect()->route('admin.cars.index')->with('success', 'Car added successfully');
         } catch (Exception $e) {
@@ -71,9 +71,7 @@ class CarsController extends Controller
     {
         try {
             $car = Car::find($id);
-            $car->type = $request->type;
-            $car->price = $request->price;
-            $car->status = $request->status;
+            $car->name = $request->name;
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $name = time() . '.' . $image->getClientOriginalExtension();
@@ -81,6 +79,9 @@ class CarsController extends Controller
                 $image->move($destinationPath, $name);
                 $car->image = $name;
             }
+            $car->max_passengers = $request->max_passengers;
+            $car->max_suitecases = $request->max_suitecases;
+            $car->max_hand_luggage = $request->max_hand_luggage;
             $car->save();
             return redirect()->route('admin.cars.index')->with('success', 'Car updated successfully');
         } catch (Exception $e) {

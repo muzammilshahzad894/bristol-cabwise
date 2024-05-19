@@ -18,6 +18,8 @@ class CreateFleetsTable extends Migration
             $table->string('name');
             $table->string('image');
             $table->string('price'); // per mile
+            $table->boolean('meet_and_greet')->default(0);
+            $table->string('meet_and_greet_price')->default(0);
             $table->timestamps();
         });
     }

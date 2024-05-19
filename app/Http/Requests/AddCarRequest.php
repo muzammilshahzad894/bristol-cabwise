@@ -24,10 +24,11 @@ class AddCarRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'required',
-            'price' => 'required',
+            'name' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'status' => 'required',
+            'max_passengers' => 'required',
+            'max_suitecases' => 'required',
+            'max_hand_luggage' => 'required',
         ];
     }
 }
