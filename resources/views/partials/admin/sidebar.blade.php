@@ -19,12 +19,12 @@
                     <span class="nav-text">Fleets</span>
                 </a>
             </li>
-            <li class="{{ request()->routeIs('admin.car.index') || request()->routeIs('admin.car.create') ? 'mm-active' : '' }}">
+            <!-- <li class="{{ request()->routeIs('admin.car.index') || request()->routeIs('admin.car.create') ? 'mm-active' : '' }}">
                 <a href="{{ route('admin.cars.index') }}" class="" aria-expanded="false">
                     <i class="flaticon-086-star"></i>
                     <span class="nav-text">Cars</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
     </div>
 </div>

@@ -46,6 +46,27 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Max Passengers <span class="text-danger">*</span></label>
+                                    <input type="number" name="max_passengers" class="form-control" placeholder="Max Passengers" value="{{ old('max_passengers') }}" required>
+                                    @error('max_passengers')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Max Suitecases <span class="text-danger">*</span></label>
+                                    <input type="number" name="max_suitecases" class="form-control" placeholder="Max Suitecases" value="{{ old('max_suitecases') }}" required>
+                                    @error('max_suitecases')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Max Hand Luggage <span class="text-danger">*</span></label>
+                                    <input type="number" name="max_hand_luggage" class="form-control" placeholder="Max Hand Luggage" value="{{ old('max_hand_luggage') }}" required>
+                                    @error('max_hand_luggage')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
                                 <hr>
                                 <!-- Tax fields section -->
                                 <h4>Tax Section</h4>
@@ -73,6 +94,15 @@
                                     </div>
                                 </div>
                                 <!-- End Meet and Greet Section -->
+                                <hr>
+                                <!-- Features Section -->
+                                <h4>Features</h4>
+                                <div class="mb-3">
+                                    <input type="text" data-role="tagsinput" name="features" class="form-control" placeholder="Add Features" value="{{ old('features') }}">
+                                    @error('features')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </form>

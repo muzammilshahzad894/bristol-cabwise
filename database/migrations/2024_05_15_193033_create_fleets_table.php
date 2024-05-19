@@ -20,6 +20,10 @@ class CreateFleetsTable extends Migration
             $table->string('price'); // per mile
             $table->boolean('meet_and_greet')->default(0);
             $table->string('meet_and_greet_price')->default(0);
+            $table->string('max_passengers')->nullable();
+            $table->string('max_suitecases')->nullable();
+            $table->string('max_hand_luggage')->nullable();
+            $table->text('features')->nullable();
             $table->timestamps();
         });
     }

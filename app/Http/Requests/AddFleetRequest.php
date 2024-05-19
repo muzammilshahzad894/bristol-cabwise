@@ -27,6 +27,10 @@ class AddFleetRequest extends FormRequest
             'name' => 'required',
             'price' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'max_passengers' => 'required',
+            'max_suitecases' => 'required',
+            'max_hand_luggage' => 'required',
+            'features' => 'sometimes|nullable',
         ];
     }
 }

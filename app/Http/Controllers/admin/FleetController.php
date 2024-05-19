@@ -51,6 +51,10 @@ class FleetController extends Controller
             }
             $fleet->meet_and_greet = $request->meet_and_greet ? 1 : 0;
             $fleet->meet_and_greet_price = $request->meet_and_greet ? $request->meet_and_greet_price : 0;
+            $fleet->max_passengers = $request->max_passengers;
+            $fleet->max_suitecases = $request->max_suitecases;
+            $fleet->max_hand_luggage = $request->max_hand_luggage;
+            $fleet->features = $request->features;
             $fleet->save();
 
             $this->storeTaxes($request, $fleet);
@@ -107,6 +111,10 @@ class FleetController extends Controller
             }
             $fleet->meet_and_greet = $request->meet_and_greet ? 1 : 0;
             $fleet->meet_and_greet_price = $request->meet_and_greet ? $request->meet_and_greet_price : 0;
+            $fleet->max_passengers = $request->max_passengers;
+            $fleet->max_suitecases = $request->max_suitecases;
+            $fleet->max_hand_luggage = $request->max_hand_luggage;
+            $fleet->features = $request->features;
             $fleet->save();
 
             FleetTax::where('fleet_id', $id)->delete();
