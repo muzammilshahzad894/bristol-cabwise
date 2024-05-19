@@ -16,8 +16,7 @@ class CarsController extends Controller
         try {
             $services = Service::all();
             $fleets = Fleet::all();
-            $cars = Car::where('status', 1)->get();
-            return view('frontend.index', compact('cars', 'services', 'fleets'));
+            return view('frontend.index', compact('services', 'fleets'));
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while fetching cars');
