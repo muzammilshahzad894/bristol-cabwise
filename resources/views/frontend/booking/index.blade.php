@@ -729,7 +729,7 @@
                         </div>
                         <div class="d-flex  meet_greet" style="gap:10px;align-items:center">
                             <input type="checkbox" id="child_seat" name="child_seat" value="child_seat">
-                            <label for="child_seat" class="passenger_lebals">Child Seat</label>
+                            <label for="child_seat" class="passenger_lebals">Child Seat (£6)</label>
                             <div id="child-error" class="error-message"></div>
                         </div>
                         <div class="d-flex meet_greet" style="gap:10px;align-items:center">
@@ -737,6 +737,29 @@
                             <label for="meet_greet">Meet & Greet (£12 extra)</label>
 
                             </label>
+                        </div>
+                        <div class="d-flex meet_greet" style="gap:10px;align-items:center" onclick="showSomeoneElse()">
+                            <input type="checkbox" id="Booking_for_someone" name="Booking_for_someone" value="booking_for_someone" >
+                            <label for="Booking_for_someone">
+                                Booking for someone else. 
+                            </label>
+                        </div>
+                    </div>
+                    <div class="border-botom" id="someone_else" style="display: none;">
+                        <div class="column_type">
+                            <label for="else_name" class="passenger_lebals">Name</label>
+                            <input type="text" class="form-control pickupLocation custom_input border-radius-0" name="else_name" placeholder="Enter Name" />
+                        </div>
+                        <div class="column_type">
+                            <label for="else_tele" class="passenger_lebals">Telephone</label>
+                            <input type="text" class="form-control pickupLocation custom_input border-radius-0" id="else_tele" name="else_tele" placeholder="Enter Telephone" />
+                            <div id="else_tele-error" class="error-message"></div>
+
+                        </div>
+                        <div class="column_type">
+                            <label for="else_email" class="passenger_lebals">Email</label>
+                            <input type="email" class="form-control pickupLocation custom_input border-radius-0" id="else_email" name="else_email" placeholder="Enter Email" />
+                            <div id="else_email" class="error-message"></div>
                         </div>
                     </div>
 
@@ -986,6 +1009,15 @@
         const fleets = document.querySelectorAll("#fleets-section");
         fleets.forEach((fleet) => fleet.classList.remove("selected-fleet"));
         fleet.classList.add("selected-fleet");
+    }
+    function showSomeoneElse() {
+        var checkBox = document.getElementById("Booking_for_someone");
+        var someoneElse = document.getElementById("someone_else");
+        if (checkBox.checked == true) {
+            someoneElse.style.display = "block";
+        } else {
+            someoneElse.style.display = "none";
+        }
     }
 </script>
 @endsection
