@@ -4071,7 +4071,8 @@ height: 100% !important;
     height: auto;
 }
 .selection {
-    display: inline-flex;
+    /* display: inline-flex; */
+    width: 100% !important;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     font-size: 14px;

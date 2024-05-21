@@ -484,7 +484,12 @@
     .select2 {
         border-radius: 0 !important;
     }
-
+.styled-input1{
+    min-width: 70px;
+    background: transparent;
+    border: 1px solid white;
+    margin-top: 5px;
+}
     /* Responsive adjustments */
     @media screen and (max-width: 768px) {
         .date-time-picker {
@@ -682,18 +687,44 @@
                     <div class="border-botom">
                         <div class="d-flex  column_type mt-4">
                             <label for="no_passenger" class="passenger_lebals">No of passenger</label>
-                            <input type="number" class="" style="width: 70px;" id="no_passenger" name="no_passenger" value="1">
+                            {{-- <input type="number" class="" style="width: 70px;" id="no_passenger" name="no_passenger" value="1"> --}}
+                            <select name="no_passenger" id="no_passenger" class="styled-input1 border-radius-0">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
                             <div id="passenger-error" class="error-message"></div>
                         </div>
 
                         <div class="d-flex  column_type">
                             <label for="suit_case" class="passenger_lebals">SuitCases</label>
-                            <input type="number" class="" style="width: 70px;" id="suit_case" name="suit_case" value="0">
+                            {{-- <input type="number" class="" style="width: 70px;" id="suit_case" name="suit_case" value="0"> --}}
+                            <select name="suit_case" id="suit_case" class="styled-input1 border-radius-0">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
                             <div id="suit-error" class="error-message"></div>
                         </div>
                         <div class="d-flex  column_type">
                             <label for="hand_lauggage" class="passenger_lebals">Hand luggage</label>
-                            <input type="number" class="" style="width: 70px;" id="hand_lauggage" name="hand_lauggage" value="0">
+                            {{-- <input type="number" class="" style="width: 70px;" id="hand_lauggage" name="hand_lauggage" value="0"> --}}
+                            <select name="hand_lauggage" id="hand_lauggage" class="styled-input1 border-radius-0">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
                             <div id="luggage" class="error-message"></div>
                         </div>
                         <div class="d-flex  meet_greet" style="gap:10px;align-items:center">
