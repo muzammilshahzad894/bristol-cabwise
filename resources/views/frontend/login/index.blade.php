@@ -1,5 +1,9 @@
 @extends('layouts.frontend.app')
-
+<style>
+    .booking-box{
+        background: white !important;
+    }
+</style>
 @section('content')
 <section class="section-padding" style="display: flex; justify-content:center;">
     <div class="booking-box" style="max-width: 600px;background-color:rgba(255, 255, 255, 0.5);">
