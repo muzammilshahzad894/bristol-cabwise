@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddSettingRequest extends FormRequest
+class AddCouponRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,10 @@ class AddSettingRequest extends FormRequest
     {
         return [
             'name' => 'required',
-           'date_range' => 'required',
+            'code' => 'required',
+            'discount' => 'required',
+            'description' => 'required',
+           'date' => 'required',
         ];
     }
 }

@@ -6,7 +6,8 @@ use App\Http\Controllers\admin\AdminLoginController;
 use App\Http\Controllers\admin\CarsController;
 use App\Http\Controllers\admin\ServicesController;
 use App\Http\Controllers\admin\FleetController;
-use App\Http\Controllers\admin\SettingController;
+use App\Http\Controllers\admin\BlockDatesController;
+use App\Http\Controllers\admin\CouponController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/optimize', function () {
@@ -55,13 +56,19 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/delete/{id}', [FleetController::class, 'delete'])->name('admin.fleets.delete');
     });
     Route::prefix('admin/settings')->group(function () {
-        Route::get('/', [SettingController::class, 'index'])->name('admin.settings.index');
-        Route::get('/create', [SettingController::class, 'create'])->name('admin.settings.create');
-        Route::post('/create', [SettingController::class, 'store'])->name('admin.settings.store');
-        Route::get('/edit/{id}', [SettingController::class, 'edit'])->name('admin.settings.edit');
-        Route::post('/update/{id}', [SettingController::class, 'update'])->name('admin.settings.update');
-        Route::get('/delete/{id}', [SettingController::class, 'delete'])->name('admin.settings.delete');
-
-    
+        Route::get('/', [BlockDatesController::class, 'index'])->name('admin.settings.index');
+        Route::get('/create', [BlockDatesController::class, 'create'])->name('admin.settings.create');
+        Route::post('/create', [BlockDatesController::class, 'store'])->name('admin.settings.store');
+        Route::get('/edit/{id}', [BlockDatesController::class, 'edit'])->name('admin.settings.edit');
+        Route::post('/update/{id}', [BlockDatesController::class, 'update'])->name('admin.settings.update');
+        Route::get('/delete/{id}', [BlockDatesController::class, 'delete'])->name('admin.settings.delete');
+    });
+    Route::prefix('admin/coupons')->group(function () {
+        Route::get('/', [CouponController::class, 'index'])->name('admin.coupons.index');
+        Route::get('/create', [CouponController::class, 'create'])->name('admin.coupons.create');
+        Route::post('/create', [CouponController::class, 'store'])->name('admin.coupons.store');
+        Route::get('/edit/{id}', [CouponController::class, 'edit'])->name('admin.coupons.edit');
+        Route::post('/update/{id}', [CouponController::class, 'update'])->name('admin.coupons.update');
+        Route::get('/delete/{id}', [CouponController::class, 'delete'])->name('admin.coupons.delete');
     });
 });

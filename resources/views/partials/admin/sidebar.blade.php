@@ -19,10 +19,19 @@
                     <span class="nav-text">Fleets</span>
                 </a>
             </li>
-            <li class="{{ request()->routeIs('admin.settings.index') || request()->routeIs('admin.settings.index') ? 'mm-active' : '' }}">
+            <li class="{{ request()->routeIs('admin.settings.index') || request()->routeIs('admin.settings.index') ? 'mm-active' : '' }} || request()->routeIs('admin.settings.edit')">
                 <a href="{{ route('admin.settings.index') }}" class="" aria-expanded="false">
-                    <i class="fa fa-list-ul"></i>
+                 
+                    <i class="fa fa-calendar">
+                        
+                    </i>
                     <span class="nav-text">Block Dates</span>
+                </a>
+            </li>
+            <li class="{{ request()->routeIs('admin.coupons.index') || request()->routeIs('admin.coupons.create') ? 'mm-active' : '' }} || request()->routeIs('admin.coupons.edit')">
+                 <a href="{{ route('admin.coupons.index') }}" class="" aria-expanded="false">
+                    <i class="fa fa-list-ul"></i>
+                    <span class="nav-text">Coupon</span>
                 </a>
             </li>
             <!-- <li class="{{ request()->routeIs('admin.car.index') || request()->routeIs('admin.car.create') ? 'mm-active' : '' }}">
