@@ -55,6 +55,7 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/update/{id}', [FleetController::class, 'update'])->name('admin.fleets.update');
         Route::get('/delete/{id}', [FleetController::class, 'delete'])->name('admin.fleets.delete');
     });
+    
     Route::prefix('admin/settings')->group(function () {
         Route::get('/', [BlockDatesController::class, 'index'])->name('admin.settings.index');
         Route::get('/create', [BlockDatesController::class, 'create'])->name('admin.settings.create');
