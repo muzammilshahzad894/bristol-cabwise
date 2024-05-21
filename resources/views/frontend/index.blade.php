@@ -646,16 +646,16 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Get 10% Off Now!</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Get {{$coupon->discount}}% Off Now!</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
                 <div id="countdown">
-                    <h4>This coupon is valid for the next 12 hours.</h4>
+                    <h4>{{$coupon->description}}</h4>
                 </div>
                 <div class="coupon-code">
                     <h2 class="coupon-heading">Your Coupon Code:</h2>
-                    <h1 class="coupon" id="couponCode">123456</h1>
+                    <h1 class="coupon" id="couponCode">{{$coupon->code}}</h1>
                     <button class="view_details" onclick="copyToClipboard()">Copy copoun</button>
                 </div>
                 <div id="copyAlert" class="alert alert-success mt-3" style="display: none;">Coupon code copied to clipboard!</div>
