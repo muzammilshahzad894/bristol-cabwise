@@ -642,6 +642,7 @@
     </div>
 </section>
 
+@if($coupon)
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -666,7 +667,7 @@
         </div>
     </div>
 </div>
-
+@endif
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
         // Get the video element
