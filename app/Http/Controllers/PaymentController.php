@@ -1,31 +1,44 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
 
 class PaymentController extends Controller
 {
-    public function processPayment(Request $request)
+    public function createCheckoutSession()
     {
-        Stripe::setApiKey('YOUR_STRIPE_SECRET_KEY');
+        Stripe::setApiKey(config('services.stripe.secret'));
 
-        $paymentMethodId = $request->input('payment_method_id');
-
-        // Create a PaymentIntent and confirm it
-        $intent = PaymentIntent::create([
-            'payment_method' => $paymentMethodId,
-            'amount' => 1000, // Amount in cents
-            'currency' => 'usd',
-            'confirmation_method' => 'manual',
-            'confirm' => true,
+        $session = Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'usd',
+                    'product_data' => [
+                        'name' => 'Sample Product',
+                    ],
+                    'unit_amount' => 1000, // Amount in cents ($10.00)
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('payment.success'),
+            'cancel_url' => route('payment.cancel'),
         ]);
 
-        // Handle payment success/failure and return response
-        return response()->json(['success' => true]);
+        return response()->json(['id' => $session->id]);
     }
+
     public function paymentSuccess()
     {
-        dd('heere');
-        return view('frontend.payment.success');
+        return view('payment.success');
+    }
+
+    public function paymentCancel()
+    {
+        return view('payment.cancel');
     }
 }

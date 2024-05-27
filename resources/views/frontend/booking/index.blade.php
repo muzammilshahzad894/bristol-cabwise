@@ -509,6 +509,60 @@
     border: 1px solid white;
     margin-top: 5px;
 }
+.unique-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .unique-dropdown-content {
+            display: none;
+            position: absolute;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            min-width: 220px;
+            background: black;
+            border-radius: 10px;
+            margin-top: -10px;
+        }
+        p.unique-dropbtns{
+            color: white;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            min-width: 220px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .unique-dropdown-content ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .unique-dropdown-content li {
+            padding: 12px 16px;
+            cursor: pointer;
+        }
+
+        .unique-dropdown-content li:hover {
+            background-color: #ffa51c;
+            color: white;
+        }
+
+        .unique-dropdown:hover .unique-dropdown-content {
+            display: block;
+        }
+
+
+        #payment-form {
+            margin-top: 20px;
+        }
+        .dropdown_menus{
+            color: orange;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 20px 0px 0px 0px;
+
+        }
     /* Responsive adjustments */
     @media screen and (max-width: 768px) {
         .date-time-picker {
@@ -523,6 +577,7 @@
             left: 0;
             top: calc(100% + 5px);
         }
+
     }
 
     @media (max-width: 768px) {
@@ -853,13 +908,24 @@
                     </div>
                     <div class="payment_section_main">
                         {{-- <h3 class="color color_theme">Payment for Booking.</h3> --}}
-                        <div>
+                        {{-- <div>
                             <label for="payment_type">payment type</label>
                             <select class="select2 select border-radius-0" style="width: 100%" name="payment_type" id="payment_type">
                                 <option value="">Choose payment type</option>
                                 <option value="1">Debit card</option>
                                 <option value="2">Paypal</option>
                             </select>
+                        </div>
+                        <button id="checkout-button">Checkout</button> --}}
+                        <p class="dropdown_menus">Select Payment Type:</p>
+                        <div class="unique-dropdown">
+                            <p class="unique-dropbtns">Select Option</p>
+                            <div class="unique-dropdown-content">
+                                <ul>
+                                    <li class="unique-payment-option" id="checkout-button">Debit Card</li>
+                                    <li class="unique-payment-option" id="paypal">PayPal</li>
+                                </ul>
+                            </div>
                         </div>
                         
 
@@ -942,6 +1008,38 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtRWAKC7UW3kK8VNLlDe1EBHQQKu6ZTFo&libraries=places&callback=initMap"></script>
 <script src="{{ asset('frontend-assets/js/google-map.js') }}"></script>
 <script src="{{ asset('frontend-assets/js/distance.js') }}"></script>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript">
+    var stripe = Stripe('{{ config('services.stripe.key') }}');
+
+    var checkoutButton = document.getElementById('checkout-button');
+    
+
+    checkoutButton.addEventListener('click', function () {
+        fetch('/create-checkout-session', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            },
+        })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (session) {
+            return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+            if (result.error) {
+                alert(result.error.message);
+            }
+        })
+        .catch(function (error) {
+            console.error('Error:', error);
+        });
+    });
+</script>
 <script>
     let currentStep = 1;
 
@@ -1089,5 +1187,10 @@
         }
     });
 }
+
+var paypal = document.getElementById('paypal');
+    paypal.addEventListener('click', function () {
+    window.location.href = '/paypal/payment';
+});
 </script>
 @endsection

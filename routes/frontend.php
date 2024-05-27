@@ -5,6 +5,7 @@ use App\Http\Controllers\frontend\CarsController;
 use App\Http\Controllers\frontend\BookingController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PayPalController;
 
 
 Route::get('/', [CarsController::class, 'index'])->name('frontend.index');
@@ -20,5 +21,11 @@ Route::get('/signIn', [FrontendController::class, 'login'])->name('frontend.logi
 Route::get('/signUp', [FrontendController::class, 'signup'])->name('frontend.signup');
 
 
-Route::post('/stripe/payment', [PaymentController::class, 'processPayment'])->name('stripe.payment');
-Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::get('/paypal/payment', [PayPalController::class, 'createPayment'])->name('paypal.payment');
+Route::get('/paypal/success', [PayPalController::class, 'executePayment'])->name('paypal.success');
+Route::get('/paypal/cancel', [PayPalController::class, 'cancelPayment'])->name('paypal.cancel');
+
+
+Route::post('/create-checkout-session', [PaymentController::class, 'createCheckoutSession'])->name('create.checkout.session');
+Route::get('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::get('/payment-cancel', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
