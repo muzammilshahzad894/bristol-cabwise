@@ -311,6 +311,22 @@
     .styled-input::placeholder {
         color: white;
     }
+    #error_msg{
+        background: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border-top-right-radius: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    }
+    #error_msg p{
+        margin: 0;
+        color: white;
+        font-size: 17px;
+        cursor: pointer;
+    }
 
     /* Common styles for both input fields */
     .styled-input {
@@ -457,7 +473,10 @@
         border: 1px solid #ccc;
         z-index: 1000;
     }
-
+.fleet_id{
+    height: 20px;
+    width: 20px;
+}
     .date-time-picker.open .picker-popup {
         display: block;
     }
@@ -477,9 +496,9 @@
         border-radius: 0 !important;
     }
 
-    .selected-fleet {
+    /* .selected-fleet {
         border: 2px solid #f0901d;
-    }
+    } */
 
     .select2 {
         border-radius: 0 !important;
@@ -493,6 +512,9 @@
     /* Responsive adjustments */
     @media screen and (max-width: 768px) {
         .date-time-picker {
+            width: 100%;
+        }
+        .styled-input1{
             width: 100%;
         }
 
@@ -590,15 +612,6 @@
             <div class="col-md-8">
                 <div class="new_form step1" id="forms">
                     <h2 class="color color_theme">Journey Details</h2>
-                    <!-- <div>
-                        <label for="carType">Select Type:</label>
-                        <select id="carType" class="select2 select" style="width: 100%" name="carType" onchange="toggleFlightIdVisibility()">
-                            <option value="0">Select Type</option>
-                            <option value="1">Departure</option>
-                            <option value="2">Arrival</option>
-                        </select>
-                    </div> -->
-
                     <div class="gap-3">
                         <div id="flightId" style="display: none">
                             <label for="pickupLocation">Flight Name:</label>
@@ -628,12 +641,18 @@
                     </div>
                 </div>
                 <div class="new_form step2 row">
+                    <div id="error_msg_show" class="error-message" style="display: none">
+                        <div id="error_msg" class="error-message">
+                            <p>Please select a fleet</p>
+                            <p onclick="closeAlert();">X</p>
+                        </div>
+                    </div>
                     <h3 class="color color_theme">Please select Fleets:</h3>
                     <div class="main-div">
                         @if($fleets->count() > 0)
                             @foreach($fleets as $fleet)
-                                <div class="col-md-6 form-container @if($loop->first) selected-fleet @endif" data-fleet-id="{{ $fleet->id }}" id="fleets-section" onclick="selectFleet(this)">
-                                    <div class="p-6">
+                                <div class="col-md-6 form-container @if($loop->first) selected-fleet @endif" data-fleet-id="{{ $fleet->id }}" id="fleets-section" onclick="selectFleet(this)" >
+                                    <div class="p-6" >
                                         <img src="{{ asset('uploads/fleets/'.$fleet->image) }}" alt="" />
                                         <Strong>{{ $fleet->name }}</Strong>
                                         <!-- <p class="car_name">car name l</p> -->
@@ -656,9 +675,11 @@
 
                                         </div>
                                     </div>
-                                    <div class="footer-box">
+                                    <div class="footer-box d-flex align-items-center">
                                         <p class="color">price: <strong> ${{ $fleet->price }}</strong></p>
-                                        <button class="proceed">Proceed</button>
+                                        <div>
+                                            <input type="checkbox" class="fleet_id" name="fleet_id" value="{{ $fleet->id }}" onclick="handleCheckboxClick(this)">
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -840,6 +861,7 @@
                                 <option value="2">Paypal</option>
                             </select>
                         </div>
+                        
 
                     </div>
                 </div>
@@ -925,6 +947,11 @@
 
     function nextStep() {
         if (currentStep < 4) {
+            if (currentStep === 2 && document.querySelectorAll('.fleet_id:checked').length === 0) {
+                document.getElementById('error_msg_show').style.display = 'block';
+                document.getElementById('error_msg_show').scrollIntoView();
+        return;
+    }
             currentStep++;
             updateProgress();
             updateFormVisibility();
@@ -938,6 +965,7 @@
 
     function prevStep() {
         if (currentStep > 1) {
+        
             currentStep--;
             updateProgress();
             updateFormVisibility();
@@ -969,7 +997,11 @@
             prevButton.style.display = "block";
         }
     }
+    
 
+    function closeAlert(){
+        document.getElementById('error_msg_show').style.display = 'none';
+    }
     // Initial call to ensure correct button visibility and form visibility
     updateButtonVisibility();
     updateFormVisibility();
@@ -1009,7 +1041,37 @@
         const fleets = document.querySelectorAll("#fleets-section");
         fleets.forEach((fleet) => fleet.classList.remove("selected-fleet"));
         fleet.classList.add("selected-fleet");
+        const fleetId = fleet.getAttribute("data-fleet-id");
+
+        fetch(`/fleet-details/${fleetId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data); 
+            updateSelectOptions('no_passenger', data.max_passengers);
+            updateSelectOptions('suit_case', data.max_suitecases);
+            updateSelectOptions('hand_lauggage', data.max_hand_luggage);
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+       
     }
+    function updateSelectOptions(selectId, max) {
+    const selectElement = document.getElementById(selectId);
+    selectElement.innerHTML = ''; // Clear existing options
+
+    for (let i = 1; i <= max; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = i;
+        selectElement.appendChild(option);
+    }
+}
     function showSomeoneElse() {
         var checkBox = document.getElementById("Booking_for_someone");
         var someoneElse = document.getElementById("someone_else");
@@ -1019,5 +1081,13 @@
             someoneElse.style.display = "none";
         }
     }
+    function handleCheckboxClick(checkbox) {
+    const checkboxes = document.querySelectorAll('input[name="fleet_id"]');
+    checkboxes.forEach(cb => {
+        if (cb !== checkbox) {
+            cb.checked = false;
+        }
+    });
+}
 </script>
 @endsection

@@ -19,4 +19,14 @@ class BookingController extends Controller
             return redirect()->back()->with('error', 'An error occurred while fetching bookings');
         }
     }
+    public function fleetDetails($id)
+    {
+        try {
+            $fleet = Fleet::find($id);
+            return response()->json($fleet);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while fetching fleet details');
+        }
+    }
 }
