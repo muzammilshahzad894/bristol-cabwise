@@ -311,17 +311,19 @@
     .styled-input::placeholder {
         color: white;
     }
-    #error_msg{
+
+    #error_msg {
         background: red;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border-top-right-radius: 0px;
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        border-top-right-radius: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
     }
-    #error_msg p{
+
+    #error_msg p {
         margin: 0;
         color: white;
         font-size: 17px;
@@ -473,10 +475,12 @@
         border: 1px solid #ccc;
         z-index: 1000;
     }
-.fleet_id{
-    height: 20px;
-    width: 20px;
-}
+
+    .fleet_id {
+        height: 20px;
+        width: 20px;
+    }
+
     .date-time-picker.open .picker-popup {
         display: block;
     }
@@ -503,72 +507,79 @@
     .select2 {
         border-radius: 0 !important;
     }
-.styled-input1{
-    min-width: 70px;
-    background: transparent;
-    border: 1px solid white;
-    margin-top: 5px;
-}
-.unique-dropdown {
-            position: relative;
-            display: inline-block;
-        }
 
-        .unique-dropdown-content {
-            display: none;
-            position: absolute;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            min-width: 220px;
-            background: black;
-            border-radius: 10px;
-            margin-top: -10px;
-        }
-        p.unique-dropbtns{
-            color: white;
-            border: 1px solid #ffc107;
-            padding: 10px;
-            min-width: 220px;
-            cursor: pointer;
-            border-radius: 10px;
-        }
-        .unique-dropdown-content ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
+    .styled-input1 {
+        min-width: 70px;
+        background: transparent;
+        border: 1px solid white;
+        margin-top: 5px;
+    }
 
-        .unique-dropdown-content li {
-            padding: 12px 16px;
-            cursor: pointer;
-        }
+    .unique-dropdown {
+        position: relative;
+        display: inline-block;
+    }
 
-        .unique-dropdown-content li:hover {
-            background-color: #ffa51c;
-            color: white;
-        }
+    .unique-dropdown-content {
+        display: none;
+        position: absolute;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        min-width: 220px;
+        background: black;
+        border-radius: 10px;
+        margin-top: -10px;
+    }
 
-        .unique-dropdown:hover .unique-dropdown-content {
-            display: block;
-        }
+    p.unique-dropbtns {
+        color: white;
+        border: 1px solid #ffc107;
+        padding: 10px;
+        min-width: 220px;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .unique-dropdown-content ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .unique-dropdown-content li {
+        padding: 12px 16px;
+        cursor: pointer;
+    }
+
+    .unique-dropdown-content li:hover {
+        background-color: #ffa51c;
+        color: white;
+    }
+
+    .unique-dropdown:hover .unique-dropdown-content {
+        display: block;
+    }
 
 
-        #payment-form {
-            margin-top: 20px;
-        }
-        .dropdown_menus{
-            color: orange;
-            font-size: 20px;
-            font-weight: 600;
-            padding: 20px 0px 0px 0px;
+    #payment-form {
+        margin-top: 20px;
+    }
 
-        }
+    .dropdown_menus {
+        color: orange;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 20px 0px 0px 0px;
+
+    }
+
     /* Responsive adjustments */
     @media screen and (max-width: 768px) {
         .date-time-picker {
             width: 100%;
         }
-        .styled-input1{
+
+        .styled-input1 {
             width: 100%;
         }
 
@@ -702,42 +713,42 @@
                             <p onclick="closeAlert();">X</p>
                         </div>
                     </div>
-                    <h3 class="color color_theme">Please select Fleets:</h3>
+                    <h3 class="color color_theme">Please select Fleet:</h3>
                     <div class="main-div">
                         @if($fleets->count() > 0)
-                            @foreach($fleets as $fleet)
-                                <div class="col-md-6 form-container @if($loop->first) selected-fleet @endif" data-fleet-id="{{ $fleet->id }}" id="fleets-section" onclick="selectFleet(this)" >
-                                    <div class="p-6" >
-                                        <img src="{{ asset('uploads/fleets/'.$fleet->image) }}" alt="" />
-                                        <Strong>{{ $fleet->name }}</Strong>
-                                        <!-- <p class="car_name">car name l</p> -->
-                                        <div style="display: flex;flex-direction:column;justify-content:center;">
-                                            <div class="d-flex gap-2 align-items-center">
-                                                <i class="fa fa-users"></i>
-                                                <p style="margin-bottom: 0px">max.</p>
-                                                <span>{{ $fleet->max_passengers }}</span>
-                                            </div>
-                                            <div class="d-flex gap-2 align-items-center">
-                                                <i class="fa-solid fa-suitcase"></i>
-                                                <p style="margin-bottom: 0;">max.</p>
-                                                <span>{{ $fleet->max_suitecases }}</span>
-                                            </div>
-                                            <div class="d-flex gap-2 align-items-center">
-                                                <i class="fa fa-briefcase"></i>
-                                                <p style="margin-bottom: 0;">max.</p>
-                                                <span>{{ $fleet->max_hand_luggage }}</span>
-                                            </div>
+                        @foreach($fleets as $fleet)
+                        <div class="col-md-6 form-container @if($loop->first) selected-fleet @endif" data-fleet-id="{{ $fleet->id }}" id="fleets-section" onclick="selectFleet(this)">
+                            <div class="p-6">
+                                <img src="{{ asset('uploads/fleets/'.$fleet->image) }}" alt="" />
+                                <Strong>{{ $fleet->name }}</Strong>
+                                <!-- <p class="car_name">car name l</p> -->
+                                <div style="display: flex;flex-direction:column;justify-content:center;">
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <i class="fa fa-users"></i>
+                                        <p style="margin-bottom: 0px">max.</p>
+                                        <span>{{ $fleet->max_passengers }}</span>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <i class="fa-solid fa-suitcase"></i>
+                                        <p style="margin-bottom: 0;">max.</p>
+                                        <span>{{ $fleet->max_suitecases }}</span>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <i class="fa fa-briefcase"></i>
+                                        <p style="margin-bottom: 0;">max.</p>
+                                        <span>{{ $fleet->max_hand_luggage }}</span>
+                                    </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="footer-box d-flex align-items-center">
-                                        <p class="color">price: <strong> ${{ $fleet->price }}</strong></p>
-                                        <div>
-                                            <input type="checkbox" class="fleet_id" name="fleet_id" value="{{ $fleet->id }}" onclick="handleCheckboxClick(this)">
-                                        </div>
-                                    </div>
                                 </div>
-                            @endforeach
+                            </div>
+                            <div class="footer-box d-flex align-items-center">
+                                <p class="color">price: <strong> ${{ $fleet->price }}</strong></p>
+                                <div>
+                                    <input type="checkbox" class="fleet_id" name="fleet_id" value="{{ $fleet->id }}" onclick="handleCheckboxClick(this)">
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
                         @endif
                     </div>
                 </div>
@@ -815,9 +826,9 @@
                             </label>
                         </div>
                         <div class="d-flex meet_greet" style="gap:10px;align-items:center" onclick="showSomeoneElse()">
-                            <input type="checkbox" id="Booking_for_someone" name="Booking_for_someone" value="booking_for_someone" >
+                            <input type="checkbox" id="Booking_for_someone" name="Booking_for_someone" value="booking_for_someone">
                             <label for="Booking_for_someone">
-                                Booking for someone else. 
+                                Booking for someone else.
                             </label>
                         </div>
                     </div>
@@ -927,7 +938,7 @@
                                 </ul>
                             </div>
                         </div>
-                        
+
 
                     </div>
                 </div>
@@ -1011,33 +1022,36 @@
 
 <script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript">
-    var stripe = Stripe('{{ config('services.stripe.key') }}');
+    var stripe = Stripe('{{ config('
+        services.stripe.key ') }}');
 
     var checkoutButton = document.getElementById('checkout-button');
-    
 
-    checkoutButton.addEventListener('click', function () {
+
+    checkoutButton.addEventListener('click', function() {
         fetch('/create-checkout-session', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            },
-        })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (session) {
-            return stripe.redirectToCheckout({ sessionId: session.id });
-        })
-        .then(function (result) {
-            if (result.error) {
-                alert(result.error.message);
-            }
-        })
-        .catch(function (error) {
-            console.error('Error:', error);
-        });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(session) {
+                return stripe.redirectToCheckout({
+                    sessionId: session.id
+                });
+            })
+            .then(function(result) {
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+            });
     });
 </script>
 <script>
@@ -1048,8 +1062,8 @@
             if (currentStep === 2 && document.querySelectorAll('.fleet_id:checked').length === 0) {
                 document.getElementById('error_msg_show').style.display = 'block';
                 document.getElementById('error_msg_show').scrollIntoView();
-        return;
-    }
+                return;
+            }
             currentStep++;
             updateProgress();
             updateFormVisibility();
@@ -1063,7 +1077,7 @@
 
     function prevStep() {
         if (currentStep > 1) {
-        
+
             currentStep--;
             updateProgress();
             updateFormVisibility();
@@ -1095,9 +1109,9 @@
             prevButton.style.display = "block";
         }
     }
-    
 
-    function closeAlert(){
+
+    function closeAlert() {
         document.getElementById('error_msg_show').style.display = 'none';
     }
     // Initial call to ensure correct button visibility and form visibility
@@ -1142,34 +1156,36 @@
         const fleetId = fleet.getAttribute("data-fleet-id");
 
         fetch(`/fleet-details/${fleetId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log(data); 
-            updateSelectOptions('no_passenger', data.max_passengers);
-            updateSelectOptions('suit_case', data.max_suitecases);
-            updateSelectOptions('hand_lauggage', data.max_hand_luggage);
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
-        });
-       
-    }
-    function updateSelectOptions(selectId, max) {
-    const selectElement = document.getElementById(selectId);
-    selectElement.innerHTML = ''; // Clear existing options
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                updateSelectOptions('no_passenger', data.max_passengers);
+                updateSelectOptions('suit_case', data.max_suitecases);
+                updateSelectOptions('hand_lauggage', data.max_hand_luggage);
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
 
-    for (let i = 1; i <= max; i++) {
-        const option = document.createElement('option');
-        option.value = i;
-        option.textContent = i;
-        selectElement.appendChild(option);
     }
-}
+
+    function updateSelectOptions(selectId, max) {
+        const selectElement = document.getElementById(selectId);
+        selectElement.innerHTML = ''; // Clear existing options
+
+        for (let i = 1; i <= max; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            selectElement.appendChild(option);
+        }
+    }
+
     function showSomeoneElse() {
         var checkBox = document.getElementById("Booking_for_someone");
         var someoneElse = document.getElementById("someone_else");
@@ -1179,18 +1195,19 @@
             someoneElse.style.display = "none";
         }
     }
-    function handleCheckboxClick(checkbox) {
-    const checkboxes = document.querySelectorAll('input[name="fleet_id"]');
-    checkboxes.forEach(cb => {
-        if (cb !== checkbox) {
-            cb.checked = false;
-        }
-    });
-}
 
-var paypal = document.getElementById('paypal');
-    paypal.addEventListener('click', function () {
-    window.location.href = '/paypal/payment';
-});
+    function handleCheckboxClick(checkbox) {
+        const checkboxes = document.querySelectorAll('input[name="fleet_id"]');
+        checkboxes.forEach(cb => {
+            if (cb !== checkbox) {
+                cb.checked = false;
+            }
+        });
+    }
+
+    var paypal = document.getElementById('paypal');
+    paypal.addEventListener('click', function() {
+        window.location.href = '/paypal/payment';
+    });
 </script>
 @endsection
