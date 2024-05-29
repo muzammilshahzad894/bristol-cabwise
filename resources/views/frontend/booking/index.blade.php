@@ -687,22 +687,25 @@
                         </div>
                         <div>
                             <label for="pickupLocation">Pickup Location:</label>
-                            <input type="text" id="pickupLocation" name="pickupLocation" placeholder="Enter pickup location" class="form-control pickupLocation border-radius-0" />
+                            <input type="text" id="pickupLocation" name="pickupLocation" placeholder="Enter pickup location" class="form-control pickupLocation border-radius-0 mb-0" />
+                            <div id="pickup-error" class="error-message text-danger"></div>
                         </div>
                         <div>
                             <label for="dropLocation">Drop Location:</label>
                             <div id="dropLocations">
                                 <div class="drop-location">
-                                    <input type="text" name="dropLocation[]" placeholder="Enter drop location" class="form-control pickupLocation border-radius-0" id="dropLocation" />
+                                    <input type="text" id="dropLocation" name="dropLocation[]" placeholder="Enter drop location" class="form-control pickupLocation border-radius-0 mb-0" />
+                                    <div id="drop-error" class="error-message text-danger"></div>
                                 </div>
                             </div>
-                            {{-- <input type="text" id="dropLocation" name="dropLocation"
+                            {{-- <input type="text" name="dropLocation"
                                     placeholder="Enter drop location" class="form-control pickupLocation" /> --}}
-                            <button class="plus_icon" id="addLocation" onclick="addMore();">Add More location</button>
+                            <button class="plus_icon mt-1" id="addLocation" onclick="addMore();">Add More location</button>
                         </div>
                         <div>
                             <label for="date">Date & Time:</label>
-                            <input type="datetime-local" class="input location styled-input timepicker border-radius-0" placeholder="Return Date" />
+                            <input type="datetime-local" class="input location styled-input timepicker border-radius-0 mb-0" placeholder="Return Date" id="date-time" />
+                            <div id="date-time-error" class="error-message text-danger"></div>
                         </div>
                     </div>
                 </div>
@@ -758,24 +761,23 @@
                     </div>
                     <div class="column_type">
                         <label for="name" class="passenger_lebals">Name</label>
-                        <input type="text" class="form-control pickupLocation custom_input border-radius-0" name="name" placeholder="Enter Your Name" />
+                        <input type="text" class="form-control pickupLocation custom_input border-radius-0 mb-0" name="name" placeholder="Enter Your Name" id="name" />
+                        <div id="name-error" class="error-message text-danger"></div>
                     </div>
                     <div class="column_type">
-                        <label for="tele" class="passenger_lebals">Telephone</label>
-                        <input type="text" class="form-control pickupLocation custom_input border-radius-0" id="tele" name="telephone" placeholder="Enter Your Telephone" />
-                        <div id="telephone-error" class="error-message"></div>
-
+                        <label for="telephone" class="passenger_lebals">Telephone</label>
+                        <input type="text" class="form-control pickupLocation custom_input border-radius-0 mb-0" id="telephone" name="telephone" placeholder="Enter Your Telephone" />
+                        <div id="telephone-error" class="error-message text-danger"></div>
                     </div>
                     <div class="column_type border-botom">
                         <label for="tele" class="passenger_lebals">Email</label>
-                        <input type="email" class="form-control pickupLocation custom_input border-radius-0" id="" name="email" placeholder="Enter Your Email" />
-                        <div id="telephone-error" class="error-message"></div>
+                        <input type="email" class="form-control pickupLocation custom_input border-radius-0 mb-0" id="email" name="email" placeholder="Enter Your Email" />
+                        <div id="email-error" class="error-message text-danger"></div>
                     </div>
                     <div class="border-botom">
                         <div class="d-flex  column_type mt-4">
                             <label for="no_passenger" class="passenger_lebals">No of passenger</label>
-                            {{-- <input type="number" class="" style="width: 70px;" id="no_passenger" name="no_passenger" value="1"> --}}
-                            <select name="no_passenger" id="no_passenger" class="styled-input1 border-radius-0">
+                            <select name="no_passenger" id="no_passenger" class="styled-input1 border-radius-0 mb-0">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -787,46 +789,39 @@
                                 <option value="9">9</option>
                                 <option value="10">10</option>
                             </select>
-                            <div id="passenger-error" class="error-message"></div>
+                            <div id="passenger-error" class="error-message text-danger"></div>
                         </div>
 
                         <div class="d-flex  column_type">
                             <label for="suit_case" class="passenger_lebals">SuitCases</label>
-                            {{-- <input type="number" class="" style="width: 70px;" id="suit_case" name="suit_case" value="0"> --}}
-                            <select name="suit_case" id="suit_case" class="styled-input1 border-radius-0">
+                            <select name="suit_case" id="suit_case" class="styled-input1 border-radius-0 mb-0">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                             </select>
-                            <div id="suit-error" class="error-message"></div>
                         </div>
                         <div class="d-flex  column_type">
                             <label for="hand_lauggage" class="passenger_lebals">Hand luggage</label>
-                            {{-- <input type="number" class="" style="width: 70px;" id="hand_lauggage" name="hand_lauggage" value="0"> --}}
-                            <select name="hand_lauggage" id="hand_lauggage" class="styled-input1 border-radius-0">
+                            <select name="hand_lauggage" id="hand_lauggage" class="styled-input1 border-radius-0 mb-0">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                             </select>
-                            <div id="luggage" class="error-message"></div>
-                        </div>
-                        <div class="d-flex  meet_greet" style="gap:10px;align-items:center">
-                            <input type="checkbox" id="child_seat" name="child_seat" value="child_seat">
-                            <label for="child_seat" class="passenger_lebals">Child Seat (£6)</label>
-                            <div id="child-error" class="error-message"></div>
                         </div>
                         <div class="d-flex meet_greet" style="gap:10px;align-items:center">
-                            <input type="checkbox" id="meet_greet" name="meet_greet" value="meet_greet">
+                            <input type="checkbox" id="child_seat" name="child_seat" value="" class="mb-0">
+                            <label for="child_seat" class="passenger_lebals">Child Seat (£6)</label>
+                        </div>
+                        <div class="d-flex meet_greet" style="gap:10px;align-items:center">
+                            <input type="checkbox" id="meet_greet" name="meet_greet" value="" class="mb-0">
                             <label for="meet_greet">Meet & Greet (£12 extra)</label>
-
-                            </label>
                         </div>
                         <div class="d-flex meet_greet" style="gap:10px;align-items:center" onclick="showSomeoneElse()">
-                            <input type="checkbox" id="Booking_for_someone" name="Booking_for_someone" value="booking_for_someone">
+                            <input type="checkbox" id="booking_for_someone" name="Booking_for_someone" value="">
                             <label for="Booking_for_someone">
                                 Booking for someone else.
                             </label>
@@ -834,19 +829,19 @@
                     </div>
                     <div class="border-botom" id="someone_else" style="display: none;">
                         <div class="column_type">
-                            <label for="else_name" class="passenger_lebals">Name</label>
-                            <input type="text" class="form-control pickupLocation custom_input border-radius-0" name="else_name" placeholder="Enter Name" />
+                            <label for="someone_else_name" class="passenger_lebals">Name</label>
+                            <input type="text" class="form-control pickupLocation custom_input border-radius-0 mb-0" name="someone_else_name" placeholder="Enter Name" id="someone_else_name" />
+                            <div id="someone_else_name_error" class="error-message text-danger"></div>
                         </div>
                         <div class="column_type">
-                            <label for="else_tele" class="passenger_lebals">Telephone</label>
-                            <input type="text" class="form-control pickupLocation custom_input border-radius-0" id="else_tele" name="else_tele" placeholder="Enter Telephone" />
-                            <div id="else_tele-error" class="error-message"></div>
-
+                            <label for="someone_else_telephone" class="passenger_lebals">Telephone</label>
+                            <input type="text" class="form-control pickupLocation custom_input border-radius-0 mb-0" id="someone_else_telephone" name="someone_else_telephone" placeholder="Enter Telephone" />
+                            <div id="someone_else_telephone_error" class="error-message text-danger"></div>
                         </div>
                         <div class="column_type">
-                            <label for="else_email" class="passenger_lebals">Email</label>
-                            <input type="email" class="form-control pickupLocation custom_input border-radius-0" id="else_email" name="else_email" placeholder="Enter Email" />
-                            <div id="else_email" class="error-message"></div>
+                            <label for="someone_else_email" class="passenger_lebals">Email</label>
+                            <input type="email" class="form-control pickupLocation custom_input border-radius-0 mb-0" id="someone_else_email" name="someone_else_email" placeholder="Enter Email" />
+                            <div id="someone_else_email_error" class="error-message text-danger"></div>
                         </div>
                     </div>
 
@@ -854,9 +849,7 @@
                         <label for="comment">Comment (optional):</label>
                         <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
                     </div>
-
                 </div>
-
 
                 <div class="step4 new_form">
                     <div class="summary">
@@ -1021,193 +1014,5 @@
 <script src="{{ asset('frontend-assets/js/distance.js') }}"></script>
 
 <script src="https://js.stripe.com/v3/"></script>
-<script type="text/javascript">
-    var stripe = Stripe('{{ config('
-        services.stripe.key ') }}');
-
-    var checkoutButton = document.getElementById('checkout-button');
-
-
-    checkoutButton.addEventListener('click', function() {
-        fetch('/create-checkout-session', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                },
-            })
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(session) {
-                return stripe.redirectToCheckout({
-                    sessionId: session.id
-                });
-            })
-            .then(function(result) {
-                if (result.error) {
-                    alert(result.error.message);
-                }
-            })
-            .catch(function(error) {
-                console.error('Error:', error);
-            });
-    });
-</script>
-<script>
-    let currentStep = 1;
-
-    function nextStep() {
-        if (currentStep < 4) {
-            if (currentStep === 2 && document.querySelectorAll('.fleet_id:checked').length === 0) {
-                document.getElementById('error_msg_show').style.display = 'block';
-                document.getElementById('error_msg_show').scrollIntoView();
-                return;
-            }
-            currentStep++;
-            updateProgress();
-            updateFormVisibility();
-            updateButtonVisibility();
-        }
-        if (currentStep == 4) {
-            document.querySelector("#next_btn").style.display = "none";
-            document.getElementById("form_submit").style.display = "block";
-        }
-    }
-
-    function prevStep() {
-        if (currentStep > 1) {
-
-            currentStep--;
-            updateProgress();
-            updateFormVisibility();
-            updateButtonVisibility();
-        }
-        if (currentStep < 4) {
-            document.querySelector("#next_btn").style.display = "block";
-            document.getElementById("form_submit").style.display = "none";
-        }
-    }
-
-    function updateProgress() {
-        const steps = document.querySelectorAll(".progress-step");
-        steps.forEach((step) => step.classList.remove("active"));
-        document.getElementById(`step${currentStep}`).classList.add("active");
-    }
-
-    function updateFormVisibility() {
-        const forms = document.querySelectorAll(".new_form");
-        forms.forEach((form) => (form.style.display = "none"));
-        document.querySelector(`.step${currentStep}`).style.display = "block";
-    }
-
-    function updateButtonVisibility() {
-        const prevButton = document.querySelector(".previous_btn");
-        if (currentStep === 1) {
-            prevButton.style.display = "none";
-        } else {
-            prevButton.style.display = "block";
-        }
-    }
-
-
-    function closeAlert() {
-        document.getElementById('error_msg_show').style.display = 'none';
-    }
-    // Initial call to ensure correct button visibility and form visibility
-    updateButtonVisibility();
-    updateFormVisibility();
-</script>
-<script>
-    $(document).ready(function() {
-        // Allow only numeric input for telephone field
-        $('#tele').on('input', function() {
-            this.value = this.value.replace(/\D/g, '');
-        });
-    });
-
-    function toggleFlightIdVisibility() {
-        var selectedValue = document.getElementById('carType').value;
-        var flightIdDiv = document.getElementById('flightId');
-
-        if (selectedValue == 2) { // Arrival
-            flightIdDiv.style.display = 'block';
-        } else {
-            flightIdDiv.style.display = 'none';
-        }
-    }
-
-    function addMore() {
-        const dropLocationsContainer = document.getElementById("dropLocations");
-        const dropLocationCount = dropLocationsContainer.children.length;
-        const newDropLocation = document.createElement("div");
-        newDropLocation.classList.add("drop-location");
-        newDropLocation.innerHTML = `
-                <label for="dropLocation${dropLocationCount + 1}">Drop Location ${dropLocationCount + 1}:</label>
-                <input type="text" name="dropLocation[]" placeholder="Enter drop location" class="form-control pickupLocation" />
-            `;
-        dropLocationsContainer.appendChild(newDropLocation);
-    }
-
-    function selectFleet(fleet) {
-        const fleets = document.querySelectorAll("#fleets-section");
-        fleets.forEach((fleet) => fleet.classList.remove("selected-fleet"));
-        fleet.classList.add("selected-fleet");
-        const fleetId = fleet.getAttribute("data-fleet-id");
-
-        fetch(`/fleet-details/${fleetId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                updateSelectOptions('no_passenger', data.max_passengers);
-                updateSelectOptions('suit_case', data.max_suitecases);
-                updateSelectOptions('hand_lauggage', data.max_hand_luggage);
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-
-    }
-
-    function updateSelectOptions(selectId, max) {
-        const selectElement = document.getElementById(selectId);
-        selectElement.innerHTML = ''; // Clear existing options
-
-        for (let i = 1; i <= max; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = i;
-            selectElement.appendChild(option);
-        }
-    }
-
-    function showSomeoneElse() {
-        var checkBox = document.getElementById("Booking_for_someone");
-        var someoneElse = document.getElementById("someone_else");
-        if (checkBox.checked == true) {
-            someoneElse.style.display = "block";
-        } else {
-            someoneElse.style.display = "none";
-        }
-    }
-
-    function handleCheckboxClick(checkbox) {
-        const checkboxes = document.querySelectorAll('input[name="fleet_id"]');
-        checkboxes.forEach(cb => {
-            if (cb !== checkbox) {
-                cb.checked = false;
-            }
-        });
-    }
-
-    var paypal = document.getElementById('paypal');
-    paypal.addEventListener('click', function() {
-        window.location.href = '/paypal/payment';
-    });
-</script>
+@include('frontend.booking.booking-js')
 @endsection
