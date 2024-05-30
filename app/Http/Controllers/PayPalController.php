@@ -14,14 +14,16 @@ class PayPalController extends Controller
         $this->payPalService = $payPalService;
     }
 
-    public function createPayment()
+    public function createPayment(Request $request)
     {
+        $price = $request->get('price');
+        // dd($price);
         $payment = $this->payPalService->createPayment(
-            10.00, 
+            $price,
             'USD',
             'paypal', 
             'sale',
-            'Description of the payment', 
+            'Book a car payment.', 
             route('paypal.success'), 
             route('paypal.cancel') 
         );

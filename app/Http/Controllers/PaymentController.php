@@ -8,10 +8,13 @@ use Stripe\Stripe;
 
 class PaymentController extends Controller
 {
-    public function createCheckoutSession()
+    public function createCheckoutSession(Request $request)
+    
     {
+        
         Stripe::setApiKey(config('services.stripe.secret'));
-
+        
+        $price = $request->price;
         $session = Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
@@ -20,7 +23,7 @@ class PaymentController extends Controller
                     'product_data' => [
                         'name' => 'Sample Product',
                     ],
-                    'unit_amount' => 1000, // Amount in cents ($10.00)
+                    'unit_amount' => $price * 100,
                 ],
                 'quantity' => 1,
             ]],

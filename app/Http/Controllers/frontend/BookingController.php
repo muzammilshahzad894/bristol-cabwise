@@ -29,4 +29,8 @@ class BookingController extends Controller
             return redirect()->back()->with('error', 'An error occurred while fetching fleet details');
         }
     }
+    public function store(Request $request)
+    {
+
+    }
 }

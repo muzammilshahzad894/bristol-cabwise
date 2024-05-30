@@ -1,38 +1,26 @@
-<script type="text/javascript">
-    var stripe = Stripe('{{ config('
-        services.stripe.key ') }}');
-
-    var checkoutButton = document.getElementById('checkout-button');
-
-    checkoutButton.addEventListener('click', function() {
-        fetch('/create-checkout-session', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            },
-        })
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(session) {
-            return stripe.redirectToCheckout({
-                sessionId: session.id
-            });
-        })
-        .then(function(result) {
-            if (result.error) {
-                alert(result.error.message);
-            }
-        })
-        .catch(function(error) {
-            console.error('Error:', error);
-        });
-    });
-</script>
-
 <script>
     let currentStep = 1;
+    let FleetPrice = 0;
+    isChildSeat = false;
+    isBoosterSeat = false;
+
+    function showChildSeat() {
+        var checkBox = document.getElementById("child_seat");
+        if (checkBox.checked == true) {
+            isChildSeat = true;
+        } else {
+            isChildSeat = false;
+        }
+    }
+
+    function meetNdGreet() {
+        var checkBox = document.getElementById("meet_greet");
+        if (checkBox.checked == true) {
+            isBoosterSeat = true;
+        } else {
+            isBoosterSeat = false;
+        }
+    }
 
     function nextStep() {
         if (currentStep < 4) {
@@ -44,17 +32,17 @@
             }
 
             if (currentStep === 2) {
-                if(!validateSecondStep()) {
+                if (!validateSecondStep()) {
                     return;
                 }
             }
 
-            if(currentStep === 3) {
-                if(!validateThirdStep()) {
+            if (currentStep === 3) {
+                if (!validateThirdStep()) {
                     return;
                 }
             }
-            
+
             currentStep++;
             updateProgress();
             updateFormVisibility();
@@ -67,8 +55,7 @@
     }
 
     function validateFirstStep() {
-        const validations = [
-            {
+        const validations = [{
                 selector: '#pickupLocation',
                 errorSelector: '#pickup-error',
                 message: 'Pickup location is required'
@@ -87,14 +74,19 @@
         ];
 
         let isValid = true;
-        validations.forEach(({ selector, errorSelector, message, isMultiple }) => {
+        validations.forEach(({
+            selector,
+            errorSelector,
+            message,
+            isMultiple
+        }) => {
             const elements = $(selector);
-            const hasError = isMultiple 
-                ? elements.filter((_, el) => !$(el).val()).length > 0 
-                : !elements.val();
-            
+            const hasError = isMultiple ?
+                elements.filter((_, el) => !$(el).val()).length > 0 :
+                !elements.val();
+
             $(errorSelector).text(hasError ? message : '');
-            
+
             if (hasError) {
                 isValid = false;
                 elements.first().focus();
@@ -123,8 +115,7 @@
     }
 
     function validateThirdStep() {
-        const validations = [
-            {
+        const validations = [{
                 selector: '#name',
                 errorSelector: '#name-error',
                 message: 'Name is required'
@@ -145,9 +136,8 @@
                 message: 'Number of passengers is required'
             },
         ];
-        
-        const someOneElseValidation = [
-            {
+
+        const someOneElseValidation = [{
                 selector: '#someone_else_name',
                 errorSelector: '#someone_else_name_error',
                 message: 'Name is required'
@@ -165,7 +155,11 @@
         ];
 
         let isValid = true;
-        validations.forEach(({ selector, errorSelector, message }) => {
+        validations.forEach(({
+            selector,
+            errorSelector,
+            message
+        }) => {
             const element = $(selector);
             const hasError = !element.val();
             $(errorSelector).text(hasError ? message : '');
@@ -176,7 +170,11 @@
         });
 
         if ($('#booking_for_someone').is(':checked')) {
-            someOneElseValidation.forEach(({ selector, errorSelector, message }) => {
+            someOneElseValidation.forEach(({
+                selector,
+                errorSelector,
+                message
+            }) => {
                 const element = $(selector);
                 const hasError = !element.val();
                 $(errorSelector).text(hasError ? message : '');
@@ -232,9 +230,7 @@
     // Initial call to ensure correct button visibility and form visibility
     updateButtonVisibility();
     updateFormVisibility();
-</script>
 
-<script>
     $(document).ready(function() {
         // Allow only numeric input for telephone field
         $('#tele').on('input', function() {
@@ -313,6 +309,9 @@
     }
 
     function handleCheckboxClick(checkbox) {
+
+        var value = checkbox.value;
+        FleetPrice = value;
         const checkboxes = document.querySelectorAll('input[name="fleet_id"]');
         checkboxes.forEach(cb => {
             if (cb !== checkbox) {
@@ -321,8 +320,16 @@
         });
     }
 
-    var paypal = document.getElementById('paypal');
-    paypal.addEventListener('click', function() {
-        window.location.href = '/paypal/payment';
-    });
+    // var paypal = document.getElementById('paypal');
+    // paypal.addEventListener('click', function() {
+    //     window.location.href = '/paypal/payment';
+    // });
+    function paypalRedirect() {
+       
+        var TotalPrice = parseInt(FleetPrice) + (isChildSeat ? 6 : 0) + (isBoosterSeat ? 12 : 0);
+
+        var url = '/paypal/payment?price=' + TotalPrice;
+
+        window.location.href = url;
+    }
 </script>

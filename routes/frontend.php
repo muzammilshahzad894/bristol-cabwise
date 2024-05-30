@@ -14,6 +14,9 @@ Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.c
 Route::get('/services', [FrontendController::class, 'services'])->name('frontend.services');
 
 Route::get('/book-online', [BookingController::class, 'index'])->name('frontend.book-online');
+Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+
+
 Route::get('/fleet-details/{id}', [BookingController::class, 'fleetDetails'])->name('frontend.fleetDetails');
 Route::get('/car-details/{id}', [CarsController::class, 'carDetails'])->name('frontend.carDetails');
 Route::get('/trust-violet', [FrontendController::class, 'trustVoilet'])->name('frontend.trustVoilet');
@@ -29,3 +32,5 @@ Route::get('/paypal/cancel', [PayPalController::class, 'cancelPayment'])->name('
 Route::post('/create-checkout-session', [PaymentController::class, 'createCheckoutSession'])->name('create.checkout.session');
 Route::get('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
 Route::get('/payment-cancel', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
+
+

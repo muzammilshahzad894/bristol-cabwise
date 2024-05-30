@@ -745,9 +745,10 @@
                                 </div>
                             </div>
                             <div class="footer-box d-flex align-items-center">
-                                <p class="color">price: <strong> ${{ $fleet->price }}</strong></p>
+                                <p class="color">price: <strong> ${{ 9*$fleet->price }} 
+                                </strong></p>
                                 <div>
-                                    <input type="checkbox" class="fleet_id" name="fleet_id" value="{{ $fleet->id }}" onclick="handleCheckboxClick(this)">
+                                    <input  type="checkbox" class="fleet_id" name="fleet_id"  onclick="handleCheckboxClick(this)" value="{{9*$fleet->price}}">
                                 </div>
                             </div>
                         </div>
@@ -812,7 +813,7 @@
                                 <option value="4">4</option>
                             </select>
                         </div>
-                        <div class="d-flex meet_greet" style="gap:10px;align-items:center">
+                        <div class="d-flex meet_greet" style="gap:10px;align-items:center" onclick="showChildSeat()">
                             <input type="checkbox" id="child_seat" name="child_seat" value="" class="mb-0">
                             <label for="child_seat" class="passenger_lebals">Child Seat (£6)</label>
                         </div>
@@ -926,8 +927,8 @@
                             <p class="unique-dropbtns">Select Option</p>
                             <div class="unique-dropdown-content">
                                 <ul>
-                                    <li class="unique-payment-option" id="checkout-button">Debit Card</li>
-                                    <li class="unique-payment-option" id="paypal">PayPal</li>
+                                    <li class="unique-payment-option" id="checkout-button" onclick="PayonStripe();">Debit Card</li>
+                                    <li class="unique-payment-option" id="paypal" onclick="paypalRedirect();">PayPal</li>
                                 </ul>
                             </div>
                         </div>
@@ -935,7 +936,6 @@
 
                     </div>
                 </div>
-
 
 
                 <div class="both_btn">
@@ -980,7 +980,7 @@
                     </div>
                     <div class="icon_text">
                         <i class="fa-solid fa-check"></i>
-                        <p>
+                        <p> 
                             Complimentary water bottle & Wi-Fi
                         </p>
                     </div>
@@ -1006,13 +1006,65 @@
         </div>
     </div>
 </section>
+<script type="text/javascript">
+    var stripeKey = '{{ config('services.stripe.key') }}';
+
+    if (!stripeKey) {
+        console.error('Stripe publishable key is not set');
+    } else {
+        var stripe = Stripe(stripeKey);
+        console.log('Stripe object:', stripe);
+
+        function PayonStripe() {
+            // Calculate the total price
+            var TotalPrice = parseInt(FleetPrice) + (isChildSeat ? 6 : 0) + (isBoosterSeat ? 12 : 0);
+
+            fetch('/create-checkout-session', {
+                method: 'POST',
+                body: JSON.stringify({ price: TotalPrice }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+            })
+            .then(function(response) {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(function(session) {
+                console.log('Session ID:', session.id);
+                if (stripe && typeof stripe.redirectToCheckout === 'function') {
+                    return stripe.redirectToCheckout({ sessionId: session.id });
+                } else {
+                    throw new Error('Stripe object is not initialized correctly or redirectToCheckout is undefined');
+                }
+            })
+            .then(function(result) {
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+            });
+        }
+
+        document.getElementById('checkout-button').addEventListener('click', PayonStripe);
+    }
+</script>
+
+
+
 @endsection
 
 @section('scripts')
+
+<script src="https://js.stripe.com/v3/"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtRWAKC7UW3kK8VNLlDe1EBHQQKu6ZTFo&libraries=places&callback=initMap"></script>
 <script src="{{ asset('frontend-assets/js/google-map.js') }}"></script>
 <script src="{{ asset('frontend-assets/js/distance.js') }}"></script>
 
-<script src="https://js.stripe.com/v3/"></script>
 @include('frontend.booking.booking-js')
 @endsection
