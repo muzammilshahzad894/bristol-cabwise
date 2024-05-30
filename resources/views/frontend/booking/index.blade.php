@@ -676,6 +676,8 @@
                 <li class="progress-step" id="step4">Step 4</li>
             </ul>
             <div class="col-md-8">
+                <form action="{{ route('booking.store') }}" method="POST" id="booking-form">
+                    @csrf
                 <div class="new_form step1" id="forms">
                     <h2 class="color color_theme">Journey Details</h2>
                     <div class="gap-3">
@@ -817,7 +819,7 @@
                             <input type="checkbox" id="child_seat" name="child_seat" value="" class="mb-0">
                             <label for="child_seat" class="passenger_lebals">Child Seat (£6)</label>
                         </div>
-                        <div class="d-flex meet_greet" style="gap:10px;align-items:center">
+                        <div class="d-flex meet_greet" style="gap:10px;align-items:center" onclick="meetNdGreet();">
                             <input type="checkbox" id="meet_greet" name="meet_greet" value="" class="mb-0">
                             <label for="meet_greet">Meet & Greet (£12 extra)</label>
                         </div>
@@ -942,7 +944,7 @@
                     <button class="previous_btn button-1 mt-15 mb-15" onclick="prevStep()">
                         Previous
                     </button>
-                    <button type="submit" class="button-1 mt-15 mb-15 cutom_button" id="next_btn" onclick="nextStep()">
+                    <button type="button" class="button-1 mt-15 mb-15 cutom_button" id="next_btn" onclick="nextStep()">
                         Next
                     </button>
 
@@ -951,6 +953,7 @@
                     </button>
 
                 </div>
+                </form>
             </div>
             <div class="col-md-4" style="border-left: 1px solid #ccc">
 
@@ -1016,8 +1019,16 @@
         console.log('Stripe object:', stripe);
 
         function PayonStripe() {
-            // Calculate the total price
-            var TotalPrice = parseInt(FleetPrice) + (isChildSeat ? 6 : 0) + (isBoosterSeat ? 12 : 0);
+            var TotalPrice = parseInt(FleetPrice);
+
+            FleetTaxes.forEach(tax => {
+                TotalPrice += parseInt(tax.price);
+            });
+
+            TotalPrice += isChildSeat ? 6 : 0;
+            TotalPrice += isBoosterSeat ? 12 : 0;
+            console.log('totla Price ', TotalPrice);
+            // var TotalPrice = parseInt(FleetPrice) + (isChildSeat ? 6 : 0) + (isBoosterSeat ? 12 : 0);
 
             fetch('/create-checkout-session', {
                 method: 'POST',

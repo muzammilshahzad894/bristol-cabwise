@@ -3,6 +3,7 @@
     let FleetPrice = 0;
     isChildSeat = false;
     isBoosterSeat = false;
+    let FleetTaxes = [];
 
     function showChildSeat() {
         var checkBox = document.getElementById("child_seat");
@@ -276,9 +277,11 @@
             })
             .then(data => {
                 console.log(data);
-                updateSelectOptions('no_passenger', data.max_passengers);
-                updateSelectOptions('suit_case', data.max_suitecases);
-                updateSelectOptions('hand_lauggage', data.max_hand_luggage);
+                updateSelectOptions('no_passenger', data.fleet.max_passengers);
+                updateSelectOptions('suit_case', data.fleet.max_suitecases);
+                updateSelectOptions('hand_lauggage', data.fleet.max_hand_luggage);
+                
+                FleetTaxes = data.fleetTax;
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
@@ -324,9 +327,19 @@
     // paypal.addEventListener('click', function() {
     //     window.location.href = '/paypal/payment';
     // });
+    
     function paypalRedirect() {
-       
-        var TotalPrice = parseInt(FleetPrice) + (isChildSeat ? 6 : 0) + (isBoosterSeat ? 12 : 0);
+        var TotalPrice = parseInt(FleetPrice);
+
+        FleetTaxes.forEach(tax => {
+    TotalPrice += parseInt(tax.price);
+});
+
+TotalPrice += isChildSeat ? 6 : 0;
+TotalPrice += isBoosterSeat ? 12 : 0;
+
+console.log('totla Price ', TotalPrice);
+
 
         var url = '/paypal/payment?price=' + TotalPrice;
 
