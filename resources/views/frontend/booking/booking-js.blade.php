@@ -3,8 +3,27 @@
     let FleetPrice = 0;
     let Fleet_id = 0;
     isChildSeat = false;
-    isBoosterSeat = false;
+    meet_nd_greet = false;
     let FleetTaxes = [];
+    let user_name = '';
+    let user_email = '';
+    let user_phone_number = '';
+    let other_name = '';
+    let other_email = '';
+    let other_phone_number = '';
+    let no_of_passenger = '';
+    let no_suite_case = '';
+    let no_hand_luggage = '';
+    let summary = '';
+    let pickup_location = '';
+    let dropoff_location = '';
+    let dates_times = '';
+    let flight_name = '';
+    let flight_time = '';
+    let flight_type = '';
+    let Total_price ='';
+    let service_type = '';
+
 
     $(document).ready(function() {
 
@@ -16,9 +35,9 @@
             isChildSeat = false;
         }
         if (checkBox.checked == true) {
-            isBoosterSeat = true;
+            meet_nd_greet = true;
         } else {
-            isBoosterSeat = false;
+            meet_nd_greet = false;
         }
 
     });
@@ -37,11 +56,45 @@
     function meetNdGreet() {
         var checkBox = document.getElementById("meet_greet");
         if (checkBox.checked == true) {
-            isBoosterSeat = true;
+            meet_nd_greet = true;
         } else {
-            isBoosterSeat = false;
+            meet_nd_greet = false;
         }
     }
+    function updateSummary() {
+    const ids = [
+        'summary-service-type', 'summary-pickup-location', 'summary-drop-location', 
+        'summary-date', 'summary-name', 'summary-telephone', 'summary-email', 
+        'summary-passengers', 'summary-child-seat', 'summary-suitcases', 
+        'summary-hand-luggage', 'summary-summary', 
+        'summary-other-name', 'summary-other-telephone', 'summary-other-email', 
+        'summary-total-price'
+    ];
+
+    ids.forEach(id => {
+        const element = document.getElementById(id);
+        if (!element) {
+            console.error(`Element with id '${id}' not found`);
+        }
+    });
+
+    document.getElementById('summary-service-type').innerText = service_type;
+    document.getElementById('summary-pickup-location').innerText = pickup_location;
+    document.getElementById('summary-drop-location').innerText = dropoff_location;
+    document.getElementById('summary-date').innerText = dates_times;
+    document.getElementById('summary-name').innerText = user_name;
+    document.getElementById('summary-telephone').innerText = user_phone_number;
+    document.getElementById('summary-email').innerText = user_email;
+    document.getElementById('summary-passengers').innerText = no_of_passenger;
+    document.getElementById('summary-child-seat').innerText = isChildSeat ? '1' : '0';
+    document.getElementById('summary-suitcases').innerText = no_suite_case;
+    document.getElementById('summary-hand-luggage').innerText = no_hand_luggage;
+    document.getElementById('summary-summary').innerText = summary;
+    document.getElementById('summary-other-name').innerText = other_name;
+    document.getElementById('summary-other-telephone').innerText = other_phone_number;
+    document.getElementById('summary-other-email').innerText = other_email;
+    document.getElementById('summary-total-price').innerText = Total_price;
+}
 
     function nextStep() {
         if (currentStep < 4) {
@@ -64,6 +117,34 @@
                     return;
                 }
             }
+            if(currentStep == 3) {
+    var TotalPrice = parseInt(FleetPrice);
+    FleetTaxes.forEach(tax => {
+        TotalPrice += parseInt(tax.price);
+    });
+    TotalPrice += isChildSeat ? 6 : 0;
+    TotalPrice += meet_nd_greet ? 12 : 0;
+    Total_price = TotalPrice;
+
+    user_name = document.getElementById('name').value;
+    user_email = document.getElementById('email').value;
+    user_phone_number = document.getElementById('telephone').value;
+    other_name = document.getElementById('someone_else_name').value;
+    other_email = document.getElementById('someone_else_email').value;
+    other_phone_number = document.getElementById('someone_else_telephone').value;
+    no_of_passenger = document.getElementById('no_passenger').value;
+    no_suite_case = document.getElementById('suit_case').value;
+    no_hand_luggage = document.getElementById('hand_lauggage').value;
+    summary = document.getElementById('summary').value;
+    pickup_location = document.getElementById('pickupLocation').value;
+    dropoff_location = document.getElementById('dropLocation').value;
+    dates_times = document.getElementById('date-time').value;
+    flight_name = document.getElementById('flightName').value;
+    flight_time = document.getElementById('flight_time').value;
+    flight_type = document.getElementById('carType').value;
+
+    updateSummary();
+}
 
             currentStep++;
             updateProgress();
@@ -391,19 +472,14 @@
 // Call the function on page load
 document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
 
-    // var paypal = document.getElementById('paypal');
-    // paypal.addEventListener('click', function() {
-    //     window.location.href = '/paypal/payment';
-    // });
 
     function paypalRedirect() {
         var TotalPrice = parseInt(FleetPrice);
-
         FleetTaxes.forEach(tax => {
             TotalPrice += parseInt(tax.price);
         });
         TotalPrice += isChildSeat ? 6 : 0;
-        TotalPrice += isBoosterSeat ? 12 : 0;
+        TotalPrice += meet_nd_greet ? 12 : 0;
         var url = '/paypal/payment?price=' + TotalPrice;
 
         // window.location.href = url;
@@ -442,8 +518,6 @@ document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
             formData.time = time;
         }
 
-        console.log('Date:', formData.date); 
-        console.log('Time:', formData.time); 
         fetch('/booking', {
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -459,7 +533,6 @@ document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
                 return response.json();
             })
             .then(data => {
-                console.log(data);
                 if (data.error) {
                     $('#exampleModal').modal('show');
                     return;
@@ -470,7 +543,6 @@ document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
                 }else{
                     PayonStripe();
                 }
-                createPaymentSession(data.price);
                 }
                 // Pass the price received from the backend
             })
@@ -530,8 +602,8 @@ document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
         });
         function showFlightId(select) {
     var selectedServiceName = select.options[select.selectedIndex].text.trim(); // Get the text of the selected option
-   console.log(selectedServiceName)
-;    if (selectedServiceName === 'Airport transfers') {
+            service_type = selectedServiceName;
+    if (selectedServiceName === 'Airport transfers') {
         document.getElementById("flight_type").style.display = "block"; // Show the div
     } else {
         document.getElementById("flight_type").style.display = "none"; // Hide the div

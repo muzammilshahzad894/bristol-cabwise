@@ -940,62 +940,77 @@
                 <div class="step4 new_form">
                     <div class="summary">
                         <div class="heading-border-bottom">
-
                             <h3 class="color color_theme">Summary.</h3>
                         </div>
                         <div class="d-flex gap-4">
-                            <strong>Car Type:</strong>
-                            <p>Departure</p>
+                            <strong>Service Type:</strong>
+                            <p id="summary-service-type">Departure</p>
                         </div>
                         <div class="d-flex gap-4">
                             <strong>Pickup Location:</strong>
-                            <p>London</p>
+                            <p id="summary-pickup-location">London</p>
                         </div>
                         <div class="d-flex gap-4">
                             <strong>Drop Location:</strong>
-                            <p>Manchester</p>
+                            <p id="summary-drop-location">Manchester</p>
                         </div>
                         <div class="d-flex gap-4">
-                            <strong>Date:</strong>
-                            <p>2022-03-09</p>
-                        </div>
-                        <div class="d-flex gap-4">
-                            <strong>Time:</strong>
-                            <p>12:00</p>
+                            <strong>Date & Time: </strong>
+                            <p id="summary-date">2022-03-09</p>
                         </div>
                         <div class="d-flex gap-4">
                             <strong>Name:</strong>
-                            <p>John Doe</p>
+                            <p id="summary-name">John Doe</p>
                         </div>
                         <div class="d-flex gap-4">
                             <strong>Telephone:</strong>
-                            <p>1234567890</p>
+                            <p id="summary-telephone">1234567890</p>
                         </div>
                         <div class="d-flex gap-4">
                             <strong>Email:</strong>
-                            <p>testing@gmail.com </p>
+                            <p id="summary-email">testing@gmail.com </p>
                         </div>
                         <div class="d-flex gap-4">
                             <strong>No of passenger:</strong>
-                            <p>1</p>
+                            <p id="summary-passengers">1</p>
                         </div>
                         <div class="d-flex gap-4">
                             <strong>Child Seat:</strong>
-                            <p>0</p>
+                            <p id="summary-child-seat">0</p>
                         </div>
                         <div class="d-flex gap-4">
                             <strong>SuitCases:</strong>
-                            <p>0</p>
+                            <p id="summary-suitcases">0</p>
                         </div>
                         <div class="d-flex gap-4">
                             <strong>Hand luggage:</strong>
-                            <p>0</p>
+                            <p id="summary-hand-luggage">0</p>
                         </div>
                         <div class="d-flex gap-4">
-                            <strong>summary:</strong>
-                            <p>You need any help!.</p>
+                            <strong>Summary:</strong>
+                            <p id="summary-summary">You need any help!.</p>
+                        </div>
+                        <h3 class="color color_theme">Other Details:</h3>
+                        <div class="d-flex gap-4 mt-2">
+                            <strong>Name:</strong>
+                            <p id="summary-other-name"></p>
+                        </div>
+                        <div class="d-flex gap-4">
+                            <strong>Telephone:</strong>
+                            <p id="summary-other-telephone"></p>
+                        </div>
+                        <div class="d-flex gap-4">
+                            <strong>Email:</strong>
+                            <p id="summary-other-email"></p>
+                        </div>
+                        
+                        <h3 class="color color_theme">Total Price:</h3>
+                        <div class="d-flex gap-4">
+                            <strong>Price:</strong>
+                            <p id="summary-total-price"> <span>$</span> </p>
                         </div>
                     </div>
+                    
                     <div class="payment_section_main">
                         <p class="dropdown_menus">Select Payment Type:</p>
                         <div class="unique-dropdown">
@@ -1109,6 +1124,7 @@
         console.log('Stripe object:', stripe);
 
         function PayonStripe() {
+            console.log('hree');
             var TotalPrice = parseInt(FleetPrice);
 
             FleetTaxes.forEach(tax => {
@@ -1116,7 +1132,7 @@
             });
 
             TotalPrice += isChildSeat ? 6 : 0;
-            TotalPrice += isBoosterSeat ? 12 : 0;
+            TotalPrice += meet_nd_greet ? 12 : 0;
             console.log('totla Price ', TotalPrice);
             // var TotalPrice = parseInt(FleetPrice) + (isChildSeat ? 6 : 0) + (isBoosterSeat ? 12 : 0);
 

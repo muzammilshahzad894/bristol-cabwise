@@ -14,6 +14,13 @@
     .modal-body {
         padding: 20px;
     }
+    .modal-header{
+        background: orange;
+        color: white;
+    }
+    .modal-body{
+        background: black;
+    }
 
     #countdown {
         margin-bottom: 20px;
@@ -25,6 +32,7 @@
 
     .coupon-heading {
         font-size: 18px;
+        color: white;
         margin-bottom: 10px;
     }
 
@@ -36,6 +44,7 @@
 
     .modal-footer {
         /* justify-content: center; */
+        display: none;
         padding: 20px;
     }
 
@@ -72,6 +81,9 @@
         font-size: 16px;
         margin-top: 40px !important;
         margin-left: 10px;
+    }
+    #countdown h4{
+        color: white !important;
     }
 
     .cutom_button:hover {
