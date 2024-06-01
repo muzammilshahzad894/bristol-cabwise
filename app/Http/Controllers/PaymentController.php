@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
+use App\Models\Booking;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -37,11 +39,24 @@ class PaymentController extends Controller
 
     public function paymentSuccess()
     {
-        return view('payment.success');
+        $booking = Booking::where('user_id', 1)->first();
+        if ($booking) {
+            $booking->is_payment = 1;
+            $booking->is_draft = 0;
+            $booking->save();
+            
+        Log::info('Payment successful, redirecting to booking success page.');
+            return redirect()->route('booking.success')->with('success', 'Payment successful.');
+        } else {
+            // If the booking does not exist, redirect back with an error message
+            return redirect()->back()->with('error', 'Booking not found.');
+        }
     }
+    
 
     public function paymentCancel()
     {
         return view('payment.cancel');
     }
+    
 }

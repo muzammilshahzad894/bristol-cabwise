@@ -11,6 +11,44 @@
         border-bottom-right-radius: 10px;
 
     }
+    .modal-body {
+        padding: 20px;
+        background:#000;
+    }
+    .modal{
+        background: rgb(0 0 0 / 48%);
+    }
+    .modal-header{
+        background-color: orange;
+
+    }
+    #countdown h4 {
+        color: orange;
+        font-family: cursive;
+    }
+    #countdown {
+        margin-bottom: 20px;
+    }
+
+    .coupon-code {
+        margin-bottom: 20px;
+    }
+
+    .coupon-heading {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .coupon {
+        font-size: 36px;
+        color: #f00;
+        /* Red color for emphasis */
+    }
+
+    .modal-footer {
+        /* justify-content: center; */
+        padding: 20px;
+    }
 
     .meet_greet input[type="checkbox"] {
         height: 25px;
@@ -681,22 +719,53 @@
                 <div class="new_form step1" id="forms">
                     <h2 class="color color_theme">Journey Details</h2>
                     <div class="gap-3">
+                        @php 
+                            $services = \App\Models\Service::all();
+
+                            $id = request('id');
+                            $bookingServiceId = isset($booking_detail) ? $booking_detail->service_id : null;
+                            
+                        @endphp
+                        <select name="service" id="service" class="styled-input border-radius-0 mb-0" onchange="showFlightId(this);">
+                            @foreach($services as $service)
+                                <option value="{{ $service->id }}" 
+                                    @if ($service->id == $id || $service->id == $bookingServiceId)
+                                        selected
+                                    @endif
+                                >
+                                    {{ $service->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div id="flight_type" style="display: none">
+                            <label for="flight_type">Select Type:</label>
+                            <select id="carType" class="select2 select" style="width: 100%" name="flight_type"
+                                onchange="toggleFlightIdVisibility()">
+                                <option value="1">Departure</option>
+                                <option value="2">Arrival</option>
+
+                            </select>
+                        </div>
+                        
+                        
                         <div id="flightId" style="display: none">
                             <label for="pickupLocation">Flight Name:</label>
-                            <input type="text" name="flightName" placeholder="Enter flight Name" class="form-control pickupLocation" />
+                            <input type="text" name="flightName" placeholder="Enter flight Name" class="form-control pickupLocation" id="flightName" />
+                            <div id="flightName-error" class="error-message text-danger"></div>
                             <label for="arrival time ">Arrival Time:</label>
-                            <input type="time" class="input timepicker styled-input" id="arrival_time" placeholder="Arrival Time" />
+                            <input type="time" name="flight_time" class="input timepicker styled-input"  placeholder="Arrival Time"  id="flight_time" />
+                            <div id="flight_time-error" class="error-message text-danger"></div>
                         </div>
                         <div>
                             <label for="pickupLocation">Pickup Location:</label>
-                            <input type="text" id="pickupLocation" name="pickupLocation" placeholder="Enter pickup location" class="form-control pickupLocation border-radius-0 mb-0" />
+                            <input type="text" id="pickupLocation" name="pickupLocation" placeholder="Enter pickup location" class="form-control pickupLocation border-radius-0 mb-0" value={{$booking_detail->pickup_location ?? ''}} >
                             <div id="pickup-error" class="error-message text-danger"></div>
                         </div>
                         <div>
                             <label for="dropLocation">Drop Location:</label>
                             <div id="dropLocations">
                                 <div class="drop-location">
-                                    <input type="text" id="dropLocation" name="dropLocation[]" placeholder="Enter drop location" class="form-control pickupLocation border-radius-0 mb-0" />
+                                    <input type="text" id="dropLocation" name="dropLocation[]" placeholder="Enter drop location" class="form-control pickupLocation border-radius-0 mb-0" value={{$booking_detail->dropoff_location ?? ''}} >
                                     <div id="drop-error" class="error-message text-danger"></div>
                                 </div>
                             </div>
@@ -704,9 +773,13 @@
                                     placeholder="Enter drop location" class="form-control pickupLocation" /> --}}
                             <button class="plus_icon mt-1" id="addLocation" onclick="addMore();">Add More location</button>
                         </div>
+                        @php 
+                            $datetime = isset($booking_detail->booking_date, $booking_detail->booking_time) ? $booking_detail->booking_date . 'T' . $booking_detail->booking_time : '';
+
+                        @endphp
                         <div>
                             <label for="date">Date & Time:</label>
-                            <input type="datetime-local" class="input location styled-input timepicker border-radius-0 mb-0" placeholder="Return Date" id="date-time" />
+                            <input type="datetime-local" class="input location styled-input timepicker border-radius-0 mb-0" placeholder="Return Date" id="date-time" value="{{ isset($booking_detail) ? (isset($booking_detail->booking_date) && isset($booking_detail->booking_time) ? $booking_detail->booking_date . 'T' . $booking_detail->booking_time : '') : '' }}" />
                             <div id="date-time-error" class="error-message text-danger"></div>
                         </div>
                     </div>
@@ -750,7 +823,10 @@
                                 <p class="color">price: <strong> ${{ 9*$fleet->price }} 
                                 </strong></p>
                                 <div>
-                                    <input  type="checkbox" class="fleet_id" name="fleet_id"  onclick="handleCheckboxClick(this)" value="{{9*$fleet->price}}">
+                                    <input  type="checkbox" class="fleet_id" name="fleet_id"  onclick="handleCheckboxClick(this)" value="{{9*$fleet->price}}"
+                                    @if (isset($booking_detail) && $booking_detail->fleet_id == $fleet->id)
+                                        checked
+                                    @endif>
                                 </div>
                             </div>
                         </div>
@@ -764,17 +840,17 @@
                     </div>
                     <div class="column_type">
                         <label for="name" class="passenger_lebals">Name</label>
-                        <input type="text" class="form-control pickupLocation custom_input border-radius-0 mb-0" name="name" placeholder="Enter Your Name" id="name" />
+                        <input type="text" class="form-control pickupLocation custom_input border-radius-0 mb-0" name="name" placeholder="Enter Your Name" id="name" value={{$booking_detail->name ?? ''}} >
                         <div id="name-error" class="error-message text-danger"></div>
                     </div>
                     <div class="column_type">
                         <label for="telephone" class="passenger_lebals">Telephone</label>
-                        <input type="text" class="form-control pickupLocation custom_input border-radius-0 mb-0" id="telephone" name="telephone" placeholder="Enter Your Telephone" />
+                        <input type="number" class="form-control pickupLocation custom_input border-radius-0 mb-0" id="telephone" name="telephone" placeholder="Enter Your Telephone" value={{$booking_detail->phone_number ?? ''}} >
                         <div id="telephone-error" class="error-message text-danger"></div>
                     </div>
                     <div class="column_type border-botom">
                         <label for="tele" class="passenger_lebals">Email</label>
-                        <input type="email" class="form-control pickupLocation custom_input border-radius-0 mb-0" id="email" name="email" placeholder="Enter Your Email" />
+                        <input type="email" class="form-control pickupLocation custom_input border-radius-0 mb-0" id="email" name="email" placeholder="Enter Your Email" value={{$booking_detail->email ?? ''}} >
                         <div id="email-error" class="error-message text-danger"></div>
                     </div>
                     <div class="border-botom">
@@ -785,12 +861,6 @@
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
                             </select>
                             <div id="passenger-error" class="error-message text-danger"></div>
                         </div>
@@ -816,41 +886,54 @@
                             </select>
                         </div>
                         <div class="d-flex meet_greet" style="gap:10px;align-items:center" onclick="showChildSeat()">
-                            <input type="checkbox" id="child_seat" name="child_seat" value="" class="mb-0">
+                            <input type="checkbox" id="child_seat" name="child_seat" value="" class="mb-0" 
+                            @if (isset($booking_detail) && $booking_detail->is_childseat == 1)
+                            checked
+                            @endif>
                             <label for="child_seat" class="passenger_lebals">Child Seat (£6)</label>
                         </div>
                         <div class="d-flex meet_greet" style="gap:10px;align-items:center" onclick="meetNdGreet();">
-                            <input type="checkbox" id="meet_greet" name="meet_greet" value="" class="mb-0">
+                            <input type="checkbox" id="meet_greet" name="meet_greet" value="" class="mb-0"
+                            @if (isset($booking_detail) && $booking_detail->is_meet_nd_greet == 1)
+                            checked
+                            @endif>
                             <label for="meet_greet">Meet & Greet (£12 extra)</label>
                         </div>
                         <div class="d-flex meet_greet" style="gap:10px;align-items:center" onclick="showSomeoneElse()">
-                            <input type="checkbox" id="booking_for_someone" name="Booking_for_someone" value="">
+                            <input type="checkbox" id="booking_for_someone" name="Booking_for_someone" value=""
+                            @if (isset($booking_detail) && $booking_detail->other_name != "")
+                            checked
+                            @endif>
                             <label for="Booking_for_someone">
                                 Booking for someone else.
                             </label>
                         </div>
                     </div>
-                    <div class="border-botom" id="someone_else" style="display: none;">
+                    <div class="border-botom" id="someone_else" style="display: {{ isset($booking_detail) && $booking_detail->other_name != "" ? 'block' : 'none' }}">
+                        
                         <div class="column_type">
                             <label for="someone_else_name" class="passenger_lebals">Name</label>
-                            <input type="text" class="form-control pickupLocation custom_input border-radius-0 mb-0" name="someone_else_name" placeholder="Enter Name" id="someone_else_name" />
+                            <input type="text" class="form-control pickupLocation custom_input border-radius-0 mb-0" name="someone_else_name" placeholder="Enter Name" id="someone_else_name" value={{$booking_detail->other_name ?? ''}} >
                             <div id="someone_else_name_error" class="error-message text-danger"></div>
                         </div>
                         <div class="column_type">
                             <label for="someone_else_telephone" class="passenger_lebals">Telephone</label>
-                            <input type="text" class="form-control pickupLocation custom_input border-radius-0 mb-0" id="someone_else_telephone" name="someone_else_telephone" placeholder="Enter Telephone" />
+                            <input type="number" class="form-control pickupLocation custom_input border-radius-0 mb-0" id="someone_else_telephone" name="someone_else_telephone" placeholder="Enter Telephone" 
+                            value={{$booking_detail->other_phone_number ?? ''}} >
                             <div id="someone_else_telephone_error" class="error-message text-danger"></div>
                         </div>
                         <div class="column_type">
                             <label for="someone_else_email" class="passenger_lebals">Email</label>
-                            <input type="email" class="form-control pickupLocation custom_input border-radius-0 mb-0" id="someone_else_email" name="someone_else_email" placeholder="Enter Email" />
+                            <input type="email" class="form-control pickupLocation custom_input border-radius-0 mb-0" id="someone_else_email" name="someone_else_email" placeholder="Enter Email"
+                            value={{$booking_detail->other_email ?? ''}}
+                            >
                             <div id="someone_else_email_error" class="error-message text-danger"></div>
                         </div>
                     </div>
 
                     <div class="mt-2">
                         <label for="comment">Comment (optional):</label>
-                        <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
+                        <textarea name="comment" id="summary" class="form-control" rows="3">{{$booking_detail->summary ?? ''}}</textarea>
                     </div>
                 </div>
 
@@ -914,23 +997,13 @@
                         </div>
                     </div>
                     <div class="payment_section_main">
-                        {{-- <h3 class="color color_theme">Payment for Booking.</h3> --}}
-                        {{-- <div>
-                            <label for="payment_type">payment type</label>
-                            <select class="select2 select border-radius-0" style="width: 100%" name="payment_type" id="payment_type">
-                                <option value="">Choose payment type</option>
-                                <option value="1">Debit card</option>
-                                <option value="2">Paypal</option>
-                            </select>
-                        </div>
-                        <button id="checkout-button">Checkout</button> --}}
                         <p class="dropdown_menus">Select Payment Type:</p>
                         <div class="unique-dropdown">
                             <p class="unique-dropbtns">Select Option</p>
                             <div class="unique-dropdown-content">
                                 <ul>
-                                    <li class="unique-payment-option" id="checkout-button" onclick="PayonStripe();">Debit Card</li>
-                                    <li class="unique-payment-option" id="paypal" onclick="paypalRedirect();">PayPal</li>
+                                    <li class="unique-payment-option" target="_blank" id="checkout-button" onclick="bookAndPay('stripe');">Debit Card</li>
+                                    <li class="unique-payment-option" target="_blank" id="paypal" onclick="bookAndPay('paypal');">PayPal</li>
                                 </ul>
                             </div>
                         </div>
@@ -941,16 +1014,16 @@
 
 
                 <div class="both_btn">
-                    <button class="previous_btn button-1 mt-15 mb-15" onclick="prevStep()">
+                    <button class="previous_btn button-1 mt-15 mb-15" onclick="prevStep()" type="button">
                         Previous
                     </button>
                     <button type="button" class="button-1 mt-15 mb-15 cutom_button" id="next_btn" onclick="nextStep()">
                         Next
                     </button>
 
-                    <button type="submit" class="button-1 mt-15 mb-15 cutom_button" id="form_submit" style="display: none">
+                    {{-- <button type="submit" class="button-1 mt-15 mb-15 cutom_button" id="form_submit" style="display: none" onclick="formSubmit();">
                         Book Now
-                    </button>
+                    </button> --}}
 
                 </div>
                 </form>
@@ -1008,6 +1081,23 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Booking Alert</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="countdown">
+                        <h4>Booking block for this day please contact to the support!</h4>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+    </div>
 </section>
 <script type="text/javascript">
     var stripeKey = '{{ config('services.stripe.key') }}';
@@ -1062,7 +1152,7 @@
             });
         }
 
-        document.getElementById('checkout-button').addEventListener('click', PayonStripe);
+        document.getElementById('checkout-button').addEventListener('click', bookAndPay);
     }
 </script>
 

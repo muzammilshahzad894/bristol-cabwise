@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Fleet;
 use App\Models\FleetTax;
+use App\Models\Booking;
+use App\Models\BlockDate;
 
 class BookingController extends Controller
 {
@@ -14,7 +16,8 @@ class BookingController extends Controller
     {
         try {
             $fleets = Fleet::all();
-            return view('frontend.booking.index', compact('fleets'));
+            $booking_detail = Booking::where('user_id', 1)->first();
+            return view('frontend.booking.index', compact('fleets', 'booking_detail'));
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while fetching bookings');
@@ -33,17 +36,22 @@ class BookingController extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->all());
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone_number' => 'required',
-            'fleet_id' => 'required',
-            'pickup_location' => 'required',
-            'dropoff_location' => 'required',
-            'booking_date' => 'required',
-        ]);
         try {
+            $bookingDate = strtotime($request->date); // Convert booking date to a Unix timestamp
+
+            $blockedDates = BlockDate::all(); // Fetch all blocked dates from the database
+            
+            foreach ($blockedDates as $blockedDate) {
+                $blockedUnixDate = strtotime($blockedDate->date_range);
+                
+                if ($bookingDate == $blockedUnixDate) {
+                    return response()->json(['error' => 'Booking date is blocked'], 400); 
+                }
+            }
+            $booking_detail = Booking::where('user_id', 1)->first();
+            if($booking_detail){
+                $booking_detail->delete();
+            }
             $booking = new Booking();
             $booking->name = $request->name;
             $booking->email = $request->email;
@@ -51,16 +59,34 @@ class BookingController extends Controller
             $booking->fleet_id = $request->fleet_id;
             $booking->pickup_location = $request->pickup_location;
             $booking->dropoff_location = $request->dropoff_location;
-            $booking->booking_date = $request->booking_date;
+            $booking->booking_date = $request->date;
+            $booking->booking_time = $request->time;
             $booking->other_name = $request->other_name;
             $booking->other_email = $request->other_email;
             $booking->other_phone_number = $request->other_phone_number;
+            $booking->is_childseat = $request->child_seat;
+            $booking->is_meet_nd_greet = $request->meet_greet;
+            $booking->summary = $request->summary;
+            $booking->no_of_passenger = $request->no_of_passenger;
+            $booking->no_suit_case = $request->no_suite_case;
+            $booking->no_of_laugage = $request->no_hand_luggage;
+            $booking->flight_name = $request->flight_name;
+            $booking->flight_time = $request->flight_time;
+            $booking->user_id = 1;
+            $booking->flight_name = $request->flight_name;
+            $booking->flight_time = $request->flight_time;
+            $booking->flight_type = $request->flight_type;
             $booking->save();
-            return redirect()->route('frontend.index')->with('success', 'Booking successful');
+    
+            return response()->json(['success' => 'Booking successful'], 200);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return redirect()->back()->with('error', 'An error occurred while booking');
+            return response()->json(['error' => 'An error occurred while booking'], 500); // HTTP status code 500 for server errors
         }
-
+    }
+    
+    public function bookingSuccess()
+    {
+        return view('frontend.booking.success');
     }
 }

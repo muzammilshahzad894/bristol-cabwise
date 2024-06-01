@@ -41,7 +41,8 @@
                                         </p>
                                         <div class="d-flex justify-content-between gap-4">
                                             <a class="view_details" href="{{ route('frontend.carDetails', $service->id) }}">View Details</a>
-                                            <a class="view_details" href="{{ route('frontend.book-online', $service->id) }}">Book Now</a>
+                                            <a class="view_details" href="{{ route('frontend.book-online', ['id' => $service->id, 'name' => str_replace(' ', '-', $service->name)]) }}">
+                                                Book Now</a>
                                         </div>
                                     </div>
                                 </div>

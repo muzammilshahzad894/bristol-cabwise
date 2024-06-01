@@ -1,9 +1,29 @@
 <script>
     let currentStep = 1;
     let FleetPrice = 0;
+    let Fleet_id = 0;
     isChildSeat = false;
     isBoosterSeat = false;
     let FleetTaxes = [];
+
+    $(document).ready(function() {
+
+        var checkBox = document.getElementById("child_seat");
+        var checkBox = document.getElementById("meet_greet");
+        if (checkBox.checked == true) {
+            isChildSeat = true;
+        } else {
+            isChildSeat = false;
+        }
+        if (checkBox.checked == true) {
+            isBoosterSeat = true;
+        } else {
+            isBoosterSeat = false;
+        }
+
+    });
+
+
 
     function showChildSeat() {
         var checkBox = document.getElementById("child_seat");
@@ -25,7 +45,8 @@
 
     function nextStep() {
         if (currentStep < 4) {
-            // check if current step is 1 and validate the form
+            var date_time = document.getElementById('date-time').value;
+
             if (currentStep === 1) {
                 if (!validateFirstStep()) {
                     return;
@@ -60,6 +81,7 @@
                 selector: '#pickupLocation',
                 errorSelector: '#pickup-error',
                 message: 'Pickup location is required'
+
             },
             {
                 selector: '.drop-location input',
@@ -72,6 +94,17 @@
                 errorSelector: '#date-time-error',
                 message: 'Date and time is required'
             }
+        ];
+        const flightValidation = [{
+                selector: '#flightName',
+                errorSelector: '#flightName-error',
+                message: 'Flight Name is required'
+            },
+            {
+                selector: '#flight_time',
+                errorSelector: '#flight_time-error',
+                message: 'Flight Time is required'
+            },
         ];
 
         let isValid = true;
@@ -93,6 +126,24 @@
                 elements.first().focus();
             }
         });
+     
+        if($('#carType').val() == 2){
+            console.log('Arrival');
+            flightValidation.forEach(({
+                selector,
+                errorSelector,
+                message
+            }) => {
+                const element = $(selector);
+                const hasError = !element.val();
+                $(errorSelector).text(hasError ? message : '');
+                if (hasError) {
+                    isValid = false;
+                    element.focus();
+                }
+            });
+            
+        }
 
         return isValid;
     }
@@ -154,6 +205,7 @@
                 message: 'Email is required'
             },
         ];
+       
 
         let isValid = true;
         validations.forEach(({
@@ -185,6 +237,7 @@
                 }
             });
         }
+      
 
         return isValid;
     }
@@ -267,6 +320,7 @@
         fleets.forEach((fleet) => fleet.classList.remove("selected-fleet"));
         fleet.classList.add("selected-fleet");
         const fleetId = fleet.getAttribute("data-fleet-id");
+        Fleet_id = fleetId;
 
         fetch(`/fleet-details/${fleetId}`)
             .then(response => {
@@ -280,7 +334,7 @@
                 updateSelectOptions('no_passenger', data.fleet.max_passengers);
                 updateSelectOptions('suit_case', data.fleet.max_suitecases);
                 updateSelectOptions('hand_lauggage', data.fleet.max_hand_luggage);
-                
+
                 FleetTaxes = data.fleetTax;
             })
             .catch(error => {
@@ -310,9 +364,7 @@
             someoneElse.style.display = "none";
         }
     }
-
     function handleCheckboxClick(checkbox) {
-
         var value = checkbox.value;
         FleetPrice = value;
         const checkboxes = document.querySelectorAll('input[name="fleet_id"]');
@@ -321,28 +373,168 @@
                 cb.checked = false;
             }
         });
+        console.log('page load ');
     }
+    function triggerCheckedCheckbox() {
+    const checkedCheckbox = document.querySelector('input[name="fleet_id"]:checked');
+    if (checkedCheckbox) {
+        handleCheckboxClick(checkedCheckbox);
+
+        // Find the fleet container and trigger selectFleet
+        const fleetContainer = checkedCheckbox.closest('.form-container');
+        if (fleetContainer) {
+            selectFleet(fleetContainer);
+        }
+    }
+}
+
+// Call the function on page load
+document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
 
     // var paypal = document.getElementById('paypal');
     // paypal.addEventListener('click', function() {
     //     window.location.href = '/paypal/payment';
     // });
-    
+
     function paypalRedirect() {
         var TotalPrice = parseInt(FleetPrice);
 
         FleetTaxes.forEach(tax => {
-    TotalPrice += parseInt(tax.price);
-});
-
-TotalPrice += isChildSeat ? 6 : 0;
-TotalPrice += isBoosterSeat ? 12 : 0;
-
-console.log('totla Price ', TotalPrice);
-
-
+            TotalPrice += parseInt(tax.price);
+        });
+        TotalPrice += isChildSeat ? 6 : 0;
+        TotalPrice += isBoosterSeat ? 12 : 0;
         var url = '/paypal/payment?price=' + TotalPrice;
 
-        window.location.href = url;
+        // window.location.href = url;
     }
+
+    function bookAndPay(name) {
+        payment_method = name;
+        var formData = {
+            name: getElementValue('name'),
+            email: getElementValue('email'),
+            phone_number: getElementValue('telephone'),
+            other_name: getElementValue('someone_else_name'),
+            other_email: getElementValue('someone_else_email'),
+            other_phone_number: getElementValue('someone_else_telephone'),
+            no_of_passenger: getElementValue('no_passenger'),
+            no_suite_case: getElementValue('suit_case'),
+            no_hand_luggage: getElementValue('hand_lauggage'),
+            child_seat: document.getElementById('child_seat').checked ? 1 : 0,
+            meet_greet: document.getElementById('meet_greet').checked ? 1 : 0,
+            summary: getElementValue('summary'),
+            pickup_location: getElementValue('pickupLocation'),
+            dropoff_location: getElementValue('dropLocation'),
+            date_time: getElementValue('date-time'),
+            flight_name : getElementValue('flightName'),
+            flight_time : getElementValue('flight_time'), 
+            flight_type : getElementValue('carType'),
+            fleet_id: Fleet_id,
+
+        };
+        $fleet_id = document.querySelector('input[name="fleet_id"]:checked').value;
+        if (formData.date_time) {
+            var dateTimeArray = formData.date_time.split('T');
+            var date = dateTimeArray[0];
+            var time = dateTimeArray[1];
+            formData.date = date;
+            formData.time = time;
+        }
+
+        console.log('Date:', formData.date); 
+        console.log('Time:', formData.time); 
+        fetch('/booking', {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Network response was not ok', response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                if (data.error) {
+                    $('#exampleModal').modal('show');
+                    return;
+                }
+                else{
+                if(payment_method == 'paypal'){
+                    paypalRedirect();
+                }else{
+                    PayonStripe();
+                }
+                createPaymentSession(data.price);
+                }
+                // Pass the price received from the backend
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+    }
+
+    // Helper function to get element value by ID
+    function getElementValue(id) {
+        var element = document.getElementById(id);
+        if (element) {
+            return element.value;
+        } else {
+            console.error('Element with ID ' + id + ' not found');
+            return ''; // Return empty string if element not found
+        }
+    }
+
+
+    function pad(number) {
+        return number < 10 ? '0' + number : number;
+    }
+
+    function setMinDateTime() {
+        var now = new Date();
+        now.setDate(now.getDate() + 1); // Move to the next day
+        var year = now.getFullYear();
+        var month = pad(now.getMonth() + 1);
+        var day = pad(now.getDate());
+        var hours = pad(now.getHours());
+        var minutes = pad(now.getMinutes());
+
+        var minDateTime = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+        document.getElementById('date-time').setAttribute('min', minDateTime);
+    }
+
+    window.onload = setMinDateTime;
+    document.addEventListener('DOMContentLoaded', function () {
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+            var results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        var serviceName = getParameterByName('name');
+        if (serviceName && serviceName === 'Airport-transfers') {
+            document.getElementById('flight_type').style.display = 'block';
+        }
+    });
+    document.getElementById('triggerModal').addEventListener('click', function() {
+            $('#exampleModal').modal('show');
+        });
+        function showFlightId(select) {
+    var selectedServiceName = select.options[select.selectedIndex].text.trim(); // Get the text of the selected option
+   console.log(selectedServiceName)
+;    if (selectedServiceName === 'Airport transfers') {
+        document.getElementById("flight_type").style.display = "block"; // Show the div
+    } else {
+        document.getElementById("flight_type").style.display = "none"; // Hide the div
+    }
+}    
 </script>

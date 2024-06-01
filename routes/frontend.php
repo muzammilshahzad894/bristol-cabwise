@@ -15,6 +15,7 @@ Route::get('/services', [FrontendController::class, 'services'])->name('frontend
 
 Route::get('/book-online', [BookingController::class, 'index'])->name('frontend.book-online');
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+Route::get('/booking/success', [BookingController::class, 'bookingSuccess'])->name('booking.success');
 
 
 Route::get('/fleet-details/{id}', [BookingController::class, 'fleetDetails'])->name('frontend.fleetDetails');

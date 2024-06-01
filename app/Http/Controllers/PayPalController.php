@@ -43,8 +43,8 @@ class PayPalController extends Controller
         $result = $this->payPalService->executePayment($paymentId, $payerId);
 
         if ($result) {
-            // return redirect()->route('/')->with('success', 'Payment successful.');
-            return view('welcome');
+            return redirect()->route('booking.success')->with('success', 'Payment successful.');
+        
         }
 
         return redirect()->route('/')->with('error', 'Payment failed.');
