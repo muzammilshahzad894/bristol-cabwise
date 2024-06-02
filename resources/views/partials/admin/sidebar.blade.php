@@ -34,6 +34,18 @@
                     <span class="nav-text">Coupon</span>
                 </a>
             </li>
+            <li class="{{ request()->routeIs('admin.draft.index') || request()->routeIs('admin.draft.create') ? 'mm-active' : '' }} || request()->routeIs('admin.draft.edit')">
+                 <a href="{{ route('admin.draft.index') }}" class="" aria-expanded="false">
+                    <i class="fa fa-user"></i>
+                    <span class="nav-text">Draft User</span>
+                </a>
+            </li>
+            <li class="{{ request()->routeIs('admin.confirm.index') || request()->routeIs('admin.confirm.create') ? 'mm-active' : '' }} || request()->routeIs('admin.confirm.edit')">
+                 <a href="{{ route('admin.confirm.index') }}" class="" aria-expanded="false">
+                    <i class="fa fa-user"></i>
+                    <span class="nav-text">Clients</span>
+                </a>
+            </li>
             <!-- <li class="{{ request()->routeIs('admin.car.index') || request()->routeIs('admin.car.create') ? 'mm-active' : '' }}">
                 <a href="{{ route('admin.cars.index') }}" class="" aria-expanded="false">
                     <i class="flaticon-086-star"></i>

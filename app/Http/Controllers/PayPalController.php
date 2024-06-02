@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\PayPalService;
+use App\Models\Booking;
+
 
 class PayPalController extends Controller
 {
@@ -16,8 +18,9 @@ class PayPalController extends Controller
 
     public function createPayment(Request $request)
     {
-        $price = $request->get('price');
-        // dd($price);
+        $id = $request->get('id');
+        $booking = Booking::find($id);
+        $price = $booking->total_price;
         $payment = $this->payPalService->createPayment(
             $price,
             'USD',

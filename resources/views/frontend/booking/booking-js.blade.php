@@ -79,23 +79,24 @@
             }
         });
 
-        document.getElementById('summary-service-type').innerText = service_type;
-        document.getElementById('summary-pickup-location').innerText = pickup_location;
-        document.getElementById('summary-drop-location').innerText = dropoff_location;
-        document.getElementById('summary-date').innerText = dates_times;
-        document.getElementById('summary-name').innerText = user_name;
-        document.getElementById('summary-telephone').innerText = user_phone_number;
-        document.getElementById('summary-email').innerText = user_email;
-        document.getElementById('summary-passengers').innerText = no_of_passenger;
-        document.getElementById('summary-child-seat').innerText = isChildSeat ? '1' : '0';
-        document.getElementById('summary-suitcases').innerText = no_suite_case;
-        document.getElementById('summary-hand-luggage').innerText = no_hand_luggage;
-        document.getElementById('summary-summary').innerText = summary;
-        document.getElementById('summary-other-name').innerText = other_name;
-        document.getElementById('summary-other-telephone').innerText = other_phone_number;
-        document.getElementById('summary-other-email').innerText = other_email;
-        document.getElementById('summary-total-price').innerText = Total_price;
-    }
+    document.getElementById('summary-service-type').innerText = service_type;
+    document.getElementById('summary-pickup-location').innerText = pickup_location;
+    document.getElementById('summary-drop-location').innerText = dropoff_location;
+    document.getElementById('summary-date').innerText = dates_times;
+    document.getElementById('summary-name').innerText = user_name;
+    document.getElementById('summary-telephone').innerText = user_phone_number;
+    document.getElementById('summary-email').innerText = user_email;
+    document.getElementById('summary-passengers').innerText = no_of_passenger;
+    document.getElementById('summary-child-seat').innerText = isChildSeat ? '1' : '0';
+    document.getElementById('summary-suitcases').innerText = no_suite_case;
+    document.getElementById('summary-hand-luggage').innerText = no_hand_luggage;
+    document.getElementById('summary-summary').innerText = summary;
+    document.getElementById('summary-other-name').innerText = other_name;
+    document.getElementById('summary-other-telephone').innerText = other_phone_number;
+    document.getElementById('summary-other-email').innerText = other_email;
+    document.getElementById('summary-total-price').innerText = '£' + Total_price;
+
+}
 
     function nextStep() {
         if (currentStep < 4) {
@@ -127,22 +128,23 @@
                 TotalPrice += meet_nd_greet ? 12 : 0;
                 Total_price = TotalPrice;
 
-                user_name = document.getElementById('name').value;
-                user_email = document.getElementById('email').value;
-                user_phone_number = document.getElementById('telephone').value;
-                other_name = document.getElementById('someone_else_name').value;
-                other_email = document.getElementById('someone_else_email').value;
-                other_phone_number = document.getElementById('someone_else_telephone').value;
-                no_of_passenger = document.getElementById('no_passenger').value;
-                no_suite_case = document.getElementById('suit_case').value;
-                no_hand_luggage = document.getElementById('hand_lauggage').value;
-                summary = document.getElementById('summary').value;
-                pickup_location = document.getElementById('pickupLocation').value;
-                dropoff_location = document.getElementById('dropLocation').value;
-                dates_times = document.getElementById('date-time').value;
-                flight_name = document.getElementById('flightName').value;
-                flight_time = document.getElementById('flight_time').value;
-                flight_type = document.getElementById('carType').value;
+    user_name = document.getElementById('name').value;
+    user_email = document.getElementById('email').value;
+    user_phone_number = document.getElementById('telephone').value;
+    other_name = document.getElementById('someone_else_name').value;
+    other_email = document.getElementById('someone_else_email').value;
+    other_phone_number = document.getElementById('someone_else_telephone').value;
+    no_of_passenger = document.getElementById('no_passenger').value;
+    no_suite_case = document.getElementById('suit_case').value;
+    no_hand_luggage = document.getElementById('hand_lauggage').value;
+    summary = document.getElementById('summary').value;
+    pickup_location = document.getElementById('pickupLocation').value;
+    dropoff_location = document.getElementById('dropLocation').value;
+    dates_times = document.getElementById('date-time').value;
+    flight_name = document.getElementById('flightName').value;
+    flight_time = document.getElementById('flight_time').value;
+    flight_type = document.getElementById('carType').value;
+    total_price = TotalPrice;
 
                 updateSummary();
             }
@@ -476,14 +478,14 @@
     document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
 
 
-    function paypalRedirect() {
+    function paypalRedirect(bookingId) {
         var TotalPrice = parseInt(FleetPrice);
         FleetTaxes.forEach(tax => {
             TotalPrice += parseInt(tax.price);
         });
         TotalPrice += isChildSeat ? 6 : 0;
         TotalPrice += meet_nd_greet ? 12 : 0;
-        var url = '/paypal/payment?price=' + TotalPrice;
+        var url = '/paypal/payment?id=' + bookingId;
 
         // window.location.href = url;
     }
@@ -510,6 +512,7 @@
             flight_time: getElementValue('flight_time'),
             flight_type: getElementValue('carType'),
             fleet_id: Fleet_id,
+            total_price: Total_price,
 
         };
         $fleet_id = document.querySelector('input[name="fleet_id"]:checked').value;
@@ -539,14 +542,24 @@
                 if (data.error) {
                     $('#exampleModal').modal('show');
                     return;
-                } else {
-                    if (payment_method == 'paypal') {
-                        paypalRedirect();
-                    } else {
-                        PayonStripe();
-                    }
                 }
-                // Pass the price received from the backend
+                else{
+                if(payment_method == 'paypal'){
+                    paypalRedirect(data.booking_id);
+                }else if(payment_method == "admin"){
+                    $('#exampleModal').modal('show');
+                    document.getElementById('message').textContent = "Your booking has been successfully updated.";  
+                    var Debitcard = window.location.origin+'/book-online?payment_id='+data.booking_id;
+                    var paypal = window.location.origin+'/paypal/payment?id='+data.booking_id;
+
+                                 
+                    document.getElementById('client_url').textContent = Debitcard + ' or ' + paypal;
+
+                }
+                else{
+                    PayonStripe(data.booking_id);
+                }
+                }
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
@@ -571,7 +584,12 @@
 
     function setMinDateTime() {
         var now = new Date();
-        now.setDate(now.getDate() + 1); // Move to the next day
+         let count = 0;
+        var login_user = document.getElementById('login_user').value;
+        if(login_user == "user"){
+            count = 1;
+        }
+        now.setDate(now.getDate() + count); 
         var year = now.getFullYear();
         var month = pad(now.getMonth() + 1);
         var day = pad(now.getDate());
@@ -612,4 +630,11 @@
             document.getElementById("flight_type").style.display = "none"; // Hide the div
         }
     }
+}    
+
+function AddCoupon(){
+    var coupon = document.getElementById('coupon_input').style.display = "block";
+}
+
+
 </script>

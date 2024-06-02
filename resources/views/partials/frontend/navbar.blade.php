@@ -1,3 +1,22 @@
+<style>
+    .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /* Adjusts the dropdown position */
+}
+
+/* Make the dropdown-toggle work on hover */
+.nav-item.dropdown:hover .nav-link.dropdown-toggle::after {
+    display: inline-block;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+}
+</style>
+
+
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <!-- Logo -->
@@ -25,7 +44,44 @@
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.services') ? 'active' : '' }}" href="{{ route('frontend.services') }}">Services</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.contact') ? 'active' : '' }}" href="{{ route('frontend.contact') }}">Contact</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.trustVoilet') ? 'active' : '' }}" href="{{ route('frontend.trustVoilet') }}">Trust Violet</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.login') ||  request()->routeIs('frontend.signup') ? 'active' : '' }}" href="{{ route('frontend.login') }}">LogIn</a></li>
+
+
+                @guest
+                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.login') ||  request()->routeIs('frontend.signup') ? 'active' : '' }}" href="/login">LogIn</a></li>
+                @endguest
+
+
+
+
+
+
+                @auth
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }}
+                    </a>
+    
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+    
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            @endauth
+
+
+
+
+
+
+
+
 
                 {{-- @if (Auth::check())
                 <li class="nav-item"><a class="nav-link" href="{{ route('frontend.logout') }}">Logout</a></li>

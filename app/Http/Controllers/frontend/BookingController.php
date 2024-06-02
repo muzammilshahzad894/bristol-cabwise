@@ -15,8 +15,10 @@ class BookingController extends Controller
     public function index()
     {
         try {
+            
             $fleets = Fleet::all();
-            $booking_detail = Booking::where('user_id', 1)->first();
+            $user_id = auth()->user()->id;
+            $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
             return view('frontend.booking.index', compact('fleets', 'booking_detail'));
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -37,21 +39,32 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         try {
-            $bookingDate = strtotime($request->date); // Convert booking date to a Unix timestamp
-
-            $blockedDates = BlockDate::all(); // Fetch all blocked dates from the database
-            
-            foreach ($blockedDates as $blockedDate) {
-                $blockedUnixDate = strtotime($blockedDate->date_range);
-                
-                if ($bookingDate == $blockedUnixDate) {
-                    return response()->json(['error' => 'Booking date is blocked'], 400); 
+            $user_id = auth()->user()->id;
+            $role = auth()->user()->role;
+            if($role == 'user')
+            {
+                $bookingDate = strtotime($request->date);
+                $blockedDates = BlockDate::all(); 
+                foreach ($blockedDates as $blockedDate) {
+                    $blockedUnixDate = strtotime($blockedDate->date_range);
+                    
+                    if ($bookingDate == $blockedUnixDate) {
+                        return response()->json(['error' => 'Booking date is blocked'], 400); 
+                    }
+                }
+                $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
+                if($booking_detail){
+                    $booking_detail->delete();
                 }
             }
-            $booking_detail = Booking::where('user_id', 1)->first();
-            if($booking_detail){
-                $booking_detail->delete();
+            if($role == "admin"){
+                $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->where('other_email', $request->other_email)->first();
+                if($booking_detail){
+                    $booking_detail->delete();
+                }
             }
+
+
             $booking = new Booking();
             $booking->name = $request->name;
             $booking->email = $request->email;
@@ -72,13 +85,15 @@ class BookingController extends Controller
             $booking->no_of_laugage = $request->no_hand_luggage;
             $booking->flight_name = $request->flight_name;
             $booking->flight_time = $request->flight_time;
-            $booking->user_id = 1;
+            $booking->user_id = $user_id;
             $booking->flight_name = $request->flight_name;
             $booking->flight_time = $request->flight_time;
             $booking->flight_type = $request->flight_type;
+            $booking->total_price = $request->total_price;
             $booking->save();
-    
-            return response()->json(['success' => 'Booking successful'], 200);
+            $bookingId = $booking->id;
+    //get the response and id 
+            return response()->json(['booking_id' => $bookingId]);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return response()->json(['error' => 'An error occurred while booking'], 500); // HTTP status code 500 for server errors
