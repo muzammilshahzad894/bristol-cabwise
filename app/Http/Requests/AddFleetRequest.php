@@ -30,6 +30,12 @@ class AddFleetRequest extends FormRequest
             'max_passengers' => 'required',
             'max_suitecases' => 'required',
             'max_hand_luggage' => 'required',
+            'min_booking_price' => 'required',
+            'min_booking_hours' => 'required',
+            'price_after_50_miles' => 'required',
+            'price_after_100_miles' => 'required',
+            'price_after_150_miles' => 'required',
+            'price_after_200_miles' => 'required',
             'features' => 'sometimes|nullable',
         ];
     }

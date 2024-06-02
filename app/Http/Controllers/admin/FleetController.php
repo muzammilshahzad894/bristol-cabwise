@@ -54,6 +54,12 @@ class FleetController extends Controller
             $fleet->max_passengers = $request->max_passengers;
             $fleet->max_suitecases = $request->max_suitecases;
             $fleet->max_hand_luggage = $request->max_hand_luggage;
+            $fleet->min_booking_price = $request->min_booking_price;
+            $fleet->min_booking_hours = $request->min_booking_hours;
+            $fleet->price_after_50_miles = $request->price_after_50_miles;
+            $fleet->price_after_100_miles = $request->price_after_100_miles;
+            $fleet->price_after_150_miles = $request->price_after_150_miles;
+            $fleet->price_after_200_miles = $request->price_after_200_miles;
             $fleet->features = $request->features;
             $fleet->save();
 
@@ -114,6 +120,12 @@ class FleetController extends Controller
             $fleet->max_passengers = $request->max_passengers;
             $fleet->max_suitecases = $request->max_suitecases;
             $fleet->max_hand_luggage = $request->max_hand_luggage;
+            $fleet->min_booking_price = $request->min_booking_price;
+            $fleet->min_booking_hours = $request->min_booking_hours;
+            $fleet->price_after_50_miles = $request->price_after_50_miles;
+            $fleet->price_after_100_miles = $request->price_after_100_miles;
+            $fleet->price_after_150_miles = $request->price_after_150_miles;
+            $fleet->price_after_200_miles = $request->price_after_200_miles;
             $fleet->features = $request->features;
             $fleet->save();
 
