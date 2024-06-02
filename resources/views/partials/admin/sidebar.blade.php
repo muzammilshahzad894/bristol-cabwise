@@ -19,8 +19,8 @@
                     <span class="nav-text">Fleets</span>
                 </a>
             </li>
-            <li class="{{ request()->routeIs('admin.settings.index') || request()->routeIs('admin.settings.index') ? 'mm-active' : '' }} || request()->routeIs('admin.settings.edit')">
-                <a href="{{ route('admin.settings.index') }}" class="" aria-expanded="false">
+            <li class="{{ request()->routeIs('admin.block-dates.index') || request()->routeIs('admin.block-dates.index') ? 'mm-active' : '' }} || request()->routeIs('admin.block-dates.edit')">
+                <a href="{{ route('admin.block-dates.index') }}" class="" aria-expanded="false">
                  
                     <i class="fa fa-calendar">
                         

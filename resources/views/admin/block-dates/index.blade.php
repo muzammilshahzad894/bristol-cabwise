@@ -5,7 +5,7 @@
     <div class="d-flex align-items-center mb-4 flex-wrap">
         <h3 class="me-auto">Our dates</h3>
         <div>
-            <a href="{{ route('admin.settings.create') }}" class="btn btn-primary me-3 btn-sm"><i class="fas fa-plus me-2"></i>Add New</a>
+            <a href="{{ route('admin.block-dates.create') }}" class="btn btn-primary me-3 btn-sm"><i class="fas fa-plus me-2"></i>Add New</a>
         </div>
     </div>
     <div class="row">
@@ -28,8 +28,8 @@
                                 
                                     <td> {{ $date->date_range }}</td>
                                     <td>
-                                        <a href="{{ route('admin.settings.edit', $date->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                        <a href="{{ route('admin.settings.delete', $date->id) }}" 
+                                        <a href="{{ route('admin.block-dates.edit', $date->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('admin.block-dates.delete', $date->id) }}" 
                                         class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete, all related cars will be deleted?')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>

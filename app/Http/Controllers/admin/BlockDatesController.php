@@ -22,7 +22,7 @@ class BlockDatesController extends Controller
     {
         try {
             $dates = BlockDate::paginate(10);
-            return view('admin.setting.index', compact('dates'));
+            return view('admin.block-dates.index', compact('dates'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
@@ -32,7 +32,7 @@ class BlockDatesController extends Controller
     {
         try {
 
-            return view('admin.setting.create');
+            return view('admin.block-dates.create');
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
@@ -46,7 +46,7 @@ class BlockDatesController extends Controller
             $blockDates->name = $request->name;
             $blockDates->date_range = $request->date_range;
             $blockDates->save();
-            return redirect()->route('admin.settings.index')->with('success', 'Service added successfully');
+            return redirect()->route('admin.block-dates.index')->with('success', 'Service added successfully');
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
@@ -55,7 +55,7 @@ class BlockDatesController extends Controller
     public function edit($id, Request $request){
         try{
             $date = BlockDate::find($id);
-            return view('admin.setting.edit', compact('date'));
+            return view('admin.block-dates.edit', compact('date'));
 
         } catch(Exception $e){
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
@@ -69,7 +69,7 @@ class BlockDatesController extends Controller
             $date->name = $request->name;
             $date->date_range = $request->date_range;
             $date->save();
-            return redirect()->route('admin.settings.index')->with('success', 'block date updated successfully');
+            return redirect()->route('admin.block-dates.index')->with('success', 'block date updated successfully');
         } catch(Exception $e){
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
@@ -81,7 +81,7 @@ class BlockDatesController extends Controller
     {
         try {
             BlockDate::find($id)->delete();
-            return redirect()->route('admin.settings.index')->with('success', 'block date deleted successfully');
+            return redirect()->route('admin.block-dates.index')->with('success', 'block date deleted successfully');
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');

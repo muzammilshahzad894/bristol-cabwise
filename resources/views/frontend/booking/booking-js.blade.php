@@ -21,7 +21,7 @@
     let flight_name = '';
     let flight_time = '';
     let flight_type = '';
-    let Total_price ='';
+    let Total_price = '';
     let service_type = '';
 
 
@@ -61,40 +61,41 @@
             meet_nd_greet = false;
         }
     }
+
     function updateSummary() {
-    const ids = [
-        'summary-service-type', 'summary-pickup-location', 'summary-drop-location', 
-        'summary-date', 'summary-name', 'summary-telephone', 'summary-email', 
-        'summary-passengers', 'summary-child-seat', 'summary-suitcases', 
-        'summary-hand-luggage', 'summary-summary', 
-        'summary-other-name', 'summary-other-telephone', 'summary-other-email', 
-        'summary-total-price'
-    ];
+        const ids = [
+            'summary-service-type', 'summary-pickup-location', 'summary-drop-location',
+            'summary-date', 'summary-name', 'summary-telephone', 'summary-email',
+            'summary-passengers', 'summary-child-seat', 'summary-suitcases',
+            'summary-hand-luggage', 'summary-summary',
+            'summary-other-name', 'summary-other-telephone', 'summary-other-email',
+            'summary-total-price'
+        ];
 
-    ids.forEach(id => {
-        const element = document.getElementById(id);
-        if (!element) {
-            console.error(`Element with id '${id}' not found`);
-        }
-    });
+        ids.forEach(id => {
+            const element = document.getElementById(id);
+            if (!element) {
+                console.error(`Element with id '${id}' not found`);
+            }
+        });
 
-    document.getElementById('summary-service-type').innerText = service_type;
-    document.getElementById('summary-pickup-location').innerText = pickup_location;
-    document.getElementById('summary-drop-location').innerText = dropoff_location;
-    document.getElementById('summary-date').innerText = dates_times;
-    document.getElementById('summary-name').innerText = user_name;
-    document.getElementById('summary-telephone').innerText = user_phone_number;
-    document.getElementById('summary-email').innerText = user_email;
-    document.getElementById('summary-passengers').innerText = no_of_passenger;
-    document.getElementById('summary-child-seat').innerText = isChildSeat ? '1' : '0';
-    document.getElementById('summary-suitcases').innerText = no_suite_case;
-    document.getElementById('summary-hand-luggage').innerText = no_hand_luggage;
-    document.getElementById('summary-summary').innerText = summary;
-    document.getElementById('summary-other-name').innerText = other_name;
-    document.getElementById('summary-other-telephone').innerText = other_phone_number;
-    document.getElementById('summary-other-email').innerText = other_email;
-    document.getElementById('summary-total-price').innerText = Total_price;
-}
+        document.getElementById('summary-service-type').innerText = service_type;
+        document.getElementById('summary-pickup-location').innerText = pickup_location;
+        document.getElementById('summary-drop-location').innerText = dropoff_location;
+        document.getElementById('summary-date').innerText = dates_times;
+        document.getElementById('summary-name').innerText = user_name;
+        document.getElementById('summary-telephone').innerText = user_phone_number;
+        document.getElementById('summary-email').innerText = user_email;
+        document.getElementById('summary-passengers').innerText = no_of_passenger;
+        document.getElementById('summary-child-seat').innerText = isChildSeat ? '1' : '0';
+        document.getElementById('summary-suitcases').innerText = no_suite_case;
+        document.getElementById('summary-hand-luggage').innerText = no_hand_luggage;
+        document.getElementById('summary-summary').innerText = summary;
+        document.getElementById('summary-other-name').innerText = other_name;
+        document.getElementById('summary-other-telephone').innerText = other_phone_number;
+        document.getElementById('summary-other-email').innerText = other_email;
+        document.getElementById('summary-total-price').innerText = Total_price;
+    }
 
     function nextStep() {
         if (currentStep < 4) {
@@ -117,34 +118,34 @@
                     return;
                 }
             }
-            if(currentStep == 3) {
-    var TotalPrice = parseInt(FleetPrice);
-    FleetTaxes.forEach(tax => {
-        TotalPrice += parseInt(tax.price);
-    });
-    TotalPrice += isChildSeat ? 6 : 0;
-    TotalPrice += meet_nd_greet ? 12 : 0;
-    Total_price = TotalPrice;
+            if (currentStep == 3) {
+                var TotalPrice = parseInt(FleetPrice);
+                FleetTaxes.forEach(tax => {
+                    TotalPrice += parseInt(tax.price);
+                });
+                TotalPrice += isChildSeat ? 6 : 0;
+                TotalPrice += meet_nd_greet ? 12 : 0;
+                Total_price = TotalPrice;
 
-    user_name = document.getElementById('name').value;
-    user_email = document.getElementById('email').value;
-    user_phone_number = document.getElementById('telephone').value;
-    other_name = document.getElementById('someone_else_name').value;
-    other_email = document.getElementById('someone_else_email').value;
-    other_phone_number = document.getElementById('someone_else_telephone').value;
-    no_of_passenger = document.getElementById('no_passenger').value;
-    no_suite_case = document.getElementById('suit_case').value;
-    no_hand_luggage = document.getElementById('hand_lauggage').value;
-    summary = document.getElementById('summary').value;
-    pickup_location = document.getElementById('pickupLocation').value;
-    dropoff_location = document.getElementById('dropLocation').value;
-    dates_times = document.getElementById('date-time').value;
-    flight_name = document.getElementById('flightName').value;
-    flight_time = document.getElementById('flight_time').value;
-    flight_type = document.getElementById('carType').value;
+                user_name = document.getElementById('name').value;
+                user_email = document.getElementById('email').value;
+                user_phone_number = document.getElementById('telephone').value;
+                other_name = document.getElementById('someone_else_name').value;
+                other_email = document.getElementById('someone_else_email').value;
+                other_phone_number = document.getElementById('someone_else_telephone').value;
+                no_of_passenger = document.getElementById('no_passenger').value;
+                no_suite_case = document.getElementById('suit_case').value;
+                no_hand_luggage = document.getElementById('hand_lauggage').value;
+                summary = document.getElementById('summary').value;
+                pickup_location = document.getElementById('pickupLocation').value;
+                dropoff_location = document.getElementById('dropLocation').value;
+                dates_times = document.getElementById('date-time').value;
+                flight_name = document.getElementById('flightName').value;
+                flight_time = document.getElementById('flight_time').value;
+                flight_type = document.getElementById('carType').value;
 
-    updateSummary();
-}
+                updateSummary();
+            }
 
             currentStep++;
             updateProgress();
@@ -207,8 +208,8 @@
                 elements.first().focus();
             }
         });
-     
-        if($('#carType').val() == 2){
+
+        if ($('#carType').val() == 2) {
             console.log('Arrival');
             flightValidation.forEach(({
                 selector,
@@ -223,7 +224,7 @@
                     element.focus();
                 }
             });
-            
+
         }
 
         return isValid;
@@ -286,7 +287,7 @@
                 message: 'Email is required'
             },
         ];
-       
+
 
         let isValid = true;
         validations.forEach(({
@@ -318,7 +319,7 @@
                 }
             });
         }
-      
+
 
         return isValid;
     }
@@ -445,6 +446,7 @@
             someoneElse.style.display = "none";
         }
     }
+
     function handleCheckboxClick(checkbox) {
         var value = checkbox.value;
         FleetPrice = value;
@@ -456,21 +458,22 @@
         });
         console.log('page load ');
     }
-    function triggerCheckedCheckbox() {
-    const checkedCheckbox = document.querySelector('input[name="fleet_id"]:checked');
-    if (checkedCheckbox) {
-        handleCheckboxClick(checkedCheckbox);
 
-        // Find the fleet container and trigger selectFleet
-        const fleetContainer = checkedCheckbox.closest('.form-container');
-        if (fleetContainer) {
-            selectFleet(fleetContainer);
+    function triggerCheckedCheckbox() {
+        const checkedCheckbox = document.querySelector('input[name="fleet_id"]:checked');
+        if (checkedCheckbox) {
+            handleCheckboxClick(checkedCheckbox);
+
+            // Find the fleet container and trigger selectFleet
+            const fleetContainer = checkedCheckbox.closest('.form-container');
+            if (fleetContainer) {
+                selectFleet(fleetContainer);
+            }
         }
     }
-}
 
-// Call the function on page load
-document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
+    // Call the function on page load
+    document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
 
 
     function paypalRedirect() {
@@ -503,9 +506,9 @@ document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
             pickup_location: getElementValue('pickupLocation'),
             dropoff_location: getElementValue('dropLocation'),
             date_time: getElementValue('date-time'),
-            flight_name : getElementValue('flightName'),
-            flight_time : getElementValue('flight_time'), 
-            flight_type : getElementValue('carType'),
+            flight_name: getElementValue('flightName'),
+            flight_time: getElementValue('flight_time'),
+            flight_type: getElementValue('carType'),
             fleet_id: Fleet_id,
 
         };
@@ -536,13 +539,12 @@ document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
                 if (data.error) {
                     $('#exampleModal').modal('show');
                     return;
-                }
-                else{
-                if(payment_method == 'paypal'){
-                    paypalRedirect();
-                }else{
-                    PayonStripe();
-                }
+                } else {
+                    if (payment_method == 'paypal') {
+                        paypalRedirect();
+                    } else {
+                        PayonStripe();
+                    }
                 }
                 // Pass the price received from the backend
             })
@@ -581,7 +583,7 @@ document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
     }
 
     window.onload = setMinDateTime;
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
             name = name.replace(/[\[\]]/g, '\\$&');
@@ -598,15 +600,16 @@ document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
         }
     });
     document.getElementById('triggerModal').addEventListener('click', function() {
-            $('#exampleModal').modal('show');
-        });
-        function showFlightId(select) {
-    var selectedServiceName = select.options[select.selectedIndex].text.trim(); // Get the text of the selected option
-            service_type = selectedServiceName;
-    if (selectedServiceName === 'Airport transfers') {
-        document.getElementById("flight_type").style.display = "block"; // Show the div
-    } else {
-        document.getElementById("flight_type").style.display = "none"; // Hide the div
+        $('#exampleModal').modal('show');
+    });
+
+    function showFlightId(select) {
+        var selectedServiceName = select.options[select.selectedIndex].text.trim(); // Get the text of the selected option
+        service_type = selectedServiceName;
+        if (selectedServiceName === 'Airport transfers') {
+            document.getElementById("flight_type").style.display = "block"; // Show the div
+        } else {
+            document.getElementById("flight_type").style.display = "none"; // Hide the div
+        }
     }
-}    
 </script>

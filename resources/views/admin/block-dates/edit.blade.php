@@ -22,19 +22,20 @@
                 </div>
                 <div class="card-body">
                     <div class="basic-form">
-                      <form action="{{route('admin.settings.store')}}" method="POST" enctype="multipart/form-data">
+                      <form action="{{ route('admin.block-dates.update', $date->id) }}" method="POST" enctype="multipart/form-data">
                           @csrf
                             <div class="row">
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Event Name <span class="text-danger">*</span></label>
-                                    <input type="text" name="name" class="form-control" placeholder="Name" value="{{ old('name') }}" required>
+                                    <input type="text" name="name" class="form-control" placeholder="Name" value="{{$date->name ?? ''}}"
+                                     required>
                                     @error('name')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Select date: <span class="text-danger">*</span></label>
-                                    <input type="text" id="daterange" name="date_range" class="form-control" placeholder="Select date range" required>
+                                    <input type="text" id="daterange" name="date_range" class="form-control" placeholder="Select date" value="{{$date->date_range?? ''}}" required>
                                     @error('name')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
@@ -64,24 +65,40 @@
 
 <script type="text/javascript">
 $(function() {
+    // Assuming you have the single date from the database
+    var singleDate = '{{ $dateRange ?? '' }}';
+
+    // Format the single date for the date picker
+    var formattedDate = singleDate ? moment(singleDate, 'YYYY-MM-DD') : moment();
+
     $('#daterange').daterangepicker({
         singleDatePicker: true, // Set single date picker
         opens: 'left',
         autoUpdateInput: false,
         minDate: moment(), // Disable previous dates
+        startDate: formattedDate,
         locale: {
             cancelLabel: 'Clear'
         }
     });
 
+    // Set the input value to the formatted date
+    if (singleDate) {
+        $('#daterange').val(formattedDate.format('YYYY-MM-DD'));
+    }
+
+    // Update the input value when a new date is applied
     $('#daterange').on('apply.daterangepicker', function(ev, picker) {
         $(this).val(picker.startDate.format('YYYY-MM-DD'));
     });
 
+    // Clear the input value when the selection is canceled
     $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
         $(this).val('');
     });
 });
+
+
 
 </script>
 

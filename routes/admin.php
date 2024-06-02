@@ -56,13 +56,13 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/delete/{id}', [FleetController::class, 'delete'])->name('admin.fleets.delete');
     });
     
-    Route::prefix('admin/settings')->group(function () {
-        Route::get('/', [BlockDatesController::class, 'index'])->name('admin.settings.index');
-        Route::get('/create', [BlockDatesController::class, 'create'])->name('admin.settings.create');
-        Route::post('/create', [BlockDatesController::class, 'store'])->name('admin.settings.store');
-        Route::get('/edit/{id}', [BlockDatesController::class, 'edit'])->name('admin.settings.edit');
-        Route::post('/update/{id}', [BlockDatesController::class, 'update'])->name('admin.settings.update');
-        Route::get('/delete/{id}', [BlockDatesController::class, 'delete'])->name('admin.settings.delete');
+    Route::prefix('admin/block-dates')->group(function () {
+        Route::get('/', [BlockDatesController::class, 'index'])->name('admin.block-dates.index');
+        Route::get('/create', [BlockDatesController::class, 'create'])->name('admin.block-dates.create');
+        Route::post('/create', [BlockDatesController::class, 'store'])->name('admin.block-dates.store');
+        Route::get('/edit/{id}', [BlockDatesController::class, 'edit'])->name('admin.block-dates.edit');
+        Route::post('/update/{id}', [BlockDatesController::class, 'update'])->name('admin.block-dates.update');
+        Route::get('/delete/{id}', [BlockDatesController::class, 'delete'])->name('admin.block-dates.delete');
     });
     Route::prefix('admin/coupons')->group(function () {
         Route::get('/', [CouponController::class, 'index'])->name('admin.coupons.index');
