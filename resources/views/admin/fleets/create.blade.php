@@ -33,13 +33,6 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Price / mile <span class="text-danger">*</span></label>
-                                    <input type="number" name="price" class="form-control" placeholder="Price" value="{{ old('price') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                                    @error('price')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3 col-md-6">
                                     <label class="form-label">Image <span class="text-danger">*</span></label>
                                     <input type="file" name="image" class="form-control" placeholder="Image" value="{{ old('image') }}" required>
                                     @error('image')
@@ -64,6 +57,55 @@
                                     <label class="form-label">Max Hand Luggage <span class="text-danger">*</span></label>
                                     <input type="number" name="max_hand_luggage" class="form-control" placeholder="Max Hand Luggage" value="{{ old('max_hand_luggage') }}" required>
                                     @error('max_hand_luggage')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Minimum Booking Hours <span class="text-danger">*</span></label>
+                                    <input type="number" name="min_booking_hours" class="form-control" placeholder="Minimum Booking Hours" value="{{ old('min_booking_hours') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('min_booking_hours')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Price / mile <span class="text-danger">*</span></label>
+                                    <input type="number" name="price" class="form-control" placeholder="Price" value="{{ old('price') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('price')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Price after 50 miles <span class="text-danger">*</span></label>
+                                    <input type="number" name="price_after_50_miles" class="form-control" placeholder="Price after 50 miles" value="{{ old('price_after_50_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('price_after_50_miles')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Price after 100 miles <span class="text-danger">*</span></label>
+                                    <input type="number" name="price_after_100_miles" class="form-control" placeholder="Price after 100 miles" value="{{ old('price_after_100_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('price_after_100_miles')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Price after 150 miles <span class="text-danger">*</span></label>
+                                    <input type="number" name="price_after_150_miles" class="form-control" placeholder="Price after 150 miles" value="{{ old('price_after_150_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('price_after_150_miles')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Price after 200 miles <span class="text-danger">*</span></label>
+                                    <input type="number" name="price_after_200_miles" class="form-control" placeholder="Price after 200 miles" value="{{ old('price_after_200_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('price_after_200_miles')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Minimum Booking Price <span class="text-danger">*</span></label>
+                                    <input type="number" name="min_booking_price" class="form-control" placeholder="Minimum Booking Price" value="{{ old('min_booking_price') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('min_booking_price')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
