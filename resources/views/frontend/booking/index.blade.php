@@ -9,6 +9,7 @@
         background: #f0901d;
         padding: 5;
         border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
 
     }
     .discount_btn_div{
@@ -713,8 +714,7 @@ $userRole = auth()->user()->role;
             </div>
         </div>
     </section>
-    <!-- divider line -->
-    <!-- Post -->
+ 
     <section class="post section-padding">
         <div class="container">
             <div class="row">
@@ -760,8 +760,9 @@ $userRole = auth()->user()->role;
                                     $bookingServiceId = isset($booking_detail) ? $booking_detail->service_id : null;
 
                                 @endphp
-                                <select name="service" id="service" class="styled-input border-radius-0 mb-0"
+                                <select name="service" id="service" class="styled-input border-radius-0 mb-0 select select2"
                                     onchange="showFlightId(this);">
+                                    <option value="">Select Service</option>
                                     @foreach ($services as $service)
                                         <option value="{{ $service->id }}"
                                             @if ($service->id == $id || $service->id == $bookingServiceId) selected @endif>
@@ -769,6 +770,7 @@ $userRole = auth()->user()->role;
                                         </option>
                                     @endforeach
                                 </select>
+                                <div id="service-error" class="error-message text-danger"></div>
                                 <div id="flight_type" style="display: none">
                                     <label for="flight_type">Select Type:</label>
                                     <select id="carType" class="select2 select" style="width: 100%" name="flight_type"
@@ -866,8 +868,20 @@ $userRole = auth()->user()->role;
 
                                                 </div>
                                             </div>
+                                            @php 
+                                                   $fleetPrice = 9 * $fleet->price; // Initialize fleetPrice
+                                                    $totalPrice = 0; // Initialize totalPrice
+                                                    $taxes = \App\Models\FleetTax::where('fleet_id', $fleet->id)->get();
+                                                    
+
+                                                    foreach ($taxes as $tax) {
+                                                        $totalPrice += (int)$tax->price; // Sum up the price property of each tax
+                                                    }
+
+                                                    $totalPrice += $fleetPrice;
+                                            @endphp
                                             <div class="footer-box d-flex align-items-center">
-                                                <p class="color">price: <strong> ${{ 9 * $fleet->price }}
+                                                <p class="color">price: <strong> £{{ $totalPrice }} 
                                                     </strong></p>
                                                 <div>
                                                     <input type="checkbox" class="fleet_id" name="fleet_id"
@@ -1067,7 +1081,32 @@ $userRole = auth()->user()->role;
                                 
                                 <h3 class="color color_theme">Total Price:</h3>
                                 <div class="d-flex gap-4">
-                                    <strong>Price:</strong>
+                                    <strong>Fleet Price:</strong>
+                                    <div>
+                                        <p id="summary-fleet-price"></p>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-4">
+                                    <strong>Child Seat:</strong>
+                                    <div>
+                                        <p id="summary-child-seat_price"></p>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-4">
+                                    <strong>Meet & Greet:</strong>
+                                    <div>
+                                        <p id="summary-meet-greet"></p>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-4">
+                                    <strong>Coupon Discount:</strong>
+                                    <div>
+                                        <p id="summary-coupon-discount"></p>
+                                    </div>
+                                </div>
+                             
+                                <div class="d-flex gap-4">
+                                    <strong>Total Price:</strong>
                                     <div>
                                         <p id="summary-total-price"></p>
                                     </div>
@@ -1084,8 +1123,8 @@ $userRole = auth()->user()->role;
                                             <input type="text"
                                                 class="form-control pickupLocation custom_input border-radius-0 mb-0"
                                                 id="coupon" name="coupon" placeholder="Enter Coupon" />
-                                            <button class="coupon_btn" id="apply_coupon"
-                                                onclick="applyCoupon()">Apply</button>
+                                            <button class="coupon_btn" id="apply_coupon" type="button"
+                                                onclick="applyCoupon()">submit</button>
                                         </div>
                                     </div>
                                 </div>

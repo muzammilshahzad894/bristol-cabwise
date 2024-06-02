@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,12 +8,10 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Facades\DB;
 use Exception;
-use App\Models\Fleet;
-use App\Models\FleetTax;
 
 use App\Models\Coupon;
 use App\Models\UsedCoupon;
-class UsedCouponController extends Controller
+class ApplyCouponController extends Controller
 {
     
     public function index($code)
@@ -39,4 +37,22 @@ class UsedCouponController extends Controller
         return response()->json(['error' => 'Something went wrong'], 500);
     }
 }
+public function store(Request $request)
+{
+    try {
+        $coupon = Coupon::where('code', $request->coupon)->first();
+        $usedCoupon = new UsedCoupon();
+        $usedCoupon->coupon_id = $coupon->id;
+        $usedCoupon->user_id = auth()->id();
+        $usedCoupon->save();
+
+        return response()->json(['success' => 'Coupon has been applied successfully']);
+
+    } catch (Exception $e) {
+        Log::error('Exception occurred in UsedCouponController@store: ' . $e->getMessage());
+        return response()->json(['error' => 'Something went wrong'], 500);
+    }
+}
+
+
 }

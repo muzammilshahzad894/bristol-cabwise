@@ -18,8 +18,9 @@ class BookingController extends Controller
             
             $fleets = Fleet::all();
             $user_id = auth()->user()->id;
+            $blockDates = BlockDate::all()->pluck('date_range')->toArray();
             $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
-            return view('frontend.booking.index', compact('fleets', 'booking_detail'));
+            return view('frontend.booking.index', compact('fleets', 'booking_detail', 'blockDates'));
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while fetching bookings');

@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\CarsController;
 use App\Http\Controllers\frontend\BookingController;
 use App\Http\Controllers\frontend\FrontendController;
+use App\Http\Controllers\frontend\ApplyCouponController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PayPalController;
-use App\Http\Controllers\UsedCouponController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -23,7 +23,8 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/book-online', [BookingController::class, 'index'])->name('frontend.book-online');
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/booking/success', [BookingController::class, 'bookingSuccess'])->name('booking.success');
-Route::post('/apply-coupon', [UsedCouponController::class, 'index'])->name('apply.coupon');
+Route::get('/apply-coupon/{code}', [ApplyCouponController::class, 'index'])->name('apply.coupon');
+Route::post('/store-coupon', [ApplyCouponController::class, 'store'])->name('apply.coupon.store');
 
 });
 

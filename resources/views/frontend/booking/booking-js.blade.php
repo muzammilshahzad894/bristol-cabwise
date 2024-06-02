@@ -23,6 +23,7 @@
     let flight_type = '';
     let Total_price = '';
     let service_type = '';
+    let coupon_apply = '';
 
 
     $(document).ready(function() {
@@ -69,7 +70,7 @@
             'summary-passengers', 'summary-child-seat', 'summary-suitcases',
             'summary-hand-luggage', 'summary-summary',
             'summary-other-name', 'summary-other-telephone', 'summary-other-email',
-            'summary-total-price'
+            'summary-total-price', 'summary-child-seat', 'summary-meet-greet', 'summary-fleet-price'
         ];
 
         ids.forEach(id => {
@@ -95,6 +96,10 @@
         document.getElementById('summary-other-telephone').innerText = other_phone_number;
         document.getElementById('summary-other-email').innerText = other_email;
         document.getElementById('summary-total-price').innerText = '£' + Total_price;
+        document.getElementById('summary-child-seat_price').innerText = isChildSeat ? '£6' : '-';
+        document.getElementById('summary-meet-greet').innerText = meet_nd_greet ? '£12' : '-';
+        document.getElementById('summary-fleet-price').innerText = '£' + FleetPrice;
+
 
     }
 
@@ -124,6 +129,8 @@
                 FleetTaxes.forEach(tax => {
                     TotalPrice += parseInt(tax.price);
                 });
+
+                FleetPrice = TotalPrice;
                 TotalPrice += isChildSeat ? 6 : 0;
                 TotalPrice += meet_nd_greet ? 12 : 0;
                 Total_price = TotalPrice;
@@ -177,6 +184,11 @@
                 selector: '#date-time',
                 errorSelector: '#date-time-error',
                 message: 'Date and time is required'
+            },
+            {
+                selector: '#service',
+                errorSelector: '#service-error',
+                message: 'Service is required'
             }
         ];
         const flightValidation = [{
@@ -543,11 +555,13 @@
                     $('#exampleModal').modal('show');
                     return;
                 } else {
+                    StoreCouponCode();
                     if (payment_method == 'paypal') {
                         paypalRedirect(data.booking_id);
                     } else if (payment_method == "admin") {
                         $('#exampleModal').modal('show');
-                        document.getElementById('message').textContent = "Your booking has been successfully updated.";
+                        document.getElementById('message').textContent =
+                            "Your booking has been successfully updated.";
                         var Debitcard = window.location.origin + '/book-online?payment_id=' + data.booking_id;
                         var paypal = window.location.origin + '/paypal/payment?id=' + data.booking_id;
 
@@ -581,6 +595,9 @@
     }
 
     function setMinDateTime() {
+        var blockDates = @json($blockDates); // Assuming this is an array of strings in 'YYYY-MM-DD' format
+        console.log("Block Dates:", blockDates); // Debugging
+
         var now = new Date();
         let count = 0;
         var login_user = document.getElementById('login_user').value;
@@ -596,6 +613,43 @@
 
         var minDateTime = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
         document.getElementById('date-time').setAttribute('min', minDateTime);
+        console.log("Min DateTime:", minDateTime); // Debugging
+
+        // Disable past dates and block dates
+        var dateInput = document.getElementById('date-time');
+        dateInput.addEventListener('input', function() {
+            var selectedDate = new Date(this.value);
+            selectedDate.setSeconds(0);
+            selectedDate.setMilliseconds(0);
+
+            console.log("Selected Date:", selectedDate); // Debugging
+
+            // Check if selected date is in the blockDates array or in the past
+            var isBlocked = blockDates.some(function(blockDate) {
+                var blockDateObj = new Date(blockDate);
+                blockDateObj.setHours(0, 0, 0, 0);
+                return selectedDate.toDateString() === blockDateObj.toDateString();
+            });
+
+            console.log("Is Blocked:", isBlocked); // Debugging
+
+            var now = new Date();
+            now.setSeconds(0);
+            now.setMilliseconds(0);
+
+            if (selectedDate < now || isBlocked) {
+                //show the examplemodel 
+                $('#exampleModal').modal('show');
+                document.getElementById('message').textContent =
+                    "Booking is not available to this date, please contact to support.";
+                // alert('This date is not available.Please contact to the support.');
+                this.value = '';
+            }
+        });
+    }
+
+    function pad(n) {
+        return n < 10 ? '0' + n : n;
     }
 
     window.onload = setMinDateTime;
@@ -620,7 +674,8 @@
     });
 
     function showFlightId(select) {
-        var selectedServiceName = select.options[select.selectedIndex].text.trim(); // Get the text of the selected option
+        var selectedServiceName = select.options[select.selectedIndex].text
+    .trim(); // Get the text of the selected option
         service_type = selectedServiceName;
         if (selectedServiceName === 'Airport transfers') {
             document.getElementById("flight_type").style.display = "block"; // Show the div
@@ -632,4 +687,67 @@
     function AddCoupon() {
         var coupon = document.getElementById('coupon_input').style.display = "block";
     }
+
+    function applyCoupon() {
+        var coupon = document.getElementById('coupon').value;
+
+        $.ajax({
+            url: `/apply-coupon/${coupon}`,
+            type: 'GET',
+            success: function(data) {
+                console.log('coupon data is',data)
+                if (data.error) {
+                    $('#exampleModal').modal('show');
+                    document.getElementById('message').textContent = "Coupon is not valid.";
+                    return;
+                } else {
+                    document.getElementById('summary-coupon-discount').innerText = data.discount + '%';
+                    coupon_apply= coupon;
+                    Total_price = Total_price - (Total_price * data.discount / 100);
+
+                    if (Total_price % 1 <= 0.5) {
+
+                        Total_price = Math.floor(Total_price);
+                    } else {
+
+                        Total_price = Math.ceil(Total_price);
+                    }
+
+                    document.getElementById('summary-total-price').innerText = '£' + Total_price;
+                    $('#exampleModal').modal('show');
+                    document.getElementById('message').textContent = "Coupon applied successfully.";
+                }
+            },
+            error: function(xhr, status, error) {
+                $('#exampleModal').modal('show');
+                    document.getElementById('message').textContent = "Coupon is not valid.";
+                    return;
+                console.error('There has been a problem with your AJAX request:', error);
+            }
+        });
+    }
+    function StoreCouponCode() {
+    if (coupon_apply !== '') {
+        $.ajax({
+            url: '/store-coupon',
+            type: 'POST',
+            data: {
+                coupon: coupon_apply
+            },
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                console.log(response); 
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error); // Log the error to the console
+            }
+        });
+    } else {
+        // Handle case where coupon_apply is empty
+        console.log('Coupon code is empty.');
+    }
+}
+
 </script>
