@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\BlockDatesController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\DraftController;
 use App\Http\Controllers\admin\ConfirmUserController;
+use App\Http\Controllers\admin\SettingController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/optimize', function () {
@@ -81,5 +82,9 @@ Route::middleware(['admin'])->group(function () {
     Route::prefix('admin/confirm')->group(function () {
         Route::get('/', [ConfirmUserController::class, 'index'])->name('admin.confirm.index');
         Route::get('/delete/{id}', [ConfirmUserController::class, 'delete'])->name('admin.confirm.delete');
+    });
+    Route::prefix('admin/settings')->group(function () {
+        Route::get('/', [SettingController::class, 'index'])->name('admin.settings.index');
+        Route::post('/update', [SettingController::class, 'update'])->name('admin.settings.update');
     });
 });

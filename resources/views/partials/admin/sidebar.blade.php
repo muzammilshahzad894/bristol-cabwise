@@ -46,6 +46,12 @@
                     <span class="nav-text">Clients</span>
                 </a>
             </li>
+            <li class="{{ request()->routeIs('admin.settings.index') ? 'mm-active' : '' }}">
+                <a href="{{ route('admin.settings.index') }}" class="" aria-expanded="false">
+                    <i class="fa fa-cog"></i>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </li>
             <!-- <li class="{{ request()->routeIs('admin.car.index') || request()->routeIs('admin.car.create') ? 'mm-active' : '' }}">
                 <a href="{{ route('admin.cars.index') }}" class="" aria-expanded="false">
                     <i class="flaticon-086-star"></i>
