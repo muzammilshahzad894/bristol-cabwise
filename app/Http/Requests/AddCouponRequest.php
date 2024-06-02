@@ -28,7 +28,6 @@ class AddCouponRequest extends FormRequest
             'code' => 'required',
             'discount' => 'required',
             'description' => 'required',
-           'date' => 'required',
         ];
     }
 }

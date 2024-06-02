@@ -10,36 +10,38 @@ use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
-    public function createCheckoutSession(Request $request)
+    public function createCheckoutSession($id, Request $request)
     
     {
-        
         Stripe::setApiKey(config('services.stripe.secret'));
-        
-        $price = $request->price;
+        $booking = Booking::find($id);
+        $price = $booking->total_price;
         $session = Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'usd',
                     'product_data' => [
-                        'name' => 'Sample Product',
+                        'name' => 'Booking Car',
                     ],
                     'unit_amount' => $price * 100,
                 ],
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => route('payment.success'),
-            'cancel_url' => route('payment.cancel'),
+            'success_url' => route('payment.success', ['id' => $id]),
+            'cancel_url' => route('payment.cancel', ['id' => $id]),
         ]);
 
         return response()->json(['id' => $session->id]);
     }
-
-    public function paymentSuccess()
+public function showStripePaymentPage($id)
+{
+    return view('create-checkout-session', ['bookingId' => $id]);
+}
+    public function paymentSuccess($id)
     {
-        $booking = Booking::where('user_id', 1)->first();
+        $booking = Booking::find($id);
         if ($booking) {
             $booking->is_payment = 1;
             $booking->is_draft = 0;
@@ -58,5 +60,11 @@ class PaymentController extends Controller
     {
         return view('payment.cancel');
     }
+    public function generatePayPalLink($bookingId)
+{
+    $paypalLink = "https://www.paypal.com/checkoutnow?token=" . $bookingId;
+    
+    return response()->json(['paypal_link' => $paypalLink]);
+}
     
 }

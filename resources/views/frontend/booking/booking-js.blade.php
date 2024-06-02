@@ -93,7 +93,8 @@
     document.getElementById('summary-other-name').innerText = other_name;
     document.getElementById('summary-other-telephone').innerText = other_phone_number;
     document.getElementById('summary-other-email').innerText = other_email;
-    document.getElementById('summary-total-price').innerText = Total_price;
+    document.getElementById('summary-total-price').innerText = '£' + Total_price;
+
 }
 
     function nextStep() {
@@ -142,6 +143,7 @@
     flight_name = document.getElementById('flightName').value;
     flight_time = document.getElementById('flight_time').value;
     flight_type = document.getElementById('carType').value;
+    total_price = TotalPrice;
 
     updateSummary();
 }
@@ -473,14 +475,14 @@
 document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
 
 
-    function paypalRedirect() {
+    function paypalRedirect(bookingId) {
         var TotalPrice = parseInt(FleetPrice);
         FleetTaxes.forEach(tax => {
             TotalPrice += parseInt(tax.price);
         });
         TotalPrice += isChildSeat ? 6 : 0;
         TotalPrice += meet_nd_greet ? 12 : 0;
-        var url = '/paypal/payment?price=' + TotalPrice;
+        var url = '/paypal/payment?id=' + bookingId;
 
         // window.location.href = url;
     }
@@ -507,6 +509,7 @@ document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
             flight_time : getElementValue('flight_time'), 
             flight_type : getElementValue('carType'),
             fleet_id: Fleet_id,
+            total_price: Total_price,
 
         };
         $fleet_id = document.querySelector('input[name="fleet_id"]:checked').value;
@@ -539,12 +542,21 @@ document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
                 }
                 else{
                 if(payment_method == 'paypal'){
-                    paypalRedirect();
-                }else{
-                    PayonStripe();
+                    paypalRedirect(data.booking_id);
+                }else if(payment_method == "admin"){
+                    $('#exampleModal').modal('show');
+                    document.getElementById('message').textContent = "Your booking has been successfully updated.";  
+                    var Debitcard = window.location.origin+'/book-online?payment_id='+data.booking_id;
+                    var paypal = window.location.origin+'/paypal/payment?id='+data.booking_id;
+
+                                 
+                    document.getElementById('client_url').textContent = Debitcard + ' or ' + paypal;
+
+                }
+                else{
+                    PayonStripe(data.booking_id);
                 }
                 }
-                // Pass the price received from the backend
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
@@ -569,7 +581,12 @@ document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
 
     function setMinDateTime() {
         var now = new Date();
-        now.setDate(now.getDate() + 1); // Move to the next day
+         let count = 0;
+        var login_user = document.getElementById('login_user').value;
+        if(login_user == "user"){
+            count = 1;
+        }
+        now.setDate(now.getDate() + count); 
         var year = now.getFullYear();
         var month = pad(now.getMonth() + 1);
         var day = pad(now.getDate());
@@ -609,4 +626,10 @@ document.addEventListener('DOMContentLoaded', triggerCheckedCheckbox);
         document.getElementById("flight_type").style.display = "none"; // Hide the div
     }
 }    
+
+function AddCoupon(){
+    var coupon = document.getElementById('coupon_input').style.display = "block";
+}
+
+
 </script>

@@ -8,6 +8,8 @@ use App\Http\Controllers\admin\ServicesController;
 use App\Http\Controllers\admin\FleetController;
 use App\Http\Controllers\admin\BlockDatesController;
 use App\Http\Controllers\admin\CouponController;
+use App\Http\Controllers\admin\DraftController;
+use App\Http\Controllers\admin\ConfirmUserController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/optimize', function () {
@@ -71,5 +73,13 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/edit/{id}', [CouponController::class, 'edit'])->name('admin.coupons.edit');
         Route::post('/update/{id}', [CouponController::class, 'update'])->name('admin.coupons.update');
         Route::get('/delete/{id}', [CouponController::class, 'delete'])->name('admin.coupons.delete');
+    });
+    Route::prefix('admin/draft')->group(function () {
+        Route::get('/', [DraftController::class, 'index'])->name('admin.draft.index');
+        Route::get('/delete/{id}', [DraftController::class, 'delete'])->name('admin.draft.delete');
+    });
+    Route::prefix('admin/confirm')->group(function () {
+        Route::get('/', [ConfirmUserController::class, 'index'])->name('admin.confirm.index');
+        Route::get('/delete/{id}', [ConfirmUserController::class, 'delete'])->name('admin.confirm.delete');
     });
 });

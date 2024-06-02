@@ -96,7 +96,7 @@
                                 <hr>
                                 <!-- End tax fields section -->
                                 <!-- Meet and Greet Section -->
-                                <h4>Meet and Greet</h4>
+                                {{-- <h4>Meet and Greet</h4>
                                 <div class="mb-3 col-md-6">
                                     <div class="form-check custom-checkbox mb-3 checkbox-success">
                                         <input type="checkbox" class="form-check-input" id="meetAndGreetCheckbox" name="meet_and_greet" {{ $fleet->meet_and_greet ? 'checked' : '' }}>
@@ -109,7 +109,7 @@
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                                 <!-- End Meet and Greet Section -->
                                 <hr>
                                 <!-- Features Section -->

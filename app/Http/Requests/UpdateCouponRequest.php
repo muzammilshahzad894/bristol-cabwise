@@ -25,7 +25,6 @@ class UpdateCouponRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'date' => 'required',
             'code' => 'required',
             'discount' => 'required',
             'description' => 'required',
