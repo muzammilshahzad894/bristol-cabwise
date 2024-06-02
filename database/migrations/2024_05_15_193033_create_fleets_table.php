@@ -16,6 +16,7 @@ class CreateFleetsTable extends Migration
         Schema::create('fleets', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('about_car')->nullable();
             $table->string('image');
             $table->string('price'); // per mile
             $table->boolean('meet_and_greet')->default(0);
@@ -24,7 +25,6 @@ class CreateFleetsTable extends Migration
             $table->string('max_suitecases')->nullable();
             $table->string('max_hand_luggage')->nullable();
             $table->string('min_booking_price')->nullable();
-            $table->string('min_booking_hours')->nullable();
             $table->string('price_after_50_miles')->nullable();
             $table->string('price_after_100_miles')->nullable();
             $table->string('price_after_150_miles')->nullable();

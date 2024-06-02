@@ -36,6 +36,13 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
+                                    <label class="form-label">About Car <span class="text-danger">*</span></label>
+                                    <input type="text" name="about_car" class="form-control" placeholder="About Car" value="{{ $fleet->about_car }}" required>
+                                    @error('about_car')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
                                     <label class="form-label">Image</label>
                                     <input type="file" name="image" class="form-control" placeholder="Image" value="{{ $fleet->image }}">
                                     @error('image')
@@ -60,13 +67,6 @@
                                     <label class="form-label">Max Hand Luggage <span class="text-danger">*</span></label>
                                     <input type="number" name="max_hand_luggage" class="form-control" placeholder="Max Hand Luggage" value="{{ $fleet->max_hand_luggage }}" required>
                                     @error('max_hand_luggage')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3 col-md-6">
-                                    <label class="form-label">Minimum Booking Hours <span class="text-danger">*</span></label>
-                                    <input type="number" name="min_booking_hours" class="form-control" placeholder="Minimum Booking Hours" value="{{ $fleet->min_booking_hours }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                                    @error('min_booking_hours')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
