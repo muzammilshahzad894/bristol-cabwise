@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\DraftController;
 use App\Http\Controllers\admin\ConfirmUserController;
 use App\Http\Controllers\admin\SettingController;
+use App\Http\Controllers\admin\EmailController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/optimize', function () {
@@ -86,5 +87,12 @@ Route::middleware(['admin'])->group(function () {
     Route::prefix('admin/settings')->group(function () {
         Route::get('/', [SettingController::class, 'index'])->name('admin.settings.index');
         Route::post('/update', [SettingController::class, 'update'])->name('admin.settings.update');
+    });
+    Route::prefix('admin/emails')->group(function () {
+        Route::get('/', [EmailController::class, 'index'])->name('admin.emails.index');
+        Route::post('/confirm-booking', [EmailController::class, 'confirmBooking'])->name('admin.emails.confirm-booking');
+        Route::post('/cancel-booking', [EmailController::class, 'cancelBooking'])->name('admin.emails.cancel-booking');
+        Route::post('/reminder-booking', [EmailController::class, 'reminderBooking'])->name('admin.emails.reminder-booking');
+        Route::post('/thank-you-feedback', [EmailController::class, 'feedback'])->name('admin.emails.thank-you-feedback');
     });
 });
