@@ -78,6 +78,8 @@ Route::middleware(['admin'])->group(function () {
     });
     Route::prefix('admin/draft')->group(function () {
         Route::get('/', [DraftController::class, 'index'])->name('admin.draft.index');
+      
+        Route::get('/booking-by-admin', [DraftController::class, 'bookByAdmin'])->name('admin.booking');
         Route::get('/delete/{id}', [DraftController::class, 'delete'])->name('admin.draft.delete');
     });
     Route::prefix('admin/confirm')->group(function () {

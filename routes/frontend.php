@@ -19,6 +19,8 @@ Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.c
 Route::get('/services', [FrontendController::class, 'services'])->name('frontend.services');
 
 
+Route::get('/client-booking-payment', [BookingController::class, 'clientBookingPayment'])->name('frontend.clientBookingPayment');
+
 Route::middleware(['auth'])->group(function () {
 Route::get('/book-online', [BookingController::class, 'index'])->name('frontend.book-online');
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');

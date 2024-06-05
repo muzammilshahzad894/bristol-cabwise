@@ -18,8 +18,18 @@ class BookingController extends Controller
             
             $fleets = Fleet::all();
             $user_id = auth()->user()->id;
+            
+            $role = auth()->user()->role;
             $blockDates = BlockDate::all()->pluck('date_range')->toArray();
-            $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
+            if($role == 'user')
+            {
+                $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
+                
+            }
+            else{
+                $booking_detail = null;
+            }
+            
             return view('frontend.booking.index', compact('fleets', 'booking_detail', 'blockDates'));
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -104,5 +114,10 @@ class BookingController extends Controller
     public function bookingSuccess()
     {
         return view('frontend.booking.success');
+    }
+    public function clientBookingPayment()
+    {
+        
+        return view('frontend.booking.client-booking');
     }
 }

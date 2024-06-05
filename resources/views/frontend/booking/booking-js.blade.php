@@ -111,6 +111,12 @@
                 if (!validateFirstStep()) {
                     return;
                 }
+                var distance = '{{$distance}}';
+                if(distance < 7){
+                    $('#exampleModal').modal('show');
+                    document.getElementById('message').textContent = "Minimum distance should be 7 miles.";
+                    return;
+                }
             }
 
             if (currentStep === 2) {
@@ -224,7 +230,6 @@
         });
 
         if ($('#carType').val() == 2) {
-            console.log('Arrival');
             flightValidation.forEach(({
                 selector,
                 errorSelector,
@@ -426,7 +431,6 @@
                 return response.json();
             })
             .then(data => {
-                console.log(data);
                 updateSelectOptions('no_passenger', data.fleet.max_passengers);
                 updateSelectOptions('suit_case', data.fleet.max_suitecases);
                 updateSelectOptions('hand_lauggage', data.fleet.max_hand_luggage);
@@ -470,7 +474,6 @@
                 cb.checked = false;
             }
         });
-        console.log('page load ');
     }
 
     function triggerCheckedCheckbox() {
@@ -562,11 +565,15 @@
                         $('#exampleModal').modal('show');
                         document.getElementById('message').textContent =
                             "Your booking has been successfully updated.";
-                        var Debitcard = window.location.origin + '/book-online?payment_id=' + data.booking_id;
+                        var Debitcard = window.location.origin + '/client-booking-payment?payment_id=' + data.booking_id;
                         var paypal = window.location.origin + '/paypal/payment?id=' + data.booking_id;
-
-
-                        document.getElementById('client_url').textContent = Debitcard + ' or ' + paypal;
+                     
+                        var modalStyleElements = document.getElementsByClassName('modal_style_p');
+                        for (var i = 0; i < modalStyleElements.length; i++) {
+                            modalStyleElements[i].style.display = 'block';
+                        }
+                        document.getElementById('client_url').textContent = Debitcard;
+                        document.getElementById('client_url_2').textContent = paypal;
 
                     } else {
                         PayonStripe(data.booking_id);
@@ -596,7 +603,6 @@
 
     function setMinDateTime() {
         var blockDates = @json($blockDates); // Assuming this is an array of strings in 'YYYY-MM-DD' format
-        console.log("Block Dates:", blockDates); // Debugging
 
         var now = new Date();
         let count = 0;
@@ -613,7 +619,6 @@
 
         var minDateTime = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
         document.getElementById('date-time').setAttribute('min', minDateTime);
-        console.log("Min DateTime:", minDateTime); // Debugging
 
         // Disable past dates and block dates
         var dateInput = document.getElementById('date-time');
@@ -622,16 +627,12 @@
             selectedDate.setSeconds(0);
             selectedDate.setMilliseconds(0);
 
-            console.log("Selected Date:", selectedDate); // Debugging
-
             // Check if selected date is in the blockDates array or in the past
             var isBlocked = blockDates.some(function(blockDate) {
                 var blockDateObj = new Date(blockDate);
                 blockDateObj.setHours(0, 0, 0, 0);
                 return selectedDate.toDateString() === blockDateObj.toDateString();
             });
-
-            console.log("Is Blocked:", isBlocked); // Debugging
 
             var now = new Date();
             now.setSeconds(0);
@@ -695,7 +696,6 @@
             url: `/apply-coupon/${coupon}`,
             type: 'GET',
             success: function(data) {
-                console.log('coupon data is',data)
                 if (data.error) {
                     $('#exampleModal').modal('show');
                     document.getElementById('message').textContent = "Coupon is not valid.";
@@ -749,5 +749,23 @@
         console.log('Coupon code is empty.');
     }
 }
+
+function copyToClipboard() {
+    var urlText = document.getElementById('client_url').innerText; // Get the URL text
+    navigator.clipboard.writeText(urlText).then(function() {
+        alert('URL copied to clipboard'); // Success
+    }, function(err) {
+        alert('Unable to copy URL'); // Error
+    });
+}
+function copyToClipboardsecond() {
+    var urlText = document.getElementById('client_url_2').innerText; // Get the URL text
+    navigator.clipboard.writeText(urlText).then(function() {
+        alert('URL copied to clipboard');
+    }, function(err) {
+    });
+}
+
+
 
 </script>

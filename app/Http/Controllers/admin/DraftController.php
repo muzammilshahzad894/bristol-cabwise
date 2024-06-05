@@ -27,6 +27,15 @@ class DraftController extends Controller
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
+    public function bookByAdmin(){
+        try {
+            $bookByAdmin  = Booking::where('is_draft', 1)->where('user_id', 1)->paginate(10);
+            return view('admin.draft.bookByAdmin', compact('bookByAdmin'));
+        } catch (Exception $e) {
+            Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
+    }
   
     
 

@@ -34,6 +34,13 @@
                     <span class="nav-text">Coupon</span>
                 </a>
             </li>
+            <li class="{{ request()->routeIs('admin.booking') ? 'mm-active' : '' }}">
+                <a href="{{ route('admin.booking') }}" class="" aria-expanded="false">
+                    <i class="fa fa-user"></i>
+                    <span class="nav-text">Booking by Admin</span>
+                </a>
+            </li>
+      
             <li class="{{ request()->routeIs('admin.draft.index') || request()->routeIs('admin.draft.create') ? 'mm-active' : '' }} || request()->routeIs('admin.draft.edit')">
                  <a href="{{ route('admin.draft.index') }}" class="" aria-expanded="false">
                     <i class="fa fa-user"></i>
@@ -58,12 +65,7 @@
                     <span class="nav-text">Emails</span>
                 </a>
             </li>
-            <!-- <li class="{{ request()->routeIs('admin.car.index') || request()->routeIs('admin.car.create') ? 'mm-active' : '' }}">
-                <a href="{{ route('admin.cars.index') }}" class="" aria-expanded="false">
-                    <i class="flaticon-086-star"></i>
-                    <span class="nav-text">Cars</span>
-                </a>
-            </li> -->
+          
         </ul>
     </div>
 </div>
