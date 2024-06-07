@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<title>BRISTOL CABWISE</title>
 	<link rel="shortcut icon" href="img/favicon.png" />
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
 	<link rel="stylesheet" href="{{ asset('frontend-assets/css/plugins.css') }}" />
 	<link rel="stylesheet" href="{{ asset('frontend-assets/css/style.css') }}" />
 	<script src="https://js.stripe.com/v3/"></script>
@@ -53,6 +53,7 @@
 	<script src="{{ asset('frontend-assets/js/YouTubePopUp.js') }}"></script>
 	<script src="{{ asset('frontend-assets/js/custom.js') }}"></script>
     <script src="https://js.stripe.com/v3/"></script>
+	
     <script>
         var logoLightUrl = "{{ asset('frontend-assets/img/logo-light.png') }}";
     </script>

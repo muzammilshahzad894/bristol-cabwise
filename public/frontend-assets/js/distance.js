@@ -1,88 +1,59 @@
-
 let geocoder;
 let distanceService;
+let originAutocomplete;
+let destinationAutocomplete;
+let originPlace = null;
+let destinationPlace = null;
+let distance = 1;
 
 $(document).ready(function () {
     // Initialize Google Places Autocomplete for pickup address
-    var pickupInput = document.getElementById('pickupLocation');
-    var pickupAutocomplete = new google.maps.places.Autocomplete(pickupInput);
+    const pickupInput = document.getElementById('pickupLocation');
+    originAutocomplete = new google.maps.places.Autocomplete(pickupInput);
+
     // Initialize Google Places Autocomplete for destination address
-    var destinationInput = document.getElementById('dropLocation');
-    var destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
+    const destinationInput = document.getElementById('dropLocation');
+    destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
 
-    // Initialize geocoder
     geocoder = new google.maps.Geocoder();
-
-    // Initialize Distance Matrix service
     distanceService = new google.maps.DistanceMatrixService();
 
+    // Listen for place changes in the input fields
+    originAutocomplete.addListener('place_changed', handlePlaceChange);
+    destinationAutocomplete.addListener('place_changed', handlePlaceChange);
 
-    function calculateTaxes(distance) {
-        var totalRate = null;
-        $('.selected').each(function () {
-            var fleetId = $(this).find('input[name="fleet_id"]').val();
+    function handlePlaceChange() {
+        originPlace = originAutocomplete.getPlace();
+        destinationPlace = destinationAutocomplete.getPlace();
 
-            $.ajax({
-                url: '/get-tax/' + fleetId, // Corrected AJAX URL
-                method: 'GET',
-                success: function (response) {
-                    totalRate = response.rate
-                    var totalAmount = totalRate * distance;
-                    $('#payment_amount').val(totalAmount);
-                    $('#fleetPayable' + fleetId).text(totalAmount);
-
-                },
-                error: function (xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        });
+        if (originPlace && destinationPlace) {
+            calculateDistance();
+        }
     }
 
-
     function calculateDistance() {
-        const origin = document.getElementById('pickupLocation').value;
-        const destination = document.getElementById('dropLocation').value;
+        if (!originPlace || !destinationPlace) {
+            console.error('Error: Please select both pickup and drop locations.');
+            return;
+        }
 
-        geocoder.geocode({ address: origin }, (results, status) => {
+        const originLatLng = originPlace.geometry.location;
+        const destinationLatLng = destinationPlace.geometry.location;
 
-            if (status === "OK" && results && results.length > 0) {
-
-                const originLatLng = results[0].geometry.location;
-
-                geocoder.geocode({ address: destination }, (results, status) => {
-
-                    if (status === "OK" && results && results.length > 0) {
-                        const destinationLatLng = results[0].geometry.location;
-
-
-                        distanceService.getDistanceMatrix({
-                            origins: [originLatLng],
-                            destinations: [destinationLatLng],
-                            travelMode: google.maps.TravelMode.DRIVING,
-                        }, (response, status) => {
-
-                            if (status === "OK") {
-                                const distanceText = response.rows[0].elements[0].distance.text;
-                                calculateTaxes(parseFloat(distanceText.replace(' km', '')));
-                            } else {
-                                calculateTaxes(10);
-                                console.error("Error: " + status);
-
-                            }
-                        });
-                    } else {
-                        console.error("Error: " + status);
-                    }
-                });
+        distanceService.getDistanceMatrix({
+            origins: [originLatLng],
+            destinations: [destinationLatLng],
+            travelMode: google.maps.TravelMode.DRIVING,
+        }, (response, status) => {
+            if (status === "OK") {
+                const distanceText = response.rows[0].elements[0].distance.text;
+                console.log("Distance: " + distanceText); 
+                distance = distanceText;
+                updatefleetPrice(distance);
             } else {
                 console.error("Error: " + status);
             }
         });
     }
-
-    // Call calculateDistance when the pickup or destination address changes
-    $('.fleet-card').click(function () {
-        calculateDistance();
-    });
 });
+

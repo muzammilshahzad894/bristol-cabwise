@@ -24,6 +24,9 @@
     let Total_price = '';
     let service_type = '';
     let coupon_apply = '';
+    let fleet_price_id = '';
+    let distance = '';
+    let service_id = 0;
 
 
     $(document).ready(function() {
@@ -105,18 +108,18 @@
 
     function nextStep() {
         if (currentStep < 4) {
-            var date_time = document.getElementById('date-time').value;
 
             if (currentStep === 1) {
                 if (!validateFirstStep()) {
                     return;
                 }
-                var distance = '{{$distance}}';
-                if(distance < 7){
-                    $('#exampleModal').modal('show');
-                    document.getElementById('message').textContent = "Minimum distance should be 7 miles.";
+                if(distance == ''){
+                    alert('Please select the correct locations.');
                     return;
                 }
+
+                showFleetsHtml();
+                
             }
 
             if (currentStep === 2) {
@@ -131,15 +134,11 @@
                 }
             }
             if (currentStep == 3) {
-                var TotalPrice = parseInt(FleetPrice);
-                FleetTaxes.forEach(tax => {
-                    TotalPrice += parseInt(tax.price);
-                });
-
-                FleetPrice = TotalPrice;
-                TotalPrice += isChildSeat ? 6 : 0;
-                TotalPrice += meet_nd_greet ? 12 : 0;
-                Total_price = TotalPrice;
+              
+                childset = isChildSeat ? 6 : 0;
+                meet_greet_price = meet_nd_greet ? 12 : 0;
+                updatefleetPrice = parseFloat(FleetPrice);
+                Total_price = updatefleetPrice + childset + meet_greet_price;
 
                 user_name = document.getElementById('name').value;
                 user_email = document.getElementById('email').value;
@@ -157,7 +156,7 @@
                 flight_name = document.getElementById('flightName').value;
                 flight_time = document.getElementById('flight_time').value;
                 flight_type = document.getElementById('carType').value;
-                total_price = TotalPrice;
+                total_price = Total_price;
 
                 updateSummary();
             }
@@ -172,6 +171,98 @@
             document.getElementById("form_submit").style.display = "block";
         }
     }
+    function showFleetsHtml() {
+    fetch('/all-fleets')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            var fleets = data.fleets;
+            var fleetHtml = '';
+            fleets.forEach((fleet, index) => {
+                var fleetPrice = calculateFleetPrice(fleet);
+                var totalTax = fleet.taxes.reduce((sum, tax) => sum + parseFloat(tax.price), 0); // Convert tax.price to number
+                var totalPrice = fleetPrice + totalTax;
+                if (isNaN(totalPrice)) {
+                    console.log('Total price is NaN.');
+                    alert('An error occurred: Total price is not a number.');
+                    location.reload();
+                    return;
+                }
+
+                fleetHtml += `
+                    <div class="col-md-6 form-container ${index === 0 ? 'selected-fleet' : ''}" data-fleet-id="${fleet.id}" onclick="selectFleet(this)">
+                        <div class="p-6">
+                            <img src="/uploads/fleets/${fleet.image}" alt="" />
+                            <strong>${fleet.name}</strong>
+                            <div style="display: flex; flex-direction: column; justify-content: center;">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <i class="fa fa-users"></i>
+                                    <p style="margin-bottom: 0px">max.</p>
+                                    <span>${fleet.max_passengers}</span>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <i class="fa-solid fa-suitcase"></i>
+                                    <p style="margin-bottom: 0;">max.</p>
+                                    <span>${fleet.max_suitecases}</span>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <i class="fa fa-briefcase"></i>
+                                    <p style="margin-bottom: 0;">max.</p>
+                                    <span>${fleet.max_hand_luggage}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-box d-flex align-items-center">
+                            <p class="color">price: <strong id="fleetPrice_value${index + 1}"> £${totalPrice.toFixed(2)}</strong></p>
+                            <div>
+                                <input type="radio" class="fleet_id" name="fleet_id" id="fleet_id${index + 1}" onclick="handleCheckboxClick(this, 'fleetPrice_value${index + 1}')" value="${totalPrice}">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('fleets-section').innerHTML = fleetHtml;
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+}
+
+function calculateFleetPrice(fleet) {
+
+    let newdistancevalue = parseFloat(distance.replace('km', '').trim());
+    let dist = Math.round(newdistancevalue);
+    let fleetPrice = 0;
+    let price = parseFloat(fleet.price);
+    let priceAfter50Miles = parseFloat(fleet.price_after_50_miles);
+    let priceAfter100Miles = parseFloat(fleet.price_after_100_miles);
+    let priceAfter150Miles = parseFloat(fleet.price_after_150_miles);
+    let priceAfter200Miles = parseFloat(fleet.price_after_200_miles);
+    let min_booking_price = parseFloat(fleet.min_booking_price);
+
+    if (dist > 200) {
+        fleetPrice = dist * priceAfter200Miles;
+    } else if (dist > 150) {
+        fleetPrice = dist * priceAfter150Miles;
+    } else if (dist > 100) {
+        fleetPrice = dist * priceAfter100Miles;
+    } else if (dist > 50) {
+        fleetPrice = dist * priceAfter50Miles;
+    } else {
+        fleetPrice = dist * price;
+    }
+    if(fleetPrice < min_booking_price){
+        fleetPrice = min_booking_price;
+    }
+
+    return fleetPrice;
+}
+
+
 
     function validateFirstStep() {
         const validations = [{
@@ -465,23 +556,39 @@
         }
     }
 
-    function handleCheckboxClick(checkbox) {
+    function handleCheckboxClick(checkbox , id) {
+   
         var value = checkbox.value;
         FleetPrice = value;
+        fleet_price_id = id;
         const checkboxes = document.querySelectorAll('input[name="fleet_id"]');
+        if(checkbox.checked){
+            handleupdateprice(id);
+        }
         checkboxes.forEach(cb => {
             if (cb !== checkbox) {
                 cb.checked = false;
             }
         });
     }
+    function handleupdateprice(id) {
+    var value = id;
+    var FleetPrice = document.getElementById(value).textContent;
+    var TotalPrice = FleetPrice;
+   
+    
+}
+
 
     function triggerCheckedCheckbox() {
         const checkedCheckbox = document.querySelector('input[name="fleet_id"]:checked');
+        
+        var checkedId = checkedCheckbox.id;
+        
         if (checkedCheckbox) {
-            handleCheckboxClick(checkedCheckbox);
 
-            // Find the fleet container and trigger selectFleet
+            handleCheckboxClick(checkedCheckbox ,checkedId);
+
             const fleetContainer = checkedCheckbox.closest('.form-container');
             if (fleetContainer) {
                 selectFleet(fleetContainer);
@@ -494,15 +601,10 @@
 
 
     function paypalRedirect(bookingId) {
-        var TotalPrice = parseInt(FleetPrice);
-        FleetTaxes.forEach(tax => {
-            TotalPrice += parseInt(tax.price);
-        });
-        TotalPrice += isChildSeat ? 6 : 0;
-        TotalPrice += meet_nd_greet ? 12 : 0;
+        
         var url = '/paypal/payment?id=' + bookingId;
 
-        // window.location.href = url;
+        window.location.href = url;
     }
 
     function bookAndPay(name) {
@@ -526,10 +628,12 @@
             flight_name: getElementValue('flightName'),
             flight_time: getElementValue('flight_time'),
             flight_type: getElementValue('carType'),
+            service_id: service_id,
             fleet_id: Fleet_id,
             total_price: Total_price,
 
         };
+     
         $fleet_id = document.querySelector('input[name="fleet_id"]:checked').value;
         if (formData.date_time) {
             var dateTimeArray = formData.date_time.split('T');
@@ -558,7 +662,9 @@
                     $('#exampleModal').modal('show');
                     return;
                 } else {
-                    StoreCouponCode();
+                    if(coupon_apply !== ''){
+                        StoreCouponCode();
+                    }
                     if (payment_method == 'paypal') {
                         paypalRedirect(data.booking_id);
                     } else if (payment_method == "admin") {
@@ -675,13 +781,17 @@
     });
 
     function showFlightId(select) {
-        var selectedServiceName = select.options[select.selectedIndex].text
-    .trim(); // Get the text of the selected option
+        var selectedServiceName = select.options[select.selectedIndex].text.trim(); 
         service_type = selectedServiceName;
+        var selectedOption = select.options[select.selectedIndex];
+        var selectedServiceId = selectedOption.value;
+
+        service_id = selectedServiceId;
+        
         if (selectedServiceName === 'Airport transfers') {
-            document.getElementById("flight_type").style.display = "block"; // Show the div
+            document.getElementById("flight_type").style.display = "block"; 
         } else {
-            document.getElementById("flight_type").style.display = "none"; // Hide the div
+            document.getElementById("flight_type").style.display = "none"; 
         }
     }
 
@@ -745,8 +855,8 @@
             }
         });
     } else {
-        // Handle case where coupon_apply is empty
-        console.log('Coupon code is empty.');
+        alert('Coupon code is empty.');
+        location.reload();
     }
 }
 

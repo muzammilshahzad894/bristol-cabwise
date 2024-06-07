@@ -1,19 +1,55 @@
 @extends('layouts.frontend.app')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFnXfbd7cYC4CknS2DpDvO6EskP95Z_7M&libraries=places"></script>
+<style>
+    #map{
+        overflow: unset !important;
+        height: 400px;
+            width: 100%;
+            border: 0; /* Remove border */
+            padding: 0;
+            margin: 0;
+    }
+    #mapContainer {
+            height: 400px;
+            width: 100%;
+        }
+</style>
+    
 
 
 
-@php 
-$userRole = auth()->user()->role;
-$distance = 8;
+@php
+    $userRole = auth()->user()->role;
+    $distance = 1;
+    $totalPrice = 0;
 
 @endphp
+<script>
+    let allFleetPrices = [];
+
+    function updatefleetValue(fleetId, currentPrice) {
+        allFleetPrices.push({ id: fleetId, price: currentPrice });
+    }
+
+    function updatefleetPrice(distance) {
+        let ids = allFleetPrices;
+        ids.forEach(function(item) {
+            let priceElement = document.getElementById(item.id);
+            if (priceElement) {
+                let updatedPrice = item.price * distance;
+                priceElement.textContent = '£' + updatedPrice.toFixed(2);
+            }
+        });
+    }
+</script>
 
 
 @section('content')
 
     <section class="banner-header section-padding bg-img" data-overlay-dark="4"
         data-background="{{ asset('frontend-assets/img/slider/booking_img.jpeg') }}">
-        <input type="hidden" id="login_user" value="{{$userRole}}">
+        <input type="hidden" id="login_user" value="{{ $userRole }}">
         <div class="v-middle">
             <div class="container">
                 <div class="row">
@@ -31,7 +67,7 @@ $distance = 8;
             </div>
         </div>
     </section>
- 
+
     <section class="post section-padding">
         <div class="container">
             <div class="row">
@@ -77,8 +113,8 @@ $distance = 8;
                                     $bookingServiceId = !empty($booking_detail) ? $booking_detail->service_id : '';
 
                                 @endphp
-                                <select name="service" id="service" class="styled-input border-radius-0 mb-0 select select2"
-                                    onchange="showFlightId(this);">
+                                <select name="service" id="service"
+                                    class="styled-input border-radius-0 mb-0 select select2" onchange="showFlightId(this);">
                                     <option value="">Select Service</option>
                                     @foreach ($services as $service)
                                         <option value="{{ $service->id }}"
@@ -113,8 +149,7 @@ $distance = 8;
                                     <label for="pickupLocation">Pickup Location:</label>
                                     <input type="text" id="pickupLocation" name="pickupLocation"
                                         placeholder="Enter pickup location"
-                                        class="form-control pickupLocation border-radius-0 mb-0"
-                                        value={{ $booking_detail->pickup_location ?? '' }}>
+                                        class="form-control pickupLocation border-radius-0 mb-0">
                                     <div id="pickup-error" class="error-message text-danger"></div>
                                 </div>
                                 <div>
@@ -123,8 +158,7 @@ $distance = 8;
                                         <div class="drop-location">
                                             <input type="text" id="dropLocation" name="dropLocation[]"
                                                 placeholder="Enter drop location"
-                                                class="form-control pickupLocation border-radius-0 mb-0"
-                                                value={{ $booking_detail->dropoff_location ?? '' }}>
+                                                class="form-control pickupLocation border-radius-0 mb-0">
                                             <div id="drop-error" class="error-message text-danger"></div>
                                         </div>
                                     </div>
@@ -143,7 +177,7 @@ $distance = 8;
                                     <input type="datetime-local"
                                         class="input location styled-input timepicker border-radius-0 mb-0"
                                         placeholder="Return Date" id="date-time"
-                                        value="{{ isset($booking_detail) ? (isset($booking_detail->booking_date) && isset($booking_detail->booking_time) ? $booking_detail->booking_date . 'T' . $booking_detail->booking_time : '') : '' }}"  />
+                                        value="{{ isset($booking_detail) ? (isset($booking_detail->booking_date) && isset($booking_detail->booking_time) ? $booking_detail->booking_date . 'T' . $booking_detail->booking_time : '') : '' }}" />
                                     <div id="date-time-error" class="error-message text-danger"></div>
                                 </div>
                             </div>
@@ -156,69 +190,7 @@ $distance = 8;
                                 </div>
                             </div>
                             <h3 class="color color_theme">Please select Fleet:</h3>
-                            <div class="main-div">
-                                @if ($fleets->count() > 0)
-                                    @foreach ($fleets as $fleet)
-                                        <div class="col-md-6 form-container @if ($loop->first) selected-fleet @endif"
-                                            data-fleet-id="{{ $fleet->id }}" id="fleets-section"
-                                            onclick="selectFleet(this)">
-                                            <div class="p-6">
-                                                <img src="{{ asset('uploads/fleets/' . $fleet->image) }}" alt="" />
-                                                <Strong>{{ $fleet->name }}</Strong>
-                                                <!-- <p class="car_name">car name l</p> -->
-                                                <div style="display: flex;flex-direction:column;justify-content:center;">
-                                                    <div class="d-flex gap-2 align-items-center">
-                                                        <i class="fa fa-users"></i>
-                                                        <p style="margin-bottom: 0px">max.</p>
-                                                        <span>{{ $fleet->max_passengers }}</span>
-                                                    </div>
-                                                    <div class="d-flex gap-2 align-items-center">
-                                                        <i class="fa-solid fa-suitcase"></i>
-                                                        <p style="margin-bottom: 0;">max.</p>
-                                                        <span>{{ $fleet->max_suitecases }}</span>
-                                                    </div>
-                                                    <div class="d-flex gap-2 align-items-center">
-                                                        <i class="fa fa-briefcase"></i>
-                                                        <p style="margin-bottom: 0;">max.</p>
-                                                        <span>{{ $fleet->max_hand_luggage }}</span>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            @php 
-                                            if($distance >50){
-                                                $fleetPrice = $distance * $fleet->price_after_50_miles;
-                                            }else if($distance > 100){
-                                                $fleetPrice = $distance * $fleet->price_after_100_miles;
-                                            }else if($distance > 150){
-                                                $fleetPrice = $distance * $fleet->price_after_150_miles;
-                                            }else if($distance > 200){
-                                                $fleetPrice = $distance * $fleet->price_after_200_miles;
-                                            }else{
-                                                $fleetPrice = $distance * $fleet->price;
-                                            }
-                                                    $totalPrice = 0; // Initialize totalPrice
-                                                    $taxes = \App\Models\FleetTax::where('fleet_id', $fleet->id)->get();
-                                                    
-
-                                                    foreach ($taxes as $tax) {
-                                                        $totalPrice += (int)$tax->price; // Sum up the price property of each tax
-                                                    }
-
-                                                    $totalPrice += $fleetPrice;
-                                            @endphp
-                                            <div class="footer-box d-flex align-items-center">
-                                                <p class="color">price: <strong> £{{ $totalPrice }} 
-                                                    </strong></p>
-                                                <div>
-                                                    <input type="checkbox" class="fleet_id" name="fleet_id"
-                                                        onclick="handleCheckboxClick(this)" value="{{ $distance * $fleet->price }}"
-                                                        @if (isset($booking_detail) && $booking_detail->fleet_id == $fleet->id) checked @endif>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @endif
+                            <div id="fleets-section" class="main-div">
                             </div>
                         </div>
                         <div class="step3 new_form">
@@ -405,7 +377,7 @@ $distance = 8;
                                     <strong>Email:</strong>
                                     <p id="summary-other-email"></p>
                                 </div>
-                                
+
                                 <h3 class="color color_theme">Total Price:</h3>
                                 <div class="d-flex gap-4">
                                     <strong>Fleet Price:</strong>
@@ -431,49 +403,49 @@ $distance = 8;
                                         <p id="summary-coupon-discount"></p>
                                     </div>
                                 </div>
-                             
+
                                 <div class="d-flex gap-4">
                                     <strong>Total Price:</strong>
                                     <div>
                                         <p id="summary-total-price"></p>
                                     </div>
                                 </div>
-                                @if($userRole != "admin")
-                                <div class="gap-4">
-                                    <div class="discount_btn_div">
-                                        <button class="discount_btn" type="button" id="apply_coupon"
-                                        onclick="AddCoupon()">Apply Coupon</button>
-                                    </div>
-                                    
-                                    <div id="coupon_input" class="" style="display: none">
-                                        <div class="d-flex gap-1">
-                                            <input type="text"
-                                                class="form-control pickupLocation custom_input border-radius-0 mb-0"
-                                                id="coupon" name="coupon" placeholder="Enter Coupon" />
-                                            <button class="coupon_btn" id="apply_coupon" type="button"
-                                                onclick="applyCoupon()">submit</button>
+                                @if ($userRole != 'admin')
+                                    <div class="gap-4">
+                                        <div class="discount_btn_div">
+                                            <button class="discount_btn" type="button" id="apply_coupon"
+                                                onclick="AddCoupon()">Apply Coupon</button>
+                                        </div>
+
+                                        <div id="coupon_input" class="" style="display: none">
+                                            <div class="d-flex gap-1">
+                                                <input type="text"
+                                                    class="form-control pickupLocation custom_input border-radius-0 mb-0"
+                                                    id="coupon" name="coupon" placeholder="Enter Coupon" />
+                                                <button class="coupon_btn" id="apply_coupon" type="button"
+                                                    onclick="applyCoupon()">submit</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endif
 
 
                             </div>
-                            @if($userRole != "admin")   
-                            <div class="payment_section_main">
-                                <p class="dropdown_menus">Select Payment Type:</p>
-                                <div class="unique-dropdown">
-                                    <p class="unique-dropbtns">Select Option</p>
-                                    <div class="unique-dropdown-content">
-                                        <ul>
-                                            <li class="unique-payment-option" target="_blank" id="checkout-button"
-                                                onclick="bookAndPay('stripe');">Debit Card</li>
-                                            <li class="unique-payment-option" target="_blank" id="paypal"
-                                                onclick="bookAndPay('paypal');">PayPal</li>
-                                        </ul>
+                            @if ($userRole != 'admin')
+                                <div class="payment_section_main">
+                                    <p class="dropdown_menus">Select Payment Type:</p>
+                                    <div class="unique-dropdown">
+                                        <p class="unique-dropbtns">Select Option</p>
+                                        <div class="unique-dropdown-content">
+                                            <ul>
+                                                <li class="unique-payment-option" target="_blank" id="checkout-button"
+                                                    onclick="bookAndPay('stripe');">Debit Card</li>
+                                                <li class="unique-payment-option" target="_blank" id="paypal"
+                                                    onclick="bookAndPay('paypal');">PayPal</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endif
                         </div>
 
@@ -486,10 +458,11 @@ $distance = 8;
                                 onclick="nextStep()">
                                 Next
                             </button>
-                            @if($userRole == "admin")
-                             <button type="button" class="button-1 mt-15 mb-15 cutom_button" id="form_submit" style="display: none" onclick="bookAndPay('admin');">
-                                Book Now
-                            </button>
+                            @if ($userRole == 'admin')
+                                <button type="button" class="button-1 mt-15 mb-15 cutom_button" id="form_submit"
+                                    style="display: none" onclick="bookAndPay('admin');">
+                                    Book Now
+                                </button>
                             @endif
 
                         </div>
@@ -499,9 +472,9 @@ $distance = 8;
 
                     <h3 class="color color_theme">Location</h3>
                     <div class="google-map">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1573147.7480448114!2d-74.84628175962355!3d41.04009641088412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25856139b3d33%3A0xb2739f33610a08ee!2s1616%20Broadway%2C%20New%20York%2C%20NY%2010019%2C%20Amerika%20Birle%C5%9Fik%20Devletleri!5e0!3m2!1str!2str!4v1646760525018!5m2!1str!2str"
-                            width="100%" height="100%" style="border: 0" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24301.0311484067!2d-2.6174498609618677!3d51.45451443765247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48719c1653d8c9a9%3A0xb47bdb0a605f0a0!2sBristol%2C%20UK!5e0!3m2!1sen!2s!4v1605382028827!5m2!1sen!2s" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+                        <div id="map"></div>
                     </div>
                     <div style="padding: 10px;margin-top:10px">
                         <h5 class="color">All classes include:</h5>
@@ -568,7 +541,8 @@ $distance = 8;
                             </div>
                             <div id="second_url " class="modal_style_p">
                                 <p id="client_url_2"></p>
-                                <button class="view_details" id="copy_btn" onclick="copyToClipboardsecond()">Copy</button>
+                                <button class="view_details" id="copy_btn"
+                                    onclick="copyToClipboardsecond()">Copy</button>
 
                             </div>
                         </div>
@@ -577,9 +551,9 @@ $distance = 8;
                 </div>
             </div>
         </div>
+        
     </section>
     <script type="text/javascript">
-      
         var payment_id = '{{ request('payment_id') }}';
         var stripeKey = '{{ config('services.stripe.key') }}';
         if (!stripeKey) {
@@ -588,17 +562,6 @@ $distance = 8;
             var stripe = Stripe(stripeKey);
 
             function PayonStripe(bookingId) {
-                console.log('bookingId', bookingId);
-
-                var TotalPrice = parseInt(FleetPrice);
-
-                FleetTaxes.forEach(tax => {
-                    TotalPrice += parseInt(tax.price);
-                });
-
-                TotalPrice += isChildSeat ? 6 : 0;
-                TotalPrice += meet_nd_greet ? 12 : 0;
-                // var TotalPrice = parseInt(FleetPrice) + (isChildSeat ? 6 : 0) + (isBoosterSeat ? 12 : 0);
 
                 fetch(`/create-checkout-session/${bookingId}`, {
                         method: 'POST',
@@ -614,7 +577,6 @@ $distance = 8;
                         return response.json();
                     })
                     .then(function(session) {
-                        console.log('Session ID:', session.id);
                         if (stripe && typeof stripe.redirectToCheckout === 'function') {
                             return stripe.redirectToCheckout({
                                 sessionId: session.id
@@ -634,102 +596,225 @@ $distance = 8;
                     });
             }
 
-        if (payment_id) {
-            var button = document.getElementById('checkout-button');
-            button.addEventListener('click', function() {
-                PayonStripe(payment_id);
-            });
-        }
-
-        document.getElementById('checkout-button').addEventListener('click', bookAndPay);
-    }
-      
-    </script>
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            var payment_id = '{{ request('payment_id') }}';
-            var stripeKey = '{{ config('services.stripe.key') }}';
-    
-            if (!stripeKey) {
-                console.error('Stripe publishable key is not set');
-            } else {
-                var stripe = Stripe(stripeKey);
-    
-                function PayonStripeclient(bookingId) {
-                    console.log('bookingId', bookingId);
-    
-                    var TotalPrice = parseInt(FleetPrice);
-    
-                    FleetTaxes.forEach(tax => {
-                        TotalPrice += parseInt(tax.price);
-                    });
-    
-                    TotalPrice += isChildSeat ? 6 : 0;
-                    TotalPrice += meet_nd_greet ? 12 : 0;
-                    console.log('Total Price ', TotalPrice);
-    
-                    fetch(`/create-checkout-session/${bookingId}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            },
-                        })
-                        .then(function(response) {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.json();
-                        })
-                        .then(function(session) {
-                            console.log('Session ID:', session.id);
-                            if (stripe && typeof stripe.redirectToCheckout === 'function') {
-                                return stripe.redirectToCheckout({
-                                    sessionId: session.id
-                                });
-                            } else {
-                                throw new Error('Stripe object is not initialized correctly or redirectToCheckout is undefined');
-                            }
-                        })
-                        .then(function(result) {
-                            if (result.error) {
-                                alert(result.error.message);
-                            }
-                        })
-                        .catch(function(error) {
-                            console.error('Error:', error);
-                        });
-                }
-    
-                // Check if payment_id is set and not empty on page load
-                if (payment_id) {
-                    PayonStripeclient(payment_id);
-                }
-    
-                // Add event listener to the checkout button if it exists
-                var checkoutButton = document.getElementById('checkout-button');
-                if (checkoutButton) {
-                    checkoutButton.addEventListener('click', function() {
-                        var bookingId = payment_id; // Use the payment_id or retrieve a bookingId
-                        PayonStripeclient(bookingId);
-                    });
-                }
+            if (payment_id) {
+                var button = document.getElementById('checkout-button');
+                button.addEventListener('click', function() {
+                    PayonStripe(payment_id);
+                });
             }
-        });
+
+            document.getElementById('checkout-button').addEventListener('click', bookAndPay);
+        }
     </script>
-    
-
-
-
+  
 @endsection
 
 @section('scripts')
     <script src="https://js.stripe.com/v3/"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtRWAKC7UW3kK8VNLlDe1EBHQQKu6ZTFo&libraries=places&callback=initMap">
+
+   
+    {{-- <script src="{{ asset('frontend-assets/js/google-map.js') }}"></script> --}}
+    {{-- <script src="{{ asset('frontend-assets/js/distance.js') }}"></script> --}}
+    <script>
+        // Global variables
+        let geocoder;
+        let distanceService;
+        let originAutocomplete;
+        let destinationAutocomplete;
+        let originPlace = null;
+        let destinationPlace = null;
+        let map;
+        let directionsService;
+        let directionsDisplay;
+        let markers = [];
+    
+        $(document).ready(function() {
+            // Initialize Google Places Autocomplete for pickup address
+            const pickupInput = document.getElementById('pickupLocation');
+            originAutocomplete = new google.maps.places.Autocomplete(pickupInput);
+    
+            // Initialize Google Places Autocomplete for destination address
+            const destinationInput = document.getElementById('dropLocation');
+            destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
+    
+            // Initialize Geocoder
+            geocoder = new google.maps.Geocoder();
+            distanceService = new google.maps.DistanceMatrixService();
+    
+            // Listen for place changes in the input fields
+            originAutocomplete.addListener('place_changed', handleOriginPlaceChange);
+            destinationAutocomplete.addListener('place_changed', handleDestinationPlaceChange);
+    
+            function handleOriginPlaceChange() {
+                originPlace = originAutocomplete.getPlace();
+                if (!originPlace || !originPlace.geometry) {
+                    alert('Invalid pickup location. Please select a valid location.');
+                    return;
+                }
+                checkAndCalculateDistance();
+            }
+    
+            function handleDestinationPlaceChange() {
+                destinationPlace = destinationAutocomplete.getPlace();
+                if (!destinationPlace || !destinationPlace.geometry) {
+                    alert('Invalid dropoff location. Please select a valid location.');
+                    return;
+                }
+                checkAndCalculateDistance();
+            }
+    
+            function checkAndCalculateDistance() {
+                if (originPlace && destinationPlace) {
+                    calculateDistance();
+                }
+            }
+    
+            function calculateDistance() {
+                if (!originPlace || !destinationPlace) {
+                    console.error('Error: Please select both pickup and drop locations.');
+                    return;
+                }
+    
+                const originLatLng = originPlace.geometry.location;
+                const destinationLatLng = destinationPlace.geometry.location;
+    
+                distanceService.getDistanceMatrix({
+                    origins: [originLatLng],
+                    destinations: [destinationLatLng],
+                    travelMode: google.maps.TravelMode.DRIVING,
+                }, (response, status) => {
+                    if (status === "OK") {
+                        const distanceText = response.rows[0].elements[0].distance.text;
+                        distance = distanceText;
+                        console.log('Distance:', distanceText);
+                        // Call function to mark locations and calculate route
+                        markAndCalculateRoute(originLatLng, destinationLatLng);
+                    } else {
+                        console.error("Error: " + status);
+                    }
+                });
+            }
+    
+            // Create a map centered at the default location (Bristol, UK)
+            const defaultLocation = { lat: 51.4545, lng: -2.5879 };
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: defaultLocation,
+                zoom: 10
+            });
+    
+            // Initialize DirectionsService and DirectionsRenderer
+            directionsService = new google.maps.DirectionsService();
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            directionsDisplay.setMap(map);
+    
+            // Function to mark pickup and dropoff locations on the map and calculate route
+            function markAndCalculateRoute(originLatLng, destinationLatLng) {
+                // Clear existing markers
+                clearMarkers();
+                // Mark pickup and dropoff locations on the map
+                markLocation(originLatLng, 'Pickup Location');
+                markLocation(destinationLatLng, 'Dropoff Location');
+    
+                // Request route between pickup and dropoff locations
+                calculateRoute(originLatLng, destinationLatLng);
+            }
+    
+            // Function to mark a location on the map
+            function markLocation(location, title) {
+                // Mark the selected location on the map
+                const marker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    title: title
+                });
+                markers.push(marker);
+                map.panTo(location);
+            }
+    
+            // Function to clear all markers on the map
+            function clearMarkers() {
+                for (let i = 0; i < markers.length; i++) {
+                    markers[i].setMap(null);
+                }
+                markers = [];
+            }
+    
+            // Function to calculate route between pickup and dropoff locations
+            function calculateRoute(origin, destination) {
+                const request = {
+                    origin: origin,
+                    destination: destination,
+                    travelMode: google.maps.TravelMode.DRIVING
+                };
+                directionsService.route(request, function(result, status) {
+                    if (status == 'OK') {
+                        directionsDisplay.setDirections(result);
+                    }
+                });
+            }
+        });
     </script>
-    <script src="{{ asset('frontend-assets/js/google-map.js') }}"></script>
-    <script src="{{ asset('frontend-assets/js/distance.js') }}"></script>
+    
+    
+    {{-- <script>
+        let geocoder;
+        let distanceService;
+        let originAutocomplete;
+        let destinationAutocomplete;
+        let originPlace = null;
+        let destinationPlace = null;
+
+        $(document).ready(function() {
+            const pickupInput = document.getElementById('pickupLocation');
+            originAutocomplete = new google.maps.places.Autocomplete(pickupInput);
+
+            // Initialize Google Places Autocomplete for destination address
+            const destinationInput = document.getElementById('dropLocation');
+            destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
+
+            geocoder = new google.maps.Geocoder();
+            distanceService = new google.maps.DistanceMatrixService();
+
+            // Listen for place changes in the input fields
+            originAutocomplete.addListener('place_changed', handlePlaceChange);
+            destinationAutocomplete.addListener('place_changed', handlePlaceChange);
+
+            function handlePlaceChange() {
+                originPlace = originAutocomplete.getPlace();
+                destinationPlace = destinationAutocomplete.getPlace();
+
+                if (originPlace && destinationPlace) {
+                    calculateDistance();
+                }
+            }
+
+            function calculateDistance() {
+                if (!originPlace || !destinationPlace) {
+                    console.error('Error: Please select both pickup and drop locations.');
+                    return;
+                }
+
+                const originLatLng = originPlace.geometry.location;
+                const destinationLatLng = destinationPlace.geometry.location;
+
+                distanceService.getDistanceMatrix({
+                    origins: [originLatLng],
+                    destinations: [destinationLatLng],
+                    travelMode: google.maps.TravelMode.DRIVING,
+                }, (response, status) => {
+                    if (status === "OK") {
+                        const distanceText = response.rows[0].elements[0].distance.text;
+                        distance = distanceText;
+                        console.log('Distance:', distanceText);
+                    } else {
+                        console.error("Error: " + status);
+                    }
+                });
+            }
+        });
+
+       
+    </script> --}}
 
     @include('frontend.booking.booking-js')
     @include('frontend.booking.style-css')

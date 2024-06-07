@@ -101,9 +101,9 @@ class BookingController extends Controller
             $booking->flight_time = $request->flight_time;
             $booking->flight_type = $request->flight_type;
             $booking->total_price = $request->total_price;
+            $booking->service_id = $request->service_id;
             $booking->save();
             $bookingId = $booking->id;
-    //get the response and id 
             return response()->json(['booking_id' => $bookingId]);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -119,5 +119,20 @@ class BookingController extends Controller
     {
         
         return view('frontend.booking.client-booking');
+    }
+    public function allFleets()
+    {
+        $fleets = Fleet::all();
+        foreach ($fleets as $fleet) {
+            $fleet->taxes = FleetTax::where('fleet_id', $fleet->id)->get();
+        }
+        return response()->json(['fleets' => $fleets]);
+    }
+    
+    public function fleettaxDetails($id)
+    {
+        $fleet = Fleet::find($id);
+        $fleetTax = FleetTax::where('fleet_id', $id)->get();
+        return response()->json([ 'fleetTax' => $fleetTax]);
     }
 }

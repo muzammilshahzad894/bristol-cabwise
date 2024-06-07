@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes(['verify' => true]);
 
 
+
 Route::get('/', [CarsController::class, 'index'])->name('frontend.index');
 Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
@@ -27,6 +28,9 @@ Route::post('/booking', [BookingController::class, 'store'])->name('booking.stor
 Route::get('/booking/success', [BookingController::class, 'bookingSuccess'])->name('booking.success');
 Route::get('/apply-coupon/{code}', [ApplyCouponController::class, 'index'])->name('apply.coupon');
 Route::post('/store-coupon', [ApplyCouponController::class, 'store'])->name('apply.coupon.store');
+Route::get('/all-fleets', [BookingController::class, 'allFleets'])->name('frontend.allFleets');
+Route::get('/fleet-details/{id}', [BookingController::class, 'fleettaxDetails'])->name('frontend.fleetDetails');
+
 
 });
 
