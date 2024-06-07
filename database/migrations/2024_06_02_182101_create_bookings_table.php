@@ -40,6 +40,7 @@ class CreateBookingsTable extends Migration
             $table->integer('is_draft')->default(1);
             $table->integer('user_id')->nullable();
             $table->string('total_price')->nullable();
+            $table->boolean('reminder_sent')->default(false);
             $table->timestamps();
         });
     }
