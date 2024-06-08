@@ -20,6 +20,8 @@
                             <th>Amount</th>
                             <th>Date</th>
                             <th>Time</th>
+                            <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +36,32 @@
                                     <td> {{ $draft->total_price }}£</td>
                                     <td> {{ $draft->booking_date }}</td>
                                     <td> {{ $draft->booking_time }}</td>
-                                  
+                                    <td>
+                                        @if($draft->status == 0)
+                                            <span class="badge bg-warning">Pending</span>
+                                        @elseif($draft->status == 1)
+                                            <span class="badge bg-success">Confirmed</span>
+                                        @else
+                                            <span class="badge bg-danger">Rejected</span>
+                                        @endif
+                                    <td>
+                                        @if($draft->status == 0)
+                                        <form action="{{ route('admin.confirm.update', $draft->id) }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="status" value="1">
+                                            <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+                                        </form>
+                                        <form action="{{ route('admin.confirm.update', $draft->id) }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="status" value="2">
+                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
+                                        </form>
+                                        @endif
+                                    </td>
+                                    
+                                    
+
+                                      
                                 </tr>
                             @endforeach
                         @else

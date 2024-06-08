@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Service;
+use App\Models\Booking;
 
 class FrontendController extends Controller
 {
@@ -49,6 +50,26 @@ class FrontendController extends Controller
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while fetching car details');
+        }
+    }
+
+    public function userHistory()
+    {
+        try {
+            
+            $user_id = auth()->user()->id;
+            $role = auth()->user()->role;
+            if($role == 'user')
+            {
+                $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 0)->get();
+            }
+            else{
+                $booking_detail = null;
+            }
+            return view('frontend.userHistory.index', compact('booking_detail'));
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while fetching bookings');
         }
     }
 }

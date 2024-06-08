@@ -21,17 +21,17 @@ Route::get('/services', [FrontendController::class, 'services'])->name('frontend
 
 
 Route::get('/client-booking-payment', [BookingController::class, 'clientBookingPayment'])->name('frontend.clientBookingPayment');
-
 Route::middleware(['auth'])->group(function () {
-Route::get('/book-online', [BookingController::class, 'index'])->name('frontend.book-online');
-Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
-Route::get('/booking/success', [BookingController::class, 'bookingSuccess'])->name('booking.success');
-Route::get('/apply-coupon/{code}', [ApplyCouponController::class, 'index'])->name('apply.coupon');
-Route::post('/store-coupon', [ApplyCouponController::class, 'store'])->name('apply.coupon.store');
-Route::get('/all-fleets', [BookingController::class, 'allFleets'])->name('frontend.allFleets');
-Route::get('/fleet-details/{id}', [BookingController::class, 'fleettaxDetails'])->name('frontend.fleetDetails');
-
-
+    Route::get('/book-online', [BookingController::class, 'index'])->name('frontend.book-online');
+    Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+    Route::get('/booking/success', [BookingController::class, 'bookingSuccess'])->name('booking.success');
+    Route::get('/apply-coupon/{code}', [ApplyCouponController::class, 'index'])->name('apply.coupon');
+    Route::post('/store-coupon', [ApplyCouponController::class, 'store'])->name('apply.coupon.store');
+    Route::get('/all-fleets', [BookingController::class, 'allFleets'])->name('frontend.allFleets');
+    Route::get('/fleet-details/{id}', [BookingController::class, 'fleettaxDetails'])->name('frontend.fleetDetails');
+    
+    
+    Route::get('/user-history', [FrontendController::class, 'userHistory'])->name('frontend.userHistory');
 });
 
 

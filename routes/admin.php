@@ -85,6 +85,7 @@ Route::middleware(['admin'])->group(function () {
     Route::prefix('admin/confirm')->group(function () {
         Route::get('/', [ConfirmUserController::class, 'index'])->name('admin.confirm.index');
         Route::get('/delete/{id}', [ConfirmUserController::class, 'delete'])->name('admin.confirm.delete');
+        Route::post('/update/{id}', [ConfirmUserController::class, 'update'])->name('admin.confirm.update');
     });
     Route::prefix('admin/settings')->group(function () {
         Route::get('/', [SettingController::class, 'index'])->name('admin.settings.index');

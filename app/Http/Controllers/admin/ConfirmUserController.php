@@ -40,4 +40,27 @@ class ConfirmUserController extends Controller
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
+    public function update(Request $request, $id)
+    {
+        try {
+            // Find the booking by ID
+            $Booking = Booking::find($id);
+            
+            // Check if the booking exists
+            if (!$Booking) {
+                return redirect()->back()->with('error', 'Booking not found');
+            }
+            
+            $status = intval($request->input('status'));
+           if($Booking->status != $status){
+            $Booking->status = $status;
+            $Booking->save();
+            return redirect()->back()->with('success', 'Booking status updated successfully');
+            }
+            
+        } catch (Exception $e) {
+            Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
+    }
 }
