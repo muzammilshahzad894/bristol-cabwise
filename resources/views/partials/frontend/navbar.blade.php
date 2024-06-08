@@ -65,6 +65,10 @@
                         <a class="dropdown-item" href="{{ route('frontend.userHistory') }}">
                             {{ __('My Bookings') }}
                         </a>
+                        <a class="dropdown-item" href="{{ route('frontend.refund') }}">
+                            {{ __('Refund') }}
+                        </a>
+
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">

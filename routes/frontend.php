@@ -30,8 +30,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/all-fleets', [BookingController::class, 'allFleets'])->name('frontend.allFleets');
     Route::get('/fleet-details/{id}', [BookingController::class, 'fleettaxDetails'])->name('frontend.fleetDetails');
     
-    
     Route::get('/user-history', [FrontendController::class, 'userHistory'])->name('frontend.userHistory');
+    Route::get('/refund-payment',[FrontendController::class, 'refund'])->name('frontend.refund');
+    Route::post('/refund-request',[FrontendController::class, 'refundRequest'])->name('frontend.refundRequest');
+
+    Route::get('/review',[FrontendController::class, 'reviewget'])->name('frontend.reviewget');
+    Route::post('/reviews',[FrontendController::class, 'reviewPost'])->name('frontend.reviewPost');
 });
 
 
