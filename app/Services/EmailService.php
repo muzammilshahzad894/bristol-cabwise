@@ -7,6 +7,7 @@ use App\Mail\BookingCancellationMail;
 use App\Mail\BookingReminderMail;
 use App\Mail\ThankYouFeedbackMail;
 use App\Mail\RefundMail;
+use App\Mail\DriverWaitingEmail;
 use Illuminate\Support\Facades\Mail;
 
 class EmailService
@@ -71,5 +72,19 @@ class EmailService
             'bookingId' => $feedbackLink->booking_id,
         ];
         Mail::to($user->email)->send(new RefundMail($data));
+    }
+
+    public function sendDriverWaitingEmail($user, $bookingDetails)
+    {
+        $data = [
+            'userName' => $user->name,
+            'pickupLocation' => $bookingDetails->pickupLocation,
+            'dropoffLocation' => $bookingDetails->dropoffLocation,
+            'pickupDateTime' => $bookingDetails->pickupDateTime,
+            'driverName' => $bookingDetails->driverName,
+            'driverContact' => $bookingDetails->driverContact,
+        ];
+
+        Mail::to($user->email)->send(new DriverWaitingEmail($data));
     }
 }

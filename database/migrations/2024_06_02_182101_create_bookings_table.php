@@ -42,6 +42,7 @@ class CreateBookingsTable extends Migration
             $table->string('total_price')->nullable();
             $table->boolean('reminder_sent')->default(false);
             $table->integer('assigned_to')->nullable();
+            $table->string('ride_status')->default('pending');
             $table->timestamps();
         });
     }
