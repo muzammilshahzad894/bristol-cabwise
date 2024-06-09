@@ -18,7 +18,7 @@ class DriverWaitingEmail extends Mailable
 
     public function build()
     {
-        return $this->view('emails.driver-waiting')
+        return $this->view('emails.driver_waiting_email')
             ->with($this->data)
             ->subject('Your Driver Has Arrived');
     }

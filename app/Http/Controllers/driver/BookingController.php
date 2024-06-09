@@ -10,9 +10,17 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Booking;
 use App\Services\EmailService;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
+    protected $emailService;
+
+    public function __construct(EmailService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
+
     public function index()
     {
         try {
@@ -41,25 +49,26 @@ class BookingController extends Controller
     public function wait($bookingId)
     {
         try {
-            
+            $booking = Booking::find($bookingId);
+
+            $pickupDateTime = Carbon::createFromFormat('Y-m-d H:i', $booking->booking_date . ' ' . $booking->booking_time);
+
+            $data = [
+                'userName' => $booking->name,
+                'email' => $booking->email,
+                'pickupLocation' => $booking->pickup_location,
+                'dropoffLocation' => $booking->dropoff_location,
+                'pickupDateTime' => $pickupDateTime->format('l, F j, Y, g:i A'),
+                'pickupDateTime' => $pickupDateTime->format('l, F j, Y, g:i A'),
+                'driverName' => $booking->driver->name,
+                'driverContact' => $booking->driver->phone,
+            ];
+
+            $this->emailService->sendDriverWaitingEmail($data);
+            return redirect()->back()->with('success', 'Email sent successfully');
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
-
-
-    // public function sendDriverWaitingEmail($user, $bookingDetails)
-    // {
-    //     $data = [
-    //         'userName' => $user->name,
-    //         'pickupLocation' => $bookingDetails->pickupLocation,
-    //         'dropoffLocation' => $bookingDetails->dropoffLocation,
-    //         'pickupDateTime' => $bookingDetails->pickupDateTime,
-    //         'driverName' => $bookingDetails->driverName,
-    //         'driverContact' => $bookingDetails->driverContact,
-    //     ];
-
-    //     Mail::to($user->email)->send(new DriverWaitingEmail($data));
-    // }
 }

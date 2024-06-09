@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     use HasFactory;
+
+    public function driver()
+    {
+        return $this->belongsTo(User::class, 'assigned_to');
+    }
 }

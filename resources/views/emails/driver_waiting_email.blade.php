@@ -15,24 +15,28 @@
                         <h2>Your Driver Has Arrived!</h2>
                     </div>
                     <div class="card-body">
-                        <p>Dear {{ $data->userName }},</p>
+                        <p>Dear {{ $userName }},</p>
                         <p>We are pleased to inform you that your driver has arrived and is waiting for you at the designated pickup location. Here are the details of your ride:</p>
                         <table class="table table-bordered">
                             <tr>
                                 <th>Pickup Location</th>
-                                <td>{{ $data->pickupLocation }}</td>
+                                <td>{{ $pickupLocation }}</td>
                             </tr>
                             <tr>
                                 <th>Dropoff Location</th>
-                                <td>{{ $data->dropoffLocation }}</td>
+                                <td>{{ $dropoffLocation }}</td>
+                            </tr>
+                            <tr>
+                                <th>Pickup Date & Time</th>
+                                <td>{{ $pickupDateTime }}</td>
                             </tr>
                             <tr>
                                 <th>Driver Name</th>
-                                <td>{{ $data->driver_name }}</td>
+                                <td>{{ $driverName }}</td>
                             </tr>
                             <tr>
                                 <th>Driver Contact</th>
-                                <td>{{ $data->driver_contact }}</td>
+                                <td>{{ $driverContact }}</td>
                             </tr>
                         </table>
                         <p>Please proceed to the pickup location at your earliest convenience. If you need to contact your driver, you can reach them at the provided contact number.</p>

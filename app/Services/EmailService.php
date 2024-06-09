@@ -60,7 +60,8 @@ class EmailService
 
         Mail::to($user->email)->send(new ThankYouFeedbackMail($data));
     }
-    public function sendRefundRequest($user, $feedbackLink )
+
+    public function sendRefundRequest($user, $feedbackLink)
     {
         $data = [
             'userName' => $feedbackLink->name,
@@ -71,20 +72,21 @@ class EmailService
             'reason' => $feedbackLink->reason,
             'bookingId' => $feedbackLink->booking_id,
         ];
+
         Mail::to($user->email)->send(new RefundMail($data));
     }
 
-    public function sendDriverWaitingEmail($user, $bookingDetails)
+    public function sendDriverWaitingEmail($bookingDetails)
     {
         $data = [
-            'userName' => $user->name,
-            'pickupLocation' => $bookingDetails->pickupLocation,
-            'dropoffLocation' => $bookingDetails->dropoffLocation,
-            'pickupDateTime' => $bookingDetails->pickupDateTime,
-            'driverName' => $bookingDetails->driverName,
-            'driverContact' => $bookingDetails->driverContact,
+            'userName' => $bookingDetails['userName'],
+            'pickupLocation' => $bookingDetails['pickupLocation'],
+            'dropoffLocation' => $bookingDetails['dropoffLocation'],
+            'pickupDateTime' => $bookingDetails['pickupDateTime'],
+            'driverName' => $bookingDetails['driverName'],
+            'driverContact' => $bookingDetails['driverContact'],
         ];
 
-        Mail::to($user->email)->send(new DriverWaitingEmail($data));
+        Mail::to($bookingDetails['email'])->send(new DriverWaitingEmail($data));
     }
 }
