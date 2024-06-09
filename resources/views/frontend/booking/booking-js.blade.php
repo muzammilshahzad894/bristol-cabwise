@@ -120,6 +120,7 @@
                     alert('Please select the correct locations.');
                     return;
                 }
+               
 
                 showFleetsHtml();
                 
@@ -663,13 +664,16 @@ function calculateFleetPrice(fleet) {
                     if(coupon_apply !== ''){
                         StoreCouponCode();
                     }
-                    if(droplocationss > 1){
-                        //show the modal and show the message for via booking please contact to the support
-                        $('#exampleModal').modal('show');
-                        document.getElementById('message').textContent ="Via Booking please contact to the support."
-                        return;
-                    }
+                    
+                    var login_user = document.getElementById('login_user').value;
                 
+                    if(login_user == "user"){
+                        if(droplocationss > 1){
+                            $('#exampleModal').modal('show');
+                            document.getElementById('message').textContent ="Via Booking please contact to the support."
+                            return;
+                        }
+                    }
                     if (payment_method == 'paypal') {
                         paypalRedirect(data.booking_id);
                     } else if (payment_method == "admin") {
