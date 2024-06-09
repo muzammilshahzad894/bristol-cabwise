@@ -20,6 +20,8 @@
                             <th>Amount</th>
                             <th>Date</th>
                             <th>Time</th>
+                            <th>Ride Status</th>
+                            <th>Wait</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +36,21 @@
                                     <td> {{ $booking->total_price }}£</td>
                                     <td> {{ $booking->booking_date }}</td>
                                     <td> {{ $booking->booking_time }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ $booking->ride_status }}
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <li><a class="dropdown-item" href="{{ route('driver.booking.status', ['booking' => $booking->id, 'status' => 'pending']) }}">Pending</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('driver.booking.status', ['booking' => $booking->id, 'status' => 'completed']) }}">Completed</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('driver.booking.status', ['booking' => $booking->id, 'status' => 'cancelled']) }}">Cancelled</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('driver.booking.wait', $booking->id) }}" class="btn btn-primary btn-sm">Wait</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         @else
