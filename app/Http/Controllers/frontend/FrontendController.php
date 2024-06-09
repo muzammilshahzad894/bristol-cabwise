@@ -17,8 +17,9 @@ use Carbon\Carbon;
 
 class FrontendController extends Controller
 {
+    protected $emailService;
 
-      public function __construct(EmailService $emailService)
+    public function __construct(EmailService $emailService)
     {
         $this->emailService = $emailService;
     }
@@ -86,8 +87,8 @@ class FrontendController extends Controller
             return redirect()->back()->with('error', 'An error occurred while fetching bookings');
         }
     }
-    public function refund(){
-        
+    public function refund()
+    {    
         $user_id = auth()->user()->id;
         $role = auth()->user()->role;
 
@@ -97,14 +98,13 @@ class FrontendController extends Controller
     }
     public function refundRequest(Request $request)
     {
-      
         try {
             $user_id = auth()->user()->id;
             $booking_id = $request->booking_id;
             $check = Refund::where('user_id', $user_id)->where('booking_id', $booking_id)->first();
-            if ($check) {
-                return redirect()->back()->with('error', 'You already sent the refund request for this booking');
-            }
+            // if ($check) {
+            //     return redirect()->back()->with('error', 'You already sent the refund request for this booking');
+            // }
             $refund = new Refund();
             $refund->user_id = $user_id;
             $refund->booking_id = $booking_id;
@@ -128,9 +128,9 @@ class FrontendController extends Controller
                 'refundAmount' => $refund_amount,
                 'reason' => $request->reason,
             ];
+
             $this->emailService->sendRefundRequest($user, $bookingDetails);
             
-    
             return redirect()->back()->with('success', 'Refund request sent successfully');
         } catch (\Exception $e) {
             Log::error('Refund Request Error: ' . $e->getMessage());
@@ -159,10 +159,4 @@ class FrontendController extends Controller
             return redirect()->back()->with('error', 'Something went wrong while processing your request');
         }
     }
-
-  
-
-
-
-
 }

@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['verify' => true]);
 
-
-
 Route::get('/', [CarsController::class, 'index'])->name('frontend.index');
 Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');

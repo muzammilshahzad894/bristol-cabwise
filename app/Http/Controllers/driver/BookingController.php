@@ -59,7 +59,6 @@ class BookingController extends Controller
                 'pickupLocation' => $booking->pickup_location,
                 'dropoffLocation' => $booking->dropoff_location,
                 'pickupDateTime' => $pickupDateTime->format('l, F j, Y, g:i A'),
-                'pickupDateTime' => $pickupDateTime->format('l, F j, Y, g:i A'),
                 'driverName' => $booking->driver->name,
                 'driverContact' => $booking->driver->phone,
             ];

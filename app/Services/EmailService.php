@@ -64,13 +64,13 @@ class EmailService
     public function sendRefundRequest($user, $feedbackLink)
     {
         $data = [
-            'userName' => $feedbackLink->name,
+            'userName' => $feedbackLink->userName,
             'email' => $feedbackLink->email,
-            'accountNumber' => $feedbackLink->account_number,
-            'bankName' => $feedbackLink->bank_name,
-            'refundAmount' => $feedbackLink->refund_amount,
+            'accountNumber' => $feedbackLink->accountNumber,
+            'bankName' => $feedbackLink->bankName,
+            'refundAmount' => $feedbackLink->refundAmount,
             'reason' => $feedbackLink->reason,
-            'bookingId' => $feedbackLink->booking_id,
+            'bookingId' => $feedbackLink->bookingId,
         ];
 
         Mail::to($user->email)->send(new RefundMail($data));
