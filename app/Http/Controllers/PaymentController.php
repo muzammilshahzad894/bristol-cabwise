@@ -58,7 +58,7 @@ public function showStripePaymentPage($id)
 
     public function paymentCancel()
     {
-        return view('payment.cancel');
+        return view('frontend.booking.cancel');
     }
     public function generatePayPalLink($bookingId)
 {
