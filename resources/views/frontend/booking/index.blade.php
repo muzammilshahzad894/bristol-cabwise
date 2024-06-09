@@ -14,6 +14,9 @@
             height: 400px;
             width: 100%;
         }
+        .pickupLocation{
+            border-radius: 0px !important;
+        }
 </style>
     
 
@@ -155,16 +158,14 @@
                                 <div>
                                     <label for="dropLocation">Drop Location:</label>
                                     <div id="dropLocations">
-                                        <div class="drop-location">
-                                            <input type="text" id="dropLocation" name="dropLocation[]"
-                                                placeholder="Enter drop location"
-                                                class="form-control pickupLocation border-radius-0 mb-0">
+                                        <div class="drop-location mb-2">
+                                            <input type="text" id="dropLocation0" name="dropLocation[]" placeholder="Enter drop location" class="form-control border-radius-0 mb-0">
                                             <div id="drop-error" class="error-message text-danger"></div>
                                         </div>
                                     </div>
                                     {{-- <input type="text" name="dropLocation"
                                     placeholder="Enter drop location" class="form-control pickupLocation" /> --}}
-                                    {{-- <button class="plus_icon mt-1" id="addLocation" onclick="addMore();">Add More location</button> --}}
+                                    <button class="plus_icon mt-1" type="button" id="addLocation" onclick="addMore();">Add Via Location</button>
                                 </div>
                                 @php
                                     $datetime = isset($booking_detail->booking_date, $booking_detail->booking_time)
@@ -603,7 +604,6 @@
                 });
             }
 
-            document.getElementById('checkout-button').addEventListener('click', bookAndPay);
         }
     </script>
   
@@ -612,10 +612,124 @@
 @section('scripts')
     <script src="https://js.stripe.com/v3/"></script>
 
+
    
     {{-- <script src="{{ asset('frontend-assets/js/google-map.js') }}"></script> --}}
     {{-- <script src="{{ asset('frontend-assets/js/distance.js') }}"></script> --}}
     <script>
+        let geocoder;
+        let distanceService;
+        let originAutocomplete;
+        let map;
+        let originPlace = null;
+        let destinationPlaces = [];
+        let distances = [];
+        let totalDistance = 0;
+
+        $(document).ready(function () {
+            // Initialize Google Maps
+            const defaultLocation = { lat: 51.4545, lng: -2.5879 }; // Bristol, UK
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: defaultLocation,
+                zoom: 10
+            });
+
+            const pickupInput = document.getElementById('pickupLocation');
+            originAutocomplete = new google.maps.places.Autocomplete(pickupInput);
+            originAutocomplete.addListener('place_changed', handleOriginPlaceChange);
+
+            geocoder = new google.maps.Geocoder();
+            distanceService = new google.maps.DistanceMatrixService();
+
+            // Initialize the first drop location autocomplete
+            handleDestinationPlaceChange(0);
+        });
+
+        function handleOriginPlaceChange() {
+            originPlace = originAutocomplete.getPlace();
+            if (!originPlace || !originPlace.geometry) {
+                alert('Invalid pickup location. Please select a valid location.');
+                return;
+            }
+            checkAndCalculateDistances();
+        }
+
+        function handleDestinationPlaceChange(index) {
+            const input = document.querySelectorAll('#dropLocations input')[index];
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.addListener('place_changed', () => {
+                const place = autocomplete.getPlace();
+                if (!place || !place.geometry) {
+                    alert('Invalid drop location. Please select a valid location.');
+                    return;
+                }
+                destinationPlaces[index] = place;
+                checkAndCalculateDistances();
+            });
+        }
+
+        function addMore() {
+            const dropLocationsDiv = document.getElementById('dropLocations');
+            const newDropLocationDiv = document.createElement('div');
+            const newIndex = destinationPlaces.length;
+
+            newDropLocationDiv.className = 'drop-location mb-2';
+            newDropLocationDiv.innerHTML = `
+                <input type="text" id="dropLocation${newIndex}" name="dropLocation[]" placeholder="Enter drop location" class="form-control border-radius-0 mb-0">
+                <div id="drop-error" class="error-message text-danger"></div>
+            `;
+
+            dropLocationsDiv.appendChild(newDropLocationDiv);
+            handleDestinationPlaceChange(newIndex);
+        }
+
+        function checkAndCalculateDistances() {
+            if (!originPlace || destinationPlaces.length === 0) {
+                return;
+            }
+
+            const allPlaces = [originPlace, ...destinationPlaces].filter(place => place);
+            if (allPlaces.length < 2) {
+                return;
+            }
+
+            totalDistance = 0;
+            distances = [];
+            for (let i = 0; i < allPlaces.length - 1; i++) {
+                const originLatLng = allPlaces[i].geometry.location;
+                const destinationLatLng = allPlaces[i + 1].geometry.location;
+
+                calculateDistance(originLatLng, destinationLatLng, i);
+            }
+        }
+
+        function calculateDistance(origin, destination, index) {
+            distanceService.getDistanceMatrix({
+                origins: [origin],
+                destinations: [destination],
+                travelMode: google.maps.TravelMode.DRIVING
+            }, (response, status) => {
+                if (status === 'OK') {
+                    const distanceValue = response.rows[0].elements[0].distance.value;
+                    distances[index] = distanceValue;
+                    updateTotalDistance();
+                } else {
+                    console.error('Error:', status);
+                }
+            });
+        }
+
+        function updateTotalDistance() {
+            totalDistance = distances.reduce((acc, distance) => acc + distance, 0);
+            const totalDistanceInKm = (totalDistance / 1000).toFixed(2);
+            distance = totalDistanceInKm;
+        }
+
+    
+    </script>
+
+
+    {{-- <script>
         // Global variables
         let geocoder;
         let distanceService;
@@ -753,7 +867,7 @@
                 });
             }
         });
-    </script>
+    </script> --}}
     
     
     {{-- <script>

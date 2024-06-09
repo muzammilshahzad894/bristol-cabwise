@@ -30,8 +30,8 @@
                                     <td>{{ $draft->name }}</td>
                                     <td> {{ $draft->email }}</td>
                                     <td> {{ $draft->phone_number }}</td>
-                                    <td> {{ $draft->pickup_location }}</td>
-                                    <td> {{ $draft->dropoff_location }}</td>
+                                    <td> <div class="max-content-display">{{ $draft->pickup_location }} </div></td>
+                                    <td> <div class="max-content-display">{{ $draft->dropoff_location }} </div></td>
                                     <td> {{ $draft->total_price }}£</td>
                                     <td> {{ $draft->booking_date }}</td>
                                     <td> {{ $draft->booking_time }}</td>

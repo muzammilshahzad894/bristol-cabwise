@@ -32,8 +32,8 @@
                                     <td>{{ $draft->name }}</td>
                                     <td> {{ $draft->email }}</td>
                                     <td> {{ $draft->phone_number }}</td>
-                                    <td> {{ $draft->pickup_location }}</td>
-                                    <td> {{ $draft->dropoff_location }}</td>
+                                    <td> <div class="max-content-display"> {{ $draft->pickup_location }}</div></td>
+                                    <td> <div class="max-content-display"> {{ $draft->dropoff_location }}</div></td>
                                     <td> {{ $draft->total_price }}£</td>
                                     <td> {{ $draft->booking_date }}</td>
                                     <td> {{ $draft->booking_time }}</td>
@@ -47,7 +47,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <form action="{{ route('admin.confirm.assign', $draft->id) }}" method="POST">
+                                        <form action="{{ route('admin.confirm.assign', $draft->id) }}" method="POST" class="select_driver">
                                             @csrf
                                             <select name="assigned_to" class="form-control">
                                                 <option value="">Select Driver</option>
@@ -55,10 +55,11 @@
                                                     <option value="{{ $driver->id }}">{{ $driver->name }}</option>
                                                 @endforeach
                                             </select>
-                                            <button type="submit" class="btn btn-primary btn-sm mt-2">Assign</button>
+                                            <button type="submit" class="btn btn-primary btn-sm">Assign</button>
                                         </form>
                                     </td>
-                                    <td>
+                                    <td class="">
+                                        <div class="accept_reject">
                                         @if($draft->status == 0)
                                         <form action="{{ route('admin.confirm.update', $draft->id) }}" method="POST">
                                             @csrf
@@ -71,6 +72,7 @@
                                             <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
                                         </form>
                                         @endif
+                                    </div>
                                     </td>  
                                 </tr>
                             @endforeach

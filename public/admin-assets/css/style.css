@@ -480,7 +480,22 @@ kbd {
 
 figure {
   margin: 0 0 1rem; }
-
+  .select_driver{
+    display:flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .select_driver select{
+    min-width: 115px !important;
+  }
+.accept_reject{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.max-content-display{
+  min-width: 200px;
+}
 img,
 svg {
   vertical-align: middle; }

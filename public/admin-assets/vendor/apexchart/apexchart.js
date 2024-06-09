@@ -14928,6 +14928,7 @@
     }, {
       key: "_createHamburgerMenu",
       value: function _createHamburgerMenu(parent) {
+      console.log('this is testing purpsoe')
         this.elMenuItems = [];
         parent.appendChild(this.elMenu);
         Graphics.setAttrs(this.elMenu, {

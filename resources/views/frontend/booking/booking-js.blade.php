@@ -27,6 +27,9 @@
     let fleet_price_id = '';
     let distance = '';
     let service_id = 0;
+    let droplocationss = 0;
+    let payment_method = '';
+
 
 
     $(document).ready(function() {
@@ -151,7 +154,13 @@
                 no_hand_luggage = document.getElementById('hand_lauggage').value;
                 summary = document.getElementById('summary').value;
                 pickup_location = document.getElementById('pickupLocation').value;
-                dropoff_location = document.getElementById('dropLocation').value;
+                // dropoff_location = document.getElementById('dropLocation').value;
+                    let dropoff_locations = [];
+                    document.querySelectorAll('input[name="dropLocation[]"]').forEach(input => {
+                        dropoff_locations.push(input.value);
+                        droplocationss++;
+                    });
+                    dropoff_location = dropoff_locations.join(', ');
                 dates_times = document.getElementById('date-time').value;
                 flight_name = document.getElementById('flightName').value;
                 flight_time = document.getElementById('flight_time').value;
@@ -495,18 +504,6 @@ function calculateFleetPrice(fleet) {
         }
     }
 
-    function addMore() {
-        const dropLocationsContainer = document.getElementById("dropLocations");
-        const dropLocationCount = dropLocationsContainer.children.length;
-        const newDropLocation = document.createElement("div");
-        newDropLocation.classList.add("drop-location");
-        newDropLocation.innerHTML = `
-                <label for="dropLocation${dropLocationCount + 1}">Drop Location ${dropLocationCount + 1}:</label>
-                <input type="text" name="dropLocation[]" placeholder="Enter drop location" class="form-control pickupLocation" />
-            `;
-        dropLocationsContainer.appendChild(newDropLocation);
-    }
-
     function selectFleet(fleet) {
         const fleets = document.querySelectorAll("#fleets-section");
         fleets.forEach((fleet) => fleet.classList.remove("selected-fleet"));
@@ -623,7 +620,7 @@ function calculateFleetPrice(fleet) {
             meet_greet: document.getElementById('meet_greet').checked ? 1 : 0,
             summary: getElementValue('summary'),
             pickup_location: getElementValue('pickupLocation'),
-            dropoff_location: getElementValue('dropLocation'),
+            dropoff_location:dropoff_location, 
             date_time: getElementValue('date-time'),
             flight_name: getElementValue('flightName'),
             flight_time: getElementValue('flight_time'),
@@ -631,6 +628,7 @@ function calculateFleetPrice(fleet) {
             service_id: service_id,
             fleet_id: Fleet_id,
             total_price: Total_price,
+            payment_method: payment_method,
 
         };
      
@@ -665,6 +663,13 @@ function calculateFleetPrice(fleet) {
                     if(coupon_apply !== ''){
                         StoreCouponCode();
                     }
+                    if(droplocationss > 1){
+                        //show the modal and show the message for via booking please contact to the support
+                        $('#exampleModal').modal('show');
+                        document.getElementById('message').textContent ="Via Booking please contact to the support."
+                        return;
+                    }
+                
                     if (payment_method == 'paypal') {
                         paypalRedirect(data.booking_id);
                     } else if (payment_method == "admin") {
