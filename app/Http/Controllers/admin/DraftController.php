@@ -5,15 +5,14 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-
 use Illuminate\Support\Facades\DB;
 use Exception;
 use App\Http\Requests\AddCouponRequest;
 use App\Http\Requests\UpdateCouponRequest;
 use App\Models\Booking;
 use App\Models\FleetTax;
-
 use App\Models\Coupon;
+
 class DraftController extends Controller
 {
     
@@ -37,9 +36,6 @@ class DraftController extends Controller
         }
     }
   
-    
-
-
     public function delete($id)
     {
         try {

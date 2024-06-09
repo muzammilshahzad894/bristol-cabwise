@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="d-flex align-items-center mb-4 flex-wrap">
-        <h3 class="me-auto">Draft</h3>
+        <h3 class="me-auto">Draft Bookings</h3>
     </div>
     <div class="row">
         @include('partials.messages')

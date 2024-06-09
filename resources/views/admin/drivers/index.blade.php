@@ -3,9 +3,9 @@
 @section('content')
 <div class="container-fluid">
     <div class="d-flex align-items-center mb-4 flex-wrap">
-        <h3 class="me-auto">Car List</h3>
+        <h3 class="me-auto">Driver List</h3>
         <div>
-            <a href="{{ route('admin.cars.create') }}" class="btn btn-primary me-3 btn-sm"><i class="fas fa-plus me-2"></i>Add New</a>
+            <a href="{{ route('admin.drivers.create') }}" class="btn btn-primary me-3 btn-sm"><i class="fas fa-plus me-2"></i>Add New</a>
         </div>
     </div>
     <div class="row">
@@ -16,25 +16,23 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Image</th>
-                            <th>Max Passengers</th>
-                            <th>Max Suitecases</th>
-                            <th>Max Hand Luggage</th>
+                            <th>Email</th>
+                            <th>Phone </th>
+                            <th>Address </th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if($cars->count())
-                            @foreach($cars as $car)
+                        @if($drivers->count())
+                            @foreach($drivers as $driver)
                                 <tr>
-                                    <td>{{ $car->name }}</td>
-                                    <td><img src="{{ asset('uploads/cars/'.$car->image) }}" alt="{{ $car->type }}" class="img-fluid" width="70"></td>
-                                    <td>{{ $car->max_passengers }}</td>
-                                    <td>{{ $car->max_suitecases }}</td>
-                                    <td>{{ $car->max_hand_luggage }}</td>
+                                    <td>{{ $driver->name }}</td>
+                                    <td> {{ $driver->email }}</td>
+                                    <td> {{ $driver->phone }}</td>
+                                    <td> {{ $driver->address }}</td>
                                     <td>
-                                        <a href="{{ route('admin.cars.edit', $car->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                        <a href="{{ route('admin.cars.delete', $car->id) }}" 
+                                        <a href="{{ route('admin.drivers.edit', $driver->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('admin.drivers.delete', $driver->id) }}" 
                                         class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
@@ -48,7 +46,7 @@
                 </table>
             </div>
             <div class="d-flex justify-content-center mt-3">
-                {{ $cars->links() }}
+                {{ $drivers->links() }}
             </div>
         </div>
     </div>

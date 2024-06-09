@@ -3,12 +3,12 @@
 @section('content')
 <div class="container-fluid">
     <div class="d-flex align-items-center mb-4 flex-wrap">
-        <h3 class="me-auto">Draft</h3>
+        <h3 class="me-auto">Bookings</h3>
     </div>
     <div class="row">
         @include('partials.messages')
         <div class="col-xl-12">
-            <div class="table-responsive">
+            <div class="table-responsive" style="overflow-x: auto;">
                 <table class="table display mb-4 dataTablesCard job-table table-responsive-xl card-table" id="example5">
                     <thead>
                         <tr>
@@ -21,6 +21,7 @@
                             <th>Date</th>
                             <th>Time</th>
                             <th>Status</th>
+                            <th>Assign To</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -44,6 +45,19 @@
                                         @else
                                             <span class="badge bg-danger">Rejected</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('admin.confirm.assign', $draft->id) }}" method="POST">
+                                            @csrf
+                                            <select name="assigned_to" class="form-control">
+                                                <option value="">Select Driver</option>
+                                                @foreach($drivers as $driver)
+                                                    <option value="{{ $driver->id }}">{{ $driver->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <button type="submit" class="btn btn-primary btn-sm mt-2">Assign</button>
+                                        </form>
+                                    </td>
                                     <td>
                                         @if($draft->status == 0)
                                         <form action="{{ route('admin.confirm.update', $draft->id) }}" method="POST">
@@ -57,11 +71,7 @@
                                             <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
                                         </form>
                                         @endif
-                                    </td>
-                                    
-                                    
-
-                                      
+                                    </td>  
                                 </tr>
                             @endforeach
                         @else

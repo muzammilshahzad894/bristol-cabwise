@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\DraftController;
 use App\Http\Controllers\admin\ConfirmUserController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\EmailController;
+use App\Http\Controllers\admin\DriverController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/optimize', function () {
@@ -86,6 +87,7 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/', [ConfirmUserController::class, 'index'])->name('admin.confirm.index');
         Route::get('/delete/{id}', [ConfirmUserController::class, 'delete'])->name('admin.confirm.delete');
         Route::post('/update/{id}', [ConfirmUserController::class, 'update'])->name('admin.confirm.update');
+        Route::post('/assign/{id}', [ConfirmUserController::class, 'assign'])->name('admin.confirm.assign');
     });
     Route::prefix('admin/settings')->group(function () {
         Route::get('/', [SettingController::class, 'index'])->name('admin.settings.index');
@@ -97,5 +99,13 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/cancel-booking', [EmailController::class, 'cancelBooking'])->name('admin.emails.cancel-booking');
         Route::post('/reminder-booking', [EmailController::class, 'reminderBooking'])->name('admin.emails.reminder-booking');
         Route::post('/thank-you-feedback', [EmailController::class, 'feedback'])->name('admin.emails.thank-you-feedback');
+    });
+    Route::prefix('admin/drivers')->group(function () {
+        Route::get('/', [DriverController::class, 'index'])->name('admin.drivers.index');
+        Route::get('/create', [DriverController::class, 'create'])->name('admin.drivers.create');
+        Route::post('/create', [DriverController::class, 'store'])->name('admin.drivers.store');
+        Route::get('/edit/{id}', [DriverController::class, 'edit'])->name('admin.drivers.edit');
+        Route::post('/update/{id}', [DriverController::class, 'update'])->name('admin.drivers.update');
+        Route::get('/delete/{id}', [DriverController::class, 'delete'])->name('admin.drivers.delete');
     });
 });

@@ -12,8 +12,9 @@ use App\Http\Requests\AddCouponRequest;
 use App\Http\Requests\UpdateCouponRequest;
 use App\Models\Booking;
 use App\Models\FleetTax;
-
+use App\Models\User;
 use App\Models\Coupon;
+
 class ConfirmUserController extends Controller
 {
     
@@ -21,15 +22,14 @@ class ConfirmUserController extends Controller
     {
         try {
             $draftUsers  = Booking::where('is_payment', 1)->paginate(10);
-            return view('admin.users.index', compact('draftUsers'));
+            $drivers = User::where('role', 'driver')->get();
+            return view('admin.users.index', compact('draftUsers', 'drivers'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
  
- 
-
     public function delete($id)
     {
         try {
@@ -58,6 +58,26 @@ class ConfirmUserController extends Controller
             return redirect()->back()->with('success', 'Booking status updated successfully');
             }
             
+        } catch (Exception $e) {
+            Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
+    }
+
+    public function assign(Request $request, $id)
+    {
+        try {
+            $Booking = Booking::find($id);
+            
+            if (!$Booking) {
+                return redirect()->back()->with('error', 'Booking not found');
+            }
+            $assigned_to = intval($request->input('assigned_to'));
+            if($Booking->assigned_to != $assigned_to){
+                $Booking->assigned_to = $assigned_to;
+                $Booking->save();
+                return redirect()->back()->with('success', 'Booking assigned successfully');
+            }
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
