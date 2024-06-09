@@ -16,7 +16,6 @@ class CarsController extends Controller
     {
         try {
             $services = Service::all();
-            $coupon = Coupon::latest()->first();
             $fleets = Fleet::all();
             return view('frontend.index', compact('services', 'fleets', 'coupon'));
         } catch (\Exception $e) {

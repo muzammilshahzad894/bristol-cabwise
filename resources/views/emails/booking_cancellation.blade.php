@@ -36,13 +36,13 @@
     <div class="container my-4">
         <div class="card">
             <div class="card-header bg-danger text-white">
-                <img src="./logo-light.png" style="height: 40px; width: 40px;" />
-              
-              
+                <img src="{{ asset('frontend-assets/img/logo-light.png') }}" alt="logo"
+                 style="height: 40px; width: 40px;"/>
             </div>
+            
             <div class="card-body">
                 <div style="display: flex;justify-content: center;width: 100%;margin-bottom: 20px;">
-                    <h3 style="color: white;">Thank You for Choosing Our Service</h3>
+                    <h3 style="color: white;">Booking Alert</h3>
                 </div>
                 <p>Dear shoaib,</p>
                 <p>We regret to inform you that your booking has been cancelled. Here are the details:</p>

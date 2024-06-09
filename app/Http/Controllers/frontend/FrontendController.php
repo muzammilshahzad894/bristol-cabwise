@@ -8,11 +8,21 @@ use App\Models\Service;
 use App\Models\Booking;
 use App\Models\Refund;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\HelperController;
+use App\Services\EmailService;
+use Carbon\Carbon;
 
 class FrontendController extends Controller
 {
+
+      public function __construct(EmailService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
+
     public function about()
     {
         return view('frontend.about');
@@ -92,11 +102,9 @@ class FrontendController extends Controller
             $user_id = auth()->user()->id;
             $booking_id = $request->booking_id;
             $check = Refund::where('user_id', $user_id)->where('booking_id', $booking_id)->first();
-    
             if ($check) {
                 return redirect()->back()->with('error', 'You already sent the refund request for this booking');
             }
-    
             $refund = new Refund();
             $refund->user_id = $user_id;
             $refund->booking_id = $booking_id;
@@ -106,10 +114,25 @@ class FrontendController extends Controller
             $refund->bank_name = $request->bank_name;
             $refund->reason = $request->reason;
             $refund->save();
+       
+            $user = User::find($user_id);
+            $booking = Booking::find($booking_id);
+            $refund_amount = $booking->total_price;
+            
+            $bookingDetails = (object) [
+                'userName' => $user->name,
+                'bookingId' => $booking->id,
+                'email' => $request->email,
+                'accountNumber' => $request->account_number,
+                'bankName' => $request->bank_name,
+                'refundAmount' => $refund_amount,
+                'reason' => $request->reason,
+            ];
+            $this->emailService->sendRefundRequest($user, $bookingDetails);
+            
     
             return redirect()->back()->with('success', 'Refund request sent successfully');
         } catch (\Exception $e) {
-            // Log the exception
             Log::error('Refund Request Error: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong while processing your request');
         }
@@ -137,6 +160,7 @@ class FrontendController extends Controller
         }
     }
 
+  
 
 
 
