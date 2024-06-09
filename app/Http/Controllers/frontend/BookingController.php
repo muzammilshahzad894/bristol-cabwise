@@ -102,6 +102,7 @@ class BookingController extends Controller
             $booking->flight_type = $request->flight_type;
             $booking->total_price = $request->total_price;
             $booking->service_id = $request->service_id;
+            $booking->payment_method = $request->payment_method;
             $booking->save();
             $bookingId = $booking->id;
             return response()->json(['booking_id' => $bookingId]);
