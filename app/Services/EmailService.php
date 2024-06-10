@@ -19,7 +19,6 @@ class EmailService
             'pickupLocation' => $bookingDetails->pickupLocation,
             'dropoffLocation' => $bookingDetails->dropoffLocation,
             'pickupDateTime' => $bookingDetails->pickupDateTime,
-            'dropoffDateTime' => $bookingDetails->dropoffDateTime,
         ];
 
         Mail::to($user->email)->send(new BookingConfirmationMail($data));

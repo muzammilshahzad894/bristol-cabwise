@@ -79,7 +79,7 @@
                 <p>We will process your request and notify you once it has been completed. If you have any questions, please contact our support team at 07533225970.</p>
             </div>
             <div class="footer">
-                <p class="copyText">&copy; 2024 Your Company. All rights reserved.</p>
+                <p class="copyText">&copy; {{ date('Y') }} BristolCabwise Service. All rights reserved.</p>
             </div>
         </div>
     </div>

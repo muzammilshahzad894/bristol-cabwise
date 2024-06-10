@@ -36,7 +36,7 @@
     <div class="container my-4">
         <div class="card">
             <div class="card-header bg-danger text-white">
-                <img src="./logo-light.png" style="height: 40px; width: 40px;" />
+                <img src="{{ asset('frontend-assets/img/logo-light.png') }}" alt="logo" style="height: 40px; width: 40px;" />
             </div>
             <div class="card-body">
                 <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 20px;">
@@ -46,22 +46,22 @@
                 <p>Thank you for booking a car pick-up and drop-off service with us. Here are your booking details:</p>
                 <table class="table">
                     <tr>
-                        <th>Booking ID</th>
-                        <td>{{ $bookingId }}</td>
+                        <th>Pick-up Location</th>
+                        <td>{{ $pickupLocation }}</td>
                     </tr>
                     <tr>
-                        <th>Reason</th>
-                        <td>{{ $reason }}</td>
+                        <th>Drop-off Location</th>
+                        <td>{{ $dropoffLocation }}</td>
                     </tr>
                     <tr>
-                        <th>Request Date</th>
-                        <td>{{ $requestDate }}</td>
+                        <th>Pick-up Date & Time</th>
+                        <td>{{ $pickupDateTime }}</td>
                     </tr>
                 </table>
                 <p>We will process your request and notify you once it has been completed. If you have any questions, please contact our support team at 07533225970.</p>
             </div>
             <div class="footer">
-                <p class="copyText">&copy; 2024 Your Company. All rights reserved.</p>
+                <p class="copyText">&copy; {{ date('Y') }} BristolCabwise Service. All rights reserved.</p>
             </div>
         </div>
     </div>

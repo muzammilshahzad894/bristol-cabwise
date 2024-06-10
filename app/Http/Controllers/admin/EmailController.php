@@ -90,11 +90,12 @@ class EmailController extends Controller
     }
 
     public function bookingDetails() {
+        $pickupDateTime = Carbon::createFromFormat('Y-m-d H:i', '2021-12-01 10:00:00');
+
         return (object) [
             'pickupLocation' => 'Airport',
             'dropoffLocation' => 'Hotel',
-            'pickupDateTime' => '2021-12-01 10:00:00',
-            'dropoffDateTime' => '2021-12-01 12:00:00',
+            'pickupDateTime' => $pickupDateTime->format('l, F j, Y, g:i A'),
         ];
     }
 }

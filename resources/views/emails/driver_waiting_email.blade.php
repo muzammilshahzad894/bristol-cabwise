@@ -45,7 +45,7 @@
                         <p><strong>Car Pick and Drop Service Team</strong></p>
                     </div>
                     <div class="card-footer text-center">
-                        <small>&copy; {{ date('Y') }} Car Pick and Drop Service. All rights reserved.</small>
+                        <p class="copyText">&copy; {{ date('Y') }} BristolCabwise Service. All rights reserved.</p>
                     </div>
                 </div>
             </div>

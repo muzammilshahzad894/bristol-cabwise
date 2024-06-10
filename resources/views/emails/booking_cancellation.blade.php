@@ -80,7 +80,7 @@
              
             </div>
             <div class="footer">
-                <p class="copyText">&copy; 2024 Your Company. All rights reserved.</p>
+                <p class="copyText">&copy; {{ date('Y') }} BristolCabwise Service. All rights reserved.</p>
             </div>
         </div>
     </div>

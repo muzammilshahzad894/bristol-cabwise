@@ -9,22 +9,16 @@ use App\Models\Booking;
 use App\Models\User;
 use App\Services\EmailService;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
-
-
-
-
-    
     public function __construct(EmailService $emailService)
     {
         $this->emailService = $emailService;
     }
 
-
     public function createCheckoutSession($id, Request $request)
-    
     {
         Stripe::setApiKey(config('services.stripe.secret'));
         $booking = Booking::find($id);
@@ -48,10 +42,12 @@ class PaymentController extends Controller
 
         return response()->json(['id' => $session->id]);
     }
-public function showStripePaymentPage($id)
-{
-    return view('create-checkout-session', ['bookingId' => $id]);
-}
+    
+    public function showStripePaymentPage($id)
+    {
+        return view('create-checkout-session', ['bookingId' => $id]);
+    }
+
     public function paymentSuccess($id)
     {
         $booking = Booking::find($id);
@@ -61,16 +57,18 @@ public function showStripePaymentPage($id)
             $booking->save();
             $bookingName =$booking->pickup_location;
             $user = User::find($booking->user_id);
+
+            $pickupDateTime = Carbon::createFromFormat('Y-m-d H:i', $booking->booking_date . ' ' . $booking->booking_time);
       
             $bookingDetails = (object) [
                 'pickupLocation' => $booking->pickup_location,
                 'dropoffLocation' => $booking->dropoff_location,
-                'pickupDateTime' => $booking->booking_date . ' ' . $booking->booking_time,
-                'dropoffDateTime' => $booking->dropoff_date . ' ' . $booking->dropoff_time,
+                'pickupDateTime' => $pickupDateTime->format('l, F j, Y, g:i A'),
             ];
-        $this->emailService->sendBookingConfirmation($user, $bookingDetails);
+
+            $this->emailService->sendBookingConfirmation($user, $bookingDetails);
             
-        Log::info('Payment successful, redirecting to booking success page.');
+            Log::info('Payment successful, redirecting to booking success page.');
             return redirect()->route('booking.success')->with('success', 'Payment successful.');
         } else {
             // If the booking does not exist, redirect back with an error message
