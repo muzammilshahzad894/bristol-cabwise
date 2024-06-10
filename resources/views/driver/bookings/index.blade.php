@@ -43,6 +43,7 @@
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <li><a class="dropdown-item" href="{{ route('driver.booking.status', ['booking' => $booking->id, 'status' => 'pending']) }}">Pending</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('driver.booking.status', ['booking' => $booking->id, 'status' => 'start']) }}">Start</a></li>
                                                 <li><a class="dropdown-item" href="{{ route('driver.booking.status', ['booking' => $booking->id, 'status' => 'completed']) }}">Completed</a></li>
                                                 <li><a class="dropdown-item" href="{{ route('driver.booking.status', ['booking' => $booking->id, 'status' => 'cancelled']) }}">Cancelled</a></li>
                                             </ul>

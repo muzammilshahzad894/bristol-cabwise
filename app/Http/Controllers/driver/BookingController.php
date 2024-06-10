@@ -39,6 +39,19 @@ class BookingController extends Controller
             $booking = Booking::find($bookingId);
             $booking->ride_status = $status;
             $booking->save();
+
+            $data = [
+                'userName' => $booking->name,
+                'email' => $booking->email,
+                'pickupLocation' => $booking->pickup_location,
+                'dropoffLocation' => $booking->dropoff_location,
+                'pickupDateTime' => Carbon::createFromFormat('Y-m-d H:i', $booking->booking_date . ' ' . $booking->booking_time)->format('l, F j, Y, g:i A'),
+                'driverName' => $booking->driver->name,
+                'driverContact' => $booking->driver->phone,
+                'status' => $status,
+            ];
+
+            $this->emailService->sendBookingStatusEmail($data);
             return redirect()->back()->with('success', 'Status updated successfully');
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());

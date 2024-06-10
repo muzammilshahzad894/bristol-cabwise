@@ -8,6 +8,7 @@ use App\Mail\BookingReminderMail;
 use App\Mail\ThankYouFeedbackMail;
 use App\Mail\RefundMail;
 use App\Mail\DriverWaitingEmail;
+use App\Mail\BookingStatusMail;
 use Illuminate\Support\Facades\Mail;
 
 class EmailService
@@ -87,5 +88,20 @@ class EmailService
         ];
 
         Mail::to($bookingDetails['email'])->send(new DriverWaitingEmail($data));
+    }
+
+    public function sendBookingStatusEmail($bookingDetails)
+    {
+        $data = [
+            'userName' => $bookingDetails['userName'],
+            'pickupLocation' => $bookingDetails['pickupLocation'],
+            'dropoffLocation' => $bookingDetails['dropoffLocation'],
+            'pickupDateTime' => $bookingDetails['pickupDateTime'],
+            'driverName' => $bookingDetails['driverName'],
+            'driverContact' => $bookingDetails['driverContact'],
+            'status' => $bookingDetails['status'],
+        ];
+
+        Mail::to($bookingDetails['email'])->send(new BookingStatusMail($data));
     }
 }
