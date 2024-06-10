@@ -52,7 +52,7 @@
                                             <select name="assigned_to" class="form-control">
                                                 <option value="">Select Driver</option>
                                                 @foreach($drivers as $driver)
-                                                    <option value="{{ $driver->id }}">{{ $driver->name }}</option>
+                                                    <option value="{{ $driver->id }}" {{ $driver->id == $draft->assigned_to ? 'selected' : '' }}>{{ $driver->name }}</option>
                                                 @endforeach
                                             </select>
                                             <button type="submit" class="btn btn-primary btn-sm">Assign</button>
