@@ -25,6 +25,8 @@ class SettingRequest extends FormRequest
     {
         return [
             'min_booking_hours' => 'required',
+            'parking_charges' => 'required',
+            'parking_charges_per_hour' => 'required',
         ];
     }
 }
