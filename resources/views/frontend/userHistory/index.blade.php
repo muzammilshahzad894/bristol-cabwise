@@ -61,9 +61,9 @@
                                             <td>{{ $booking->dropoff_location }}</td>
                                             <td>{{ $booking->booking_date }}</td>
                                             <td>{{ $booking->booking_time }}</td>
-                                            <td>{{ $booking->other_person_name }}</td>
-                                            <td>{{ $booking->other_person_phone }}</td>
-                                            <td>{{ $booking->other_person_email }}</td>
+                                            <td>{{ $booking->other_name }}</td>
+                                            <td>{{ $booking->other_phone_number }}</td>
+                                            <td>{{ $booking->other_email }}</td>
                         
                                             @php 
                                             $service = \App\Models\Service::find($booking->service_id);
@@ -89,7 +89,15 @@
                                                 <span class="badge badge-danger">No</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $booking->flight_type }}</td>
+                                            <td> @if($booking->flight_name != "")
+                                                 {{-- {{ $booking->flight_type }} --}}
+                                                 @if($booking->flight_type == 1)
+                                                    <span class="badge badge-success">Arrival</span>
+                                                @else
+                                                    <span class="badge badge-danger">Departure</span>
+                                                    @endif
+                                                 @endif
+                                                </td>
                                             <td>{{ $booking->flight_name }}</td>
                                             <td>{{ $booking->flight_time }}</td>
                         
