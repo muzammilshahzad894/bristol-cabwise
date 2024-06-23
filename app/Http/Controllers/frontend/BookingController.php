@@ -9,28 +9,28 @@ use App\Models\Fleet;
 use App\Models\FleetTax;
 use App\Models\Booking;
 use App\Models\BlockDate;
+use App\Models\Setting;
 
 class BookingController extends Controller
 {
     public function index()
     {
-        try {
-            
-            $fleets = Fleet::all();
+        try {    
             $user_id = auth()->user()->id;
-            
+            $fleets = Fleet::all();
             $role = auth()->user()->role;
             $blockDates = BlockDate::all()->pluck('date_range')->toArray();
             if($role == 'user')
             {
                 $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
-                
+                $bookingHour = Setting::where('key', 'min_booking_hours')->first();
+                $bookingHours = $bookingHour->value;
             }
             else{
+                $bookingHours = null;
                 $booking_detail = null;
             }
-            
-            return view('frontend.booking.index', compact('fleets', 'booking_detail', 'blockDates'));
+            return view('frontend.booking.index', compact('fleets', 'booking_detail', 'blockDates', 'bookingHours'));
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while fetching bookings');
@@ -47,6 +47,26 @@ class BookingController extends Controller
             return redirect()->back()->with('error', 'An error occurred while fetching fleet details');
         }
     }
+    public function getServiceTax(Request $request)
+    {
+        $serviceId = $request->query('service_id');
+        
+        if (!$serviceId) {
+            return response()->json(['error' => 'Service ID is required'], 400);
+        }
+    
+        $serviceTaxes = FleetTax::where('service_id', $serviceId)->get();
+    
+        if ($serviceTaxes->isEmpty()) {
+            return response()->json(['error' => 'Service taxes not found'], 404);
+        }
+    
+        $totalTax = $serviceTaxes->sum('price');
+    
+        return response()->json(['total_tax' => $totalTax, 'taxes' => $serviceTaxes], 200);
+    }
+
+
     public function store(Request $request)
     {
         try {
@@ -103,6 +123,7 @@ class BookingController extends Controller
             $booking->total_price = $request->total_price;
             $booking->service_id = $request->service_id;
             $booking->payment_method = $request->payment_method;
+            $booking->is_extra_lauggage = $request->extra_lauggage;
             $booking->save();
             $bookingId = $booking->id;
             return response()->json(['booking_id' => $bookingId]);

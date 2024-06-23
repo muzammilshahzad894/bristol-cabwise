@@ -80,6 +80,28 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <h4>Tax Section</h4>
+                                <div id="taxes-section">
+                                    @foreach($fleetTaxes as $index => $tax)
+                                        <div class="tax-row row">
+                                            <div class="mb-3 col-md-5">
+                                                <label class="form-label">Tax Name</label>
+                                                <input type="text" name="taxes[{{ $index }}][name]" class="form-control" placeholder="Tax Name" value="{{ $tax->name }}">
+                                            </div>
+                                            <div class="mb-3 col-md-5">
+                                                <label class="form-label">Tax Price</label>
+                                                <input type="text" name="taxes[{{ $index }}][price]" class="form-control" placeholder="Tax Price" value="{{ $tax->price }}" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn btn-danger mt-4" onclick="removeTaxRow(this)">Remove</button>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-success mb-3" onclick="addTaxRow()">Add Tax</button>
+                                </div>
+                                <hr>
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>
@@ -88,4 +110,42 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    let taxIndex = {{ count($fleetTaxes) }};
+
+    function addTaxRow() {
+        const taxSection = document.getElementById('taxes-section');
+        const newTaxRow = document.createElement('div');
+        newTaxRow.classList.add('tax-row', 'row');
+
+        newTaxRow.innerHTML = `
+            <div class="mb-3 col-md-5">
+                <label class="form-label">Tax Name</label>
+                <input type="text" name="taxes[${taxIndex}][name]" class="form-control" placeholder="Tax Name">
+            </div>
+            <div class="mb-3 col-md-5">
+                <label class="form-label">Tax Price</label>
+                <input type="text" name="taxes[${taxIndex}][price]" class="form-control" placeholder="Tax Price" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger mt-4" onclick="removeTaxRow(this)">Remove</button>
+            </div>
+        `;
+        taxSection.appendChild(newTaxRow);
+        taxIndex++;
+    }
+
+    function removeTaxRow(button) {
+        const row = button.parentElement.parentElement;
+        row.remove();
+    }
+
+    document.getElementById('meetAndGreetCheckbox').addEventListener('change', function() {
+        const meetGreetPriceSec = document.getElementById('meet_greet_price_sec');
+        meetGreetPriceSec.style.display = this.checked ? '' : 'none';
+    });
+</script>
 @endsection

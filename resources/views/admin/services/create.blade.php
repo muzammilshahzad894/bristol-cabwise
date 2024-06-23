@@ -43,6 +43,7 @@
                                     @enderror
                                 </div>
                                 <hr>
+                               
                                 <!-- Detail Page section -->
                                 <h4>Detail Page Data</h4>
                                 <div class="mb-3 col-md-6">
@@ -80,6 +81,14 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <h4>Tax Section</h4>
+                                <div id="taxes-section">
+                                    
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-success mb-3" onclick="addTaxRow()">Add Tax</button>
+                                </div>
+                                <hr>
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </form>
@@ -89,6 +98,49 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('scripts')
+<script>
+    let taxIndex = 0;
+
+    function addTaxRow() {
+        const taxSection = document.getElementById('taxes-section');
+        const newTaxRow = document.createElement('div');
+        newTaxRow.classList.add('tax-row', 'row');
+
+        newTaxRow.innerHTML = `
+            <div class="mb-3 col-md-5">
+                <label class="form-label">Tax Name</label>
+                <input type="text" name="taxes[${taxIndex}][name]" class="form-control" placeholder="Tax Name">
+                <div class="tax-name-error[${taxIndex}] text-danger"></div>
+            </div>
+            <div class="mb-3 col-md-5">
+                <label class="form-label">Tax Price</label>
+                <input type="number" name="taxes[${taxIndex}][price]" class="form-control" placeholder="Tax Price" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <div class="tax-price-error[${taxIndex}] text-danger"></div>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger mt-4" onclick="removeTaxRow(this)">Remove</button>
+            </div>
+        `;
+
+        taxSection.appendChild(newTaxRow);
+        taxIndex++;
+    }
+
+    function removeTaxRow(button) {
+        const row = button.parentElement.parentElement;
+        row.remove();
+    }
+
+    // hide and show meet and greet price field
+    document.getElementById('meetAndGreetCheckbox').addEventListener('change', function() {
+        const meetGreetPriceSec = document.getElementById('meet_greet_price_sec');
+        meetGreetPriceSec.style.display = this.checked ? '' : 'none';
+    });
+</script>
 @endsection
 
 <!-- $table->string('detail_page_tag')->nullable();

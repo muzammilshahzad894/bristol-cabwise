@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Facades\DB;
 use Exception;
-
+use Carbon\Carbon;
 use App\Models\Coupon;
 use App\Models\UsedCoupon;
 class ApplyCouponController extends Controller
@@ -28,6 +28,10 @@ class ApplyCouponController extends Controller
         if ($usedCoupon) {
             return response()->json(['error' => 'Coupon has already been used'], 400);
         }
+        if (Carbon::parse($coupon->date)->isBefore(now())) {
+            return response()->json(['error' => 'Coupon has expired'], 400);
+        }
+
         $discount = $coupon->discount;
 
         return response()->json(['discount' => $discount]);

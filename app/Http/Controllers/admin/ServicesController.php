@@ -9,6 +9,7 @@ use Exception;
 use App\Http\Requests\AddServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Models\Service;
+use App\Models\FleetTax;
 
 class ServicesController extends Controller
 {
@@ -48,6 +49,8 @@ class ServicesController extends Controller
             $service->detail_page_description = $request->detail_page_description;
             $service->detail_page_features = $request->detail_page_features;
             $service->save();
+
+            $this->storeTaxes($request, $service);
             return redirect()->route('admin.services.index')->with('success', 'Service added successfully');
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
@@ -58,8 +61,10 @@ class ServicesController extends Controller
     public function edit($id)
     {
         try {
+            
+            $fleetTaxes = FleetTax::where('service_id', $id)->get();
             $service = Service::find($id);
-            return view('admin.services.edit', compact('service'));
+            return view('admin.services.edit', compact('service', 'fleetTaxes'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
@@ -86,6 +91,7 @@ class ServicesController extends Controller
             $service->detail_page_description = $request->detail_page_description;
             $service->detail_page_features = $request->detail_page_features;
             $service->save();
+            $this->storeTaxes($request, $service);
             return redirect()->route('admin.services.index')->with('success', 'Service updated successfully');
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
@@ -102,6 +108,23 @@ class ServicesController extends Controller
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
+        }
+    }
+    
+    private function storeTaxes($request, $service)
+    {
+        if ($request->has('taxes')) {
+            foreach ($request->taxes as $tax) {
+                
+                if (!empty($tax['name']) && !empty($tax['price'])) {
+                    $fleetTax = new FleetTax();
+                    $fleetTax->service_id = $service->id;
+                    $fleetTax->fleet_id = 0;
+                    $fleetTax->name = $tax['name'];
+                    $fleetTax->price = $tax['price'];
+                    $fleetTax->save();
+                }
+            }
         }
     }
 }

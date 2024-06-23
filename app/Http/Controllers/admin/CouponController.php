@@ -41,9 +41,10 @@ class CouponController extends Controller
     {
      
         try {
+            $date = $request->date ?? "";
             $coupon = new Coupon();
             $coupon->name = $request->name;
-            $coupon->date = $request->date;
+            $coupon->date = $date;
             $coupon->code = $request->code;
             $coupon->discount = $request->discount;
             $coupon->description = $request->description;
@@ -68,8 +69,9 @@ class CouponController extends Controller
     public function update($id , UpdateCouponRequest $request){
         try{
             $date = Coupon::find($id);
+            $updateDate = $request->date ?? "";
             $date->name = $request->name;
-            $date->date = $request->date;
+            $date->date = $updateDate;
             $date->code = $request->code;
             $date->discount = $request->discount;
             $date->description = $request->description;
