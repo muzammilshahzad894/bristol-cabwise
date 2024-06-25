@@ -33,19 +33,21 @@
                                     <td> {{ $booking->phone_number }}</td>
                                     <td> {{ $booking->pickup_location }}</td>
                                     <td> {{ $booking->dropoff_location }}</td>
-                                    <td> {{ $booking->total_price }}£</td>
+                                    <td> £{{ $booking->total_price }}</td>
                                     <td> {{ $booking->booking_date }}</td>
                                     <td> {{ $booking->booking_time }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                                {{ $booking->ride_status }}
+                                            <?php
+                                                $status = App\Models\Status::find($booking->status_id);
+                                            ?>
+                                            {{ $status->name }}
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <li><a class="dropdown-item" href="{{ route('driver.booking.status', ['booking' => $booking->id, 'status' => 'pending']) }}">Pending</a></li>
-                                                <li><a class="dropdown-item" href="{{ route('driver.booking.status', ['booking' => $booking->id, 'status' => 'start']) }}">Start</a></li>
-                                                <li><a class="dropdown-item" href="{{ route('driver.booking.status', ['booking' => $booking->id, 'status' => 'completed']) }}">Completed</a></li>
-                                                <li><a class="dropdown-item" href="{{ route('driver.booking.status', ['booking' => $booking->id, 'status' => 'cancelled']) }}">Cancelled</a></li>
+                                                @foreach($statuses as $status)
+                                                    <li><a class="dropdown-item" href="{{ route('driver.booking.status', ['booking' => $booking->id, 'status' => $status->id]) }}">{{ $status->name }}</a></li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </td>

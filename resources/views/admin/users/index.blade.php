@@ -1,10 +1,80 @@
 @extends('layouts.admin.app')
 
+@section('styles')
+    <style>
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-item {
+            flex: 0 0 150px;
+        }
+
+        .filter-item label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .filter-item input,
+        .filter-item select {
+            width: 100%;
+        }
+
+        .filter-item button {
+            width: 100%;
+        }
+
+        @media (max-width: 350px) {
+            .filter-item {
+                flex: 1 1 100%;
+            }
+
+            .filter-item button {
+                margin-top: 10px;
+            }
+        }
+    </style>
+@endsection
+
 @section('content')
 <div class="container-fluid">
-    <div class="d-flex align-items-center mb-4 flex-wrap">
-        <h3 class="me-auto">Bookings</h3>
+    <div class="d-flex flex-column mb-4">
+        <h3 class="mb-3">Bookings</h3>
+        <!-- Filters -->
+        <div class="filter">
+            <form action="{{ route('admin.confirm.index') }}" method="GET">
+                <div class="filters-container">
+                    <div class="filter-item">
+                        <label for="date">date</label>
+                        <input type="date" name="date" id="date" class="form-control" value="{{ request()->date }}">
+                    </div>
+                    <div class="filter-item">
+                        <label for="from_time">From Time</label>
+                        <input type="time" name="from_time" id="from_time" class="form-control" value="{{ request()->from_time }}">
+                    </div>
+                    <div class="filter-item">
+                        <label for="to_time">To Time</label>
+                        <input type="time" name="to_time" id="to_time" class="form-control" value="{{ request()->to_time }}">
+                    </div>
+                    <div class="filter-item">
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="" selected>Select Status</option>
+                            @foreach($statuses as $status)
+                                <option value="{{ $status->id }}" {{ request()->status == $status->id ? 'selected' : '' }}>{{ $status->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <button type="submit" class="btn btn-primary mt-4">Filter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
+
     <div class="row">
         @include('partials.messages')
         <div class="col-xl-12">
@@ -30,21 +100,18 @@
                             @foreach($draftUsers as $draft)
                                 <tr>
                                     <td>{{ $draft->name }}</td>
-                                    <td> {{ $draft->email }}</td>
-                                    <td> {{ $draft->phone_number }}</td>
-                                    <td> <div class="max-content-display"> {{ $draft->pickup_location }}</div></td>
-                                    <td> <div class="max-content-display"> {{ $draft->dropoff_location }}</div></td>
-                                    <td> {{ $draft->total_price }}£</td>
-                                    <td> {{ $draft->booking_date }}</td>
-                                    <td> {{ $draft->booking_time }}</td>
+                                    <td>{{ $draft->email }}</td>
+                                    <td>{{ $draft->phone_number }}</td>
+                                    <td> <div class="max-content-display">{{ $draft->pickup_location }}</div></td>
+                                    <td> <div class="max-content-display">{{ $draft->dropoff_location }}</div></td>
+                                    <td>£{{ $draft->total_price }}</td>
+                                    <td>{{ $draft->booking_date }}</td>
+                                    <td>{{ $draft->booking_time }}</td>
                                     <td>
-                                        @if($draft->status == 0)
-                                            <span class="badge bg-warning">Pending</span>
-                                        @elseif($draft->status == 1)
-                                            <span class="badge bg-success">Confirmed</span>
-                                        @else
-                                            <span class="badge bg-danger">Rejected</span>
-                                        @endif
+                                        <?php
+                                            $status = getStatusDetails($draft->status_id);
+                                        ?>
+                                        <span class="badge {{ $status->bg_color }}">{{ $status->name }}</span>
                                     </td>
                                     <td>
                                         <form action="{{ route('admin.confirm.assign', $draft->id) }}" method="POST" class="select_driver">
@@ -58,27 +125,33 @@
                                             <button type="submit" class="btn btn-primary btn-sm">Assign</button>
                                         </form>
                                     </td>
-                                    <td class="">
+                                    <td class="text-nowrap">
+                                        <div class="btn-group" role="group" aria-label="Action Buttons">
+                                            <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                            <a href="#" class="btn btn-danger btn-sm mx-sm-1"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                    <!-- <td class="">
                                         <div class="accept_reject">
-                                        @if($draft->status == 0)
-                                        <form action="{{ route('admin.confirm.update', $draft->id) }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="status" value="1">
-                                            <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
-                                        </form>
-                                        <form action="{{ route('admin.confirm.update', $draft->id) }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="status" value="2">
-                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
-                                        </form>
-                                        @endif
-                                    </div>
-                                    </td>  
+                                            @if($draft->status == 0)
+                                            <form action="{{ route('admin.confirm.update', $draft->id) }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="status" value="1">
+                                                <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+                                            </form>
+                                            <form action="{{ route('admin.confirm.update', $draft->id) }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="status" value="2">
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
+                                            </form>
+                                            @endif
+                                        </div>
+                                    </td> -->
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5" class="text-center">No Records Found</td>
+                                <td colspan="11" class="text-center">No Records Found</td>
                             </tr>
                         @endif
                     </tbody>

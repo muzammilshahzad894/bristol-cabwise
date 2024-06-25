@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Booking;
+use App\Models\Status;
 use App\Services\EmailService;
 use Carbon\Carbon;
 
@@ -26,19 +27,22 @@ class BookingController extends Controller
         try {
             $user = Auth::user();
             $bookings  = Booking::where('assigned_to', $user->id)->paginate(10);
-            return view('driver.bookings.index', compact('bookings'));
+            $statuses = Status::all();
+            return view('driver.bookings.index', compact('bookings', 'statuses'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
 
-    public function updateStatus($bookingId, $status)
+    public function updateStatus($bookingId, $statusId)
     {
         try {
             $booking = Booking::find($bookingId);
-            $booking->ride_status = $status;
+            $booking->status_id = $statusId;
             $booking->save();
+
+            $statusDetails = getStatusDetails($statusId);
 
             $data = [
                 'userName' => $booking->name,
@@ -48,7 +52,7 @@ class BookingController extends Controller
                 'pickupDateTime' => Carbon::createFromFormat('Y-m-d H:i', $booking->booking_date . ' ' . $booking->booking_time)->format('l, F j, Y, g:i A'),
                 'driverName' => $booking->driver->name,
                 'driverContact' => $booking->driver->phone,
-                'status' => $status,
+                'status' => $statusDetails->name,
             ];
 
             $this->emailService->sendBookingStatusEmail($data);

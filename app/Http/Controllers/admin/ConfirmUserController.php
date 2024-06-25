@@ -14,16 +14,36 @@ use App\Models\Booking;
 use App\Models\FleetTax;
 use App\Models\User;
 use App\Models\Coupon;
+use App\Models\Status;
 
 class ConfirmUserController extends Controller
-{
-    
-    public function index()
+{    
+    public function index(Request $request)
     {
         try {
-            $draftUsers  = Booking::where('is_payment', 1)->paginate(10);
+            $draftUsers  = Booking::where('is_payment', 1);
             $drivers = User::where('role', 'driver')->get();
-            return view('admin.users.index', compact('draftUsers', 'drivers'));
+            $statuses = Status::all();
+
+            if (isset($request->date) && !empty($request->date)) {
+                $draftUsers = $draftUsers->where('booking_date', $request->date);
+            }
+
+            if (isset($request->from_time) && !empty($request->from_time)) {
+                $draftUsers = $draftUsers->where('booking_time', '>=', $request->from_time);
+            }
+
+            if (isset($request->to_time) && !empty($request->to_time)) {
+                $draftUsers = $draftUsers->where('booking_time', '<=', $request->to_time);
+            }
+
+            if (isset($request->status) && !empty($request->status)) {
+                $draftUsers = $draftUsers->where('status_id', $request->status);
+            }
+
+            $draftUsers = $draftUsers->paginate(10);
+
+            return view('admin.users.index', compact('draftUsers', 'drivers', 'statuses'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
