@@ -48,6 +48,7 @@
                                             <th scope="col">Flight Type</th>
                                             <th scope="col">Flight Name</th>
                                             <th scope="col">Flight Time</th>
+                                            <th scope="col">Total Price</th>
                                             <th scope="col">Status</th>
                                         </tr>
                                     </thead>
@@ -100,6 +101,7 @@
                                                 </td>
                                             <td>{{ $booking->flight_name }}</td>
                                             <td>{{ $booking->flight_time }}</td>
+                                            <td>{{ $booking->total_price }}£</td>
                         
                                             @if($booking->status == 0)
                                             <td>Pending</td>

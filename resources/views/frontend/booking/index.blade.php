@@ -12,7 +12,8 @@
         padding: 0;
         margin: 0;
     }
-    .about_car{
+
+    .about_car {
         font-size: 12px;
         color: white;
         margin: 0px;
@@ -152,11 +153,13 @@
                                 <div id="flightId" style="display: none">
                                     <label for="pickupLocation">Flight Name:</label>
                                     <input type="text" name="flightName" placeholder="Enter flight Name"
-                                        class="form-control pickupLocation" id="flightName" @if (isset($booking_detail) && $booking_detail->flight_name != '') value="{{ $booking_detail->flight_name }}" @endif>
+                                        class="form-control pickupLocation" id="flightName"
+                                        @if (isset($booking_detail) && $booking_detail->flight_name != '') value="{{ $booking_detail->flight_name }}" @endif>
                                     <div id="flightName-error" class="error-message text-danger"></div>
                                     <label for="arrival time ">Flight Arrival Time:</label>
                                     <input type="time" name="flight_time" class="input timepicker styled-input"
-                                        placeholder="Arrival Time" id="flight_time" @if (isset($booking_detail) && $booking_detail->flight_time != '') value="{{ $booking_detail->flight_time }}" @endif>
+                                        placeholder="Arrival Time" id="flight_time"
+                                        @if (isset($booking_detail) && $booking_detail->flight_time != '') value="{{ $booking_detail->flight_time }}" @endif>
                                     <div id="flight_time-error" class="error-message text-danger"></div>
                                 </div>
                                 <div>
@@ -364,7 +367,7 @@
                                     <strong>Flight Arrival Time:</strong>
                                     <p id="summary-flight-time"></p>
                                 </div>
-                          
+
                                 <div class="d-flex gap-4">
                                     <strong>Name:</strong>
                                     <p id="summary-name">John Doe</p>
@@ -384,6 +387,10 @@
                                 <div class="d-flex gap-4">
                                     <strong>Child Seat:</strong>
                                     <p id="summary-child-seat">0</p>
+                                </div>
+                                <div class="d-flex gap-4">
+                                    <strong>Meet & Greet:</strong>
+                                    <p id="summary-meets-greets">0</p>
                                 </div>
 
                                 <div class="d-flex gap-4">
@@ -506,15 +513,17 @@
 
                         </div>
                     </form>
+                    <div id="mapMarkplaces"></div>
+
                 </div>
                 <div class="col-md-4" style="border-left: 1px solid #ccc">
 
                     <h3 class="color color_theme">Location</h3>
                     <div class="google-map">
-                        <iframe id="map"
+                        {{-- <iframe id="map"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24301.0311484067!2d-2.6174498609618677!3d51.45451443765247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48719c1653d8c9a9%3A0xb47bdb0a605f0a0!2sBristol%2C%20UK!5e0!3m2!1sen!2s!4v1605382028827!5m2!1sen!2s"
                             width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""
-                            aria-hidden="false" tabindex="0"></iframe>
+                            aria-hidden="false" tabindex="0"></iframe> --}}
 
                         <div id="map"></div>
                     </div>
@@ -581,7 +590,7 @@
                                 <p id="client_url"></p>
                                 <button class="view_details" id="copy_btn" onclick="copyToClipboard()">Copy</button>
                             </div>
-                       
+
                         </div>
                     </div>
 
@@ -653,144 +662,8 @@
     {{-- <script src="{{ asset('frontend-assets/js/google-map.js') }}"></script> --}}
     {{-- <script src="{{ asset('frontend-assets/js/distance.js') }}"></script> --}}
 
-
+{{-- 
     <script>
-        let geocoder;
-let distanceService;
-let originAutocomplete;
-let map;
-let originPlace = null;
-let destinationPlaces = [];
-let distances = [];
-let totalDistance = 0;
-
-$(document).ready(function () {
-    // Initialize Google Maps centered on Sargodha, Pakistan
-    const sargodhaLocation = { lat: 32.0836, lng: 72.6712 };
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: sargodhaLocation,
-        zoom: 13
-    });
-
-    const pickupInput = document.getElementById('pickupLocation');
-    originAutocomplete = new google.maps.places.Autocomplete(pickupInput, {
-        bounds: new google.maps.LatLngBounds(
-            new google.maps.LatLng(32.0000, 72.5000), // South West Corner
-            new google.maps.LatLng(32.1500, 72.8000)  // North East Corner
-        ),
-        componentRestrictions: { country: 'pk' },
-        types: ['geocode']
-    });
-    originAutocomplete.addListener('place_changed', handleOriginPlaceChange);
-
-    geocoder = new google.maps.Geocoder();
-    distanceService = new google.maps.DistanceMatrixService();
-
-    // Initialize the first drop location autocomplete
-    handleDestinationPlaceChange(0);
-});
-
-function handleOriginPlaceChange() {
-    originPlace = originAutocomplete.getPlace();
-    if (!originPlace || !originPlace.geometry || !isPlaceInSargodha(originPlace)) {
-        alert('Invalid pickup location. Please select a valid location within Sargodha.');
-        originPlace = null; // Reset originPlace if it's invalid
-        return;
-    }
-    checkAndCalculateDistances();
-}
-
-function handleDestinationPlaceChange(index) {
-    const input = document.querySelectorAll('#dropLocations input')[index];
-    const autocomplete = new google.maps.places.Autocomplete(input, {
-        bounds: new google.maps.LatLngBounds(
-            new google.maps.LatLng(32.0000, 72.5000), // South West Corner
-            new google.maps.LatLng(32.1500, 72.8000)  // North East Corner
-        ),
-        componentRestrictions: { country: 'pk' },
-        types: ['geocode']
-    });
-    autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        if (!place || !place.geometry || !isPlaceInSargodha(place)) {
-            alert('Invalid drop location. Please select a valid location within Sargodha.');
-            destinationPlaces[index] = null; // Reset the invalid destination place
-            return;
-        }
-        destinationPlaces[index] = place;
-        checkAndCalculateDistances();
-    });
-}
-
-function addMore() {
-    const dropLocationsDiv = document.getElementById('dropLocations');
-    const newDropLocationDiv = document.createElement('div');
-    const newIndex = destinationPlaces.length;
-
-    newDropLocationDiv.className = 'drop-location mb-2';
-    newDropLocationDiv.innerHTML = `
-        <input type="text" id="dropLocation${newIndex}" name="dropLocation[]" placeholder="Enter drop location" class="form-control border-radius-0 mb-0">
-        <div id="drop-error" class="error-message text-danger"></div>
-    `;
-
-    dropLocationsDiv.appendChild(newDropLocationDiv);
-    handleDestinationPlaceChange(newIndex);
-}
-
-function checkAndCalculateDistances() {
-    if (!originPlace || destinationPlaces.length === 0) {
-        return;
-    }
-
-    const allPlaces = [originPlace, ...destinationPlaces].filter(place => place);
-    if (allPlaces.length < 2) {
-        return;
-    }
-
-    totalDistance = 0;
-    distances = [];
-    for (let i = 0; i < allPlaces.length - 1; i++) {
-        const originLatLng = allPlaces[i].geometry.location;
-        const destinationLatLng = allPlaces[i + 1].geometry.location;
-
-        calculateDistance(originLatLng, destinationLatLng, i);
-    }
-}
-
-function calculateDistance(origin, destination, index) {
-    distanceService.getDistanceMatrix({
-        origins: [origin],
-        destinations: [destination],
-        travelMode: google.maps.TravelMode.DRIVING
-    }, (response, status) => {
-        if (status === 'OK') {
-            const distanceValueInMeters = response.rows[0].elements[0].distance.value;
-            const distanceValueInMiles = distanceValueInMeters / 1609.34; // Convert meters to miles
-            distances[index] = distanceValueInMiles;
-            updateTotalDistance();
-        } else {
-            console.error('Error:', status);
-        }
-    });
-}
-
-function updateTotalDistance() {
-    totalDistance = distances.reduce((acc, distance) => acc + distance, 0);
-    const totalDistanceInMiles = totalDistance.toFixed(2);
-    distance = totalDistanceInMiles;
-}
-
-function isPlaceInSargodha(place) {
-    const sargodhaBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(32.0000, 72.5000), // South West Corner
-        new google.maps.LatLng(32.1500, 72.8000)  // North East Corner
-    );
-    return sargodhaBounds.contains(place.geometry.location);
-}
-
-    </script>
-
-    {{-- <script>
         let geocoder;
         let distanceService;
         let originAutocomplete;
@@ -801,20 +674,24 @@ function isPlaceInSargodha(place) {
         let totalDistance = 0;
 
         $(document).ready(function() {
-            // Initialize Google Maps
-            const defaultLocation = {
-                lat: 51.4545,
-                lng: -2.5879
-            }; // Bristol, UK
+            // Initialize Google Maps centered on Sargodha, Pakistan
+            const sargodhaLocation = {
+                lat: 32.0836,
+                lng: 72.6712
+            };
             map = new google.maps.Map(document.getElementById('map'), {
-                center: defaultLocation,
-                zoom: 10
+                center: sargodhaLocation,
+                zoom: 13
             });
 
             const pickupInput = document.getElementById('pickupLocation');
             originAutocomplete = new google.maps.places.Autocomplete(pickupInput, {
+                bounds: new google.maps.LatLngBounds(
+                    new google.maps.LatLng(32.0000, 72.5000), // South West Corner
+                    new google.maps.LatLng(32.1500, 72.8000) // North East Corner
+                ),
                 componentRestrictions: {
-                    country: 'us'
+                    country: 'pk'
                 },
                 types: ['geocode']
             });
@@ -829,8 +706,8 @@ function isPlaceInSargodha(place) {
 
         function handleOriginPlaceChange() {
             originPlace = originAutocomplete.getPlace();
-            if (!originPlace || !originPlace.geometry || !isPlaceInUS(originPlace)) {
-                alert('Invalid pickup location. Please select a valid location in the United States.');
+            if (!originPlace || !originPlace.geometry || !isPlaceInSargodha(originPlace)) {
+                alert('Invalid pickup location. Please select a valid location within Sargodha.');
                 originPlace = null; // Reset originPlace if it's invalid
                 return;
             }
@@ -840,15 +717,19 @@ function isPlaceInSargodha(place) {
         function handleDestinationPlaceChange(index) {
             const input = document.querySelectorAll('#dropLocations input')[index];
             const autocomplete = new google.maps.places.Autocomplete(input, {
+                bounds: new google.maps.LatLngBounds(
+                    new google.maps.LatLng(32.0000, 72.5000), // South West Corner
+                    new google.maps.LatLng(32.1500, 72.8000) // North East Corner
+                ),
                 componentRestrictions: {
-                    country: 'us'
+                    country: 'pk'
                 },
                 types: ['geocode']
             });
             autocomplete.addListener('place_changed', () => {
                 const place = autocomplete.getPlace();
-                if (!place || !place.geometry || !isPlaceInUS(place)) {
-                    alert('Invalid drop location. Please select a valid location in the United States.');
+                if (!place || !place.geometry || !isPlaceInSargodha(place)) {
+                    alert('Invalid drop location. Please select a valid location within Sargodha.');
                     destinationPlaces[index] = null; // Reset the invalid destination place
                     return;
                 }
@@ -899,8 +780,9 @@ function isPlaceInSargodha(place) {
                 travelMode: google.maps.TravelMode.DRIVING
             }, (response, status) => {
                 if (status === 'OK') {
-                    const distanceValue = response.rows[0].elements[0].distance.value;
-                    distances[index] = distanceValue;
+                    const distanceValueInMeters = response.rows[0].elements[0].distance.value;
+                    const distanceValueInMiles = distanceValueInMeters / 1609.34; // Convert meters to miles
+                    distances[index] = distanceValueInMiles;
                     updateTotalDistance();
                 } else {
                     console.error('Error:', status);
@@ -910,22 +792,19 @@ function isPlaceInSargodha(place) {
 
         function updateTotalDistance() {
             totalDistance = distances.reduce((acc, distance) => acc + distance, 0);
-            const totalDistanceInKm = (totalDistance / 1000).toFixed(2);
-                const miles = totalDistanceInKm * 0.621371;
-
-            distance = miles;
+            const totalDistanceInMiles = totalDistance.toFixed(2);
+            distance = totalDistanceInMiles;
         }
 
-        function isPlaceInUS(place) {
-            // Function to check if a place is in the United States
-            return place.address_components.some(component => component.short_name === 'US');
+        function isPlaceInSargodha(place) {
+            const sargodhaBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(32.0000, 72.5000), // South West Corner
+                new google.maps.LatLng(32.1500, 72.8000) // North East Corner
+            );
+            return sargodhaBounds.contains(place.geometry.location);
         }
     </script> --}}
-
-
-
-
-    {{-- <script>
+    <script>
         let geocoder;
         let distanceService;
         let originAutocomplete;
@@ -934,84 +813,118 @@ function isPlaceInSargodha(place) {
         let destinationPlaces = [];
         let distances = [];
         let totalDistance = 0;
-
-        $(document).ready(function () {
-            // Initialize Google Maps
-            const defaultLocation = { lat: 51.4545, lng: -2.5879 }; // Bristol, UK
+        let markers = [];
+        let directionsService;
+        let directionsRenderer;
+        let infoWindow;
+    
+        $(document).ready(function() {
+            // Initialize Google Maps centered on Sargodha, Pakistan
+            const sargodhaLocation = { lat: 32.0836, lng: 72.6712 };
             map = new google.maps.Map(document.getElementById('map'), {
-                center: defaultLocation,
-                zoom: 10
+                center: sargodhaLocation,
+                zoom: 13
             });
-
+    
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(map);
+    
+            infoWindow = new google.maps.InfoWindow();
+    
             const pickupInput = document.getElementById('pickupLocation');
-            originAutocomplete = new google.maps.places.Autocomplete(pickupInput);
+            originAutocomplete = new google.maps.places.Autocomplete(pickupInput, {
+                bounds: new google.maps.LatLngBounds(
+                    new google.maps.LatLng(32.0000, 72.5000), // South West Corner
+                    new google.maps.LatLng(32.1500, 72.8000) // North East Corner
+                ),
+                componentRestrictions: { country: 'pk' },
+                types: ['geocode']
+            });
             originAutocomplete.addListener('place_changed', handleOriginPlaceChange);
-
+    
             geocoder = new google.maps.Geocoder();
             distanceService = new google.maps.DistanceMatrixService();
-
+    
             // Initialize the first drop location autocomplete
             handleDestinationPlaceChange(0);
         });
-
+    
         function handleOriginPlaceChange() {
             originPlace = originAutocomplete.getPlace();
-            if (!originPlace || !originPlace.geometry) {
-                alert('Invalid pickup location. Please select a valid location.');
+            if (!originPlace || !originPlace.geometry || !isPlaceInSargodha(originPlace)) {
+                alert('Invalid pickup location. Please select a valid location within Sargodha.');
+                originPlace = null; // Reset originPlace if it's invalid
                 return;
             }
+            addMarker(originPlace.geometry.location, originPlace.formatted_address);
             checkAndCalculateDistances();
         }
-
+    
         function handleDestinationPlaceChange(index) {
             const input = document.querySelectorAll('#dropLocations input')[index];
-            const autocomplete = new google.maps.places.Autocomplete(input);
+            const autocomplete = new google.maps.places.Autocomplete(input, {
+                bounds: new google.maps.LatLngBounds(
+                    new google.maps.LatLng(32.0000, 72.5000), // South West Corner
+                    new google.maps.LatLng(32.1500, 72.8000) // North East Corner
+                ),
+                componentRestrictions: { country: 'pk' },
+                types: ['geocode']
+            });
             autocomplete.addListener('place_changed', () => {
                 const place = autocomplete.getPlace();
-                if (!place || !place.geometry) {
-                    alert('Invalid drop location. Please select a valid location.');
+                if (!place || !place.geometry || !isPlaceInSargodha(place)) {
+                    alert('Invalid drop location. Please select a valid location within Sargodha.');
+                    destinationPlaces[index] = null; // Reset the invalid destination place
                     return;
                 }
                 destinationPlaces[index] = place;
+                addMarker(place.geometry.location, place.formatted_address);
                 checkAndCalculateDistances();
             });
         }
-
+    
         function addMore() {
             const dropLocationsDiv = document.getElementById('dropLocations');
             const newDropLocationDiv = document.createElement('div');
             const newIndex = destinationPlaces.length;
-
+    
             newDropLocationDiv.className = 'drop-location mb-2';
             newDropLocationDiv.innerHTML = `
                 <input type="text" id="dropLocation${newIndex}" name="dropLocation[]" placeholder="Enter drop location" class="form-control border-radius-0 mb-0">
                 <div id="drop-error" class="error-message text-danger"></div>
             `;
-
+    
             dropLocationsDiv.appendChild(newDropLocationDiv);
             handleDestinationPlaceChange(newIndex);
         }
-
+    
         function checkAndCalculateDistances() {
             if (!originPlace || destinationPlaces.length === 0) {
                 return;
             }
-
+    
             const allPlaces = [originPlace, ...destinationPlaces].filter(place => place);
             if (allPlaces.length < 2) {
                 return;
             }
-
+    
             totalDistance = 0;
             distances = [];
+            clearMarkers();
             for (let i = 0; i < allPlaces.length - 1; i++) {
                 const originLatLng = allPlaces[i].geometry.location;
                 const destinationLatLng = allPlaces[i + 1].geometry.location;
-
+    
+                addMarker(originLatLng, allPlaces[i].formatted_address);
+                addMarker(destinationLatLng, allPlaces[i + 1].formatted_address);
+    
                 calculateDistance(originLatLng, destinationLatLng, i);
             }
+    
+            drawRoute(allPlaces);
         }
-
+    
         function calculateDistance(origin, destination, index) {
             distanceService.getDistanceMatrix({
                 origins: [origin],
@@ -1019,23 +932,66 @@ function isPlaceInSargodha(place) {
                 travelMode: google.maps.TravelMode.DRIVING
             }, (response, status) => {
                 if (status === 'OK') {
-                    const distanceValue = response.rows[0].elements[0].distance.value;
-                    distances[index] = distanceValue;
+                    const distanceValueInMeters = response.rows[0].elements[0].distance.value;
+                    const distanceValueInMiles = distanceValueInMeters / 1609.34; // Convert meters to miles
+                    distances[index] = distanceValueInMiles;
                     updateTotalDistance();
                 } else {
                     console.error('Error:', status);
                 }
             });
         }
-
+    
         function updateTotalDistance() {
             totalDistance = distances.reduce((acc, distance) => acc + distance, 0);
-            const totalDistanceInKm = (totalDistance / 1000).toFixed(2);
-            distance = totalDistanceInKm;
+            const totalDistanceInMiles = totalDistance.toFixed(2);
+            distance = totalDistanceInMiles;
         }
-
     
-    </script> --}}
+        function isPlaceInSargodha(place) {
+            const sargodhaBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(32.0000, 72.5000), // South West Corner
+                new google.maps.LatLng(32.1500, 72.8000) // North East Corner
+            );
+            return sargodhaBounds.contains(place.geometry.location);
+        }
+    
+        function addMarker(location, title) {
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: title
+            });
+            marker.addListener('click', () => {
+                infoWindow.setContent(title);
+                infoWindow.open(map, marker);
+            });
+            markers.push(marker);
+        }
+    
+        function clearMarkers() {
+            markers.forEach(marker => marker.setMap(null));
+            markers = [];
+        }
+    
+        function drawRoute(places) {
+            const waypoints = places.slice(1, -1).map(place => ({ location: place.geometry.location, stopover: true }));
+            directionsService.route({
+                origin: places[0].geometry.location,
+                destination: places[places.length - 1].geometry.location,
+                waypoints: waypoints,
+                travelMode: google.maps.TravelMode.DRIVING
+            }, (response, status) => {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(response);
+                } else {
+                    console.error('Directions request failed due to ' + status);
+                }
+            });
+        }
+    </script>
+    
+    
 
 
 
