@@ -129,7 +129,7 @@
             'summary-passengers', 'summary-child-seat', 'summary-suitcases',
             'summary-hand-luggage', 'summary-summary',
             'summary-other-name', 'summary-other-telephone', 'summary-other-email',
-            'summary-total-price', 'summary-child-seat_price', 'summary-meet-greet', 'summary-fleet-price',
+            'summary-total-price', 'summary-child-seat_price', 'summary-meet-greet','summary-meets-greets', 'summary-fleet-price',
             'summary-child-seat_price_div', 'summary-meet-greet_price_div', 'summary-extra-lauggage_price_div',
             'summary-flight-type', 'summary-flight-name', 'summary-flight-time'
         ];
@@ -151,6 +151,7 @@
             'summary-email': user_email,
             'summary-passengers': no_of_passenger,
             'summary-child-seat': isChildSeat ? '1' : '-',
+            'summary-meets-greets': meet_nd_greet ? '1' : '-',
             'summary-suitcases': no_suite_case,
             'summary-hand-luggage': no_hand_luggage,
             'summary-summary': summary,
@@ -199,6 +200,13 @@
 
 
     function nextStep() {
+        if(currentStep == 1){
+            var maplocation = document.getElementById('mapMarkplaces');
+            maplocation.style.display = 'block';
+        }else{
+            var maplocation = document.getElementById('mapMarkplaces');
+            maplocation.style.display = 'none';
+        }
         if (currentStep < 4) {
 
             if (currentStep === 1) {
@@ -593,6 +601,14 @@
     }
 
     function prevStep() {
+        if(currentStep == 1){
+            var maplocation = document.getElementById('mapMarkplaces');
+            maplocation.style.display = 'block';
+        }else{
+            var maplocation = document.getElementById('mapMarkplaces');
+            maplocation.style.display = 'none';
+        }
+
         if (currentStep > 1) {
 
             currentStep--;

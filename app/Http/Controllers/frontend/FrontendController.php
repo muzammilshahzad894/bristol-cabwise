@@ -39,7 +39,25 @@ class FrontendController extends Controller
         $services = Service::all();
         return view('frontend.services', compact('services'));
     }
+    public function faqs()
+    {
+        try {
+            return view('frontend.faqs');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while fetching faqs');
+        }
+    }
 
+    public function termCondition()
+    {
+        try {
+            return view('frontend.termCondition');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'An error occurred while fetching term and condition');
+        }
+    }
     public function trustVoilet()
     {
         try {

@@ -76,6 +76,8 @@
                             <li><a href="{{ route('frontend.about') }}">About</a></li>
                             <li><a href="{{ route('frontend.services') }}">Services</a></li>
                             <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
+                            <li><a href="{{ route('frontend.faqs') }}">FAQs</a></li>
+                            <li><a href="{{ route('frontend.termCondition') }}">Term and Condition</a></li>
                             <!-- <li><a href="{{ route('frontend.services') }}" class="booking_online_btn">Book Now</a></li> -->
                         </ul>
                     </div>
