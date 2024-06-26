@@ -68,6 +68,13 @@
                         </select>
                     </div>
                     <div class="filter-item">
+                        <label for="sort">Sort</label>
+                        <select name="sort" id="sort" class="form-control">
+                            <option value="asc" {{ request()->sort == 'asc' ? 'selected' : '' }}>Ascending</option>
+                            <option value="desc" {{ request()->sort != 'asc' ? 'selected' : '' }}>Descending</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
                         <button type="submit" class="btn btn-primary mt-4">Filter</button>
                     </div>
                 </div>

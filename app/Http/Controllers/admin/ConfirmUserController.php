@@ -41,6 +41,12 @@ class ConfirmUserController extends Controller
                 $draftUsers = $draftUsers->where('status_id', $request->status);
             }
 
+            if (isset($request->sort) && !empty($request->sort)) {
+                $draftUsers = $draftUsers->orderBy('id', $request->sort);
+            } else {
+                $draftUsers = $draftUsers->orderBy('id', 'desc');
+            }
+
             $draftUsers = $draftUsers->paginate(10);
 
             return view('admin.users.index', compact('draftUsers', 'drivers', 'statuses'));
