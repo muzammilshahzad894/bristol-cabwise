@@ -40,11 +40,12 @@ class BlockDatesController extends Controller
     }
     public function store(AddBlockDatesRequest $request)
     {
-     
         try {
             $blockDates = new BlockDate();
             $blockDates->name = $request->name;
             $blockDates->date_range = $request->date_range;
+            $blockDates->from_time = $request->from_time;
+            $blockDates->to_time = $request->to_time;
             $blockDates->save();
             return redirect()->route('admin.block-dates.index')->with('success', 'Service added successfully');
         } catch (Exception $e) {

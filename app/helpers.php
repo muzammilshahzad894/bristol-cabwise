@@ -17,3 +17,10 @@ if (!function_exists('getStatusDetails')) {
         return Status::find($id);
     }
 }
+
+if (!function_exists('showTime')) {
+    function showTime($time)
+    {
+        return date('h:i A', strtotime($time));
+    }
+}

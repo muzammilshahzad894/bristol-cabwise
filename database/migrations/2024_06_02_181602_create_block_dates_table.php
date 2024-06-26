@@ -17,6 +17,8 @@ class CreateBlockDatesTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('date_range')->nullable();
+            $table->time('from_time')->nullable();
+            $table->time('to_time')->nullable();
             $table->timestamps();
         });
     }

@@ -8,6 +8,8 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
+use App\Models\Fleet;
+use App\Models\Service;
 
 class DashboardController extends Controller
 {
@@ -24,7 +26,10 @@ class DashboardController extends Controller
     public function dashboard()
     {
         try {
-            return view('admin.index');
+            $totalFleets = Fleet::count();
+            $totalServices = Service::count();
+            $totalDrivers = User::where('role', 'driver')->count();
+            return view('admin.index', compact('totalFleets', 'totalServices', 'totalDrivers'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');

@@ -16,7 +16,9 @@
                     <thead>
                         <tr>
                             <th>Event name </th>
-                            <th>Dates</th>
+                            <th>Date</th>
+                            <th>From Time</th>
+                            <th>To Time</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -25,8 +27,9 @@
                             @foreach($dates as $date)
                                 <tr>
                                     <td>{{ $date->name }}</td>
-                                
                                     <td> {{ $date->date_range }}</td>
+                                    <td>{{ $date->from_time ? showTime($date->from_time) : 'N/A' }}</td>
+                                    <td>{{ $date->to_time ? showTime($date->to_time) : 'N/A' }}</td>
                                     <td>
                                         <a href="{{ route('admin.block-dates.edit', $date->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                         <a href="{{ route('admin.block-dates.delete', $date->id) }}" 
