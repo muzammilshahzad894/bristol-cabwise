@@ -19,9 +19,12 @@ class BookingController extends Controller
             $user_id = auth()->user()->id;
             $fleets = Fleet::all();
             $role = auth()->user()->role;
-            $blockDates = BlockDate::all()->pluck('date_range')->toArray();
+
+            // dd($blockDates);
             if($role == 'user')
             {
+                $blockDates = BlockDate::all();
+                // $blockDates = BlockDate::all()->pluck('date_range')->toArray();
                 $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
                 $bookingHour = Setting::where('key', 'min_booking_hours')->first();
                 $bookingHours = $bookingHour->value;
@@ -29,6 +32,7 @@ class BookingController extends Controller
             else{
                 $bookingHours = null;
                 $booking_detail = null;
+                $blockDates = null;
             }
             return view('frontend.booking.index', compact('fleets', 'booking_detail', 'blockDates', 'bookingHours'));
         } catch (\Exception $e) {

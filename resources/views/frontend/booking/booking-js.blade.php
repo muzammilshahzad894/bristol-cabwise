@@ -884,71 +884,146 @@
     var bookingHours = @json($bookingHours); // Assuming $bookingHours is a number
 
 
+    // function pad(n) {
+    //     return n < 10 ? '0' + n : n;
+    // }
+
+    // function setMinDateTime() {
+    //     var blockDates = @json($blockDates); // Assuming this is an array of strings in 'YYYY-MM-DD' format
+    //     var login_user = document.getElementById('login_user').value;
+
+    //     var now = new Date();
+    //     var year = now.getFullYear();
+    //     var month = pad(now.getMonth() + 1);
+    //     var day = pad(now.getDate());
+    //     var hours = pad(now.getHours());
+    //     var minutes = pad(now.getMinutes());
+
+    //     var currentDateTime = new Date(year, now.getMonth(), day, hours, minutes);
+
+    //     var minDateTime = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+    //     document.getElementById('date-time').setAttribute('min', minDateTime);
+
+    //     // Disable past dates and block dates
+    //     var dateInput = document.getElementById('date-time');
+    //     dateInput.addEventListener('input', function() {
+    //         var selectedDate = new Date(this.value);
+    //         selectedDate.setSeconds(0);
+    //         selectedDate.setMilliseconds(0);
+
+    //         // Check if selected date is in the blockDates array or in the past
+    //         var isBlocked = blockDates.some(function(blockDate) {
+    //             var blockDateObj = new Date(blockDate);
+    //             blockDateObj.setHours(0, 0, 0, 0);
+    //             return selectedDate.toDateString() === blockDateObj.toDateString();
+    //         });
+
+    //         // Check if the user is logged in and the selected date is less than minimum booking hours from now
+    //         if (login_user === "user") {
+    //             var minBookingTime = new Date(currentDateTime.getTime() + (bookingHours * 60 * 60 *
+    //             1000)); // Convert hours to milliseconds
+    //             if (selectedDate < minBookingTime) {
+    //                 $('#exampleModal').modal('show');
+    //                 document.getElementById('message').textContent =
+    //                     "Booking must be made at least " + bookingHours +
+    //                     " hours in advance. Please select another date or time.";
+    //                 this.value = '';
+    //                 lessTimeError = true; // Set lessTimeError to true
+    //                 return; // Exit function to prevent further processing
+    //             } else {
+    //                 lessTimeError = false; // Set lessTimeError to false if condition is not met
+    //             }
+    //         }
+
+    //         var now = new Date();
+    //         now.setSeconds(0);
+    //         now.setMilliseconds(0);
+
+    //         if (selectedDate < now || isBlocked) {
+    //             $('#exampleModal').modal('show');
+    //             document.getElementById('message').textContent =
+    //                 "Booking is not available at this time. Please contact support.";
+    //             this.value = '';
+    //         }
+    //     });
+    // }
+
+    // window.onload = setMinDateTime;
     function pad(n) {
-        return n < 10 ? '0' + n : n;
-    }
+    return n < 10 ? '0' + n : n;
+}
 
-    function setMinDateTime() {
-        var blockDates = @json($blockDates); // Assuming this is an array of strings in 'YYYY-MM-DD' format
-        var login_user = document.getElementById('login_user').value;
+function setMinDateTime() {
+    var blockDates = @json($blockDates); // Assuming this is an array of objects with 'date_range', 'from_time', and 'to_time' attributes
+    var login_user = document.getElementById('login_user').value;
 
-        var now = new Date();
-        var year = now.getFullYear();
-        var month = pad(now.getMonth() + 1);
-        var day = pad(now.getDate());
-        var hours = pad(now.getHours());
-        var minutes = pad(now.getMinutes());
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = pad(now.getMonth() + 1);
+    var day = pad(now.getDate());
+    var hours = pad(now.getHours());
+    var minutes = pad(now.getMinutes());
 
-        var currentDateTime = new Date(year, now.getMonth(), day, hours, minutes);
+    var currentDateTime = new Date(year, now.getMonth(), day, hours, minutes);
 
-        var minDateTime = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
-        document.getElementById('date-time').setAttribute('min', minDateTime);
+    var minDateTime = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+    document.getElementById('date-time').setAttribute('min', minDateTime);
 
-        // Disable past dates and block dates
-        var dateInput = document.getElementById('date-time');
-        dateInput.addEventListener('input', function() {
-            var selectedDate = new Date(this.value);
-            selectedDate.setSeconds(0);
-            selectedDate.setMilliseconds(0);
+    // Disable past dates and block dates
+    var dateInput = document.getElementById('date-time');
+    dateInput.addEventListener('input', function() {
+        var selectedDate = new Date(this.value);
+        selectedDate.setSeconds(0);
+        selectedDate.setMilliseconds(0);
 
-            // Check if selected date is in the blockDates array or in the past
-            var isBlocked = blockDates.some(function(blockDate) {
-                var blockDateObj = new Date(blockDate);
-                blockDateObj.setHours(0, 0, 0, 0);
-                return selectedDate.toDateString() === blockDateObj.toDateString();
-            });
-
-            // Check if the user is logged in and the selected date is less than minimum booking hours from now
-            if (login_user === "user") {
-                var minBookingTime = new Date(currentDateTime.getTime() + (bookingHours * 60 * 60 *
-                1000)); // Convert hours to milliseconds
-                if (selectedDate < minBookingTime) {
-                    $('#exampleModal').modal('show');
-                    document.getElementById('message').textContent =
-                        "Booking must be made at least " + bookingHours +
-                        " hours in advance. Please select another date or time.";
-                    this.value = '';
-                    lessTimeError = true; // Set lessTimeError to true
-                    return; // Exit function to prevent further processing
+        // Check if selected date is in the blockDates array or in the past
+        var isBlocked = blockDates.some(function(blockDate) {
+            var blockDateObj = new Date(blockDate.date_range);
+            blockDateObj.setHours(0, 0, 0, 0);
+            
+            if (selectedDate.toDateString() === blockDateObj.toDateString()) {
+                if (blockDate.from_time && blockDate.to_time) {
+                    var fromTime = new Date(blockDate.date_range + ' ' + blockDate.from_time);
+                    var toTime = new Date(blockDate.date_range + ' ' + blockDate.to_time);
+                    return selectedDate >= fromTime && selectedDate <= toTime;
                 } else {
-                    lessTimeError = false; // Set lessTimeError to false if condition is not met
+                    return true;
                 }
             }
+            return false;
+        });
 
-            var now = new Date();
-            now.setSeconds(0);
-            now.setMilliseconds(0);
-
-            if (selectedDate < now || isBlocked) {
+        // Check if the user is logged in and the selected date is less than minimum booking hours from now
+        if (login_user === "user") {
+            var minBookingTime = new Date(currentDateTime.getTime() + (bookingHours * 60 * 60 * 1000)); // Convert hours to milliseconds
+            if (selectedDate < minBookingTime) {
                 $('#exampleModal').modal('show');
                 document.getElementById('message').textContent =
-                    "Booking is not available at this time. Please contact support.";
+                    "Booking must be made at least " + bookingHours +
+                    " hours in advance. Please select another date or time.";
                 this.value = '';
+                lessTimeError = true; // Set lessTimeError to true
+                return; // Exit function to prevent further processing
+            } else {
+                lessTimeError = false; // Set lessTimeError to false if condition is not met
             }
-        });
-    }
+        }
 
-    window.onload = setMinDateTime;
+        var now = new Date();
+        now.setSeconds(0);
+        now.setMilliseconds(0);
+
+        if (selectedDate < now || isBlocked) {
+            $('#exampleModal').modal('show');
+            document.getElementById('message').textContent =
+                "Booking is not available at this time. Please contact support.";
+            this.value = '';
+        }
+    });
+}
+
+window.onload = setMinDateTime;
+
 
 
 
