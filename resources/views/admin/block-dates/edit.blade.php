@@ -27,21 +27,33 @@
                             <div class="row">
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Event Name <span class="text-danger">*</span></label>
-                                    <input type="text" name="name" class="form-control" placeholder="Name" value="{{$date->name ?? ''}}"
-                                     required>
+                                    <input type="text" name="name" class="form-control" placeholder="Name" value="{{ old('name') ?? $date->name }}" required>
                                     @error('name')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Select date: <span class="text-danger">*</span></label>
-                                    <input type="text" id="daterange" name="date_range" class="form-control" placeholder="Select date" value="{{$date->date_range?? ''}}" required>
+                                    <input type="text" id="daterange" name="date_range" class="form-control" placeholder="Select date" value="{{ old('date_range') ?? $date->date_range }}" required>
                                     @error('name')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
-
                                 </div>
-                                <div class=" col-md-12 d-flex justify-content-end">
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">From Time </label>
+                                    <input type="time" name="from_time" class="form-control" value="{{ old('from_time') ?? $date->from_time }}">
+                                    @error('from_time')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">To Time </label>
+                                    <input type="time" name="to_time" class="form-control" value="{{ old('to_time') ?? $date->to_time }}">
+                                    @error('to_time')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class=" col-md-12 d-flex">
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div> 
                             </div>

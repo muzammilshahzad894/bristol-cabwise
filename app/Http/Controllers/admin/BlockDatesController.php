@@ -69,6 +69,8 @@ class BlockDatesController extends Controller
             $date = BlockDate::find($id);
             $date->name = $request->name;
             $date->date_range = $request->date_range;
+            $date->from_time = $request->from_time;
+            $date->to_time = $request->to_time;
             $date->save();
             return redirect()->route('admin.block-dates.index')->with('success', 'block date updated successfully');
         } catch(Exception $e){

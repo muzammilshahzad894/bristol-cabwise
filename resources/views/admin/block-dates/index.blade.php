@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="d-flex align-items-center mb-4 flex-wrap">
-        <h3 class="me-auto">Our dates</h3>
+        <h3 class="me-auto">Block dates</h3>
         <div>
             <a href="{{ route('admin.block-dates.create') }}" class="btn btn-primary me-3 btn-sm"><i class="fas fa-plus me-2"></i>Add New</a>
         </div>
