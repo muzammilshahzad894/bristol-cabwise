@@ -1,43 +1,5 @@
 @extends('layouts.admin.app')
 
-@section('styles')
-    <style>
-        .filters-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .filter-item {
-            flex: 0 0 150px;
-        }
-
-        .filter-item label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .filter-item input,
-        .filter-item select {
-            width: 100%;
-        }
-
-        .filter-item button {
-            width: 100%;
-        }
-
-        @media (max-width: 350px) {
-            .filter-item {
-                flex: 1 1 100%;
-            }
-
-            .filter-item button {
-                margin-top: 10px;
-            }
-        }
-    </style>
-@endsection
-
 @section('content')
 <div class="container-fluid">
     <div class="d-flex flex-column mb-4">
@@ -47,8 +9,12 @@
             <form action="{{ route('admin.confirm.index') }}" method="GET">
                 <div class="filters-container">
                     <div class="filter-item">
-                        <label for="date">date</label>
-                        <input type="date" name="date" id="date" class="form-control" value="{{ request()->date }}">
+                        <label for="date">From Date</label>
+                        <input type="date" name="from_date" id="date" class="form-control" value="{{ request()->from_date }}">
+                    </div>
+                    <div class="filter-item">
+                        <label for="date">To Date</label>
+                        <input type="date" name="to_date" id="date" class="form-control" value="{{ request()->to_date }}">
                     </div>
                     <div class="filter-item">
                         <label for="from_time">From Time</label>
@@ -112,8 +78,8 @@
                                     <td> <div class="max-content-display">{{ $draft->pickup_location }}</div></td>
                                     <td> <div class="max-content-display">{{ $draft->dropoff_location }}</div></td>
                                     <td>£{{ $draft->total_price }}</td>
-                                    <td>{{ $draft->booking_date }}</td>
-                                    <td>{{ $draft->booking_time }}</td>
+                                    <td>{{ formatDate($draft->booking_date) }}</td>
+                                    <td>{{ foramtTime($draft->booking_time) }}</td>
                                     <td>
                                         <?php
                                             $status = getStatusDetails($draft->status_id);
@@ -170,4 +136,42 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('styles')
+    <style>
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-item {
+            flex: 0 0 150px;
+        }
+
+        .filter-item label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .filter-item input,
+        .filter-item select {
+            width: 100%;
+        }
+
+        .filter-item button {
+            width: 100%;
+        }
+
+        @media (max-width: 350px) {
+            .filter-item {
+                flex: 1 1 100%;
+            }
+
+            .filter-item button {
+                margin-top: 10px;
+            }
+        }
+    </style>
 @endsection

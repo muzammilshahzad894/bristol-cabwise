@@ -18,9 +18,16 @@ if (!function_exists('getStatusDetails')) {
     }
 }
 
-if (!function_exists('showTime')) {
-    function showTime($time)
+if (!function_exists('foramtTime')) {
+    function foramtTime($time)
     {
         return date('h:i A', strtotime($time));
+    }
+}
+
+if (!function_exists('formatDate')) {
+    function formatDate($date)
+    {
+        return date('d-m-Y', strtotime($date));
     }
 }

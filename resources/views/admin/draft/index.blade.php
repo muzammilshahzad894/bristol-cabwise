@@ -2,8 +2,41 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="d-flex align-items-center mb-4 flex-wrap">
+    <div class="d-flex flex-column mb-4">
         <h3 class="me-auto">Draft Bookings</h3>
+        <!-- Filters -->
+        <div class="filter">
+            <form action="{{ route('admin.draft.index') }}" method="GET">
+                <div class="filters-container">
+                    <div class="filter-item">
+                        <label for="date">From Date</label>
+                        <input type="date" name="from_date" id="date" class="form-control" value="{{ request()->from_date }}">
+                    </div>
+                    <div class="filter-item">
+                        <label for="date">To Date</label>
+                        <input type="date" name="to_date" id="date" class="form-control" value="{{ request()->to_date }}">
+                    </div>
+                    <div class="filter-item">
+                        <label for="from_time">From Time</label>
+                        <input type="time" name="from_time" id="from_time" class="form-control" value="{{ request()->from_time }}">
+                    </div>
+                    <div class="filter-item">
+                        <label for="to_time">To Time</label>
+                        <input type="time" name="to_time" id="to_time" class="form-control" value="{{ request()->to_time }}">
+                    </div>
+                    <div class="filter-item">
+                        <label for="sort">Sort</label>
+                        <select name="sort" id="sort" class="form-control">
+                            <option value="asc" {{ request()->sort == 'asc' ? 'selected' : '' }}>Ascending</option>
+                            <option value="desc" {{ request()->sort != 'asc' ? 'selected' : '' }}>Descending</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <button type="submit" class="btn btn-primary mt-4">Filter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="row">
         @include('partials.messages')
@@ -32,9 +65,9 @@
                                     <td> {{ $draft->phone_number }}</td>
                                     <td> <div class="max-content-display">{{ $draft->pickup_location }} </div></td>
                                     <td> <div class="max-content-display">{{ $draft->dropoff_location }} </div></td>
-                                    <td> {{ $draft->total_price }}£</td>
-                                    <td> {{ $draft->booking_date }}</td>
-                                    <td> {{ $draft->booking_time }}</td>
+                                    <td> £{{ $draft->total_price }}</td>
+                                    <td> {{ formatDate($draft->booking_date) }}</td>
+                                    <td> {{ foramtTime($draft->booking_time) }}</td>
                                     <td style="display: flex;justify-content:right">
                                         {{-- <a href="{{ route('admin.draft.edit', $draft->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> --}}
                                         <a href="{{ route('admin.draft.delete', $draft->id) }}" 
@@ -56,4 +89,42 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('styles')
+    <style>
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-item {
+            flex: 0 0 150px;
+        }
+
+        .filter-item label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .filter-item input,
+        .filter-item select {
+            width: 100%;
+        }
+
+        .filter-item button {
+            width: 100%;
+        }
+
+        @media (max-width: 350px) {
+            .filter-item {
+                flex: 1 1 100%;
+            }
+
+            .filter-item button {
+                margin-top: 10px;
+            }
+        }
+    </style>
 @endsection

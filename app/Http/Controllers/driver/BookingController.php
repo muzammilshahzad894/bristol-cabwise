@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\Booking;
 use App\Models\Status;
+use App\Models\User;
 use App\Services\EmailService;
 use Carbon\Carbon;
 
@@ -22,13 +23,43 @@ class BookingController extends Controller
         $this->emailService = $emailService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         try {
             $user = Auth::user();
-            $bookings  = Booking::where('assigned_to', $user->id)->paginate(10);
+            $bookings  = Booking::where('assigned_to', $user->id);
+            $drivers = User::where('role', 'driver')->get();
             $statuses = Status::all();
-            return view('driver.bookings.index', compact('bookings', 'statuses'));
+
+            if (isset($request->from_date) && !empty($request->from_date)) {
+                $bookings = $bookings->where('booking_date', '>=', $request->from_date);
+            }
+
+            if (isset($request->to_date) && !empty($request->to_date)) {
+                $bookings = $bookings->where('booking_date', '<=', $request->to_date);
+            }
+
+            if (isset($request->from_time) && !empty($request->from_time)) {
+                $bookings = $bookings->where('booking_time', '>=', $request->from_time);
+            }
+
+            if (isset($request->to_time) && !empty($request->to_time)) {
+                $bookings = $bookings->where('booking_time', '<=', $request->to_time);
+            }
+
+            if (isset($request->status) && !empty($request->status)) {
+                $bookings = $bookings->where('status_id', $request->status);
+            }
+
+            if (isset($request->sort) && !empty($request->sort)) {
+                $bookings = $bookings->orderBy('id', $request->sort);
+            } else {
+                $bookings = $bookings->orderBy('id', 'desc');
+            }
+
+            $bookings = $bookings->paginate(10);
+
+            return view('driver.bookings.index', compact('bookings', 'drivers', 'statuses'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');

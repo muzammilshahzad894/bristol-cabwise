@@ -25,8 +25,12 @@ class ConfirmUserController extends Controller
             $drivers = User::where('role', 'driver')->get();
             $statuses = Status::all();
 
-            if (isset($request->date) && !empty($request->date)) {
-                $draftUsers = $draftUsers->where('booking_date', $request->date);
+            if (isset($request->from_date) && !empty($request->from_date)) {
+                $draftUsers = $draftUsers->where('booking_date', '>=', $request->from_date);
+            }
+
+            if (isset($request->to_date) && !empty($request->to_date)) {
+                $draftUsers = $draftUsers->where('booking_date', '<=', $request->to_date);
             }
 
             if (isset($request->from_time) && !empty($request->from_time)) {
