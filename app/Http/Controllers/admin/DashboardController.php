@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use App\Models\Fleet;
 use App\Models\Service;
+use App\Models\Booking;
 
 class DashboardController extends Controller
 {
@@ -26,10 +27,12 @@ class DashboardController extends Controller
     public function dashboard()
     {
         try {
-            $totalFleets = Fleet::count();
-            $totalServices = Service::count();
-            $totalDrivers = User::where('role', 'driver')->count();
-            return view('admin.index', compact('totalFleets', 'totalServices', 'totalDrivers'));
+            $todayPendingBookings = Booking::where('status_id', 1)->whereDate('booking_date', date('Y-m-d'))->count();
+            // $todayInprogressBookings where status 2, 3, 4
+            $todayInprogressBookings = Booking::whereIn('status_id', [2, 3, 4])->whereDate('booking_date', date('Y-m-d'))->count();
+            $todayCompletedBookings = Booking::where('status_id', 5)->whereDate('booking_date', date('Y-m-d'))->count();
+            $upcomingBookings = Booking::whereDate('booking_date', '>', date('Y-m-d'))->count();
+            return view('admin.index', compact('todayPendingBookings', 'todayInprogressBookings', 'todayCompletedBookings', 'upcomingBookings'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
