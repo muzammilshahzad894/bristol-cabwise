@@ -19,15 +19,18 @@ class BookingController extends Controller
             $user_id = auth()->user()->id;
             $fleets = Fleet::all();
             $role = auth()->user()->role;
-
-            // dd($blockDates);
             if($role == 'user')
             {
                 $blockDates = BlockDate::all();
-                // $blockDates = BlockDate::all()->pluck('date_range')->toArray();
                 $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
+                // dd($booking_detail, $blockDates);
                 $bookingHour = Setting::where('key', 'min_booking_hours')->first();
-                $bookingHours = $bookingHour->value;
+                if($bookingHour){
+                    $bookingHours = $bookingHour->value;
+                }
+                else{
+                    $bookingHours = null;
+                }
             }
             else{
                 $bookingHours = null;

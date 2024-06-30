@@ -373,6 +373,13 @@ p {
   margin-top: 0;
   margin-bottom: 1rem; }
 
+  input[disabled] {
+    background-color: #c2bcbc !important; /* light grey background */
+    cursor: not-allowed; /* not-allowed cursor */
+}
+
+
+
 abbr[title] {
   text-decoration: underline dotted;
   cursor: help;

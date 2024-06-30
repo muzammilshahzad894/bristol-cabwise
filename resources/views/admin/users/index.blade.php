@@ -84,7 +84,7 @@
                                         <?php
                                             $status = getStatusDetails($draft->status_id);
                                         ?>
-                                        <span class="badge {{ $status->bg_color }}">{{ $status->name }}</span>
+                                        {{-- <span class="badge {{ $status->bg_color }}">{{ $status->name }}</span> --}}
                                     </td>
                                     <td>
                                         <form action="{{ route('admin.confirm.assign', $draft->id) }}" method="POST" class="select_driver">
@@ -100,26 +100,12 @@
                                     </td>
                                     <td class="text-nowrap">
                                         <div class="btn-group" role="group" aria-label="Action Buttons">
-                                            <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('admin.confirm.edit', $draft->id) }}"
+                                             class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                             <a href="#" class="btn btn-danger btn-sm mx-sm-1"><i class="fas fa-trash"></i></a>
                                         </div>
                                     </td>
-                                    <!-- <td class="">
-                                        <div class="accept_reject">
-                                            @if($draft->status == 0)
-                                            <form action="{{ route('admin.confirm.update', $draft->id) }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="status" value="1">
-                                                <button type="submit" class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
-                                            </form>
-                                            <form action="{{ route('admin.confirm.update', $draft->id) }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="status" value="2">
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
-                                            </form>
-                                            @endif
-                                        </div>
-                                    </td> -->
+                                   
                                 </tr>
                             @endforeach
                         @else

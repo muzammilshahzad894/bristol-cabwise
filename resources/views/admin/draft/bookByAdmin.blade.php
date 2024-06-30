@@ -83,7 +83,7 @@
                                         <?php
                                             $status = getStatusDetails($draft->status_id);
                                         ?>
-                                        <span class="badge {{ $status->bg_color }}">{{ $status->name }}</span>
+                                        {{-- <span class="badge {{ $status->bg_color }}">{{ $status->name }}</span> --}}
                                     </td>
                                     <td>
                                         <form action="{{ route('admin.confirm.assign', $draft->id) }}" method="POST" class="select_driver">
@@ -135,7 +135,6 @@ aria-hidden="true">
                 </div>
                 <div id="second_url " class="">
                     <p id="client_url_2"></p>
-                    <button class="view_details" id="copy_btn" onclick="copyToClipboardsecond()">Copy</button>
 
                 </div>
             </div>
@@ -150,7 +149,6 @@ aria-hidden="true">
     var Debitcard = window.location.origin + '/client-booking-payment?payment_id=' + id;
     var paypal = window.location.origin + '/paypal/payment?id=' + id;
     document.getElementById("client_url").innerHTML = Debitcard;
-    document.getElementById("client_url_2").innerHTML = paypal;
                        
     
     
