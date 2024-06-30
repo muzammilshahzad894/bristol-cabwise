@@ -45,11 +45,11 @@
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.contact') ? 'active' : '' }}" href="{{ route('frontend.contact') }}">Contact</a></li>
            
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.faqs') ? 'active' : '' }}" href="{{ route('frontend.faqs') }}">FAQs</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.trustVoilet') ? 'active' : '' }}" href="{{ route('frontend.trustVoilet') }}">Trust Violet</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.trustVoilet') ? 'active' : '' }}" href="{{ route('frontend.trustVoilet') }}">Reviews</a></li>
 
 
                 @guest
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.login') ||  request()->routeIs('frontend.signup') ? 'active' : '' }}" href="/login">LogIn</a></li>
+                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.login') ||  request()->routeIs('frontend.signup') ? 'active' : '' }}" href="/login">Login</a></li>
                 @endguest
 
 

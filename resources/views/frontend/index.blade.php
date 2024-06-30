@@ -251,7 +251,7 @@
                         <p class="home_p" style="max-width: 600px; margin: 0 auto; color:#ffc107;">
                             Welcome to Bristol Cabwise, your premier pre-booking platform for reliable taxi services in Bristol, UK. Enjoy seamless travel from airport transfers to city tours. Book now for stress-free journeys!
                         </p>
-                        <a href="{{ route('frontend.book-online') }}" class="button-1 mt-15 mb-15 mr-15">Get A Quote <span class="ti-arrow-top-right"></span></a>
+                        <a href="{{ route('frontend.book-online') }}" class="button-1 mt-15 mb-15 mr-15">Get A Quote</a>
 
                         <a href="{{ route('frontend.book-online') }}" class="button-2 mt-15 mb-15">Book Online</a>
                     </div>
@@ -267,8 +267,8 @@
         <div class="row">
             <div class="col-lg-6 col-md-12 mb-30">
                 <div class="content">
-                    <div class="section-subtitle">Booking car</div>
-                    <div class="section-title">RELIABLE CAB <span>SERVICE IN BRISTOL</span></div>
+                    <div class="section-subtitle">Trusted &</div>
+                    <div class="section-title">RELIABLE CAB <span>SERVICE IN BRISTOL and across UK</span></div>
                     <p class="mb-30">Introducing Bristol Cabwise, your one-stop solution for reliable taxi services in Bristol, United Kingdom. From airport transfers to city tours, corporate rides to in-city journeys, Bristol Cabwise offers seamless pre-booking options at competitive rates. Experience convenience and comfort with our trusted transportation services. Book your ride with Bristol Cabwise today for a stress-free travel experience..</p>
                 </div>
             </div>

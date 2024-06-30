@@ -43,6 +43,7 @@ class CreateBookingsTable extends Migration
             $table->boolean('reminder_sent')->default(false);
             $table->integer('assigned_to')->nullable();
             $table->integer('status_id')->default(1);
+            $table->integer('is_extra_lauggage')->default(0);
             $table->timestamps();
         });
     }
