@@ -36,6 +36,7 @@ class CreateBookingsTable extends Migration
             $table->string('flight_time')->nullable();
             $table->string('flight_name')->nullable();
             $table->string('flight_type')->nullable();
+            $table->string('payment_method')->nullable();
             $table->integer('is_payment')->default(0);
             $table->integer('is_draft')->default(1);
             $table->integer('user_id')->nullable();
@@ -44,6 +45,7 @@ class CreateBookingsTable extends Migration
             $table->integer('assigned_to')->nullable();
             $table->integer('status_id')->default(1);
             $table->integer('is_extra_lauggage')->default(0);
+            
             $table->timestamps();
         });
     }

@@ -127,7 +127,17 @@
                                     <label class="form-label">Total Price</label>
                                     <input type="text" name="total_price" class="form-control" placeholder="Total Price" value="{{ old('total_price') ?? $booking->total_price }}">
                                 </div>
+                                @if($booking->is_draft == 1)
                                 <div class="mb-3 col-md-6">
+                                    <label class="form-label" for="is_payment">Payment Status</label>
+                                    <select name="is_payment" class="form-control">
+                                        <option value="">Select Payment</option>
+                                        <option value="0" {{ old('is_paid', $booking->is_payment) == 0 ? 'selected' : '' }}>Unpaid</option>
+                                        <option value="1" {{ old('is_paid', $booking->is_payment) == 1 ? 'selected' : '' }}>Paid</option>
+                                    </select>
+                                </div>
+                            @endif
+                                <div class="mb-3 col-md-6 d-flex align-items-center">
                                     <div class="checkboxes">
                                     <label class="form-label">Extra Luggage</label>
                                     <input type="checkbox" name="is_extra_lauggage" value="1" {{ old('is_extra_lauggage') ?? $booking->is_extra_lauggage ? 'checked' : '' }}>
@@ -148,6 +158,9 @@
                                      {{ old('is_meet_nd_greet') ?? $booking->is_meet_nd_greet ? 'checked' : '' }}>
                                     </div>
                                 </div>
+                               
+                            
+
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>

@@ -84,7 +84,7 @@
                                         <?php
                                             $status = getStatusDetails($draft->status_id);
                                         ?>
-                                        {{-- <span class="badge {{ $status->bg_color }}">{{ $status->name }}</span> --}}
+                                        <span class="badge {{ $status->bg_color }}">{{ $status->name }}</span>
                                     </td>
                                     <td>
                                         <form action="{{ route('admin.confirm.assign', $draft->id) }}" method="POST" class="select_driver">

@@ -83,7 +83,7 @@
                                         <?php
                                             $status = getStatusDetails($draft->status_id);
                                         ?>
-                                        {{-- <span class="badge {{ $status->bg_color }}">{{ $status->name }}</span> --}}
+                                        <span class="badge {{ $status->bg_color }}">{{ $status->name }}</span>
                                     </td>
                                     <td>
                                         <form action="{{ route('admin.confirm.assign', $draft->id) }}" method="POST" class="select_driver">
@@ -99,8 +99,13 @@
                                     </td>
                                     <td class="text-nowrap">
                                         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editDraft({{ $draft->id }})">
-                                            <i class="fas fa-edit"></i>
+                                           Payment Link
                                         </button>
+                                        <a href="{{ route('admin.confirm.edit', $draft->id) }}"
+                                         type="button" class="btn btn-primary btn-sm" >
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        
                                     </td>
                                 </tr>
                             @endforeach

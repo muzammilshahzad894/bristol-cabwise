@@ -270,7 +270,7 @@
     }
 
     .section-padding {
-        padding: 70px 0px 0px 0px;
+        padding: 70px 0px 40px 0px;
     }
 
     .progress-bar_main {
@@ -655,6 +655,9 @@
         @media screen and (max-width: 768px) {
             .date-time-picker {
                 width: 100%;
+            }
+            .payment_section{
+                padding: 0px;
             }
 
             .styled-input1 {

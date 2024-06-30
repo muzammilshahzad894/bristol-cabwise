@@ -147,7 +147,6 @@ class ConfirmUserController extends Controller
             'is_meet_nd_greet' => 'nullable|boolean',
         ]);
     $booking = Booking::findOrFail($id);
-     // Update each field individually
      $booking->name = $request->name;
      $booking->email = $request->email;
      $booking->phone_number = $request->phone_number;
@@ -167,6 +166,10 @@ class ConfirmUserController extends Controller
      $booking->is_extra_lauggage = $request->is_extra_lauggage ? 1:0;
      $booking->is_childseat = $request->is_childseat ? 1 : 0;
      $booking->is_meet_nd_greet = $request->is_meet_nd_greet ? 1: 0;
+     if($request->is_payment == 1){
+         $booking->is_draft = 0;
+         $booking->is_payment = 1;
+     }
  
      $booking->save();
  
