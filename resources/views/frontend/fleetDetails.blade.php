@@ -2,14 +2,14 @@
 
 @section('content')
     <section class="banner-header section-padding bg-img" data-overlay-dark="6"
-        data-background="{{ asset('uploads/services/'.$service->image) }}">
+        data-background="{{ asset('uploads/fleets/' . $fleet->image) }}">
         <div class="v-middle">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h6>What We Do</h6>
+                        <h6>Our Fleet</h6>
                         {{-- <h1>Our <span>Services</span></h1> --}}
-                        <h1>{{$service->name}}</h1>
+                        <h1>{{ $fleet->name }}</h1>
                     </div>
                 </div>
             </div>
@@ -20,70 +20,94 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12 mb-30">
                     <div class="content">
-                        <div class="section-subtitle">{{ $service->detail_page_tag }}</div>
-                        <div class="section-title">{{ $service->detail_page_first_heading }} <span>{{ $service->detail_page_second_heading }}</span></div>
-                        <p class="mb-30">{{$service->detail_page_description}}</p>
-                        <ul class="list-unstyled list mb-30">
-                            @foreach(explode(',', $service->detail_page_features) as $feature)
-                                <li>
-                                    <div class="list-icon"> <span class="ti-check"></span> </div>
-                                    <div class="list-text">
-                                        <p>{{ $feature }}</p>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-5 offset-lg-1 col-md-12">
-                    <div class="item"> <img src="{{ asset('uploads/services/'.$service->image) }}" alt="about"
-                            class="img-fluid">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
- 
-    <section class="testimonials section-padding mt-15">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center mb-30">
-                    <div class="section-subtitle"></div>
-                    <h1 class="section-title">Our <span>Services</span></h1>
-
-                </div>
-                <div class="col-md-12">
-                    <div class="owl-carousel owl-theme">
-                        @if($services->count() > 0)
-                            @foreach($services as $service)
-                                <div class="item" style="padding:10px;">
-                                    <div class="cars_details_view">
-                                        <div>
-                                            <img src="{{ asset('uploads/services/'.$service->image) }}" alt="" />
-                                            <h4 class="text-white mb-0 pt-2" style="font-size:24px;">{{ $service->name }}</h4>
-                                            <p style="color: #f5b754">{{ $service->tag }}</p>
-                                            <p style="color: white;" class="truncate">
-                                                {{ $service->short_description }}
-                                            </p>
-                                            <div class="d-flex justify-content-between gap-4">
-                                                <a class="view_details" href="{{ route('frontend.carDetails', $service->id) }}">View Details</a>
-                                                <a class="view_details" href="{{ route('frontend.book-online', $service->id) }}">Book Now</a>
-                                            </div>
+                        <div class="section-subtitle">{{ $fleet->name }}</div>
+                        <div class="section-title">
+                            {{ $fleet->about_car }} <span></span>
+                        </div>
+                        <p class="mb-30">{{ $fleet->detail_page_description }}</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex gap-2 align-items-center" >
+                                        <div class="icon"><i class="fas fa-users"></i></div>
+                                        <div class="d-flex align-items-center">
+                                            <p>Max Passengers:</p>
+                                            <h6>{{ $fleet->max_passengers }}</h6>
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-                        @endif
+                            </div>
+                            <div class="col-md-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <div class="icon"><i class="fas fa-suitcase"></i></div>
+                                        <div class="d-flex align-items-center">
+                                            <p>Max Suitcases:</p>
+                                            <h6>{{ $fleet->max_suitecases }}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <div class="icon"><i class="fas fa-briefcase"></i></div>
+                                        <div class="d-flex align-items-center">
+                                            <p>Max Hand Luggage:</p>
+                                            <h6>{{ $fleet->max_hand_luggage }}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1 col-md-12">
+                    <div class="item">
+                        <img src="{{ asset('uploads/fleets/'.$fleet->image) }}" alt="about" class="img-fluid">
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    
+    
+    
+    
+   
+
+
 
 
     <style>
+        .fa-users:before {
+            content: "\f0c0";
+            color: orange;
+            border: 1px solid white;
+            padding: 5px;
+            border-radius: 50%;
+        }
+        .fa-suitcase:before{
+            content: "\f0f2";
+            color: orange;
+            border: 1px solid white;
+            padding: 5px;
+            border-radius: 50%;
+        }
+        .fa-briefcase:before{
+            content: "\f0b1";
+            color: orange;
+            border: 1px solid white;
+            padding: 5px;
+            border-radius: 50%;
+        }
+        .d-flex p{
+            color: white;
+            margin-bottom: 0 !important;
+        }
+        .d-flex h6{
+            color: orange;
+        }
         .img-fluid {
             width: 100%;
             height: 390px !important;
@@ -100,9 +124,10 @@
         .cutom_button {
             width: 100%;
         }
+
         .section-padding {
-    padding: 70px 0px 0px 0px;
-}
+            padding: 70px 0px 0px 0px;
+        }
 
         label {
             display: block;

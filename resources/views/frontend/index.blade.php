@@ -246,10 +246,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center " style="">
-                        <h6>* Premium</h6>
+                        <h6>* Welcome To</h6>
                         <h1 style="font-size: 60px;" class="home_heading">Bristol Cabwise </h1>
                         <p class="home_p" style="max-width: 600px; margin: 0 auto; color:#ffc107;">
-                            Welcome to Bristol Cabwise, your premier pre-booking platform for reliable taxi services in Bristol, UK. Enjoy seamless travel from airport transfers to city tours. Book now for stress-free journeys!
+                            Your premier pre-booking platform for reliable taxi services in Bristol, UK. Enjoy seamless travel from airport transfers to city tours. Book now for stress-free journeys!
                         </p>
                         <a href="{{ route('frontend.book-online') }}" class="button-1 mt-15 mb-15 mr-15">Get A Quote</a>
 
@@ -268,8 +268,8 @@
             <div class="col-lg-6 col-md-12 mb-30">
                 <div class="content">
                     <div class="section-subtitle">Trusted &</div>
-                    <div class="section-title">RELIABLE CAB <span>SERVICE IN BRISTOL and across UK</span></div>
-                    <p class="mb-30">Introducing Bristol Cabwise, your one-stop solution for reliable taxi services in Bristol, United Kingdom. From airport transfers to city tours, corporate rides to in-city journeys, Bristol Cabwise offers seamless pre-booking options at competitive rates. Experience convenience and comfort with our trusted transportation services. Book your ride with Bristol Cabwise today for a stress-free travel experience..</p>
+                    <div class="section-title">RELIABLE CAB <span>SERVICE IN BRISTOL</span> <br> AND ACROSS UK</div>
+                    <p class="mb-30">Introducing Bristol Cabwise, your one-stop solution for reliable taxi services. From airport transfers to city tours, corporate rides to in-city journeys, Bristol Cabwise offers seamless pre-booking options at competitive rates. Experience convenience and comfort with our trusted transportation services. Book your ride with Bristol Cabwise today for a stress-free travel experience..</p>
                 </div>
             </div>
             <div class="col-lg-5 offset-lg-1 col-md-12">
@@ -320,7 +320,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center mb-30">
-                <div class="section-subtitle">Categories</div>
                 <div class="section-title">Our <span>Fleets</span></div>
             </div>
         </div>
@@ -334,7 +333,7 @@
                             <h4>{{ $fleet->name }}</h4>
                         </div>
                         <div class="curv-butn icon-bg">
-                            <a href="{{ route('frontend.book-online') }}" class="vid">
+                            <a href="{{ route('frontend.fleetDetailsFrontend',$fleet->id) }}" class="vid">
                                 <div class="icon"> <i class="ti-arrow-top-right"></i> </div>
                             </a>
                             <div class="br-left-top">
@@ -363,15 +362,15 @@
         <div class="row justify-content-center">
             <div class="col-md-12 text-center mb-30">
                 <div class="section-subtitle">Steps</div>
-                <div class="section-title white">Car Booking <span>Process</span></div>
+                <div class="section-title white">Booking <span>Process</span></div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4 mb-30">
                 <div class="item">
                     <div class="text">
-                        <h5>Choose A Car</h5>
-                        <p>View our range of cars, find your perfect car for the coming days.</p>
+                        <h5>Book Online or Get a Quote</h5>
+                        <p>Make your booking online or request a quote through our user-friendly website, ensuring safe payments, date protections, and customer safety.</p>
                     </div>
                     <div class="numb">
                         <div class="numb-curv">
@@ -393,8 +392,8 @@
             <div class="col-md-4 mb-30">
                 <div class="item">
                     <div class="text">
-                        <h5>Come In Contact</h5>
-                        <p>Our advisor team is ready to help you with the booking process or any questions.</p>
+                        <h5>Choose a Service</h5>
+                        <p>Explore Bristol Cabwise's diverse fleet and service options for a seamless and enjoyable ride.</p>
                     </div>
                     <div class="numb">
                         <div class="numb-curv">
@@ -416,8 +415,8 @@
             <div class="col-md-4 mb-30">
                 <div class="item">
                     <div class="text">
-                        <h5>Enjoy Driving</h5>
-                        <p>Receive the key and enjoy your car. We treat all our cars with respect.</p>
+                        <h5>Enjoy Your Ride</h5>
+                        <p>Experience each journey with Bristol Cabwise, where our skilled drivers guarantee a smooth and secure ride.</p>
                     </div>
                     <div class="numb">
                         <div class="numb-curv">
@@ -646,9 +645,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h6>Book Your Car</h6>
+                <h6>Book Your Ride</h6>
                 <h5>Interested in booking?</h5>
-                <p>Don't hesitate and send us a message.</p> <a href="tel:+8001234567" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a href="contact.html" class="button-2 mt-15 mb-15">Contact Us <span class="ti-arrow-top-right"></span></a>
+                <p>Don’t hesitate to call or send us a message instead.</p> <a href="tel:+8001234567" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a href="contact.html" class="button-2 mt-15 mb-15">Contact Us <span class="ti-arrow-top-right"></span></a>
             </div>
         </div>
     </div>

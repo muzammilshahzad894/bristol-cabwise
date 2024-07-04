@@ -29,6 +29,7 @@ class CreateFleetsTable extends Migration
             $table->string('price_after_100_miles')->nullable();
             $table->string('price_after_150_miles')->nullable();
             $table->string('price_after_200_miles')->nullable();
+            $table->text('detail_page_description')->nullable();
             $table->text('features')->nullable();
             $table->timestamps();
         });

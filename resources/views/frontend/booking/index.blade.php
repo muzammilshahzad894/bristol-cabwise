@@ -70,11 +70,11 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12 mt-30">
                         <div class="post-wrapper">
-                            <a href="index-2.html">
+                            {{-- <a href="index-2.html">
                                 <div>Home</div>
                             </a>
                             <div class="divider"></div>
-                            <div class="text-white"><a href="#">book online</a></div>
+                            <div class="text-white"><a href="#">book online</a></div> --}}
                         </div>
                         <h1>Book Your Ride.</h1>
                     </div>
@@ -88,21 +88,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <p>
-                        Quisque pretium fermentum quam, sit amet cursus ante sollicitudin
-                        vel. Morbi consequat risus consequat, porttitor orci sit amet,
-                        iaculis nisl. Integer quis sapien nec elit ultrices euismon sit
-                        amet id lacus. Sed a imperdiet erat. Duis eu est dignissim lacus
-                        dictum hendrerit quis vitae mi. Fusce eu nulla ac nisi cursus
-                        tincidunt. Interdum et malesuada fames ac ante ipsum primis in
-                        faucibus. Integer tristique sem eget leo faucibus porttiton.
+                        We are your trusted and punctual taxi service in Bristol. We pride ourselves on professionalism and reliability, offering a diverse fleet of vehicles and experienced drivers dedicated to meeting your transportation needs. Our pricing is competitive and transparent, with no hidden fees. Enjoy the convenience of free registration and flexible cancellation up to 48 hours before your scheduled pick-up time. For airport pickups, benefit from our complimentary 1-hour waiting time. Our drivers provide attentive luggage assistance, and at other pickups, enjoy a complimentary 15-minute waiting period. Booking is effortless through our intuitive website or mobile app, supported by dedicated customer service. Simply enter your pickup and drop-off details, select your vehicle, provide passenger information, review, confirm your booking, and receive instant confirmation.
                     </p>
-                    <p>
+                    {{-- <p>
                         Nulla vitae metus tincidunt, varius nunc quis, porta nulla.
                         Pellentesque vel dui nec libero auctor pretium id sed arcu. Nunc
                         consequat diam id nisl blandit dignissim. Etiam commodo diam
                         dolor, at scelerisque sem finibus sit amet. Curabitur id lectus
                         eget purus finibus laoreet.
-                    </p>
+                    </p> --}}
                 </div>
             </div>
         </div>
@@ -532,25 +526,31 @@
                         <div class="icon_text">
                             <i class="fa-solid fa-check"></i>
                             <p>
-                                Free cancellation up to 24 hours before your pick-up
+                                Free registration
                             </p>
                         </div>
                         <div class="icon_text">
                             <i class="fa-solid fa-check"></i>
                             <p>
-                                Free 45 minutes waiting time
+                                Free cancellation up to 48 hours before your scheduled  pick-up
                             </p>
                         </div>
                         <div class="icon_text">
                             <i class="fa-solid fa-check"></i>
                             <p>
-                                Meet & Greet
+                                Enjoy complimentary 1 hour waiting time for airport pickups
                             </p>
                         </div>
                         <div class="icon_text">
                             <i class="fa-solid fa-check"></i>
                             <p>
-                                Complimentary water bottle & Wi-Fi
+                                Luggage assistance
+                            </p>
+                        </div>
+                        <div class="icon_text">
+                            <i class="fa-solid fa-check"></i>
+                            <p>
+                                Complimentary 15 min waiting period at all other pickups 
                             </p>
                         </div>
                     </div>

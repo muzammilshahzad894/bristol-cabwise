@@ -109,6 +109,13 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="mb-3 col-md-12">
+                                    <label class="form-label">Detail Page Description <span class="text-danger">*</span></label>
+                                    <textarea name="detail_page_description" class="form-control" rows="5" placeholder="Detail Page Description" required>{{ old('detail_page_description') }}</textarea>
+                                    @error('detail_page_description')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
                                 <hr>
                                 <!-- Tax fields section -->
                                 <h4>Tax Section</h4>
@@ -138,6 +145,7 @@
                                 <!-- End Meet and Greet Section -->
                                 <hr>
                                 <!-- Features Section -->
+                              
                                 <h4>Features</h4>
                                 <div class="mb-3">
                                     <input type="text" data-role="tagsinput" name="features" class="form-control" placeholder="Add Features" value="{{ old('features') }}">
@@ -145,6 +153,7 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </form>

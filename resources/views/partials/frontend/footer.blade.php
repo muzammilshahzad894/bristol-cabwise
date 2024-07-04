@@ -56,7 +56,7 @@
 
                         <!-- <div class="footer-logo"><h2>CARE<span>X</span></h2></div> -->
                         <div class="widget-text">
-                            <p>Book a car imperdiet sapien porttito the bibenum ellentesue the commodo erat nesuen.</p>
+                            <p>Book a service with us to ensure smooth and comfortable travel.</p>
                             {{-- <div class="social-icons">
                                 <ul class="list-inline">
                                     <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
@@ -76,6 +76,7 @@
                             <li><a href="{{ route('frontend.about') }}">About</a></li>
                             <li><a href="{{ route('frontend.services') }}">Services</a></li>
                             <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
+                            <li><a class="nav-link"  href="{{ route('frontend.trustVoilet') }}">Reviews</a></li>
                             <li><a href="{{ route('frontend.faqs') }}">FAQs</a></li>
                             <li><a href="{{ route('frontend.termCondition') }}">Term and Condition</a></li>
                             <!-- <li><a href="{{ route('frontend.services') }}" class="booking_online_btn">Book Now</a></li> -->

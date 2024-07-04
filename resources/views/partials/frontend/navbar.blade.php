@@ -43,7 +43,6 @@
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.about') ? 'active' : '' }}" href="{{ route('frontend.about') }}">About</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.services') ? 'active' : '' }}" href="{{ route('frontend.services') }}">Services</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.contact') ? 'active' : '' }}" href="{{ route('frontend.contact') }}">Contact</a></li>
-           
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.faqs') ? 'active' : '' }}" href="{{ route('frontend.faqs') }}">FAQs</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.trustVoilet') ? 'active' : '' }}" href="{{ route('frontend.trustVoilet') }}">Reviews</a></li>
 

@@ -36,6 +36,7 @@ class UpdateFleetRequest extends FormRequest
             'price_after_100_miles' => 'required',
             'price_after_150_miles' => 'required',
             'price_after_200_miles' => 'required',
+            'detail_page_description' => 'required',
             'features' => 'sometimes|nullable',
         ];
     }

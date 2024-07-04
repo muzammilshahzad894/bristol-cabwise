@@ -18,6 +18,7 @@ Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.c
 Route::get('/services', [FrontendController::class, 'services'])->name('frontend.services');
 Route::get('/faqs', [FrontendController::class, 'faqs'])->name('frontend.faqs');
 Route::get('/term-condition', [FrontendController::class, 'termCondition'])->name('frontend.termCondition');
+Route::get('/fleet-Detail/{id}',[FrontendController::class, 'fleetDetailsFrontend'])->name('frontend.fleetDetailsFrontend');
 
 
 

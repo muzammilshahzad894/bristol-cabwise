@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h6>What We Do</h6>
+                    {{-- <h6>What We Do</h6> --}}
                     <h1>Our <span>Services</span></h1>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 <h1 class="section-title">Other <span>Services</span></h1>
 
             </div>
-            <div class="col-md-12">
+            {{-- <div class="col-md-12">
                 <div class="owl-carousel owl-theme">
                     @if($services->count() > 0)
                         @foreach($services as $service)
@@ -50,7 +50,30 @@
                         @endforeach
                     @endif
                 </div>
+            </div> --}}
+            <div class="row">
+                @if($services->count() > 0)
+                    @foreach($services as $service)
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="cars_details_view">
+                                <div>
+                                    <img src="{{ asset('uploads/services/'.$service->image) }}" alt="" class="img-fluid" />
+                                    <h4 class="text-white mb-0 pt-2" style="font-size:24px;">{{ $service->name }}</h4>
+                                    <p style="color: #f5b754">{{ $service->tag }}</p>
+                                    <p style="color: white;" class="truncate">
+                                        {{ $service->short_description }}
+                                    </p>
+                                    <div class="d-flex justify-content-between gap-4">
+                                        <a class="view_details" href="{{ route('frontend.carDetails', $service->id) }}">View Details</a>
+                                        <a class="view_details" href="{{ route('frontend.book-online', ['id' => $service->id, 'name' => str_replace(' ', '-', $service->name)]) }}">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
+            
         </div>
     </div>
 </section>
@@ -60,7 +83,7 @@
         height: 390px !important;
     }
     .cars_details_view div img {
-    height: 300px;
+    height: 300px !important;
 }
     .new_forms {
         max-width: 400px;
@@ -192,7 +215,7 @@
         }
         
         .cars_details_view div img {
-                height: 300px;
+                height: 300px !important;
             }
 
         .v-middle {

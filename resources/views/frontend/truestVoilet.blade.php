@@ -10,13 +10,17 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
             <div class="col-lg-6 col-md-12 mt-30">
                 <div class="post-wrapper">
                     <a href="index-2.html">
-                        <div>Home</div>
+                        <!-- <div>Home</div> -->
                     </a>
-                    <div class="divider"></div>
-                    <div class="text-white"><a href="#">Trust Violet</a></div>
+                    <!-- <div class="divider"></div> -->
+                    <!-- <div class="text-white"><a href="#">Trust Piolet Reviews</a></div> -->
                 </div>
-                <h1>Book Your Ride.</h1>
+                <h1>Reviews</h1>
+                <p style="color: orange; font-size: 21px; font-weight: bold; line-height: 1.5;">
+                    Top-Rated On Trustpilot For Our <br> Punctual And Professional Cab Service.
+                </p>
             </div>
+            
         </div>
     </div>
 </div>

@@ -60,6 +60,8 @@ class FleetController extends Controller
             $fleet->price_after_100_miles = $request->price_after_100_miles;
             $fleet->price_after_150_miles = $request->price_after_150_miles;
             $fleet->price_after_200_miles = $request->price_after_200_miles;
+            
+            $fleet->detail_page_description = $request->detail_page_description;
             $fleet->features = $request->features;
             $fleet->save();
 
@@ -126,6 +128,7 @@ class FleetController extends Controller
             $fleet->price_after_100_miles = $request->price_after_100_miles;
             $fleet->price_after_150_miles = $request->price_after_150_miles;
             $fleet->price_after_200_miles = $request->price_after_200_miles;
+            $fleet->detail_page_description = $request->detail_page_description;
             $fleet->features = $request->features;
             $fleet->save();
 

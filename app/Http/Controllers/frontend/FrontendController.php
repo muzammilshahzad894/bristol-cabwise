@@ -9,11 +9,13 @@ use App\Models\Booking;
 use App\Models\Refund;
 use App\Models\Review;
 use App\Models\User;
+use App\Models\Fleet;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\HelperController;
 use App\Services\EmailService;
 use Carbon\Carbon;
+
 
 class FrontendController extends Controller
 {
@@ -26,7 +28,10 @@ class FrontendController extends Controller
 
     public function about()
     {
-        return view('frontend.about');
+        
+        $services = Service::all();
+        return view('frontend.about', compact('services'));
+ 
     }
 
     public function contact()
@@ -38,6 +43,11 @@ class FrontendController extends Controller
     {
         $services = Service::all();
         return view('frontend.services', compact('services'));
+    }
+    public function fleetDetailsFrontend($id)
+    {
+        $fleet = Fleet::find($id);
+        return view('frontend.fleetDetails', compact('fleet'));
     }
     public function faqs()
     {
