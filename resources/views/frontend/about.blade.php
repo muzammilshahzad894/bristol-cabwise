@@ -7,6 +7,13 @@
     .banner-header {
         min-height: 520px;
     }
+    .offer_img{
+        max-height: 300px;
+        max-width: 450px !important;
+    }
+    .padding-top{
+        margin-top: 4.5rem !important;
+    }
 
     @media (max-width: 767px) {
         .mobile_screen {
@@ -173,18 +180,23 @@
                 </div>
                 <div class="col-md-6">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/low_rate.jpg') }}" alt="about" class="img-fluid offer_img">
+                        <img src="{{ asset('frontend-assets/img/about/low_rate.jpg') }}" alt="about" class="img-fluid offer_img">
+                    </div>
+                </div>
+                <div class="col-md-6 padding-top">
+                    <div class="item">
+                        <img src="{{ asset('frontend-assets/img/about/staff.jpg') }}" alt="about" class="img-fluid offer_img">
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6 padding-top">
                     <div class="section-subtitle"></div>
                     <h4 class="section-title">*Highly Professional <span>Staff:</span></h4>
                     <p> Our team of experienced drivers undergo rigorous training and background checks to ensure
                         professionalism, courtesy, and safety at all times.
                     </p>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6 padding-top">
                     <div class="section-subtitle"></div>
                     <h4 class="section-title">24/7 <span>Availability:</span></h4>
                     <p>Our services are available 24/7, ensuring that you can access our support at any time of the day.
@@ -193,7 +205,17 @@
                         us or send us a message.
                     </p>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6 padding-top">
+                    <div class="item">
+                        <img src="{{ asset('frontend-assets/img/about/247.jpg') }}" alt="about" class="img-fluid offer_img">
+                    </div>
+                </div>
+                <div class="col-md-6 padding-top">
+                    <div class="item">
+                        <img src="{{ asset('frontend-assets/img/about/booking.png') }}" alt="about" class="img-fluid offer_img">
+                    </div>
+                </div>
+                <div class="col-md-6 padding-top">
                     <div class="section-subtitle"></div>
                     <h4 class="section-title">*Easy Booking<span> Process:</span></h4>
                     <p>With our user-friendly booking platform, you can reserve your ride in advance with just a few clicks,

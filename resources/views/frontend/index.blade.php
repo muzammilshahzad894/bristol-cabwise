@@ -523,12 +523,11 @@
                             </div>
                         </div> <i class="fa-solid fa-quote-left"></i>
                         <div class="text">
-                            <p>Lorem posuere in miss drana en the nisan semere sceriun amiss etiam ornare in the miss
-                                drana is lorem fermen nunta urnase mauris in the interdum.</p>
+                            <p>Excellent service! The driver was punctual and very professional. The car was clean and comfortable. Highly recommend Bristol Cabwise for reliable transportation!.</p>
                         </div>
                         <div class="info mt-30">
                             <div class="img-curv">
-                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/1.jpg') }}" alt=""> </div>
+                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/review.jpeg') }}" alt=""> </div>
                                 <div class="shap-left-top">
                                     <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
                                         <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
@@ -566,13 +565,12 @@
                             </div>
                         </div> <i class="fa-solid fa-quote-left"></i>
                         <div class="text">
-                            <p>Lorem posuere in miss drana en the nisan semere sceriun amiss etiam ornare in the miss
-                                drana is lorem fermen nunta urnase mauris in the interdum.</p>
+                            <p>I had a wonderful experience with Bristol Cabwise. The booking process was seamless, and the driver was courteous and helpful. Will definitely use this service again.</p>
                         </div>
                         <div class="info mt-30">
                             <div class="img-curv">
                                 {{-- <div class="img"> <img src="img/team/4.jpg" alt=""> </div> --}}
-                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/4.jpg') }}" alt=""> </div>
+                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/review.jpeg') }}" alt=""> </div>
                                 <div class="shap-left-top">
                                     <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
                                         <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>
@@ -610,12 +608,11 @@
                             </div>
                         </div> <i class="fa-solid fa-quote-left"></i>
                         <div class="text">
-                            <p>Lorem posuere in miss drana en the nisan semere sceriun amiss etiam ornare in the miss
-                                drana is lorem fermen nunta urnase mauris in the interdum.</p>
+                            <p>Overall, a great service. The only reason I'm giving four stars is because the traffic was a bit heavy, but that's not their fault. The driver was very patient and friendly.</p>
                         </div>
                         <div class="info mt-30">
                             <div class="img-curv">
-                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/6.jpg') }}" alt=""> </div>
+                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/review.jpeg') }}" alt=""> </div>
                                 <div class="shap-left-top">
                                     <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11">
                                         <path d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z" fill="#1b1b1b"></path>

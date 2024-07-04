@@ -60,12 +60,11 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
                             </div>
                         </div> <i class="fa-solid fa-quote-left"></i>
                         <div class="text">
-                            <p>Lorem posuere in miss drana en the nisan semere sceriun amiss etiam ornare in the miss
-                                drana is lorem fermen nunta urnase mauris in the interdum.</p>
+                            <p>I had a wonderful experience with Bristol Cabwise. The booking process was seamless, and the driver was courteous and helpful. Will definitely use this service again.</p>
                         </div>
                         <div class="info mt-30">
                             <div class="img-curv">
-                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/1.jpg') }}"
+                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/review.jpeg') }}"
                                         alt=""> </div>
                                 <div class="shap-left-top">
                                     <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -119,13 +118,12 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
                             </div>
                         </div> <i class="fa-solid fa-quote-left"></i>
                         <div class="text">
-                            <p>Lorem posuere in miss drana en the nisan semere sceriun amiss etiam ornare in the miss
-                                drana is lorem fermen nunta urnase mauris in the interdum.</p>
+                            <p>Overall, a great service. The only reason I'm giving four stars is because the traffic was a bit heavy, but that's not their fault. The driver was very patient and friendly.</p>
                         </div>
                         <div class="info mt-30">
                             <div class="img-curv">
                                 {{-- <div class="img"> <img src="img/team/4.jpg" alt=""> </div> --}}
-                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/4.jpg') }}"
+                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/review.jpeg') }}"
                                         alt=""> </div>
                                 <div class="shap-left-top">
                                     <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -179,12 +177,11 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
                             </div>
                         </div> <i class="fa-solid fa-quote-left"></i>
                         <div class="text">
-                            <p>Lorem posuere in miss drana en the nisan semere sceriun amiss etiam ornare in the miss
-                                drana is lorem fermen nunta urnase mauris in the interdum.</p>
+                            <p>Bristol Cabwise exceeded my expectations. The driver arrived on time and the ride was smooth. The rates are also very reasonable. I’ll be booking with them again for sure.</p>
                         </div>
                         <div class="info mt-30">
                             <div class="img-curv">
-                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/6.jpg') }}"
+                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/review.jpeg') }}"
                                         alt=""> </div>
                                 <div class="shap-left-top">
                                     <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -238,12 +235,11 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
                             </div>
                         </div> <i class="fa-solid fa-quote-left"></i>
                         <div class="text">
-                            <p>Lorem posuere in miss drana en the nisan semere sceriun amiss etiam ornare in the miss
-                                drana is lorem fermen nunta urnase mauris in the interdum.</p>
+                            <p>Good service with a professional touch. The car was neat and the driver knew the best routes to avoid traffic. Just wish they had more availability during peak hours.</p>
                         </div>
                         <div class="info mt-30">
                             <div class="img-curv">
-                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/1.jpg') }}"
+                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/review.jpeg') }}"
                                         alt=""> </div>
                                 <div class="shap-left-top">
                                     <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -297,13 +293,12 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
                             </div>
                         </div> <i class="fa-solid fa-quote-left"></i>
                         <div class="text">
-                            <p>Lorem posuere in miss drana en the nisan semere sceriun amiss etiam ornare in the miss
-                                drana is lorem fermen nunta urnase mauris in the interdum.</p>
+                            <p>Highly recommend Bristol Cabwise! They offer excellent customer service and the drivers are always friendly and prompt. Made my trip to the airport stress-free.</p>
                         </div>
                         <div class="info mt-30">
                             <div class="img-curv">
                                 {{-- <div class="img"> <img src="img/team/4.jpg" alt=""> </div> --}}
-                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/4.jpg') }}"
+                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/review.jpeg') }}"
                                         alt=""> </div>
                                 <div class="shap-left-top">
                                     <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -357,12 +352,11 @@ data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style=
                             </div>
                         </div> <i class="fa-solid fa-quote-left"></i>
                         <div class="text">
-                            <p>Lorem posuere in miss drana en the nisan semere sceriun amiss etiam ornare in the miss
-                                drana is lorem fermen nunta urnase mauris in the interdum.</p>
+                            <p>Excellent service! The driver was punctual and very professional. The car was clean and comfortable. Highly recommend Bristol Cabwise for reliable transportation!.</p>
                         </div>
                         <div class="info mt-30">
                             <div class="img-curv">
-                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/6.jpg') }}"
+                                <div class="img"> <img src="{{ asset('frontend-assets/img/team/review.jpeg') }}"
                                         alt=""> </div>
                                 <div class="shap-left-top">
                                     <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"
