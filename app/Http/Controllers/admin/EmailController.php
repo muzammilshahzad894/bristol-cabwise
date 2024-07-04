@@ -7,6 +7,8 @@ use App\Services\EmailService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {

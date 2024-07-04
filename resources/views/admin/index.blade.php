@@ -38,7 +38,7 @@
                     <div class="col-sm-4">
                         <div class="card">
                             <div class="card-body">
-                                <div class="job-icon pt-4 pb-sm-0 pb-4 pe-3 d-flex justify-content-between">
+                                <div class="job-icon pb-4 d-flex justify-content-between">
                                     <div>
                                         <div class="d-flex align-items-center mb-1">
                                             <h2 class="mb-0 lh-1">{{ $todayCompletedBookings }}</h2>
@@ -95,13 +95,13 @@
                                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
                                         <rect  width="13" height="13" fill="#f73a0b"/>
                                     </svg>
-                                    Total Bookings: 1000
+                                    Total Bookings: {{ $totalCompletedBookings }}
                                 </span>
                                 <span class="ms-sm-5 ms-3 font-w500">
                                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
                                         <rect  width="13" height="13" fill="#6e6e6e"/>
                                     </svg>
-                                    Total Sales: £5000
+                                    Total Sales: £{{ $totalSales }}
                                 </span>
                                 <div class="tab-content mt-5" id="myTabContent">
                                     <div class="tab-pane fade show active" id="monthly1">
@@ -115,6 +115,104 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        var activityBar1 = function(){
+            var activity1 = document.getElementById("activity1");
+            if (activity1 !== null) {
+                activity1.height = 200;
+                
+                var config = {
+                    type: "bar",
+                    data: {
+                        labels: [
+                            "01",
+                            "02",
+                            "03",
+                            "04",
+                            "05",
+                            "06",
+                            "07",
+                            "08",
+                            "09",
+                            "10",
+                            "11",
+                            "12",
+                        ],
+                        datasets: [
+                            {
+                                label: "Bookings",
+                                data: [{{ implode(',', $monthlyCompletedBookings) }}],
+                                borderColor: 'var(--primary)',
+                                borderWidth: "0",
+                                barThickness:'18',
+                                backgroundColor: '#F73A0B',
+                                minBarLength: 10,
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins:{
+                            legend: false,
+                        },
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            y: {
+                                grid: {
+                                    color: "rgba(233,236,255,0.5)",
+                                    drawBorder: true
+                                },
+                                ticks: {
+                                    fontColor: "#6E6E6E",
+                                    max: 60,
+                                    min: 0,
+                                    stepSize: 20
+                                },
+                            },
+                            x: {
+                                barPercentage: 0.3,
+                                
+                                grid: {
+                                    display: false,
+                                    zeroLineColor: "transparent"
+                                },
+                                ticks: {
+                                    stepSize: 20,
+                                    fontColor: "#6E6E6E",
+                                    fontFamily: "Nunito, sans-serif"
+                                }
+                            }
+                        },
+                        tooltips: {
+                            mode: "index",
+                            intersect: false,
+                            titleFontColor: "#888",
+                            bodyFontColor: "#555",
+                            titleFontSize: 12,
+                            bodyFontSize: 15,
+                            backgroundColor: "rgba(255,255,255,1)",
+                            displayColors: true,
+                            xPadding: 10,
+                            yPadding: 7,
+                            borderColor: "rgba(220, 220, 220, 1)",
+                            borderWidth: 1,
+                            caretSize: 6,
+                            caretPadding: 10
+                        }
+                    }
+                };
+
+                var ctx = document.getElementById("activity1").getContext("2d");
+                var myLine = new Chart(ctx, config);
+            }
+        }
+    </script>
 @endsection
 
 @section('styles')

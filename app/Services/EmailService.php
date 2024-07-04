@@ -22,7 +22,7 @@ class EmailService
             'pickupDateTime' => $bookingDetails->pickupDateTime,
         ];
 
-        Mail::to($user->email)->send(new BookingConfirmationMail($data));
+        Mail::to('muzammilshahzad894@gmail.com')->send(new BookingConfirmationMail($data));
     }
 
     public function sendBookingCancellation($user, $bookingDetails)
