@@ -70,14 +70,6 @@
             </div>
         </div>
     </section>
-    
-    
-    
-    
-   
-
-
-
 
     <style>
         .fa-users:before {
