@@ -57,8 +57,6 @@ class PaymentController extends Controller
             $booking->save();
             $bookingName =$booking->pickup_location;
             $user = User::find($booking->user_id);
-
-            $pickupDateTime = Carbon::createFromFormat('Y-m-d H:i', $booking->booking_date . ' ' . $booking->booking_time);
       
             $bookingDetails = (object) [
                 'serviceType' => $booking->service->name,
