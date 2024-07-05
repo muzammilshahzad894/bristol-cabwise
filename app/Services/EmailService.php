@@ -56,7 +56,12 @@ class EmailService
             'dropoffDateTime' => $bookingDetails->dropoffDateTime,
         ];
 
-        Mail::to($user->email)->send(new BookingCancellationMail($data));
+        $emailAddresses = [
+            $user->email,
+            setting('admin_email'),
+        ];
+
+        Mail::to($emailAddresses)->send(new BookingCancellationMail($data));
     }
 
     public function sendBookingReminder($user, $bookingDetails)
@@ -69,7 +74,12 @@ class EmailService
             'dropoffDateTime' => $bookingDetails->dropoffDateTime,
         ];
 
-        Mail::to($user->email)->send(new BookingReminderMail($data));
+        $emailAddresses = [
+            $user->email,
+            setting('admin_email'),
+        ];
+
+        Mail::to($emailAddresses)->send(new BookingReminderMail($data));
     }
 
     public function sendThankYouFeedback($user, $feedbackLink)
@@ -94,7 +104,12 @@ class EmailService
             'bookingId' => $feedbackLink->bookingId,
         ];
 
-        Mail::to($user->email)->send(new RefundMail($data));
+        $emailAddresses = [
+            $user->email,
+            setting('admin_email'),
+        ];
+
+        Mail::to($emailAddresses)->send(new RefundMail($data));
     }
 
     public function sendDriverWaitingEmail($bookingDetails)
@@ -108,7 +123,12 @@ class EmailService
             'driverContact' => $bookingDetails['driverContact'],
         ];
 
-        Mail::to($bookingDetails['email'])->send(new DriverWaitingEmail($data));
+        $emailAddresses = [
+            $bookingDetails['email'],
+            setting('admin_email'),
+        ];
+
+        Mail::to($emailAddresses)->send(new DriverWaitingEmail($data));
     }
 
     public function sendBookingStatusEmail($bookingDetails)
@@ -123,6 +143,11 @@ class EmailService
             'status' => $bookingDetails['status'],
         ];
 
-        Mail::to($bookingDetails['email'])->send(new BookingStatusMail($data));
+        $emailAddresses = [
+            $bookingDetails['email'],
+            setting('admin_email'),
+        ];
+
+        Mail::to($emailAddresses)->send(new BookingStatusMail($data));
     }
 }
