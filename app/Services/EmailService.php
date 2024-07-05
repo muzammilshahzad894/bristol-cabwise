@@ -40,7 +40,7 @@ class EmailService
 
         $emailAddresses = [
             $user->email,
-            env('ADMIN_EMAIL'),
+            setting('admin_email'),
         ];
 
         Mail::to($emailAddresses)->send(new BookingConfirmationMail($data));

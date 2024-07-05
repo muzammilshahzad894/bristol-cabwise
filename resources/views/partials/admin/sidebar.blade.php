@@ -66,13 +66,14 @@
                         <span class="nav-text">Settings</span>
                     </a>
                 </li>
-                <li class="{{ request()->routeIs('admin.emails.index') ? 'mm-active' : '' }}">
-                    <a href="{{ route('admin.emails.index') }}" class="" aria-expanded="false">
-                        <i class="fa fa-envelope"></i>
-                        <span class="nav-text">Emails</span>
-                    </a>
-                </li>
-            
+                @if(request()->has('programmer'))
+                    <li class="{{ request()->routeIs('admin.emails.index') ? 'mm-active' : '' }}">
+                        <a href="{{ route('admin.emails.index') }}" class="" aria-expanded="false">
+                            <i class="fa fa-envelope"></i>
+                            <span class="nav-text">Emails</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
         @endif
         @if(Auth::user()->role == 'driver')
