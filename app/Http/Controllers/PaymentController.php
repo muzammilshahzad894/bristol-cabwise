@@ -61,9 +61,25 @@ class PaymentController extends Controller
             $pickupDateTime = Carbon::createFromFormat('Y-m-d H:i', $booking->booking_date . ' ' . $booking->booking_time);
       
             $bookingDetails = (object) [
+                'serviceType' => $booking->service->name,
                 'pickupLocation' => $booking->pickup_location,
                 'dropoffLocation' => $booking->dropoff_location,
-                'pickupDateTime' => $pickupDateTime->format('l, F j, Y, g:i A'),
+                'dateAndTime' => formatDate($booking->booking_date) . ' ' . foramtTime($booking->booking_time),
+                'name' => $booking->name,
+                'telephone' => $booking->phone_number,
+                'email' => $booking->email,
+                'no_of_passenger' => $booking->no_of_passenger,
+                'is_childseat' => $booking->is_childseat ? $booking->is_childseat : '-',
+                'is_meet_greet' => $booking->is_meet_greet ? 'Yes' : '-',
+                'no_suit_case' => $booking->no_suit_case,
+                'no_of_laugage' => $booking->no_of_laugage,
+                'summary' => $booking->summary ? $booking->summary : '-',
+                'other_name' => $booking->other_name ? $booking->other_name : '-',
+                'other_phone_number' => $booking->other_phone_number ? $booking->other_phone_number : '-',
+                'other_email' => $booking->other_email ? $booking->other_email : '-',
+                'fleet_price' => $booking->total_price,
+                'is_extra_lauggage' => $booking->is_extra_lauggage ? 'Yes' : '-',
+                'coupon_discount' => 0,
             ];
 
             $this->emailService->sendBookingConfirmation($user, $bookingDetails);

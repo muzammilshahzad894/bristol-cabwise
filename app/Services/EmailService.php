@@ -17,12 +17,33 @@ class EmailService
     {
         $data = [
             'userName' => $user->name,
+            'serviceType' => $bookingDetails->serviceType,
             'pickupLocation' => $bookingDetails->pickupLocation,
             'dropoffLocation' => $bookingDetails->dropoffLocation,
-            'pickupDateTime' => $bookingDetails->pickupDateTime,
+            'dateAndTime' => $bookingDetails->dateAndTime,
+            'name' => $bookingDetails->name,
+            'telephone' => $bookingDetails->telephone,
+            'email' => $bookingDetails->email,
+            'no_of_passenger' => $bookingDetails->no_of_passenger,
+            'is_childseat' => $bookingDetails->is_childseat,
+            'is_meet_greet' => $bookingDetails->is_meet_greet,
+            'no_suit_case' => $bookingDetails->no_suit_case,
+            'no_of_laugage' => $bookingDetails->no_of_laugage,
+            'summary' => $bookingDetails->summary,
+            'other_name' => $bookingDetails->other_name,
+            'other_phone_number' => $bookingDetails->other_phone_number,
+            'other_email' => $bookingDetails->other_email,
+            'fleet_price' => $bookingDetails->fleet_price,
+            'is_extra_lauggage' => $bookingDetails->is_extra_lauggage,
+            'coupon_discount' => $bookingDetails->coupon_discount,
         ];
 
-        Mail::to('muzammilshahzad894@gmail.com')->send(new BookingConfirmationMail($data));
+        $emailAddresses = [
+            $user->email,
+            env('ADMIN_EMAIL'),
+        ];
+
+        Mail::to($emailAddresses)->send(new BookingConfirmationMail($data));
     }
 
     public function sendBookingCancellation($user, $bookingDetails)

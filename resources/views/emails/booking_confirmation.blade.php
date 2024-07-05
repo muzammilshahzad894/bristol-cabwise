@@ -44,18 +44,101 @@
                 </div>
                 <p>Dear {{ $userName }},</p>
                 <p>Thank you for booking a car pick-up and drop-off service with us. Here are your booking details:</p>
+                <h3 class="color_theme">Summary:</h3>
                 <table class="table">
                     <tr>
-                        <th>Pick-up Location</th>
+                        <th>serviceType</th>
+                        <td>{{ $serviceType }}</td>
+                    </tr>
+                    <tr>
+                        <th>Pickup Location</th>
                         <td>{{ $pickupLocation }}</td>
                     </tr>
                     <tr>
-                        <th>Drop-off Location</th>
+                        <th>Drop Location</th>
                         <td>{{ $dropoffLocation }}</td>
                     </tr>
                     <tr>
-                        <th>Pick-up Date & Time</th>
-                        <td>{{ $pickupDateTime }}</td>
+                        <th>Date & Time</th>
+                        <td>{{ $dateAndTime }}</td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ $name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Telephone</th>
+                        <td>{{ $telephone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ $email }}</td>
+                    </tr>
+                    <tr>
+                        <th>No of passenger</th>
+                        <td>{{ $no_of_passenger }}</td>
+                    </tr>
+                    <tr>
+                        <th>Child Seat</th>
+                        <td>{{ $is_childseat }}</td>
+                    </tr>
+                    <tr>
+                        <th>Meet & Greet</th>
+                        <td>{{ $is_meet_greet }}</td>
+                    </tr>
+                    <tr>
+                        <th>SuitCases</th>
+                        <td>{{ $no_suit_case }}</td>
+                    </tr>
+                    <tr>
+                        <th>Hand Luggage</th>
+                        <td>{{ $no_of_laugage }}</td>
+                    </tr>
+                    <tr>
+                        <th>Summary</th>
+                        <td>{{ $summary }}</td>
+                    </tr>
+                </table>
+                <h3 class="color_theme">Other Details:</h3>
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ $other_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Telephone</th>
+                        <td>{{ $other_phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ $other_email }}</td>
+                    </tr>
+                </table>
+                <h3 class="color_theme">Total Price:</h3>
+                <table class="table">
+                    <tr>
+                        <th>Fleet Price</th>
+                        <td>£{{ $fleet_price }}</td>
+                    </tr>
+                    <tr>
+                        <th>Child Seat</th>
+                        <td>{{ $is_childseat }}</td>
+                    </tr>
+                    <tr>
+                        <th>Meet & Greet</th>
+                        <td>{{ $is_meet_greet }}</td>
+                    </tr>
+                    <tr>
+                        <th>Extra Luggage</th>
+                        <td>{{ $is_extra_lauggage }}</td>
+                    </tr>
+                    <tr>
+                        <th>Coupon Discount</th>
+                        <td>{{ $coupon_discount }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Price</th>
+                        <td>£{{ $fleet_price }}</td>
                     </tr>
                 </table>
                 <p>We will process your request and notify you once it has been completed. If you have any questions, please contact our support team at 07533225970.</p>
