@@ -4657,6 +4657,9 @@ height: 100% !important;
         margin: 0;
         text-align: center;
     }
+    .testimonials .item .text p{
+        text-align: center !important;
+    }
 }
 /* prev/next post */
 .post-prev-next {

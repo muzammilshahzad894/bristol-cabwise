@@ -827,9 +827,7 @@
                     $('#exampleModal').modal('show');
                     return;
                 } else {
-                    if (coupon_apply !== '') {
-                        StoreCouponCode();
-                    }
+                   
 
                     var login_user = document.getElementById('login_user').value;
 

@@ -8,21 +8,21 @@
                         <div class="footer-contact-links-wrapper">
                             <div class="footer-contact-link-wrapper">
                                 <div class="image-wrapper footer-contact-link-icon">
-                                    <div class="icon-footer"> <i class="flaticon-phone-call"></i> </div>
+                                    <a href="tel:07533225970">   <div class="icon-footer"> <i class="flaticon-phone-call"></i> </div></a>
                                 </div>
                                 <div class="footer-contact-link-content">
                                     <h6>Call us</h6>
-                                    <p> +44 7533 225970</p>
+                                    <p><a href="tel:07533225970"> +44 7533 225970 </a></p>
                                 </div>
                             </div>
                             <div class="footer-contact-links-divider"></div>
                             <div class="footer-contact-link-wrapper">
                                 <div class="image-wrapper footer-contact-link-icon">
-                                    <div class="icon-footer"> <i class="omfi-envelope"></i> </div>
+                                    <a href="mailto:info@bristolcabwise.com" ><div class="icon-footer"> <i class="omfi-envelope"></i> </div></a>
                                 </div>
                                 <div class="footer-contact-link-content">
                                     <h6>Write to us</h6>
-                                    <p>info@bristolcabwise.com</p>
+                                    <p> <a href="mailto:info@bristolcabwise.com" >info@bristolcabwise.com</a></p>
                                 </div>
                             </div>
                             <div class="footer-contact-links-divider"></div>

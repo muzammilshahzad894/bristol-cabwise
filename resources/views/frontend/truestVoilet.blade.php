@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <section class="banner-header section-padding bg-img" data-overlay-dark="4"
 data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style="height: 84vh;">
 <div class="v-middle">

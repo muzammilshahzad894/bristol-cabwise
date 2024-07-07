@@ -75,7 +75,7 @@
         background: #f5b754;
         border-radius: 50%;
         font-weight: 600 !important;
-        transition: transform 0.3s ease;
+        transition: transform 0.2s ease;
         display: block !important;
     }
     .cross.active {
@@ -86,6 +86,9 @@
         .faq-section h2 {
         color: #333;
         font-size: 19px;
+    }
+    .container h1{
+        font-size: 31px !important;
     }
 }
 </style>
@@ -162,13 +165,19 @@
 
 @section('scripts')
 <script>
-    function toggleAnswer(element) {
+     function toggleAnswer(element) {
         const answer = element.parentNode.nextElementSibling;
-        if (answer.style.display === 'none' || answer.style.display === '') {
+        if (answer.style.maxHeight === '0px' || !answer.style.maxHeight) {
             answer.style.display = 'block';
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            answer.style.padding = '10px 0';
             element.classList.add('active');
         } else {
-            answer.style.display = 'none';
+            answer.style.maxHeight = '0px';
+            answer.style.padding = '0';
+            setTimeout(() => {
+                answer.style.display = 'none';
+            }, 300);
             element.classList.remove('active');
         }
     }

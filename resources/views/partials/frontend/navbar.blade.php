@@ -99,7 +99,7 @@
             </ul>
             <div class="navbar-right">
                 <div class="wrap">
-                    <div class="icon"> <i class="flaticon-phone-call"></i> </div>
+                    <div class="icon"><a href="tel:07533225970"> <i class="flaticon-phone-call"></i></a> </div>
                     <div class="text">
                         <p>Need help?</p>
                         <h5><a href="tel:07533225970">07533225970</a></h5>

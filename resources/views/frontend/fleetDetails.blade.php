@@ -30,9 +30,9 @@
                                 <div class="d-flex align-items-center">
                                     <div class="d-flex gap-2 align-items-center" >
                                         <div class="icon"><i class="fas fa-users"></i></div>
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center gap-2">
                                             <p>Max Passengers:</p>
-                                            <h6>{{ $fleet->max_passengers }}</h6>
+                                            <h6>({{ $fleet->max_passengers }})</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -41,9 +41,9 @@
                                 <div class="d-flex align-items-center">
                                     <div class="d-flex gap-2 align-items-center">
                                         <div class="icon"><i class="fas fa-suitcase"></i></div>
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center gap-2">
                                             <p>Max Suitcases:</p>
-                                            <h6>{{ $fleet->max_suitecases }}</h6>
+                                            <h6>({{ $fleet->max_suitecases }})</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -52,9 +52,9 @@
                                 <div class="d-flex align-items-center">
                                     <div class="d-flex gap-2 align-items-center">
                                         <div class="icon"><i class="fas fa-briefcase"></i></div>
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center gap-2">
                                             <p>Max Hand Luggage:</p>
-                                            <h6>{{ $fleet->max_hand_luggage }}</h6>
+                                            <h6>({{ $fleet->max_hand_luggage }})</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -72,6 +72,10 @@
     </section>
 
     <style>
+        
+        .d-flex h6{
+            margin: 0px !important;
+        }
         .fa-users:before {
             content: "\f0c0";
             color: orange;
@@ -232,6 +236,9 @@
         @media (max-width: 768px) {
             .header {
                 height: 1000px !important;
+            }
+            .row{
+                flex-direction: column-reverse;
             }
 
             .video-fullscreen-wrap {

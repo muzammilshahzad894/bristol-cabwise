@@ -472,20 +472,12 @@
 
                             </div>
                             @if ($userRole != 'admin')
-                                <div class="payment_section_main">
-                                    <p class="dropdown_menus">Select Payment Type:</p>
-                                    <div class="unique-dropdown">
-                                        <p class="unique-dropbtns">Select Option</p>
-                                        <div class="unique-dropdown-content">
-                                            <ul>
-                                                <li class="unique-payment-option" target="_blank" id="checkout-button"
-                                                    onclick="PayonStripe();">Debit Card</li>
-                                                {{-- <li class="unique-payment-option" target="_blank" id="paypal"
-                                                    onclick="bookAndPay('paypal');">PayPal</li> --}}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                <button class="discount_btn"  onclick="PayonStripe();" type="button" id="payment_section_main">
+                                    Pay Now  
+                                </button>
+                                <button class="discount_btn" id="request_by_admin" type="button">
+                                    Request to Admin
+                                </button>
                             @endif
                         </div>
 
@@ -599,6 +591,26 @@
         </div>
 
     </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const url = new URL(window.location.href);
+            const source = url.searchParams.get('source');
+            var element = document.getElementById('request_by_admin');
+            var element1 = document.getElementById('payment_section_main');
+            if(source == 'get_a_quote'){
+                element.style.display = 'block';
+                element1.style.display = 'none';
+            }
+            else{
+                element.style.display = 'none';
+                element1.style.display = 'block';
+            }
+        });
+    </script>
+
+
+
+
     <script type="text/javascript">
         var payment_id = '{{ request('payment_id') }}';
         var stripeKey = '{{ config('services.stripe.key') }}';
@@ -609,7 +621,9 @@
 
             function PayonStripe() {
                 bookingId = current_booking_id;
-
+                if (coupon_apply !== '') {
+                        StoreCouponCode();
+                    }
                 fetch(`/create-checkout-session/${bookingId}`, {
                         method: 'POST',
                         headers: {
@@ -657,153 +671,6 @@
 @section('scripts')
     <script src="https://js.stripe.com/v3/"></script>
 
-
-
-    {{-- <script src="{{ asset('frontend-assets/js/google-map.js') }}"></script> --}}
-    {{-- <script src="{{ asset('frontend-assets/js/distance.js') }}"></script> --}}
-
-{{-- 
-    <script>
-        let geocoder;
-        let distanceService;
-        let originAutocomplete;
-        let map;
-        let originPlace = null;
-        let destinationPlaces = [];
-        let distances = [];
-        let totalDistance = 0;
-
-        $(document).ready(function() {
-            // Initialize Google Maps centered on Sargodha, Pakistan
-            const sargodhaLocation = {
-                lat: 32.0836,
-                lng: 72.6712
-            };
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: sargodhaLocation,
-                zoom: 13
-            });
-
-            const pickupInput = document.getElementById('pickupLocation');
-            originAutocomplete = new google.maps.places.Autocomplete(pickupInput, {
-                bounds: new google.maps.LatLngBounds(
-                    new google.maps.LatLng(32.0000, 72.5000), // South West Corner
-                    new google.maps.LatLng(32.1500, 72.8000) // North East Corner
-                ),
-                componentRestrictions: {
-                    country: 'pk'
-                },
-                types: ['geocode']
-            });
-            originAutocomplete.addListener('place_changed', handleOriginPlaceChange);
-
-            geocoder = new google.maps.Geocoder();
-            distanceService = new google.maps.DistanceMatrixService();
-
-            // Initialize the first drop location autocomplete
-            handleDestinationPlaceChange(0);
-        });
-
-        function handleOriginPlaceChange() {
-            originPlace = originAutocomplete.getPlace();
-            if (!originPlace || !originPlace.geometry || !isPlaceInSargodha(originPlace)) {
-                alert('Invalid pickup location. Please select a valid location within Sargodha.');
-                originPlace = null; // Reset originPlace if it's invalid
-                return;
-            }
-            checkAndCalculateDistances();
-        }
-
-        function handleDestinationPlaceChange(index) {
-            const input = document.querySelectorAll('#dropLocations input')[index];
-            const autocomplete = new google.maps.places.Autocomplete(input, {
-                bounds: new google.maps.LatLngBounds(
-                    new google.maps.LatLng(32.0000, 72.5000), // South West Corner
-                    new google.maps.LatLng(32.1500, 72.8000) // North East Corner
-                ),
-                componentRestrictions: {
-                    country: 'pk'
-                },
-                types: ['geocode']
-            });
-            autocomplete.addListener('place_changed', () => {
-                const place = autocomplete.getPlace();
-                if (!place || !place.geometry || !isPlaceInSargodha(place)) {
-                    alert('Invalid drop location. Please select a valid location within Sargodha.');
-                    destinationPlaces[index] = null; // Reset the invalid destination place
-                    return;
-                }
-                destinationPlaces[index] = place;
-                checkAndCalculateDistances();
-            });
-        }
-
-        function addMore() {
-            const dropLocationsDiv = document.getElementById('dropLocations');
-            const newDropLocationDiv = document.createElement('div');
-            const newIndex = destinationPlaces.length;
-
-            newDropLocationDiv.className = 'drop-location mb-2';
-            newDropLocationDiv.innerHTML = `
-        <input type="text" id="dropLocation${newIndex}" name="dropLocation[]" placeholder="Enter drop location" class="form-control border-radius-0 mb-0">
-        <div id="drop-error" class="error-message text-danger"></div>
-        `;
-
-            dropLocationsDiv.appendChild(newDropLocationDiv);
-            handleDestinationPlaceChange(newIndex);
-        }
-
-        function checkAndCalculateDistances() {
-            if (!originPlace || destinationPlaces.length === 0) {
-                return;
-            }
-
-            const allPlaces = [originPlace, ...destinationPlaces].filter(place => place);
-            if (allPlaces.length < 2) {
-                return;
-            }
-
-            totalDistance = 0;
-            distances = [];
-            for (let i = 0; i < allPlaces.length - 1; i++) {
-                const originLatLng = allPlaces[i].geometry.location;
-                const destinationLatLng = allPlaces[i + 1].geometry.location;
-
-                calculateDistance(originLatLng, destinationLatLng, i);
-            }
-        }
-
-        function calculateDistance(origin, destination, index) {
-            distanceService.getDistanceMatrix({
-                origins: [origin],
-                destinations: [destination],
-                travelMode: google.maps.TravelMode.DRIVING
-            }, (response, status) => {
-                if (status === 'OK') {
-                    const distanceValueInMeters = response.rows[0].elements[0].distance.value;
-                    const distanceValueInMiles = distanceValueInMeters / 1609.34; // Convert meters to miles
-                    distances[index] = distanceValueInMiles;
-                    updateTotalDistance();
-                } else {
-                    console.error('Error:', status);
-                }
-            });
-        }
-
-        function updateTotalDistance() {
-            totalDistance = distances.reduce((acc, distance) => acc + distance, 0);
-            const totalDistanceInMiles = totalDistance.toFixed(2);
-            distance = totalDistanceInMiles;
-        }
-
-        function isPlaceInSargodha(place) {
-            const sargodhaBounds = new google.maps.LatLngBounds(
-                new google.maps.LatLng(32.0000, 72.5000), // South West Corner
-                new google.maps.LatLng(32.1500, 72.8000) // North East Corner
-            );
-            return sargodhaBounds.contains(place.geometry.location);
-        }
-    </script> --}}
     <script>
         let geocoder;
         let distanceService;
