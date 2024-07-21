@@ -174,12 +174,12 @@
                                 <div>
                                     <button class="plus_icon mt-1" type="button" id="addLocation" onclick="addMore();">Add
                                         Via Location</button>
-                                    <div id="via_locatoins_input"></div>
-                                    <label for="dropLocation">Drop Location:</label>
-                                    <div id="dropLocations">
+                                        <label for="dropLocation">Drop Location:</label>
+                                        <div id="via_locatoins_input"></div>
+                                        <div id="dropLocations">
                                         <div class="drop-location mb-2">
                                             <input type="text" id="dropLocation0" name="dropLocation[]"
-                                                placeholder="Enter drop location" class="form-control border-radius-0 mb-0">
+                                                placeholder="Enter drop location" class="form-control border-radius-0 mb-0 dropoffLocations">
                                             <div id="drop-error" class="error-message text-danger"></div>
                                         </div>
                                     </div>
@@ -281,7 +281,7 @@
                                         class="mb-0" @if (isset($booking_detail) && $booking_detail->is_childseat == 1) checked @endif>
                                     <label for="child_seat" class="passenger_lebals">Child Seat (£6)</label>
                                 </div>
-                                <div class="d-flex meet_greet " style="gap:10px;align-items:center"
+                                <div class="d-flex meet_greet " style="gap:10px;align-items:center" style="display: none"
                                     onclick="showExtraLauggage()">
                                     <input type="checkbox" id="extra_lauggage" name="extra_lauggage" value=""
                                         class="mb-0" @if (isset($booking_detail) && $booking_detail->is_extra_lauggage == 1) checked @endif>
@@ -698,6 +698,7 @@
         let directionsService;
         let directionsRenderer;
         let infoWindow;
+        let indexcount = 0;
 
         $(document).ready(function() {
             // Initialize Google Maps centered on Sargodha, Pakistan
@@ -732,8 +733,7 @@
             geocoder = new google.maps.Geocoder();
             distanceService = new google.maps.DistanceMatrixService();
 
-            // Initialize the first drop location autocomplete
-            handleDestinationPlaceChange(0);
+            handleDestinationPlaceChange(indexcount);
         });
 
         function handleOriginPlaceChange() {
@@ -748,8 +748,10 @@
         }
 
         function handleDestinationPlaceChange(index) {
-            const input = document.querySelectorAll('#dropLocations input')[index];
-
+        const className = `dropLocation${index}`;
+        console.log(className);
+        const input = document.querySelector(`#${className}`);
+        
             const autocomplete = new google.maps.places.Autocomplete(input, {
                 bounds: new google.maps.LatLngBounds(
                     new google.maps.LatLng(49.959999, -7.572168), // South West Corner of the UK
@@ -775,18 +777,19 @@
         }
 
         function addMore() {
-            const dropLocationsDiv = document.getElementById('addLocation');
+            const dropLocationsDiv = document.getElementById('via_locatoins_input');
             const newDropLocationDiv = document.createElement('div');
-            const newIndex = destinationPlaces.length;
-
+            const newIndex = indexcount+1;
             newDropLocationDiv.className = 'drop-location mb-2';
             newDropLocationDiv.innerHTML = `
-                <input type="text" id="dropLocation${newIndex}" name="dropLocation[]" placeholder="Enter Via location" class="form-control border-radius-0 mb-0">
+                <input type="text" id="dropLocation${newIndex}" name="dropLocation[]" placeholder="Enter Via location" class="form-control border-radius-0 mb-0 dropoffLocations">
                 <div id="drop-error" class="error-message text-danger"></div>
             `;
-
+            
             dropLocationsDiv.appendChild(newDropLocationDiv);
+          
             handleDestinationPlaceChange(newIndex);
+            indexcount++;
         }
 
         function checkAndCalculateDistances() {

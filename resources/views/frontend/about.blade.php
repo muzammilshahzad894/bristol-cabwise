@@ -70,7 +70,7 @@
                 </div>
                 <div class="d-flex text-center" style="width:100%; justify-content:center; padding:20px 0px">
 
-                    <h4 class="section-title" style="font-family: cursive;">Services <span>Offered</span></h4>
+                    <h4 class="section-title" >Services <span>Offered</span></h4>
                 </div>
 
                 <!-- Desktop version -->
@@ -166,7 +166,7 @@
 
 
                 <div class="d-flex text-center" style="width:100%; justify-content:center; padding:20px 0px">
-                    <h4 class="section-title"  style="font-family: cursive;">Why Choose <span>Us</span></h4>
+                    <h4 class="section-title"  >Why Choose <span>Us</span></h4>
                 </div>
 
 

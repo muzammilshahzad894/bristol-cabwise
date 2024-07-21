@@ -44,6 +44,9 @@ class ApplyCouponController extends Controller
 public function store(Request $request)
 {
     try {
+        
+        $role = auth()->user()->role;
+        if($role != 'admin'){
         $coupon = Coupon::where('code', $request->coupon)->first();
         $usedCoupon = new UsedCoupon();
         $usedCoupon->coupon_id = $coupon->id;
@@ -54,6 +57,7 @@ public function store(Request $request)
         $discount = $booking->total_price - $discount;
         DB::table('bookings')->where('id', $booking->id)->update(['total_price' => $discount]);
         return response()->json(['success' => 'Coupon has been applied successfully']);
+        }
 
     } catch (Exception $e) {
         Log::error('Exception occurred in UsedCouponController@store: ' . $e->getMessage());
