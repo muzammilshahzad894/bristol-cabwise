@@ -75,17 +75,30 @@
                         <td>{{ $email }}</td>
                     </tr>
                     <tr>
-                        <th>No of passenger</th>
+                        <th>Number of passenger</th>
                         <td>{{ $no_of_passenger }}</td>
                     </tr>
-                    <tr>
-                        <th>Child Seat</th>
-                        <td>{{ $is_childseat }}</td>
-                    </tr>
-                    <tr>
-                        <th>Meet & Greet</th>
-                        <td>{{ $is_meet_greet }}</td>
-                    </tr>
+                  
+                    @if($is_childseat == 1)
+                        <tr>
+                            <th>Child Seat</th>
+                            <td>{{ $is_childseat == 1 ? '£6' : '-' }}</td>
+                        </tr>
+                    @endif
+                    @if($is_meet_greet == 1)
+                        <tr>
+                            <th>Meet & Greet</th>
+                            <td>{{ $is_meet_greet == 1 ? '£6' : '-' }}</td>
+                        </tr>
+                    @endif
+                    @if($is_extra_lauggage == 1)
+                        <tr>
+                            <th>Extra Luggage</th>
+                            <td>{{ $is_extra_lauggage == 1 ? '£6' : '-' }}</td>
+                        </tr>
+                    @endif
+                 
+                    
                     <tr>
                         <th>SuitCases</th>
                         <td>{{ $no_suit_case }}</td>
@@ -134,7 +147,7 @@
                     </tr>
                     <tr>
                         <th>Coupon Discount</th>
-                        <td>{{ $coupon_discount }}</td>
+                        <td>{{ $coupon_discount }}%</td>
                     </tr>
                     <tr>
                         <th>Total Price</th>

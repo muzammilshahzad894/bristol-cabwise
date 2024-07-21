@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use App\Models\Booking;
+use App\Models\UsedCoupon;
+use App\Models\Coupon;
 use App\Models\User;
 use App\Services\EmailService;
 use Illuminate\Support\Facades\Log;
@@ -57,7 +59,11 @@ class PaymentController extends Controller
             $booking->save();
             $bookingName =$booking->pickup_location;
             $user = User::find($booking->user_id);
-      
+            $couponDiscount = UsedCoupon::where('user_id', $user->id)->first();
+            $coupon = null;
+            if($couponDiscount){
+                $coupon = Coupon::where('id', $couponDiscount->coupon_id)->first(); 
+            }
             $bookingDetails = (object) [
                 'serviceType' => $booking->service->name,
                 'pickupLocation' => $booking->pickup_location,
@@ -77,7 +83,7 @@ class PaymentController extends Controller
                 'other_email' => $booking->other_email ? $booking->other_email : '-',
                 'fleet_price' => $booking->total_price,
                 'is_extra_lauggage' => $booking->is_extra_lauggage ? 'Yes' : '-',
-                'coupon_discount' => 0,
+                'coupon_discount' => $coupon ? $coupon->discount : 0,
             ];
 
             $this->emailService->sendBookingConfirmation($user, $bookingDetails);

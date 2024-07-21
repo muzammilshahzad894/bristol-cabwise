@@ -2,6 +2,7 @@
     let currentStep = 1;
     let FleetPrice = 0;
     let Fleet_id = 0;
+    let Fleet_name = '';
     isChildSeat = false;
     meet_nd_greet = false;
     isExtraLauggage = false;
@@ -124,7 +125,7 @@
 
     function updateSummary() {
         const ids = [
-            'summary-service-type', 'summary-pickup-location', 'summary-drop-location',
+            'summary-service-type', 'summary-pickup-location', 'summary-drop-location','summary-fleet-type',
             'summary-date', 'summary-name', 'summary-telephone', 'summary-email',
             'summary-passengers', 'summary-child-seat', 'summary-suitcases',
             'summary-hand-luggage', 'summary-summary',
@@ -143,6 +144,7 @@
 
         const elements = {
             'summary-service-type': service_type,
+            'summary-fleet-type' : Fleet_name,
             'summary-pickup-location': pickup_location,
             'summary-drop-location': dropoff_location,
             'summary-date': dates_times,
@@ -163,7 +165,7 @@
             'summary-meet-greet': meet_nd_greet ? '£12' : '-',
             'summary-fleet-price': '£' + FleetPrice,
             'summary-extra-lauggage': extra_luggage ? '£' + extra_luggage : '-',
-            'summary-flight-type': flight_type,
+            'summary-flight-type': flight_type == 2 ? 'Arrival' : 'Departure',
             'summary-flight-name': flight_name,
             'summary-flight-time': flight_time
         };
@@ -359,7 +361,7 @@
                     }
 
                     fleetHtml += `
-                <div class="col-md-6 form-container ${index === 0 ? 'selected-fleet' : ''}" data-fleet-id="${fleet.id}" onclick="selectFleet(this)">
+                <div class="col-md-6 form-container ${index === 0 ? 'selected-fleet' : ''}" data-fleet-name="${fleet.name}" data-fleet-id="${fleet.id}" onclick="selectFleet(this)">
                     <div class="p-6">
                         <img src="/uploads/fleets/${fleet.image}" alt="" />
                         <strong>${fleet.name}</strong>
@@ -674,6 +676,8 @@
         fleets.forEach((fleet) => fleet.classList.remove("selected-fleet"));
         fleet.classList.add("selected-fleet");
         const fleetId = fleet.getAttribute("data-fleet-id");
+        Fleet_name = fleet.getAttribute("data-fleet-name");
+        
         Fleet_id = fleetId;
 
         fetch(`/fleet-details/${fleetId}`)
@@ -1119,6 +1123,7 @@ window.onload = setMinDateTime;
 
     function StoreCouponCode() {
         if (coupon_apply !== '') {
+            console.log('hereee');
             $.ajax({
                 url: '/store-coupon',
                 type: 'POST',

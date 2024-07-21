@@ -70,14 +70,15 @@
                             {{ __('Refund') }}
                         </a>
 
-                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        {{-- <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
-                        </a>
+                        </a> --}}
     
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="">
                             @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
                         </form>
                     </div>
                 </li>

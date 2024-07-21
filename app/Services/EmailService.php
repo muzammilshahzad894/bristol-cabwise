@@ -15,6 +15,10 @@ class EmailService
 {
     public function sendBookingConfirmation($user, $bookingDetails)
     {
+        $extraLaugage = "";
+        if($bookingDetails->is_extra_lauggage == 1) {
+            $extraLaugage = "6";
+        }
         $data = [
             'userName' => $user->name,
             'serviceType' => $bookingDetails->serviceType,
@@ -34,7 +38,7 @@ class EmailService
             'other_phone_number' => $bookingDetails->other_phone_number,
             'other_email' => $bookingDetails->other_email,
             'fleet_price' => $bookingDetails->fleet_price,
-            'is_extra_lauggage' => $bookingDetails->is_extra_lauggage,
+            'is_extra_lauggage' => $extraLaugage,
             'coupon_discount' => $bookingDetails->coupon_discount,
         ];
 

@@ -49,7 +49,10 @@ public function store(Request $request)
         $usedCoupon->coupon_id = $coupon->id;
         $usedCoupon->user_id = auth()->id();
         $usedCoupon->save();
-
+        $booking = DB::table('bookings')->where('user_id', auth()->id())->orderBy('id', 'desc')->first();
+        $discount = ($booking->total_price * $coupon->discount) / 100;
+        $discount = $booking->total_price - $discount;
+        DB::table('bookings')->where('id', $booking->id)->update(['total_price' => $discount]);
         return response()->json(['success' => 'Coupon has been applied successfully']);
 
     } catch (Exception $e) {

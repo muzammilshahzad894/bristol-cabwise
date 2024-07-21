@@ -88,7 +88,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <p>
-                        We are your trusted and punctual taxi service in Bristol. We pride ourselves on professionalism and reliability, offering a diverse fleet of vehicles and experienced drivers dedicated to meeting your transportation needs. Our pricing is competitive and transparent, with no hidden fees. Enjoy the convenience of free registration and flexible cancellation up to 48 hours before your scheduled pick-up time. For airport pickups, benefit from our complimentary 1-hour waiting time. Our drivers provide attentive luggage assistance, and at other pickups, enjoy a complimentary 15-minute waiting period. Booking is effortless through our intuitive website or mobile app, supported by dedicated customer service. Simply enter your pickup and drop-off details, select your vehicle, provide passenger information, review, confirm your booking, and receive instant confirmation.
+                        We are your trusted and punctual taxi service in Bristol. We pride ourselves on professionalism and
+                        reliability, offering a diverse fleet of vehicles and experienced drivers dedicated to meeting your
+                        transportation needs. Our pricing is competitive and transparent, with no hidden fees. Enjoy the
+                        convenience of free registration and flexible cancellation up to 48 hours before your scheduled
+                        pick-up time. For airport pickups, benefit from our complimentary 1-hour waiting time. Our drivers
+                        provide attentive luggage assistance, and at other pickups, enjoy a complimentary 15-minute waiting
+                        period. Booking is effortless through our intuitive website or mobile app, supported by dedicated
+                        customer service. Simply enter your pickup and drop-off details, select your vehicle, provide
+                        passenger information, review, confirm your booking, and receive instant confirmation.
                     </p>
                     {{-- <p>
                         Nulla vitae metus tincidunt, varius nunc quis, porta nulla.
@@ -164,6 +172,9 @@
                                     <div id="pickup-error" class="error-message text-danger"></div>
                                 </div>
                                 <div>
+                                    <button class="plus_icon mt-1" type="button" id="addLocation" onclick="addMore();">Add
+                                        Via Location</button>
+                                    <div id="via_locatoins_input"></div>
                                     <label for="dropLocation">Drop Location:</label>
                                     <div id="dropLocations">
                                         <div class="drop-location mb-2">
@@ -174,8 +185,7 @@
                                     </div>
                                     {{-- <input type="text" name="dropLocation"
                                     placeholder="Enter drop location" class="form-control pickupLocation" /> --}}
-                                    <button class="plus_icon mt-1" type="button" id="addLocation" onclick="addMore();">Add
-                                        Via Location</button>
+
                                 </div>
                                 @php
                                     $datetime = isset($booking_detail->booking_date, $booking_detail->booking_time)
@@ -338,6 +348,10 @@
                                     <p id="summary-service-type">Departure</p>
                                 </div>
                                 <div class="d-flex gap-4">
+                                    <strong>Fleet:</strong>
+                                    <p id="summary-fleet-type">fleet</p>
+                                </div>
+                                <div class="d-flex gap-4">
                                     <strong>Pickup Location:</strong>
                                     <p id="summary-pickup-location">London</p>
                                 </div>
@@ -472,8 +486,9 @@
 
                             </div>
                             @if ($userRole != 'admin')
-                                <button class="discount_btn"  onclick="PayonStripe();" type="button" id="payment_section_main">
-                                    Pay Now  
+                                <button class="discount_btn" onclick="PayonStripe();" type="button"
+                                    id="payment_section_main">
+                                    Pay Now
                                 </button>
                                 <button class="discount_btn" id="request_by_admin" type="button">
                                     Request to Admin
@@ -524,7 +539,7 @@
                         <div class="icon_text">
                             <i class="fa-solid fa-check"></i>
                             <p>
-                                Free cancellation up to 48 hours before your scheduled  pick-up
+                                Free cancellation up to 48 hours before your scheduled pick-up
                             </p>
                         </div>
                         <div class="icon_text">
@@ -542,7 +557,7 @@
                         <div class="icon_text">
                             <i class="fa-solid fa-check"></i>
                             <p>
-                                Complimentary 15 min waiting period at all other pickups 
+                                Complimentary 15 min waiting period at all other pickups
                             </p>
                         </div>
                     </div>
@@ -597,11 +612,10 @@
             const source = url.searchParams.get('source');
             var element = document.getElementById('request_by_admin');
             var element1 = document.getElementById('payment_section_main');
-            if(source == 'get_a_quote'){
+            if (source == 'get_a_quote') {
                 element.style.display = 'block';
                 element1.style.display = 'none';
-            }
-            else{
+            } else {
                 element.style.display = 'none';
                 element1.style.display = 'block';
             }
@@ -622,8 +636,8 @@
             function PayonStripe() {
                 bookingId = current_booking_id;
                 if (coupon_apply !== '') {
-                        StoreCouponCode();
-                    }
+                    StoreCouponCode();
+                }
                 fetch(`/create-checkout-session/${bookingId}`, {
                         method: 'POST',
                         headers: {
@@ -684,12 +698,223 @@
         let directionsService;
         let directionsRenderer;
         let infoWindow;
-    
+
         $(document).ready(function() {
             // Initialize Google Maps centered on Sargodha, Pakistan
-            const sargodhaLocation = { lat: 32.0836, lng: 72.6712 };
+            const sargodhaLocation = {
+                lat: 51.4545,
+                lng: -2.5879
+            };
             map = new google.maps.Map(document.getElementById('map'), {
                 center: sargodhaLocation,
+                zoom: 13
+            });
+
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(map);
+
+            infoWindow = new google.maps.InfoWindow();
+
+            const pickupInput = document.getElementById('pickupLocation');
+            originAutocomplete = new google.maps.places.Autocomplete(pickupInput, {
+                bounds: new google.maps.LatLngBounds(
+                    new google.maps.LatLng(49.959999, -7.572168), // South West Corner
+                    new google.maps.LatLng(58.635000, 1.681530) // North East Corner
+                ),
+                componentRestrictions: {
+                    country: 'uk'
+                },
+                types: ['geocode']
+            });
+            originAutocomplete.addListener('place_changed', handleOriginPlaceChange);
+
+            geocoder = new google.maps.Geocoder();
+            distanceService = new google.maps.DistanceMatrixService();
+
+            // Initialize the first drop location autocomplete
+            handleDestinationPlaceChange(0);
+        });
+
+        function handleOriginPlaceChange() {
+            originPlace = originAutocomplete.getPlace();
+            if (!originPlace || !originPlace.geometry || !isPlaceInSargodha(originPlace)) {
+                alert('Invalid pickup location. Please select a valid location within Sargodha.');
+                originPlace = null; // Reset originPlace if it's invalid
+                return;
+            }
+            addMarker(originPlace.geometry.location, originPlace.formatted_address);
+            checkAndCalculateDistances();
+        }
+
+        function handleDestinationPlaceChange(index) {
+            const input = document.querySelectorAll('#dropLocations input')[index];
+
+            const autocomplete = new google.maps.places.Autocomplete(input, {
+                bounds: new google.maps.LatLngBounds(
+                    new google.maps.LatLng(49.959999, -7.572168), // South West Corner of the UK
+                    new google.maps.LatLng(58.635000, 1.681530) // North East Corner of the UK
+                ),
+                componentRestrictions: {
+                    country: 'uk'
+                },
+                types: ['geocode']
+            });
+
+            autocomplete.addListener('place_changed', () => {
+                const place = autocomplete.getPlace();
+                if (!place || !place.geometry || !isPlaceInSargodha(place)) {
+                    alert('Invalid drop location. Please select a valid location within Sargodha.');
+                    destinationPlaces[index] = null; // Reset the invalid destination place
+                    return;
+                }
+                destinationPlaces[index] = place;
+                addMarker(place.geometry.location, place.formatted_address);
+                checkAndCalculateDistances();
+            });
+        }
+
+        function addMore() {
+            const dropLocationsDiv = document.getElementById('addLocation');
+            const newDropLocationDiv = document.createElement('div');
+            const newIndex = destinationPlaces.length;
+
+            newDropLocationDiv.className = 'drop-location mb-2';
+            newDropLocationDiv.innerHTML = `
+                <input type="text" id="dropLocation${newIndex}" name="dropLocation[]" placeholder="Enter Via location" class="form-control border-radius-0 mb-0">
+                <div id="drop-error" class="error-message text-danger"></div>
+            `;
+
+            dropLocationsDiv.appendChild(newDropLocationDiv);
+            handleDestinationPlaceChange(newIndex);
+        }
+
+        function checkAndCalculateDistances() {
+            if (!originPlace || destinationPlaces.length === 0) {
+                return;
+            }
+
+            const allPlaces = [originPlace, ...destinationPlaces].filter(place => place);
+            if (allPlaces.length < 2) {
+                return;
+            }
+
+            totalDistance = 0;
+            distances = [];
+            clearMarkers();
+            for (let i = 0; i < allPlaces.length - 1; i++) {
+                const originLatLng = allPlaces[i].geometry.location;
+                const destinationLatLng = allPlaces[i + 1].geometry.location;
+
+                addMarker(originLatLng, allPlaces[i].formatted_address);
+                addMarker(destinationLatLng, allPlaces[i + 1].formatted_address);
+
+                calculateDistance(originLatLng, destinationLatLng, i);
+            }
+
+            drawRoute(allPlaces);
+        }
+
+        function calculateDistance(origin, destination, index) {
+            distanceService.getDistanceMatrix({
+                origins: [origin],
+                destinations: [destination],
+                travelMode: google.maps.TravelMode.DRIVING
+            }, (response, status) => {
+                if (status === 'OK') {
+                    const distanceValueInMeters = response.rows[0].elements[0].distance.value;
+                    const distanceValueInMiles = distanceValueInMeters / 1609.34; // Convert meters to miles
+                    distances[index] = distanceValueInMiles;
+                    updateTotalDistance();
+                } else {
+                    console.error('Error:', status);
+                }
+            });
+        }
+
+        function updateTotalDistance() {
+            totalDistance = distances.reduce((acc, distance) => acc + distance, 0);
+            const totalDistanceInMiles = totalDistance.toFixed(2);
+            distance = totalDistanceInMiles;
+        }
+
+        function isPlaceInSargodha(place) {
+            const sargodhaBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(49.959999, -7.572168), // South West Corner of the UK
+                new google.maps.LatLng(58.635000, 1.681530) // North East Corner of the UK
+            );
+            return sargodhaBounds.contains(place.geometry.location);
+        }
+
+        function addMarker(location, title) {
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: title
+            });
+            marker.addListener('click', () => {
+                infoWindow.setContent(title);
+                infoWindow.open(map, marker);
+            });
+            markers.push(marker);
+
+            // Adjust map viewport to fit all markers
+            const bounds = new google.maps.LatLngBounds();
+            markers.forEach(marker => {
+                bounds.extend(marker.getPosition());
+            });
+            map.fitBounds(bounds);
+        }
+
+        function clearMarkers() {
+            markers.forEach(marker => marker.setMap(null));
+            markers = [];
+        }
+
+        function adjustMapViewport(places) {
+            const bounds = new google.maps.LatLngBounds();
+            places.forEach(place => bounds.extend(place.geometry.location));
+            map.fitBounds(bounds);
+        }
+
+        function drawRoute(places) {
+            const waypoints = places.slice(1, -1).map(place => ({
+                location: place.geometry.location,
+                stopover: true
+            }));
+            directionsService.route({
+                origin: places[0].geometry.location,
+                destination: places[places.length - 1].geometry.location,
+                waypoints: waypoints,
+                travelMode: google.maps.TravelMode.DRIVING
+            }, (response, status) => {
+                if (status === 'OK') {
+                    directionsRenderer.setDirections(response);
+                } else {
+                    console.error('Directions request failed due to ' + status);
+                }
+            });
+        }
+    </script>
+    {{-- <script>
+        let geocoder;
+        let distanceService;
+        let originAutocomplete;
+        let map;
+        let originPlace = null;
+        let destinationPlaces = [];
+        let distances = [];
+        let totalDistance = 0;
+        let markers = [];
+        let directionsService;
+        let directionsRenderer;
+        let infoWindow;
+    
+        $(document).ready(function() {
+            // Initialize Google Maps centered on Bristol, UK
+            const bristolLocation = { lat: 51.4545, lng: -2.5879 };
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: bristolLocation,
                 zoom: 13
             });
     
@@ -702,10 +927,10 @@
             const pickupInput = document.getElementById('pickupLocation');
             originAutocomplete = new google.maps.places.Autocomplete(pickupInput, {
                 bounds: new google.maps.LatLngBounds(
-                    new google.maps.LatLng(32.0000, 72.5000), // South West Corner
-                    new google.maps.LatLng(32.1500, 72.8000) // North East Corner
+                    new google.maps.LatLng(49.959999, -7.572168), // South West Corner
+                    new google.maps.LatLng(58.635000, 1.681530) // North East Corner
                 ),
-                componentRestrictions: { country: 'pk' },
+                componentRestrictions: { country: 'uk' },
                 types: ['geocode']
             });
             originAutocomplete.addListener('place_changed', handleOriginPlaceChange);
@@ -719,8 +944,8 @@
     
         function handleOriginPlaceChange() {
             originPlace = originAutocomplete.getPlace();
-            if (!originPlace || !originPlace.geometry || !isPlaceInSargodha(originPlace)) {
-                alert('Invalid pickup location. Please select a valid location within Sargodha.');
+            if (!originPlace || !originPlace.geometry || !isPlaceInUK(originPlace)) {
+                alert('Invalid pickup location. Please select a valid location within the UK.');
                 originPlace = null; // Reset originPlace if it's invalid
                 return;
             }
@@ -730,18 +955,20 @@
     
         function handleDestinationPlaceChange(index) {
             const input = document.querySelectorAll('#dropLocations input')[index];
+         
             const autocomplete = new google.maps.places.Autocomplete(input, {
                 bounds: new google.maps.LatLngBounds(
-                    new google.maps.LatLng(32.0000, 72.5000), // South West Corner
-                    new google.maps.LatLng(32.1500, 72.8000) // North East Corner
+                    new google.maps.LatLng(49.959999, -7.572168), // South West Corner of the UK
+                    new google.maps.LatLng(58.635000, 1.681530) // North East Corner of the UK
                 ),
-                componentRestrictions: { country: 'pk' },
+                componentRestrictions: { country: 'uk' },
                 types: ['geocode']
             });
+    
             autocomplete.addListener('place_changed', () => {
                 const place = autocomplete.getPlace();
-                if (!place || !place.geometry || !isPlaceInSargodha(place)) {
-                    alert('Invalid drop location. Please select a valid location within Sargodha.');
+                if (!place || !place.geometry || !isPlaceInUK(place)) {
+                    alert('Invalid drop location. Please select a valid location within the UK.');
                     destinationPlaces[index] = null; // Reset the invalid destination place
                     return;
                 }
@@ -790,6 +1017,7 @@
             }
     
             drawRoute(allPlaces);
+            adjustMapViewport(allPlaces); // Adjust the map to fit all markers
         }
     
         function calculateDistance(origin, destination, index) {
@@ -812,15 +1040,15 @@
         function updateTotalDistance() {
             totalDistance = distances.reduce((acc, distance) => acc + distance, 0);
             const totalDistanceInMiles = totalDistance.toFixed(2);
-            distance = totalDistanceInMiles;
+            console.log(`Total Distance: ${totalDistanceInMiles} miles`);
         }
     
-        function isPlaceInSargodha(place) {
-            const sargodhaBounds = new google.maps.LatLngBounds(
-                new google.maps.LatLng(32.0000, 72.5000), // South West Corner
-                new google.maps.LatLng(32.1500, 72.8000) // North East Corner
+        function isPlaceInUK(place) {
+            const ukBounds = new google.maps.LatLngBounds(
+                new google.maps.LatLng(49.959999, -7.572168), // South West Corner of the UK
+                new google.maps.LatLng(58.635000, 1.681530) // North East Corner of the UK
             );
-            return sargodhaBounds.contains(place.geometry.location);
+            return ukBounds.contains(place.geometry.location);
         }
     
         function addMarker(location, title) {
@@ -841,6 +1069,12 @@
             markers = [];
         }
     
+        function adjustMapViewport(places) {
+            const bounds = new google.maps.LatLngBounds();
+            places.forEach(place => bounds.extend(place.geometry.location));
+            map.fitBounds(bounds);
+        }
+    
         function drawRoute(places) {
             const waypoints = places.slice(1, -1).map(place => ({ location: place.geometry.location, stopover: true }));
             directionsService.route({
@@ -856,9 +1090,9 @@
                 }
             });
         }
-    </script>
-    
-    
+    </script> --}}
+
+
 
 
 
