@@ -4,162 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Confirmation</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<style>
-    .bg-danger {
-        background-color: black !important;
-    }
-    .card-body {
-        background-color: #ef8e1c;
-    }
-    th {
-        color: white;
-    }
-    td {
-        color: black;
-        font-weight: 500;
-    }
-    .footer {
-        font-size: 12px;
-        color: white;
-        padding-left: 20px;
-    }
-    .header, .footer {
-        width: 100%;
-        text-align: left;
-        background-color: #000000;
-        padding: 10px 0;
-    }
-</style>
-<body>
-    <div class="container my-4">
-        <div class="card">
-            <div class="card-header bg-danger text-white">
-                <img src="{{ asset('frontend-assets/img/logo-light.png') }}" alt="logo" style="height: 40px; width: 40px;" />
-            </div>
-            <div class="card-body">
-                <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 20px;">
-                    <h3 style="color: white;">Booking Confirmation</h3>
-                </div>
-                <p>Dear {{ $userName }},</p>
-                <p>Thank you for booking a car pick-up and drop-off service with us. Here are your booking details:</p>
-                <h3 class="color_theme">Summary:</h3>
-                <table class="table">
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f4f4;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="20" cellspacing="0" border="0" style="background-color: #ffffff; border-radius: 8px; margin-top: 20px;">
                     <tr>
-                        <th>serviceType</th>
-                        <td>{{ $serviceType }}</td>
+                        <td style="background-color: #000000; padding: 10px 20px; color: #ffffff; text-align: left; border-top-left-radius: 8px; border-top-right-radius: 8px;">
+                            <img src="{{ asset('frontend-assets/img/logo-light.png') }}" alt="logo" style="height: 70px; width: 85px;" />
+                        </td>
                     </tr>
                     <tr>
-                        <th>Pickup Location</th>
-                        <td>{{ $pickupLocation }}</td>
+                        <td style="background-color: #ef8e1c; padding: 20px; color: #ffffff;">
+                            <h3 style="text-align: center; color: #ffffff;">Booking Confirmation</h3>
+                            <p style="color: #ffffff;">Dear {{ $userName }},</p>
+                            <p style="color: #ffffff;">Thank you for booking a car pick-up and drop-off service with us. Here are your booking details:</p>
+                            <h3 style="color: #000000;">Summary:</h3>
+                            <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
+                                <tr style="background-color: #000000; color: #ffffff;">
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Service Type</th>
+                                    <td style="padding: 10px;">{{ $serviceType }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Pickup Location</th>
+                                    <td style="padding: 10px;">{{ $pickupLocation }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Drop Location</th>
+                                    <td style="padding: 10px;">{{ $dropoffLocation }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Date & Time</th>
+                                    <td style="padding: 10px;">{{ $dateAndTime }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Name</th>
+                                    <td style="padding: 10px;">{{ $name }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Telephone</th>
+                                    <td style="padding: 10px;">{{ $telephone }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Email</th>
+                                    <td style="padding: 10px;">{{ $email }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">No of Passenger</th>
+                                    <td style="padding: 10px;">{{ $no_of_passenger }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Child Seat</th>
+                                    <td style="padding: 10px;">{{ $is_childseat }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Meet & Greet</th>
+                                    <td style="padding: 10px;">{{ $is_meet_greet }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Suitcases</th>
+                                    <td style="padding: 10px;">{{ $no_suit_case }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Hand Luggage</th>
+                                    <td style="padding: 10px;">{{ $no_of_laugage }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Summary</th>
+                                    <td style="padding: 10px;">{{ $summary }}</td>
+                                </tr>
+                            </table>
+                            <h3 style="color: #000000;">Other Details:</h3>
+                            <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
+                                <tr style="background-color: #000000; color: #ffffff;">
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Name</th>
+                                    <td style="padding: 10px;">{{ $other_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Telephone</th>
+                                    <td style="padding: 10px;">{{ $other_phone_number }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Email</th>
+                                    <td style="padding: 10px;">{{ $other_email }}</td>
+                                </tr>
+                            </table>
+                            <h3 style="color: #000000;">Total Price:</h3>
+                            <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
+                                <tr style="background-color: #000000; color: #ffffff;">
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Fleet Price</th>
+                                    <td style="padding: 10px;">£{{ $fleet_price }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Child Seat</th>
+                                    <td style="padding: 10px;">{{ $is_childseat }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Meet & Greet</th>
+                                    <td style="padding: 10px;">{{ $is_meet_greet }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Extra Luggage</th>
+                                    <td style="padding: 10px;">{{ $is_extra_lauggage }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Coupon Discount</th>
+                                    <td style="padding: 10px;">{{ $coupon_discount }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Total Price</th>
+                                    <td style="padding: 10px;">£{{ $fleet_price }}</td>
+                                </tr>
+                            </table>
+                            <p style="color: #000000;">We will process your request and notify you once it has been completed. If you have any questions, please contact our support team at 07533225970.</p>
+                        </td>
                     </tr>
                     <tr>
-                        <th>Drop Location</th>
-                        <td>{{ $dropoffLocation }}</td>
-                    </tr>
-                    <tr>
-                        <th>Date & Time</th>
-                        <td>{{ $dateAndTime }}</td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td>{{ $name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Telephone</th>
-                        <td>{{ $telephone }}</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>{{ $email }}</td>
-                    </tr>
-                    <tr>
-                        <th>Number of passenger</th>
-                        <td>{{ $no_of_passenger }}</td>
-                    </tr>
-                  
-                    @if($is_childseat == 1)
-                        <tr>
-                            <th>Child Seat</th>
-                            <td>{{ $is_childseat == 1 ? '£6' : '-' }}</td>
-                        </tr>
-                    @endif
-                    @if($is_meet_greet == 1)
-                        <tr>
-                            <th>Meet & Greet</th>
-                            <td>{{ $is_meet_greet == 1 ? '£6' : '-' }}</td>
-                        </tr>
-                    @endif
-                    @if($is_extra_lauggage == 1)
-                        <tr>
-                            <th>Extra Luggage</th>
-                            <td>{{ $is_extra_lauggage == 1 ? '£6' : '-' }}</td>
-                        </tr>
-                    @endif
-                 
-                    
-                    <tr>
-                        <th>SuitCases</th>
-                        <td>{{ $no_suit_case }}</td>
-                    </tr>
-                    <tr>
-                        <th>Hand Luggage</th>
-                        <td>{{ $no_of_laugage }}</td>
-                    </tr>
-                    <tr>
-                        <th>Summary</th>
-                        <td>{{ $summary }}</td>
-                    </tr>
-                </table>
-                <h3 class="color_theme">Other Details:</h3>
-                <table class="table">
-                    <tr>
-                        <th>Name</th>
-                        <td>{{ $other_name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Telephone</th>
-                        <td>{{ $other_phone_number }}</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>{{ $other_email }}</td>
-                    </tr>
-                </table>
-                <h3 class="color_theme">Total Price:</h3>
-                <table class="table">
-                    <tr>
-                        <th>Fleet Price</th>
-                        <td>£{{ $fleet_price }}</td>
-                    </tr>
-                    <tr>
-                        <th>Child Seat</th>
-                        <td>{{ $is_childseat }}</td>
-                    </tr>
-                    <tr>
-                        <th>Meet & Greet</th>
-                        <td>{{ $is_meet_greet }}</td>
-                    </tr>
-                    <tr>
-                        <th>Extra Luggage</th>
-                        <td>{{ $is_extra_lauggage }}</td>
-                    </tr>
-                    <tr>
-                        <th>Coupon Discount</th>
-                        <td>{{ $coupon_discount }}%</td>
-                    </tr>
-                    <tr>
-                        <th>Total Price</th>
-                        <td>£{{ $fleet_price }}</td>
+                        <td style="background-color: #000000; color: #ffffff; text-align: center; padding: 10px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
+                            <p style="font-size: 12px; margin: 0;">&copy; {{ date('Y') }} BristolCabwise Service. All rights reserved.</p>
+                        </td>
                     </tr>
                 </table>
-                <p>We will process your request and notify you once it has been completed. If you have any questions, please contact our support team at 07533225970.</p>
-            </div>
-            <div class="footer">
-                <p class="copyText">&copy; {{ date('Y') }} BristolCabwise Service. All rights reserved.</p>
-            </div>
-        </div>
-    </div>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
