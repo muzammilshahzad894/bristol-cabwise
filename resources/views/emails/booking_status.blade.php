@@ -17,7 +17,7 @@
                     </tr>
                     <tr>
                         <td style="background-color: #ef8e1c; padding: 20px; color: #ffffff;">
-                            <h3 style="text-align: center; color: #ffffff;">Your Driver Has Arrived!</h3>
+                            <h3 style="text-align: center; color: #ffffff;">Ride Status Change</h3>
                             <p style="color: #ffffff;">Dear {{ $userName }},</p>
                             <p style="color: #ffffff;">We would like to inform you that the status of your ride has changed to <strong>{{ ucfirst($status) }}</strong>. Here are the details of your ride:</p>
                             <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
