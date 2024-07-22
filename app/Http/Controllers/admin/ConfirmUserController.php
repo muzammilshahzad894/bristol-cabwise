@@ -45,9 +45,9 @@ class ConfirmUserController extends Controller
             }
 
             if (isset($request->sort) && !empty($request->sort)) {
-                $draftUsers = $draftUsers->orderBy('id', $request->sort);
+                $draftUsers = $draftUsers->orderBy('booking_date', $request->sort)->orderBy('booking_time', $request->sort);
             } else {
-                $draftUsers = $draftUsers->orderBy('id', 'desc');
+                $draftUsers = $draftUsers->orderBy('booking_date', 'asc')->orderBy('booking_time', 'asc');
             }
 
             $draftUsers = $draftUsers->paginate(10);

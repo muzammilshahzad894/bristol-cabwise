@@ -52,9 +52,9 @@ class BookingController extends Controller
             }
 
             if (isset($request->sort) && !empty($request->sort)) {
-                $bookings = $bookings->orderBy('id', $request->sort);
+                $bookings = $bookings->orderBy('booking_date', $request->sort)->orderBy('booking_time', $request->sort);
             } else {
-                $bookings = $bookings->orderBy('id', 'desc');
+                $bookings = $bookings->orderBy('booking_date', 'asc')->orderBy('booking_time', 'asc');
             }
 
             $bookings = $bookings->paginate(10);
