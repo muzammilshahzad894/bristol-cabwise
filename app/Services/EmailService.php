@@ -9,6 +9,7 @@ use App\Mail\ThankYouFeedbackMail;
 use App\Mail\RefundMail;
 use App\Mail\DriverWaitingEmail;
 use App\Mail\BookingStatusMail;
+use App\Mail\RefundStatusMail;
 use Illuminate\Support\Facades\Mail;
 
 class EmailService
@@ -153,5 +154,42 @@ class EmailService
         ];
 
         Mail::to($emailAddresses)->send(new BookingStatusMail($data));
+    }
+
+    public function sendRefundStatusEmail($emailData)
+    {
+        $extraLaugage = "";
+        if($emailData['is_extra_lauggage'] == 1) {
+            $extraLaugage = "6";
+        }
+        $data = [
+            'adminMessage' => $emailData['admin_message'],
+            'user_email' => $emailData['user_email'],
+            'userName' => $emailData['user_name'],
+            'serviceType' => $emailData['serviceType'],
+            'pickupLocation' => $emailData['pickupLocation'],
+            'dropoffLocation' => $emailData['dropoffLocation'],
+            'dateAndTime' => $emailData['dateAndTime'],
+            'name' => $emailData['name'],
+            'telephone' => $emailData['telephone'],
+            'email' => $emailData['email'],
+            'no_of_passenger' => $emailData['no_of_passenger'],
+            'is_childseat' => $emailData['is_childseat'],
+            'is_meet_greet' => $emailData['is_meet_greet'],
+            'no_suit_case' => $emailData['no_suit_case'],
+            'no_of_laugage' => $emailData['no_of_laugage'],
+            'summary' => $emailData['summary'],
+            'other_name' => $emailData['other_name'],
+            'other_phone_number' => $emailData['other_phone_number'],
+            'other_email' => $emailData['other_email'],
+            'fleet_price' => $emailData['fleet_price'],
+            'is_extra_lauggage' => $extraLaugage,
+            'coupon_discount' => $emailData['coupon_discount'],
+        ];
+        if(isset($emailData['amount'])) {
+            $data['amount'] = $emailData['amount'];
+        }
+
+        Mail::to($emailData['user_email'])->send(new RefundStatusMail($data));
     }
 }

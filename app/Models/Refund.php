@@ -7,6 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Refund extends Model
 {
     use HasFactory;
-  
+
+    protected $fillable = [
+        'booking_id',
+        'user_id',
+        'user_name',
+        'user_email',
+        'card_number',
+        'bank_name',
+        'reason',
+        'status',
+        'amount',
+        'admin_message',
+    ];
 }
 
