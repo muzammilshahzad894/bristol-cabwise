@@ -69,6 +69,9 @@
                                     <td> {{ formatDate($draft->booking_date) }}</td>
                                     <td> {{ foramtTime($draft->booking_time) }}</td>
                                     <td class="text-nowrap">
+                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editDraft({{ $draft->id }})">
+                                            Payment Link
+                                         </button>
                                         <div class="btn-group" role="group" aria-label="Action Buttons">
                                             <a href="{{ route('admin.draft.delete', $draft->id) }}" class="btn btn-danger btn-sm mx-sm-1" onclick="return confirm('Are you sure to delete this draft booking?')"><i class="fas fa-trash"></i></a>
                                         </div>
