@@ -143,9 +143,8 @@
                                     <div class="mb-3 col-md-12">
                                         <label class="form-label">Detail Page Description <span
                                                 class="text-danger">*</span></label>
-                                        <textarea name="detail_page_description" class="form-control" rows="5" placeholder="Detail Page Description"
-                                            required>{{ old('detail_page_description') ?? $fleet->detail_page_description }}
-                                    </textarea>
+                                        <textarea name="detail_page_description" class="form-control" rows="5" placeholder="Detail Page Description" required>{{ old('detail_page_description') ?? $fleet->detail_page_description }}
+                                        </textarea>
                                         @error('detail_page_description')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
