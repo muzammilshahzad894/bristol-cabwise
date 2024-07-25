@@ -60,16 +60,18 @@
                                 </div>
                             </div>
                         </div>
-                        <ul class="list-unstyled list mt-30">
-                            @foreach(explode(',', $fleet->features) as $feature)
-                                <li>
-                                    <div class="list-icon"> <span class="ti-check"></span> </div>
-                                    <div class="list-text">
-                                        <p>{{ $feature }}</p>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
+                        @if($fleet->features)
+                            <ul class="list-unstyled list mt-30">
+                                @foreach(explode(',', $fleet->features) as $feature)
+                                    <li>
+                                        <div class="list-icon"> <span class="ti-check"></span> </div>
+                                        <div class="list-text">
+                                            <p>{{ $feature }}</p>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-5 offset-lg-1 col-md-12">
