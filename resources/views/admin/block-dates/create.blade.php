@@ -76,26 +76,25 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 <script type="text/javascript">
-$(function() {
-    $('#daterange').daterangepicker({
-        singleDatePicker: true, // Set single date picker
-        opens: 'left',
-        autoUpdateInput: false,
-        minDate: moment(), // Disable previous dates
-        locale: {
-            cancelLabel: 'Clear'
-        }
+    $(function() {
+        $('#daterange').daterangepicker({
+            opens: 'left',
+            autoUpdateInput: false,
+            minDate: moment(), // Disable previous dates
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+    
+        $('#daterange').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+        });
+    
+        $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
     });
-
-    $('#daterange').on('apply.daterangepicker', function(ev, picker) {
-        $(this).val(picker.startDate.format('YYYY-MM-DD'));
-    });
-
-    $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
-        $(this).val('');
-    });
-});
-
-</script>
+    </script>
+    
 
 @endsection

@@ -28,6 +28,8 @@ class UpdateCouponRequest extends FormRequest
             'code' => 'required',
             'discount' => 'required',
             'description' => 'required',
+            'public' => 'required',
+            'coupon_type' => 'required',
         ];
     }
 }

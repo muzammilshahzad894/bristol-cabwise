@@ -174,11 +174,11 @@
                                 <div>
                                     <button class="plus_icon mt-1" type="button" id="addLocation" onclick="addMore();">Add
                                         Via Location</button>
-                                        <label for="dropLocation">Drop Location:</label>
                                         <div id="via_locatoins_input"></div>
+                                        <label for="dropLocation">Drop Location:</label>
                                         <div id="dropLocations">
                                         <div class="drop-location mb-2">
-                                            <input type="text" id="dropLocation0" name="dropLocation[]"
+                                            <input type="text" id="dropLocation0" name="dropLocation"
                                                 placeholder="Enter drop location" class="form-control border-radius-0 mb-0 dropoffLocations">
                                             <div id="drop-error" class="error-message text-danger"></div>
                                         </div>
@@ -281,8 +281,7 @@
                                         class="mb-0" @if (isset($booking_detail) && $booking_detail->is_childseat == 1) checked @endif>
                                     <label for="child_seat" class="passenger_lebals">Child Seat (£6)</label>
                                 </div>
-                                <div class="d-flex meet_greet " style="gap:10px;align-items:center" style="display: none"
-                                    onclick="showExtraLauggage()">
+                                <div class="d-none" style="" style="display: none">
                                     <input type="checkbox" id="extra_lauggage" name="extra_lauggage" value=""
                                         class="mb-0" @if (isset($booking_detail) && $booking_detail->is_extra_lauggage == 1) checked @endif>
                                     <label for="extra_lauggage" class="passenger_lebals">Extra Lauggage (£6)</label>
@@ -446,7 +445,7 @@
                                         <p id="summary-meet-greet"></p>
                                     </div>
                                 </div>
-                                <div class="d-flex gap-4 " id="summary-meet-greet_price_div" style="display: none">
+                                <div class="d-none gap-4 " id="summary-meet-greet_price_div" style="display: none">
                                     <strong>Extra Lauggage:</strong>
                                     <div>
                                         <p id="summary-extra-lauggage"></p>
@@ -782,7 +781,7 @@
             const newIndex = indexcount+1;
             newDropLocationDiv.className = 'drop-location mb-2';
             newDropLocationDiv.innerHTML = `
-                <input type="text" id="dropLocation${newIndex}" name="dropLocation[]" placeholder="Enter Via location" class="form-control border-radius-0 mb-0 dropoffLocations">
+                <input type="text" id="dropLocation${newIndex}" name="via_locations[]" placeholder="Enter Via location" class="form-control border-radius-0 mb-0 dropoffLocations">
                 <div id="drop-error" class="error-message text-danger"></div>
             `;
             

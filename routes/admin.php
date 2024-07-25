@@ -10,10 +10,10 @@ use App\Http\Controllers\admin\BlockDatesController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\DraftController;
 use App\Http\Controllers\admin\ConfirmUserController;
+use App\Http\Controllers\admin\RefundController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\EmailController;
 use App\Http\Controllers\admin\DriverController;
-use App\Http\Controllers\admin\RefundController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/optimize', function () {
@@ -93,6 +93,14 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/edit/{id}', [ConfirmUserController::class, 'edit'])->name('admin.confirm.edit');
         Route::post('/update/{id}', [ConfirmUserController::class, 'bookingupdate'])->name('admin.confirm.bookingupdate');
     });
+    Route::prefix('admin/refund')->group(function () {
+        Route::get('/', [RefundController::class, 'index'])->name('admin.refund.index');
+        Route::get('/delete/{id}', [RefundController::class, 'delete'])->name('admin.refund.delete');
+        Route::post('/update/{id}', [RefundController::class, 'update'])->name('admin.refund.update');
+        Route::post('/assign/{id}', [RefundController::class, 'assign'])->name('admin.refund.assign');
+        Route::get('/edit/{id}', [RefundController::class, 'edit'])->name('admin.refund.edit');
+        Route::post('/update/{id}', [RefundController::class, 'bookingupdate'])->name('admin.refund.bookingupdate');
+    });
     Route::prefix('admin/settings')->group(function () {
         Route::get('/', [SettingController::class, 'index'])->name('admin.settings.index');
         Route::post('/update', [SettingController::class, 'update'])->name('admin.settings.update');
@@ -112,10 +120,10 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/update/{id}', [DriverController::class, 'update'])->name('admin.drivers.update');
         Route::get('/delete/{id}', [DriverController::class, 'delete'])->name('admin.drivers.delete');
     });
-    Route::prefix('admin/refunds')->group(function () {
-        Route::get('/', [RefundController::class, 'index'])->name('admin.refunds.index');
-        Route::post('/update/{id}', [RefundController::class, 'update'])->name('admin.refunds.update');
-    });
+    // Route::prefix('admin/refunds')->group(function () {
+    //     Route::get('/', [RefundController::class, 'index'])->name('admin.refunds.index');
+    //     Route::post('/update/{id}', [RefundController::class, 'update'])->name('admin.refunds.update');
+    // });
     Route::prefix('admin/custom-email')->group(function () {
         Route::get('/', [EmailController::class, 'customEmail'])->name('admin.custom-email.index');
         Route::post('/send', [EmailController::class, 'sendCustomEmail'])->name('admin.custom-email.send');

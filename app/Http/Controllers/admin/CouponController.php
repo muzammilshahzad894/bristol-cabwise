@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\DB;
 use Exception;
 use App\Http\Requests\AddCouponRequest;
 use App\Http\Requests\UpdateCouponRequest;
-use App\Models\Fleet;
-use App\Models\FleetTax;
 
 use App\Models\Coupon;
 class CouponController extends Controller
@@ -20,7 +18,7 @@ class CouponController extends Controller
     public function index()
     {
         try {
-            $dates = Coupon::paginate(10);
+            $dates = Coupon::orderBy('id', 'desc')->paginate(10);
             return view('admin.coupon.index', compact('dates'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
@@ -48,6 +46,8 @@ class CouponController extends Controller
             $coupon->code = $request->code;
             $coupon->discount = $request->discount;
             $coupon->description = $request->description;
+            $coupon->public = $request->public;
+            $coupon->coupon_type = $request->coupon_type;
             $coupon->save();
             return redirect()->route('admin.coupons.index')->with('success', 'Service added successfully');
         } catch (Exception $e) {
@@ -75,6 +75,8 @@ class CouponController extends Controller
             $date->code = $request->code;
             $date->discount = $request->discount;
             $date->description = $request->description;
+            $date->public = $request->public;
+            $date->coupon_type = $request->coupon_type;
             $date->save();
             return redirect()->route('admin.coupons.index')->with('success', 'block date updated successfully');
         } catch(Exception $e){

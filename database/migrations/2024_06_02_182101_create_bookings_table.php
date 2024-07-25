@@ -32,6 +32,7 @@ class CreateBookingsTable extends Migration
             $table->integer('no_of_passenger');
             $table->integer('no_suit_case')->nullable();
             $table->text('summary')->nullable();
+            $table->text('via_locations')->nullable();
             $table->integer('no_of_laugage')->nullable();
             $table->string('flight_time')->nullable();
             $table->string('flight_name')->nullable();

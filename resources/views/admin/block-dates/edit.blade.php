@@ -77,31 +77,32 @@
 
 <script type="text/javascript">
 $(function() {
-    // Assuming you have the single date from the database
-    var singleDate = '{{ $dateRange ?? '' }}';
+    // Assuming you have the date range from the database
+    var dateRange = '{{ $dateRange ?? '' }}';
 
-    // Format the single date for the date picker
-    var formattedDate = singleDate ? moment(singleDate, 'YYYY-MM-DD') : moment();
+    // Split the date range into start and end dates
+    var startDate = dateRange ? moment(dateRange.split(' - ')[0], 'YYYY-MM-DD') : moment();
+    var endDate = dateRange ? moment(dateRange.split(' - ')[1], 'YYYY-MM-DD') : moment();
 
     $('#daterange').daterangepicker({
-        singleDatePicker: true, // Set single date picker
         opens: 'left',
         autoUpdateInput: false,
         minDate: moment(), // Disable previous dates
-        startDate: formattedDate,
+        startDate: startDate,
+        endDate: endDate,
         locale: {
             cancelLabel: 'Clear'
         }
     });
 
-    // Set the input value to the formatted date
-    if (singleDate) {
-        $('#daterange').val(formattedDate.format('YYYY-MM-DD'));
+    // Set the input value to the formatted date range
+    if (dateRange) {
+        $('#daterange').val(startDate.format('YYYY-MM-DD') + ' - ' + endDate.format('YYYY-MM-DD'));
     }
 
-    // Update the input value when a new date is applied
+    // Update the input value when a new date range is applied
     $('#daterange').on('apply.daterangepicker', function(ev, picker) {
-        $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
     });
 
     // Clear the input value when the selection is canceled

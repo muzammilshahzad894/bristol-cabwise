@@ -20,6 +20,9 @@ class CreateCouponsTable extends Migration
             $table->string('code');
             $table->integer('discount');
             $table->text('description');
+            $table->string('public');
+            $table->string('coupon_type');
+            
 
             $table->timestamps();
         });

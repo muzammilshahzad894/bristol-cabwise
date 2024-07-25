@@ -61,6 +61,29 @@
                                     @enderror
 
                                 </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label
+                                    ">Public or Private: <span class="text-danger">*</span></label>
+                                    <select name="public" class="form-control" required>
+                                        <option value="public">Public</option>
+                                        <option value="private">Private</option>
+                                    </select>
+                                    @error('public')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label
+                                    ">Coupon Type: <span class="text-danger">*</span></label>
+                                    <select name="coupon_type" class="form-control" required>
+                                        <option value="multiple">Multiple Persons</option>
+                                        <option value="single">Single Person</option>
+                                    </select>
+                                    @error('coupon_type')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
                                 <div class=" col-md-12 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div> 
@@ -84,26 +107,25 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 <script type="text/javascript">
-$(function() {
-    $('#daterange').daterangepicker({
-        singleDatePicker: true, // Set single date picker
-        opens: 'left',
-        autoUpdateInput: false,
-        minDate: moment(), // Disable previous dates
-        locale: {
-            cancelLabel: 'Clear'
-        }
+    $(function() {
+        $('#daterange').daterangepicker({
+            opens: 'left',
+            autoUpdateInput: false,
+            minDate: moment(), // Disable previous dates
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+    
+        $('#daterange').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+        });
+    
+        $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
     });
-
-    $('#daterange').on('apply.daterangepicker', function(ev, picker) {
-        $(this).val(picker.startDate.format('YYYY-MM-DD'));
-    });
-
-    $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
-        $(this).val('');
-    });
-});
-
-</script>
+    </script>
+    
 
 @endsection

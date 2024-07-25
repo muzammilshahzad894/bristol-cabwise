@@ -20,6 +20,9 @@
                             <th>Code</th>
                             <th>Discount</th>
                             <th>Description</th>
+                            <th>Coupon Type</th>
+                            <th>Status</th>
+                            
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -33,6 +36,8 @@
                                     <td> {{ $date->code }}</td>
                                     <td> {{ $date->discount }}%</td>
                                     <td> {{ $date->description }}</td>
+                                    <td> {{ $date->coupon_type }}</td>
+                                    <td> {{ $date->public }}</td>
                                     <td>
                                         <a href="{{ route('admin.coupons.edit', $date->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                         <a href="{{ route('admin.coupons.delete', $date->id) }}" 
