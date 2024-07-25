@@ -66,6 +66,12 @@
                         <span class="nav-text">Refunds</span>
                     </a>
                 </li>
+                <li class="{{ request()->routeIs('admin.custom-email.index') ? 'mm-active' : '' }}">
+                    <a href="{{ route('admin.custom-email.index') }}" class="" aria-expanded="false">
+                        <i class="fa fa-envelope"></i>
+                        <span class="nav-text">Custom Email</span>
+                    </a>
+                </li>
                 <li class="{{ request()->routeIs('admin.settings.index') ? 'mm-active' : '' }}">
                     <a href="{{ route('admin.settings.index') }}" class="" aria-expanded="false">
                         <i class="fa fa-cog"></i>

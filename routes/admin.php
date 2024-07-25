@@ -116,4 +116,8 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/', [RefundController::class, 'index'])->name('admin.refunds.index');
         Route::post('/update/{id}', [RefundController::class, 'update'])->name('admin.refunds.update');
     });
+    Route::prefix('admin/custom-email')->group(function () {
+        Route::get('/', [EmailController::class, 'customEmail'])->name('admin.custom-email.index');
+        Route::post('/send', [EmailController::class, 'sendCustomEmail'])->name('admin.custom-email.send');
+    });
 });

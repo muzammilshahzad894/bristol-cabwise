@@ -10,6 +10,7 @@ use App\Mail\RefundMail;
 use App\Mail\DriverWaitingEmail;
 use App\Mail\BookingStatusMail;
 use App\Mail\RefundStatusMail;
+use App\Mail\CustomEmail;
 use Illuminate\Support\Facades\Mail;
 
 class EmailService
@@ -192,5 +193,17 @@ class EmailService
         }
 
         Mail::to($emailData['user_email'])->send(new RefundStatusMail($data));
+    }
+
+    public function sendCustomEmail($emailData)
+    {
+        $data = [
+            'userName' => $emailData['userName'],
+            'email' => $emailData['email'],
+            'subject' => $emailData['subject'],
+            'customMessage' => $emailData['message'],
+        ];
+
+        Mail::to($data['email'])->send(new CustomEmail($data));
     }
 }
