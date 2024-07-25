@@ -4,85 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Refund Request Received</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<style>
-    .bg-danger {
-        background-color: black !important;
-    }
-    .card-body {
-        background-color: #ef8e1c;
-    }
-    th {
-        color: white;
-    }
-    td {
-        color: black;
-        font-weight: 500;
-    }
-    .footer {
-        font-size: 12px;
-        color: white;
-        padding-left: 20px;
-    }
-    .header, .footer {
-        width: 100%;
-        text-align: left;
-        background-color: #000000;
-        padding: 10px 0;
-    }
-</style>
-<body>
-    <div class="container my-4">
-        <div class="card">
-            <div class="card-header bg-danger text-white">
-                <img src="{{ asset('frontend-assets/img/logo-light.png') }}" alt="logo" style="height: 40px; width: 40px;" />
-            </div>
-            <div class="card-body">
-                <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 20px;">
-                    <h3 style="color: white;">Refund Request Received</h3>
-                </div>
-                <p>Dear {{ $userName }},</p>
-                <p>We have received your refund request. Here are the details:</p>
-                <table class="table">
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f4f4;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="20" cellspacing="0" border="0" style="background-color: #ffffff; border-radius: 8px; margin-top: 20px;">
                     <tr>
-                        <th>Booking ID</th>
-                        <td>{{ $bookingId }}</td>
+                        <td style="background-color: #000000; padding: 10px 20px; color: #ffffff; text-align: left; border-top-left-radius: 8px; border-top-right-radius: 8px;">
+                            <img src="{{ asset('frontend-assets/img/logo-light.png') }}" alt="logo" style="height: 70px; width: 85px;" />
+                        </td>
                     </tr>
                     <tr>
-                        <th>User name</th>
-                        <td>{{ $userName }}</td>
+                        <td style="background-color: #ef8e1c; padding: 20px; color: #ffffff;">
+                            <h3 style="text-align: center; color: #ffffff;">Refund Request Received</h3>
+                            <p style="color: #ffffff;">Dear {{ $userName }},</p>
+                            <p style="color: #ffffff;">We have received your refund request. Here are the details:</p>
+                            <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
+                                <tr style="background-color: #000000; color: #ffffff;">
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Booking ID</th>
+                                    <td style="padding: 10px;">{{ $bookingId }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">User name</th>
+                                    <td style="padding: 10px;">{{ $userName }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Email</th>
+                                    <td style="padding: 10px;">{{ $email }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Bank Name</th>
+                                    <td style="padding: 10px;">{{ $bankName }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Account Number</th>
+                                    <td style="padding: 10px;">{{ $accountNumber }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Paid Amount</th>
+                                    <td style="padding: 10px;">{{ $refundAmount }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Sort Code</th>
+                                    <td style="padding: 10px;">{{ $sortCode }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Reason</th>
+                                    <td style="padding: 10px;">{{ $reason }}</td>
+                                </tr>
+                            </table>
+                            <p style="margin-bottom: 0px; padding: 0px; color: #ffffff;">If you have any questions or need further assistance, please contact us.</p>
+                            <p style="margin: 0px; padding: 0px; color: #ffffff;">Thank you for choosing our service!</p>
+                            <p style="margin-bottom: 0px; padding: 0px; color: #ffffff;">Best regards,</p>
+                            <p style="margin: 0px; padding: 0px; color: #ffffff;"><strong>BristolCabwise Team</strong></p>
+                        </td>
                     </tr>
                     <tr>
-                        <th>Email</th>
-                        <td>{{ $email }}</td>
+                        <td style="background-color: #000000; color: #ffffff; text-align: center; padding: 10px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
+                            <p style="font-size: 12px; margin: 0;">&copy; {{ date('Y') }} BristolCabwise Service. All rights reserved.</p>
+                        </td>
                     </tr>
-                    <tr>
-                        <th>Bank Name</th>
-                        <td>{{ $bankName }}</td>
-                    </tr>
-                    <tr>
-                        <th>Account Number</th>
-                        <td>{{ $accountNumber }}</td>
-                    </tr>
-                    <tr>
-                        <th>Paid Amount</th>
-                        <td>{{ $refundAmount }}</td>
-                    </tr>
-                
-                    <tr>
-                        <th>Reason</th>
-                        <td>{{ $reason }}</td>
-                    </tr>
-                 
                 </table>
-                <p>We will process your request and notify you once it has been completed. If you have any questions, please contact our support team at 07533225970.</p>
-            </div>
-            <div class="footer">
-                <p class="copyText">&copy; {{ date('Y') }} BristolCabwise Service. All rights reserved.</p>
-            </div>
-        </div>
-    </div>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
-    

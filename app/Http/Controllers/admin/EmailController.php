@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\EmailService;
+use App\Http\Requests\SendCustomEmailRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
@@ -99,5 +100,28 @@ class EmailController extends Controller
             'dropoffLocation' => 'Hotel',
             'pickupDateTime' => $pickupDateTime->format('l, F j, Y, g:i A'),
         ];
+    }
+
+    public function customEmail()
+    {
+        return view('admin.emails.custom-email');
+    }
+
+    public function sendCustomEmail(SendCustomEmailRequest $request)
+    {
+        try {
+            $data = [
+                'userName' => $request->name,
+                'email' => $request->email,
+                'subject' => $request->subject,
+                'message' => $request->message,
+            ];
+
+            $this->emailService->sendCustomEmail($data);
+            return back()->with('success', 'Custom email sent successfully');
+        } catch (Exception $e) {
+            Log::error('Error sending custom email: ' . $e->getMessage());
+            return back()->with('error', 'Error sending custom email');
+        }
     }
 }

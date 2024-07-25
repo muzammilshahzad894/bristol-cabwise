@@ -39,9 +39,9 @@ class DraftController extends Controller
             }
 
             if (isset($request->sort) && !empty($request->sort)) {
-                $draftUsers = $draftUsers->orderBy('id', $request->sort);
+                $draftUsers = $draftUsers->orderBy('booking_date', $request->sort)->orderBy('booking_time', $request->sort);
             } else {
-                $draftUsers = $draftUsers->orderBy('id', 'desc');
+                $draftUsers = $draftUsers->orderBy('booking_date', 'asc')->orderBy('booking_time', 'asc');
             }
 
             $draftUsers = $draftUsers->paginate(10);
@@ -79,9 +79,9 @@ class DraftController extends Controller
             }
 
             if (isset($request->sort) && !empty($request->sort)) {
-                $bookByAdmin = $bookByAdmin->orderBy('id', $request->sort);
+                $bookByAdmin = $bookByAdmin->orderBy('booking_date', $request->sort)->orderBy('booking_time', $request->sort);
             } else {
-                $bookByAdmin = $bookByAdmin->orderBy('id', 'desc');
+                $bookByAdmin = $bookByAdmin->orderBy('booking_date', 'asc')->orderBy('booking_time', 'asc');
             }
 
             $bookByAdmin = $bookByAdmin->paginate(10);
@@ -97,7 +97,7 @@ class DraftController extends Controller
     {
         try {
             Booking::find($id)->delete();
-            return redirect()->route('admin.coupons.index')->with('success', 'block date deleted successfully');
+            return redirect()->route('admin.draft.index')->with('success', 'Draft booking deleted successfully');
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');

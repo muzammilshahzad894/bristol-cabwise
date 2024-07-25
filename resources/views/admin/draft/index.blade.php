@@ -27,8 +27,8 @@
                     <div class="filter-item">
                         <label for="sort">Sort</label>
                         <select name="sort" id="sort" class="form-control">
-                            <option value="asc" {{ request()->sort == 'asc' ? 'selected' : '' }}>Ascending</option>
-                            <option value="desc" {{ request()->sort != 'asc' ? 'selected' : '' }}>Descending</option>
+                            <option value="asc" {{ request()->sort != 'desc' ? 'selected' : '' }}>Ascending</option>
+                            <option value="desc" {{ request()->sort == 'desc' ? 'selected' : '' }}>Descending</option>
                         </select>
                     </div>
                     <div class="filter-item">
@@ -68,10 +68,10 @@
                                     <td> £{{ $draft->total_price }}</td>
                                     <td> {{ formatDate($draft->booking_date) }}</td>
                                     <td> {{ foramtTime($draft->booking_time) }}</td>
-                                    <td style="display: flex;justify-content:right">
-                                        {{-- <a href="{{ route('admin.draft.edit', $draft->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a> --}}
-                                        <a href="{{ route('admin.draft.delete', $draft->id) }}" 
-                                        class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete, all related cars will be deleted?')"><i class="fas fa-trash"></i></a>
+                                    <td class="text-nowrap">
+                                        <div class="btn-group" role="group" aria-label="Action Buttons">
+                                            <a href="{{ route('admin.draft.delete', $draft->id) }}" class="btn btn-danger btn-sm mx-sm-1" onclick="return confirm('Are you sure to delete this draft booking?')"><i class="fas fa-trash"></i></a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

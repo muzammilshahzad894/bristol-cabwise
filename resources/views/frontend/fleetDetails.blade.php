@@ -25,7 +25,7 @@
                             {{ $fleet->about_car }} <span></span>
                         </div>
                         <p class="mb-30">{{ $fleet->detail_page_description }}</p>
-                        <div class="row">
+                        <div class="row ml-20">
                             <div class="col-md-12">
                                 <div class="d-flex align-items-center">
                                     <div class="d-flex gap-2 align-items-center" >
@@ -60,6 +60,18 @@
                                 </div>
                             </div>
                         </div>
+                        @if($fleet->features)
+                            <ul class="list-unstyled list mt-30">
+                                @foreach(explode(',', $fleet->features) as $feature)
+                                    <li>
+                                        <div class="list-icon"> <span class="ti-check"></span> </div>
+                                        <div class="list-text">
+                                            <p>{{ $feature }}</p>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-5 offset-lg-1 col-md-12">

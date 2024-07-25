@@ -140,6 +140,7 @@ class FrontendController extends Controller
             $refund->user_email = $request->email;
             $refund->card_number = $request->account_number;
             $refund->bank_name = $request->bank_name;
+            $refund->sort_code = $request->sort_code;
             $refund->reason = $request->reason;
             $refund->save();
        
@@ -154,6 +155,7 @@ class FrontendController extends Controller
                 'accountNumber' => $request->account_number,
                 'bankName' => $request->bank_name,
                 'refundAmount' => $refund_amount,
+                'sortCode' => $request->sort_code,
                 'reason' => $request->reason,
             ];
 

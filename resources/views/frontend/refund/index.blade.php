@@ -158,6 +158,7 @@ data-background="{{ asset('frontend-assets/img/slider/booking_img.jpeg') }}">
                                         <th scope="col">Email</th>
                                         <th scope="col">Bank Name</th>
                                         <th scope="col">Account Number</th>
+                                        <th scope="col">Sort Code</th>
                                         <th scope="col">Reason</th>
                                         <th scope="col">Applied At</th>
                                         <th scope="col">Status</th>
@@ -171,6 +172,7 @@ data-background="{{ asset('frontend-assets/img/slider/booking_img.jpeg') }}">
                                             <td>{{ $booking->user_email }}</td>
                                             <td>{{ $booking->bank_name }}</td>
                                             <td>{{ $booking->card_number }}</td>
+                                            <td>{{ $booking->sort_code }}</td>
                                             <td>{{ $booking->reason }}</td>
                                             <td>{{ $booking->created_at }}</td>
                                             @if($booking->status == 0)
@@ -239,7 +241,10 @@ data-background="{{ asset('frontend-assets/img/slider/booking_img.jpeg') }}">
                             <label for="account_number">Account Number</label>
                             <input type="number" class="form-control" id="account_number" name="account_number" value="{{ old('account_number') }}" required>
                         </div>
-
+                        <div class="form-group">
+                            <label for="card_number">Sort Code</label>
+                            <input type="text" class="form-control" id="sort_code" name="sort_code" value="{{ old('sort_code') }}" required>
+                        </div>
                        
                         <div class="form-group">
                             <label for="reason">Reason</label>

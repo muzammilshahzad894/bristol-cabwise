@@ -36,8 +36,8 @@
                     <div class="filter-item">
                         <label for="sort">Sort</label>
                         <select name="sort" id="sort" class="form-control">
-                            <option value="asc" {{ request()->sort == 'asc' ? 'selected' : '' }}>Ascending</option>
-                            <option value="desc" {{ request()->sort != 'asc' ? 'selected' : '' }}>Descending</option>
+                            <option value="asc" {{ request()->sort != 'desc' ? 'selected' : '' }}>Ascending</option>
+                            <option value="desc" {{ request()->sort == 'desc' ? 'selected' : '' }}>Descending</option>
                         </select>
                     </div>
                     <div class="filter-item">
@@ -105,13 +105,12 @@
                                          type="button" class="btn btn-primary btn-sm" >
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        
                                     </td>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5" class="text-center">No Records Found</td>
+                                <td colspan="10" class="text-center">No Records Found</td>
                             </tr>
                         @endif
                     </tbody>

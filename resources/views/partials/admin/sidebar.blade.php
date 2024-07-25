@@ -60,10 +60,16 @@
                         <span class="nav-text">Bookings</span>
                     </a>
                 </li>
-                <li class="{{ request()->routeIs('admin.refund.index') || request()->routeIs('admin.confirm.create') ? 'mm-active' : '' }} || request()->routeIs('admin.confirm.edit')">
-                    <a href="{{ route('admin.refund.index') }}" class="" aria-expanded="false">
-                        <i class="fa fa-clipboard-list"></i>
-                        <span class="nav-text">Refunds Request</span>
+                <li class="{{ request()->routeIs('admin.refunds.index') ? 'mm-active' : '' }}">
+                    <a href="{{ route('admin.refunds.index') }}" class="" aria-expanded="false">
+                        <i class="fa fa-undo"></i>
+                        <span class="nav-text">Refunds</span>
+                    </a>
+                </li>
+                <li class="{{ request()->routeIs('admin.custom-email.index') ? 'mm-active' : '' }}">
+                    <a href="{{ route('admin.custom-email.index') }}" class="" aria-expanded="false">
+                        <i class="fa fa-envelope"></i>
+                        <span class="nav-text">Custom Email</span>
                     </a>
                 </li>
                 <li class="{{ request()->routeIs('admin.settings.index') ? 'mm-active' : '' }}">
