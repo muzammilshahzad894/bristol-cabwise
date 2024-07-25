@@ -105,6 +105,7 @@ class EmailService
             'accountNumber' => $feedbackLink->accountNumber,
             'bankName' => $feedbackLink->bankName,
             'refundAmount' => $feedbackLink->refundAmount,
+            'sortCode' => $feedbackLink->sortCode,
             'reason' => $feedbackLink->reason,
             'bookingId' => $feedbackLink->bookingId,
         ];

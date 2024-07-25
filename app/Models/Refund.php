@@ -16,6 +16,7 @@ class Refund extends Model
         'card_number',
         'bank_name',
         'reason',
+        'sort_code',
         'status',
         'amount',
         'admin_message',
