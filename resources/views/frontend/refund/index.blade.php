@@ -238,12 +238,12 @@ data-background="{{ asset('frontend-assets/img/slider/booking_img.jpeg') }}">
                             <input type="text" class="form-control" id="bank_name" name="bank_name" value="{{ old('bank_name') }}" required>
                         </div>
                         <div class="form-group">
-                            <label for="account_number">Account Number</label>
-                            <input type="number" class="form-control" id="account_number" name="account_number" value="{{ old('account_number') }}" required>
-                        </div>
-                        <div class="form-group">
                             <label for="card_number">Sort Code</label>
                             <input type="text" class="form-control" id="sort_code" name="sort_code" value="{{ old('sort_code') }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="account_number">Account Number</label>
+                            <input type="number" class="form-control" id="account_number" name="account_number" value="{{ old('account_number') }}" required>
                         </div>
                        
                         <div class="form-group">
