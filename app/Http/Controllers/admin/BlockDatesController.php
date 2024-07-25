@@ -21,7 +21,7 @@ class BlockDatesController extends Controller
     public function index()
     {
         try {
-            $dates = BlockDate::paginate(10);
+            $dates = BlockDate::orderBy('id', 'desc')->paginate(10);
             return view('admin.block-dates.index', compact('dates'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
