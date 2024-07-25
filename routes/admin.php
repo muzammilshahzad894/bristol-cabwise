@@ -14,7 +14,6 @@ use App\Http\Controllers\admin\RefundController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\EmailController;
 use App\Http\Controllers\admin\DriverController;
-use App\Http\Controllers\admin\RefundController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/optimize', function () {
