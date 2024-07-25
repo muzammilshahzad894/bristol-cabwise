@@ -60,6 +60,12 @@
                         <span class="nav-text">Bookings</span>
                     </a>
                 </li>
+                <li class="{{ request()->routeIs('admin.refund.index') || request()->routeIs('admin.confirm.create') ? 'mm-active' : '' }} || request()->routeIs('admin.confirm.edit')">
+                    <a href="{{ route('admin.refund.index') }}" class="" aria-expanded="false">
+                        <i class="fa fa-clipboard-list"></i>
+                        <span class="nav-text">Refunds Request</span>
+                    </a>
+                </li>
                 <li class="{{ request()->routeIs('admin.settings.index') ? 'mm-active' : '' }}">
                     <a href="{{ route('admin.settings.index') }}" class="" aria-expanded="false">
                         <i class="fa fa-cog"></i>

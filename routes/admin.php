@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\BlockDatesController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\DraftController;
 use App\Http\Controllers\admin\ConfirmUserController;
+use App\Http\Controllers\admin\RefundController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\EmailController;
 use App\Http\Controllers\admin\DriverController;
@@ -91,6 +92,14 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/assign/{id}', [ConfirmUserController::class, 'assign'])->name('admin.confirm.assign');
         Route::get('/edit/{id}', [ConfirmUserController::class, 'edit'])->name('admin.confirm.edit');
         Route::post('/update/{id}', [ConfirmUserController::class, 'bookingupdate'])->name('admin.confirm.bookingupdate');
+    });
+    Route::prefix('admin/refund')->group(function () {
+        Route::get('/', [RefundController::class, 'index'])->name('admin.refund.index');
+        Route::get('/delete/{id}', [RefundController::class, 'delete'])->name('admin.refund.delete');
+        Route::post('/update/{id}', [RefundController::class, 'update'])->name('admin.refund.update');
+        Route::post('/assign/{id}', [RefundController::class, 'assign'])->name('admin.refund.assign');
+        Route::get('/edit/{id}', [RefundController::class, 'edit'])->name('admin.refund.edit');
+        Route::post('/update/{id}', [RefundController::class, 'bookingupdate'])->name('admin.refund.bookingupdate');
     });
     Route::prefix('admin/settings')->group(function () {
         Route::get('/', [SettingController::class, 'index'])->name('admin.settings.index');

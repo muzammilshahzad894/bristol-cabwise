@@ -63,7 +63,28 @@
                                     @error('date')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
-
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label
+                                    ">Public or Private: <span class="text-danger">*</span></label>
+                                    <select name="public" class="form-control" required>
+                                        <option value="public" {{ $date->public == 'public' ? 'selected' : '' }}>Public</option>
+                                        <option value="private" {{ $date->public == 'private' ? 'selected' : '' }}>Private</option>
+                                    </select>
+                                    @error('public')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label
+                                    ">Coupon Type: <span class="text-danger">*</span></label>
+                                    <select name="coupon_type" class="form-control" required>
+                                        <option value="single" {{ $date->coupon_type == 'single' ? 'selected' : '' }}>Single Person</option>
+                                        <option value="multiple" {{ $date->coupon_type == 'multiple' ? 'selected' : '' }}>Multiple Person</option>
+                                    </select>
+                                    @error('coupon_type')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class=" col-md-12 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary">Save</button>
@@ -89,31 +110,32 @@
 
 <script type="text/javascript">
 $(function() {
-    // Assuming you have the single date from the database
-    var singleDate = '{{ $dateRange ?? '' }}';
+    // Assuming you have the date range from the database
+    var dateRange = '{{ $dateRange ?? '' }}';
 
-    // Format the single date for the date picker
-    var formattedDate = singleDate ? moment(singleDate, 'YYYY-MM-DD') : moment();
+    // Split the date range into start and end dates
+    var startDate = dateRange ? moment(dateRange.split(' - ')[0], 'YYYY-MM-DD') : moment();
+    var endDate = dateRange ? moment(dateRange.split(' - ')[1], 'YYYY-MM-DD') : moment();
 
     $('#daterange').daterangepicker({
-        singleDatePicker: true, // Set single date picker
         opens: 'left',
         autoUpdateInput: false,
         minDate: moment(), // Disable previous dates
-        startDate: formattedDate,
+        startDate: startDate,
+        endDate: endDate,
         locale: {
             cancelLabel: 'Clear'
         }
     });
 
-    // Set the input value to the formatted date
-    if (singleDate) {
-        $('#daterange').val(formattedDate.format('YYYY-MM-DD'));
+    // Set the input value to the formatted date range
+    if (dateRange) {
+        $('#daterange').val(startDate.format('YYYY-MM-DD') + ' - ' + endDate.format('YYYY-MM-DD'));
     }
 
-    // Update the input value when a new date is applied
+    // Update the input value when a new date range is applied
     $('#daterange').on('apply.daterangepicker', function(ev, picker) {
-        $(this).val(picker.startDate.format('YYYY-MM-DD'));
+        $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
     });
 
     // Clear the input value when the selection is canceled
@@ -121,6 +143,7 @@ $(function() {
         $(this).val('');
     });
 });
+
 
 
 
