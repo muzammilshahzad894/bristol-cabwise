@@ -49,8 +49,7 @@
                 <div class="col-md-4 widget-area">
                     <div class="widget clearfix">
                         <div class="footer-logo">
-                            <h2>Bristol
-                                <span> Cabwise</span>
+                            <h2>Bristol  <span style="margin-left: 5px;"> Cabwise</span>
                             </h2>
                         </div>
 

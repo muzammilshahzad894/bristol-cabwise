@@ -538,7 +538,7 @@
                         <div class="icon_text">
                             <i class="fa-solid fa-check"></i>
                             <p>
-                                Free cancellation up to 48 hours before your scheduled pick-up
+                                Free cancellation up to 24 hours before your scheduled pick-up
                             </p>
                         </div>
                         <div class="icon_text">

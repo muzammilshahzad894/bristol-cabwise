@@ -206,17 +206,17 @@
                 </div>
                 <div class="col-md-6 padding-top  order_2">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/about/247.jpg') }}" alt="about" class="img-fluid offer_img">
+                        <img src="{{ asset('frontend-assets/img/about/247.jpeg') }}" alt="about" class="img-fluid offer_img">
                     </div>
                 </div>
                 <div class="col-md-6 padding-top order_1">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/about/booking.png') }}" alt="about" class="img-fluid offer_img">
+                        <img src="{{ asset('frontend-assets/img/about/booking.jpg') }}" alt="about" class="img-fluid offer_img">
                     </div>
                 </div>
                 <div class="col-md-6 padding-top order_2">
                     <div class="section-subtitle"></div>
-                    <h4 class="section-title">Easy Booking<span> Process:</span></h4>
+                    <h4 class="section-title">Easy Booking <span> Process:</span></h4>
                     <p>With our user-friendly booking platform, you can reserve your ride in advance with just a few clicks,
                         eliminating the hassle of last-minute arrangements.
                     </p>

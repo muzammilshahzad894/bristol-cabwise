@@ -2,9 +2,22 @@
 
 @section('content')
 
+<style>
+    .item .text{
+        min-height: auto !important;
+    }
+    .text p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Change this to 4 if you want to show 4 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
+
+</style>
 <section class="banner-header section-padding bg-img" data-overlay-dark="4"
-data-background="{{ asset('frontend-assets/img/slider/city_city.jpg') }}" style="height: 84vh;">
+data-background="{{ asset('frontend-assets/img/slider/city_city.jpeg') }}" style="height: 84vh;">
 <div class="v-middle">
     <div class="container">
         <div class="row">
