@@ -121,10 +121,10 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/update/{id}', [DriverController::class, 'update'])->name('admin.drivers.update');
         Route::get('/delete/{id}', [DriverController::class, 'delete'])->name('admin.drivers.delete');
     });
-    // Route::prefix('admin/refunds')->group(function () {
-    //     Route::get('/', [RefundController::class, 'index'])->name('admin.refunds.index');
-    //     Route::post('/update/{id}', [RefundController::class, 'update'])->name('admin.refunds.update');
-    // });
+    Route::prefix('admin/refunds')->group(function () {
+        Route::get('/', [RefundController::class, 'index'])->name('admin.refunds.index');
+        Route::post('/update/{id}', [RefundController::class, 'update'])->name('admin.refunds.update');
+    });
     Route::prefix('admin/custom-email')->group(function () {
         Route::get('/', [EmailController::class, 'customEmail'])->name('admin.custom-email.index');
         Route::post('/send', [EmailController::class, 'sendCustomEmail'])->name('admin.custom-email.send');
