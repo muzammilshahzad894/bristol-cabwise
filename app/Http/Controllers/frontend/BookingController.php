@@ -16,14 +16,27 @@ class BookingController extends Controller
     public function index()
     {
         try {    
-            $user_id = auth()->user()->id;
+            $user_id = null;
+            if(!auth()->user()){
+                $user_ip  = getHostByName(getHostName());
+                $role = 'user';
+            }else{
+                $user_id = auth()->user()->id;
+                $role = auth()->user()->role;
+            }
+            // $user_id = auth()->user()->id;
             $fleets = Fleet::all();
-            $role = auth()->user()->role;
             if($role == 'user')
             {
                 $blockDates = BlockDate::all();
-                $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
-                // dd($booking_detail, $blockDates);
+                if($user_id != null){
+                    dd('here');
+                    $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
+                }
+                else{
+                    $booking_detail = Booking::where('user_ip', $user_ip)->where('is_draft', 1)->first();
+                    
+                }
                 $bookingHour = Setting::where('key', 'min_booking_hours')->first();
                 if($bookingHour){
                     $bookingHours = $bookingHour->value;
@@ -37,6 +50,7 @@ class BookingController extends Controller
                 $booking_detail = null;
                 $blockDates = null;
             }
+            
             return view('frontend.booking.index', compact('fleets', 'booking_detail', 'blockDates', 'bookingHours'));
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -77,8 +91,16 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         try {
-            $user_id = auth()->user()->id;
-            $role = auth()->user()->role;
+            $user_id = null;
+            $user_ip = null;
+            $role = null;
+            if(!auth()->user()){
+                $user_ip  = getHostByName(getHostName());
+                $role = 'user';
+            }else{
+                $user_id = auth()->user()->id;
+                $role = auth()->user()->role;
+            }
             if($role == 'user')
             {
                 $bookingDate = strtotime($request->date);
@@ -90,7 +112,12 @@ class BookingController extends Controller
                         return response()->json(['error' => 'Booking date is blocked'], 400); 
                     }
                 }
-                $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
+                if($user_id != null){
+                    $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
+                }
+                else{
+                    $booking_detail = Booking::where('user_ip', $user_ip)->where('is_draft', 1)->first();
+                }
                 if($booking_detail){
                     $booking_detail->delete();
                 }
@@ -123,7 +150,8 @@ class BookingController extends Controller
             $booking->no_of_laugage = $request->no_hand_luggage;
             $booking->flight_name = $request->flight_name;
             $booking->flight_time = $request->flight_time;
-            $booking->user_id = $user_id;
+            $booking->user_id = $user_id ?? '0';
+            $booking->user_ip = $user_ip ?? '0';
             $booking->flight_name = $request->flight_name;
             $booking->flight_time = $request->flight_time;
             $booking->flight_type = $request->flight_type;
@@ -131,6 +159,7 @@ class BookingController extends Controller
             $booking->service_id = $request->service_id;
             $booking->payment_method = $request->payment_method;
             $booking->is_extra_lauggage = $request->extra_lauggage;
+            $booking->via_locations = $request->via_locations;
             $booking->save();
             $bookingId = $booking->id;
             return response()->json(['booking_id' => $bookingId]);

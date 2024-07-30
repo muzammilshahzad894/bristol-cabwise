@@ -33,7 +33,14 @@
 
 
 @php
-    $userRole = auth()->user()->role;
+$userLoggedIn = auth()->user()? true : false;
+$userRole = null;
+    // $userRole = auth()->user()->role;
+    if(!auth()->user()){
+        $userRole = 'user';
+    }else{
+        $userRole = auth()->user()->role;
+    }
     $distance = 1;
     $totalPrice = 0;
 
@@ -63,7 +70,7 @@
 
 @section('content')
     <section class="banner-header section-padding bg-img" data-overlay-dark="4"
-        data-background="{{ asset('frontend-assets/img/slider/booking_img.jpeg') }}">
+        data-background="{{ asset('frontend-assets/img/slider/booking_img1.jpg') }}">
         <input type="hidden" id="login_user" value="{{ $userRole }}">
         <div class="v-middle">
             <div class="container">
@@ -178,7 +185,7 @@
                                         <label for="dropLocation">Drop Location:</label>
                                         <div id="dropLocations">
                                         <div class="drop-location mb-2">
-                                            <input type="text" id="dropLocation0" name="dropLocation"
+                                            <input type="text" id="dropLocation0" name="dropLocation[]"
                                                 placeholder="Enter drop location" class="form-control border-radius-0 mb-0 dropoffLocations">
                                             <div id="drop-error" class="error-message text-danger"></div>
                                         </div>
@@ -330,6 +337,12 @@
                                     <div id="someone_else_email_error" class="error-message text-danger"></div>
                                 </div>
                             </div>
+                            {{-- @if(!auth()->user())
+
+
+
+
+                            @endif --}}
 
                             <div class="mt-2">
                                 <label for="comment">Comment (optional):</label>
@@ -353,6 +366,10 @@
                                 <div class="d-flex gap-4">
                                     <strong>Pickup Location:</strong>
                                     <p id="summary-pickup-location">London</p>
+                                </div>
+                                <div class="d-flex gap-4">
+                                    <strong>Via Location:</strong>
+                                    <p id="summary-via-location">Manchester</p>
                                 </div>
                                 <div class="d-flex gap-4">
                                     <strong>Drop Location:</strong>
@@ -637,6 +654,7 @@
                 if (coupon_apply !== '') {
                     StoreCouponCode();
                 }
+
                 fetch(`/create-checkout-session/${bookingId}`, {
                         method: 'POST',
                         headers: {

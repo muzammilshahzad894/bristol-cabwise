@@ -19,12 +19,12 @@ Route::get('/services', [FrontendController::class, 'services'])->name('frontend
 Route::get('/faqs', [FrontendController::class, 'faqs'])->name('frontend.faqs');
 Route::get('/term-condition', [FrontendController::class, 'termCondition'])->name('frontend.termCondition');
 Route::get('/fleet-Detail/{id}',[FrontendController::class, 'fleetDetailsFrontend'])->name('frontend.fleetDetailsFrontend');
-
-
+Route::get('/get-quote',[FrontendController::class, 'getquote'])->name('frontend.getquote');
+Route::post('/get-quote',[FrontendController::class, 'getquotePost'])->name('frontend.getquotePost');
 
 
 Route::get('/client-booking-payment', [BookingController::class, 'clientBookingPayment'])->name('frontend.clientBookingPayment');
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
     Route::get('/book-online', [BookingController::class, 'index'])->name('frontend.book-online');
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
     Route::get('/booking/success', [BookingController::class, 'bookingSuccess'])->name('booking.success');
@@ -41,7 +41,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/review',[FrontendController::class, 'reviewget'])->name('frontend.reviewget');
     Route::post('/reviews',[FrontendController::class, 'reviewPost'])->name('frontend.reviewPost');
-});
+// });
 
 
 Route::get('/fleet-details/{id}', [BookingController::class, 'fleetDetails'])->name('frontend.fleetDetails');
