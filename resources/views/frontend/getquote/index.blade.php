@@ -4,6 +4,10 @@
 <style>
     .alert-success{
         background: green !important;
+        color: white !important;
+    }
+    .custom_lable{
+        color: white !important;
     }
 </style>
 
@@ -11,7 +15,6 @@
 
 
 @php
-    $userRole = auth()->user()->role;
     $distance = 1;
     $totalPrice = 0;
 
@@ -22,7 +25,6 @@
 @section('content')
     <section class="banner-header section-padding bg-img" data-overlay-dark="4"
         data-background="{{ asset('frontend-assets/img/slider/booking_img.jpeg') }}">
-        <input type="hidden" id="login_user" value="{{ $userRole }}">
         <div class="v-middle">
             <div class="container">
                 <div class="row">
@@ -87,6 +89,7 @@
         @endif
             <div class="row payment_section">
                 <div class="col-md-8">
+                    <h3 class="color color_theme">Get a Quote</h3>
                     <form action="{{ route('frontend.getquotePost') }}" method="POST" id="booking_form">
                         @csrf
                         <div class="col-md-12">

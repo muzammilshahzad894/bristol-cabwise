@@ -642,6 +642,9 @@ $userRole = null;
 
 
     <script type="text/javascript">
+        var login_user = @json($userLoggedIn);
+        // console.log(login_user);
+        
         var payment_id = '{{ request('payment_id') }}';
         var stripeKey = '{{ config('services.stripe.key') }}';
         if (!stripeKey) {
@@ -654,6 +657,8 @@ $userRole = null;
                 if (coupon_apply !== '') {
                     StoreCouponCode();
                 }
+                if(login_user ){
+                 
 
                 fetch(`/create-checkout-session/${bookingId}`, {
                         method: 'POST',
@@ -687,13 +692,14 @@ $userRole = null;
                         console.error('Error:', error);
                     });
             }
+        }
 
-            if (payment_id) {
-                var button = document.getElementById('checkout-button');
-                button.addEventListener('click', function() {
-                    PayonStripe(payment_id);
-                });
-            }
+            // if (payment_id) {
+            //     var button = document.getElementById('checkout-button');
+            //     button.addEventListener('click', function() {
+            //         PayonStripe(payment_id);
+            //     });
+            // }
 
         }
     </script>

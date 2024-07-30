@@ -129,5 +129,5 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/', [EmailController::class, 'customEmail'])->name('admin.custom-email.index');
         Route::post('/send', [EmailController::class, 'sendCustomEmail'])->name('admin.custom-email.send');
     });
-    Route::get('/get-quote', [QuotationController::class, 'getquote'])->name('admin.getquote');
+    Route::get('/get-quotes', [QuotationController::class, 'getquote'])->name('admin.getquote');
 });
