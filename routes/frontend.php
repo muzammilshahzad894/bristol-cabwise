@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['verify' => true]);
 
+$this->redirectIfAuthenticated();
 Route::get('/', [CarsController::class, 'index'])->name('frontend.index');
 Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
@@ -64,6 +65,8 @@ Route::post('/create-checkout-session/{id}', [PaymentController::class, 'createC
 Route::get('/payment-success/{id}', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
 Route::get('/payment-cancel', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
 Route::get('/get-payment/{id}', [PaymentController::class, 'showStripePaymentPage'])->name('stripe.payment');
+Route::post('/prepare-for-registration', [PaymentController::class, 'prepareForRegistration'])->name('prepare-for-registration');
+
 
 
 Route::get('/generate-paypal-link/{booking}', [PaymentController::class, 'generatePayPalLink']);
