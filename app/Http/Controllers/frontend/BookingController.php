@@ -30,7 +30,6 @@ class BookingController extends Controller
             {
                 $blockDates = BlockDate::all();
                 if($user_id != null){
-                    dd('here');
                     $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
                 }
                 else{

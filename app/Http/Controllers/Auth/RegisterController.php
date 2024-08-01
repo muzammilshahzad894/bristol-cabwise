@@ -70,7 +70,7 @@ class RegisterController extends Controller
 
 
         $session = session()->all();
-            $ispayment = $session['ispayment'] ?? null;
+            // $ispayment = $session['ispayment'] ?? null;
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],

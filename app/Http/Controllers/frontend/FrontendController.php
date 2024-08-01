@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\HelperController;
 use App\Services\EmailService;
+use App\Http\Controllers\frontend\CarsController;
 use Carbon\Carbon;
 use League\CommonMark\Extension\SmartPunct\Quote;
 
@@ -29,7 +30,13 @@ class FrontendController extends Controller
 
     public function about()
     {
-        
+         
+        $redirection = new CarsController();
+        $redirectionResponse = $redirection->redirection();
+        if ($redirectionResponse) {
+            return $redirectionResponse;
+        }
+    
         $services = Service::all();
         return view('frontend.about', compact('services'));
  
@@ -37,22 +44,45 @@ class FrontendController extends Controller
 
     public function contact()
     {
+        
+        $redirection = new CarsController();
+        $redirectionResponse = $redirection->redirection();
+        if ($redirectionResponse) {
+            return $redirectionResponse;
+        };
         return view('frontend.contact');
     }
 
     public function services()
     {
+        
+        $redirection = new CarsController();
+        $redirectionResponse = $redirection->redirection();
+        if ($redirectionResponse) {
+            return $redirectionResponse;
+        };
         $services = Service::all();
         return view('frontend.services', compact('services'));
     }
     public function fleetDetailsFrontend($id)
     {
+        $redirection = new CarsController();
+        $redirectionResponse = $redirection->redirection();
+        if ($redirectionResponse) {
+            return $redirectionResponse;
+        };
         $fleet = Fleet::find($id);
         return view('frontend.fleetDetails', compact('fleet'));
     }
     public function faqs()
     {
         try {
+            
+            $redirection = new CarsController();
+            $redirectionResponse = $redirection->redirection();
+            if ($redirectionResponse) {
+                return $redirectionResponse;
+            };
             return view('frontend.faqs');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -63,6 +93,12 @@ class FrontendController extends Controller
     public function termCondition()
     {
         try {
+            
+            $redirection = new CarsController();
+            $redirectionResponse = $redirection->redirection();
+            if ($redirectionResponse) {
+                return $redirectionResponse;
+            };
             return view('frontend.termCondition');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -72,6 +108,12 @@ class FrontendController extends Controller
     public function trustVoilet()
     {
         try {
+            
+            $redirection = new CarsController();
+            $redirectionResponse = $redirection->redirection();
+            if ($redirectionResponse) {
+                return $redirectionResponse;
+            };
             return view('frontend.truestVoilet');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -192,6 +234,13 @@ class FrontendController extends Controller
     }
     public function getquote(){
         try {
+            
+        $session = session()->all();
+        $ispayment = $session['ispayment'] ?? null;
+        if($ispayment){
+            $redirection = new CarsController();
+            $redirection->redirection();
+        };
             $fleets = Fleet::all();
             return view('frontend.getquote.index', compact('fleets'));
         } catch (\Exception $e) {

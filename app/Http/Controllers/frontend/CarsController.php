@@ -13,36 +13,36 @@ use App\Models\Fleet;
 
 class CarsController extends Controller
 {
-    private function redirection(){
-        
+    public function redirection()
+    {
         $session = session()->all();
         $ispayment = $session['ispayment'] ?? null;
         if ($ispayment) {
-            $clientIp =  getHostByName(getHostName());
+            $clientIp = getHostByName(getHostName());
             $booking = Booking::where('user_ip', $clientIp)
                               ->where('is_draft', 1)
                               ->first();
-                              
-            $baseUrl = url('/');
-            $redirectionUrl = $baseUrl . '/client-booking-payment?payment_id=' . $booking->id;
             if ($booking) {
-            session()->forget('ispayment');
-            return redirect($redirectionUrl);
-            //update the previous url to the new url
+                $booking->user_id = auth()->user()->id;
+                $booking->save();
+                session()->forget('ispayment');
+                return redirect('/client-booking-payment?payment_id=' . $booking->id);
             }
         }
+
+        return null; // Return null if no redirection
     }
     public function index()
     {
         try {
-            // $session = session()->all();
-            // dd($session);
-            // $ispayment = $session['ispayment'] ?? null; // This will get the value of ispayment or null if it's not set
-            // dd($ispayment);
+            
+            $redirectionResponse = $this->redirection();
+            if ($redirectionResponse) {
+                return $redirectionResponse;
+            };
+        
             $services = Service::all();
-            //get the coupon column public value public
             $coupon = Coupon::where('public', 'public')->latest()->first();
-            // $coupon = Coupon::latest()->first();
             $fleets = Fleet::all();
             return view('frontend.index', compact('services', 'fleets', 'coupon'));
         } catch (\Exception $e) {
