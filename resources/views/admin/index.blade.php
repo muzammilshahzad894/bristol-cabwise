@@ -74,20 +74,23 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card" id="user-activity1">
-                            <div class="card-header border-0 pb-0">
+                            <div class="card-header border-0 pb-0 d-flex flex-wrap">
                                 <h4 class="fs-20 mb-0">Sales</h4>
-                                <div class="card-action coin-tabs  mt-0">
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        <!-- <li class="nav-item">
-                                            <a class="nav-link " data-bs-toggle="tab" href="#Daily1" role="tab">Daily</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link " data-bs-toggle="tab" href="#Daily1" role="tab" >Weekly</a>
-                                        </li> -->
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-bs-toggle="tab" href="#Daily1" role="tab" >Monthly</a>
-                                        </li>
-                                    </ul>
+                                <div class="d-flex flex-wrap gap-3 align-items-center">
+                                    <form action="{{ route('admin.dashboard') }}" method="GET" class="d-flex flex-wrap gap-3 align-items-center">
+                                        <div class="d-flex flex-column">
+                                            <label for="start_date" class="form-label">Start Date:</label>
+                                            <input type="date" name="start_date" id="start_date" class="form-control" value="{{ request()->start_date }}">
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <label for="end_date" class="form-label">End Date:</label>
+                                            <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request()->end_date }}">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mt-4" id="submit">Filter</button>
+                                        @if(request()->has('start_date') && request()->has('end_date'))
+                                            <a href="{{ route('admin.dashboard') }}" class="btn btn-danger mt-4">Clear</a>
+                                        @endif
+                                    </form>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -95,13 +98,13 @@
                                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
                                         <rect  width="13" height="13" fill="#f73a0b"/>
                                     </svg>
-                                    Total Bookings: {{ $totalCompletedBookings }}
+                                    Total completed bookings: {{ $totalCompletedBookings }}
                                 </span>
                                 <span class="ms-sm-5 ms-3 font-w500">
                                     <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
                                         <rect  width="13" height="13" fill="#6e6e6e"/>
                                     </svg>
-                                    Total Sales: £{{ $totalSales }}
+                                    Total sales of completed bookings: £{{ $totalSales }}
                                 </span>
                                 <div class="tab-content mt-5" id="myTabContent">
                                     <div class="tab-pane fade show active" id="monthly1">
@@ -128,26 +131,19 @@
                     type: "bar",
                     data: {
                         labels: [
-                            "01",
-                            "02",
-                            "03",
-                            "04",
-                            "05",
-                            "06",
-                            "07",
-                            "08",
-                            "09",
-                            "10",
-                            "11",
-                            "12",
+                            "Completed Bookings",
+                            "Pending Bookings",
+                            "Inprogress Bookings",
+                            "Refunded Bookings",
+                            "Draft Bookings"
                         ],
                         datasets: [
                             {
                                 label: "Bookings",
-                                data: [{{ implode(',', $monthlyCompletedBookings) }}],
+                                data: [{{ implode(',', $graphData) }}],
                                 borderColor: 'var(--primary)',
                                 borderWidth: "0",
-                                barThickness:'18',
+                                barThickness:'60',
                                 backgroundColor: '#F73A0B',
                                 minBarLength: 10,
                             }
@@ -228,6 +224,13 @@
         .completed-bookings {
             color: #2ECC71;
             font-size: xx-large;
+        }
+        .card-header .form-control {
+            height: 38px;
+        }
+        .card-header .btn-primary {
+            height: 38px;
+            line-height: 1.5;
         }
     </style>
 @endsection
