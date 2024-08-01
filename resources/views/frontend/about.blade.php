@@ -8,8 +8,13 @@
         min-height: 520px;
     }
     .offer_img{
-        max-height: 300px;
+        height: 300px;
         max-width: 450px !important;
+
+    }
+    .img-fluid{
+        height: 450px !important;
+        
     }
     .padding-top{
         margin-top: 4.5rem !important;
@@ -179,12 +184,12 @@
                 </div>
                 <div class="col-md-6 order_2">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/about/low_rate.jpg') }}" alt="about" class="img-fluid offer_img">
+                        <img src="{{ asset('frontend-assets/img/about/low_rate.jpg') }}" alt="about" style="max-height:  300px !important;" class="img-fluid offer_img">
                     </div>
                 </div>
                 <div class="col-md-6 padding-top  order_1">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/about/staff.jpg') }}" alt="about" class="img-fluid offer_img">
+                        <img src="{{ asset('frontend-assets/img/about/staff.jpg') }}" alt="about" style="max-height:  300px !important;" class="img-fluid offer_img">
                     </div>
                 </div>
 
@@ -206,12 +211,12 @@
                 </div>
                 <div class="col-md-6 padding-top  order_2">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/about/247.jpeg') }}" alt="about" class="img-fluid offer_img">
+                        <img src="{{ asset('frontend-assets/img/about/247.jpeg') }}" alt="about" style="max-height:  300px !important;" class="img-fluid offer_img">
                     </div>
                 </div>
                 <div class="col-md-6 padding-top order_1">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/about/booking.jpg') }}" alt="about" class="img-fluid offer_img">
+                        <img src="{{ asset('frontend-assets/img/about/booking.jpg') }}" alt="about" style="max-height:  300px !important;" class="img-fluid offer_img">
                     </div>
                 </div>
                 <div class="col-md-6 padding-top order_2">
