@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
 use App\Http\Requests\AddDriverRequest;
+use App\Http\Requests\UpdateDriverRequest;
 use App\Models\User;
 
 class DriverController extends Controller
@@ -53,7 +54,7 @@ class DriverController extends Controller
         }
     }
 
-    public function update(AddDriverRequest $request, $id)
+    public function update(UpdateDriverRequest $request, $id)
     {
         try {
             $data = $request->all();

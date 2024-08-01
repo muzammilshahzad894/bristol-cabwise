@@ -128,4 +128,12 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/', [EmailController::class, 'customEmail'])->name('admin.custom-email.index');
         Route::post('/send', [EmailController::class, 'sendCustomEmail'])->name('admin.custom-email.send');
     });
+    Route::prefix('admin/email-settings')->group(function () {
+        Route::get('/', [EmailController::class, 'emailSettings'])->name('admin.email-settings.index');
+        Route::get('/create', [EmailController::class, 'createEmailSettings'])->name('admin.email-settings.create');
+        Route::post('/store', [EmailController::class, 'storeEmailSettings'])->name('admin.email-settings.store');
+        Route::get('/edit/{id}', [EmailController::class, 'editEmailSettings'])->name('admin.email-settings.edit');
+        Route::post('/update/{id}', [EmailController::class, 'updateEmailSettings'])->name('admin.email-settings.update');
+        Route::get('/delete/{id}', [EmailController::class, 'deleteEmailSettings'])->name('admin.email-settings.delete');
+    });
 });
