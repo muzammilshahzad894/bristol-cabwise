@@ -59,11 +59,9 @@
                             <th>Phone </th>
                             <th>Pickup </th>
                             <th>DropOff </th>
-                            <th>Amount</th>
                             <th>Date</th>
                             <th>Time</th>
                             <th>Ride Status</th>
-                            <th>Wait</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,7 +73,6 @@
                                     <td>{{ $booking->phone_number }}</td>
                                     <td>{{ $booking->pickup_location }}</td>
                                     <td>{{ $booking->dropoff_location }}</td>
-                                    <td>£{{ $booking->total_price }}</td>
                                     <td>{{ formatDate($booking->booking_date) }}</td>
                                     <td>{{ foramtTime($booking->booking_time) }}</td>
                                     <td>
@@ -92,9 +89,6 @@
                                                 @endforeach
                                             </ul>
                                         </div>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('driver.booking.wait', $booking->id) }}" class="btn btn-primary btn-sm">Wait</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -26,6 +26,9 @@ class CarsController extends Controller
                 $booking->user_id = auth()->user()->id;
                 $booking->save();
                 session()->forget('ispayment');
+                if($booking->via_locations != ''){
+                    return redirect()->back()->with('error', 'Please select a valid location');
+                }
                 return redirect('/client-booking-payment?payment_id=' . $booking->id);
             }
         }
