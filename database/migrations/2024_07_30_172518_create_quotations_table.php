@@ -12,7 +12,7 @@ class CreateQuotationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('quotations', function (Blueprint $table) {
+        Schema::create('user_request', function (Blueprint $table) {
             $table->id();
             $table->string('pickup');
             $table->string('dropoff');
@@ -34,6 +34,6 @@ class CreateQuotationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotations');
+        Schema::dropIfExists('user_request');
     }
 }
