@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\Booking;
+use App\Models\Quotation;
 use App\Models\Refund;
 use App\Models\Review;
 use App\Models\User;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\HelperController;
 use App\Services\EmailService;
 use Carbon\Carbon;
-
+use League\CommonMark\Extension\SmartPunct\Quote;
 
 class FrontendController extends Controller
 {
@@ -189,4 +190,56 @@ class FrontendController extends Controller
             return redirect()->back()->with('error', 'Something went wrong while processing your request');
         }
     }
+    public function getquote(){
+        try {
+            $fleets = Fleet::all();
+            return view('frontend.getquote.index', compact('fleets'));
+        } catch (\Exception $e) {
+            Log::error('Review Post Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong while processing your request');
+        
+        }
+
+    }
+    public function getquotePost(Request $request){
+        try {
+            $validator = Validator::make($request->all(), [
+                'pickup' => 'required',
+                'dropoff' => 'required',
+                'date' => 'required|date',
+                'fleet_id' => 'required',
+                'fullname' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required',
+                
+            ]);
+    
+            
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+            $pickup_date = Carbon::parse($request->date)->format('Y-m-d');
+            $pickup_time = Carbon::parse($request->date)->format('H:i:s');
+            $pickup = $pickup_date . ' ' . $pickup_time;
+            $booking = new Quotation();
+            $booking->pickup = $request->pickup;
+            $booking->dropoff = $request->dropoff;
+            $booking->date_time = $pickup;
+            $booking->fleet_id = intval($request->fleet_id);
+            $booking->fullname = $request->fullname;
+            $booking->email = $request->email;
+            $booking->phone = $request->phone;
+            $booking->return_journey = intval($request->return_journey);
+            $booking->comment = $request->comment;
+            $booking->created_at = Carbon::now();
+            $booking->updated_at = Carbon::now();
+            $booking->save();
+            return redirect()->back()->with('success', 'Quote sent successfully');
+        } catch (\Exception $e) {
+            Log::error('Quote Post Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong while processing your request');
+        }
+    }
+    
 }

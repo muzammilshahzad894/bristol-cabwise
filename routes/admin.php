@@ -14,6 +14,7 @@ use App\Http\Controllers\admin\RefundController;
 use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\EmailController;
 use App\Http\Controllers\admin\DriverController;
+use App\Http\Controllers\admin\QuotationController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/optimize', function () {
@@ -136,4 +137,5 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/update/{id}', [EmailController::class, 'updateEmailSettings'])->name('admin.email-settings.update');
         Route::get('/delete/{id}', [EmailController::class, 'deleteEmailSettings'])->name('admin.email-settings.delete');
     });
+    Route::get('/get-quotes', [QuotationController::class, 'getquote'])->name('admin.getquote');
 });

@@ -66,6 +66,12 @@
                         <span class="nav-text">Refunds</span>
                     </a>
                 </li>
+                <li class="{{ request()->routeIs('admin.getquote') ? 'mm-active' : '' }}">
+                    <a href="{{ route('admin.getquote') }}" class="" aria-expanded="false">
+                        <i class="fa fa-envelope"></i>
+                        <span class="nav-text">Quotations</span>
+                    </a>
+                </li>
                 <li class="{{ request()->routeIs('admin.custom-email.index') || request()->routeIs('admin.email-settings.index') ? 'mm-active' : '' }}">
                     <a class="has-arrow " href="javascript:void()" aria-expanded="false">
                         <i class="fa fa-envelope"></i>

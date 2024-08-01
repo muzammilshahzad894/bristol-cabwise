@@ -33,6 +33,7 @@
     let payment_method = '';
     let current_booking_id = 0;
     let lessTimeError = false;
+    let via_locations = '';
 
 
     $(document).ready(function() {
@@ -126,7 +127,7 @@
     function updateSummary() {
         const ids = [
             'summary-service-type', 'summary-pickup-location', 'summary-drop-location','summary-fleet-type',
-            'summary-date', 'summary-name', 'summary-telephone', 'summary-email',
+            'summary-date', 'summary-name', 'summary-telephone', 'summary-email','summary-via-location',
             'summary-passengers', 'summary-child-seat', 'summary-suitcases',
             'summary-hand-luggage', 'summary-summary',
             'summary-other-name', 'summary-other-telephone', 'summary-other-email',
@@ -141,12 +142,15 @@
                 console.error(`Element with id '${id}' not found`);
             }
         });
+        console.log(via_locations);
 
         const elements = {
             'summary-service-type': service_type,
             'summary-fleet-type' : Fleet_name,
             'summary-pickup-location': pickup_location,
             'summary-drop-location': dropoff_location,
+            'summary-via-location': via_locations,
+            
             'summary-date': dates_times,
             'summary-name': user_name,
             'summary-telephone': user_phone_number,
@@ -157,9 +161,9 @@
             'summary-suitcases': no_suite_case,
             'summary-hand-luggage': no_hand_luggage,
             'summary-summary': summary,
-            'summary-other-name': other_name,
-            'summary-other-telephone': other_phone_number,
-            'summary-other-email': other_email,
+            'summary-other-name': other_name ? other_name : '-',
+            'summary-other-telephone': other_phone_number ? other_phone_number : '-',
+            'summary-other-email': other_email ? other_email : '-',
             'summary-total-price': '£' + Total_price,
             'summary-child-seat_price': isChildSeat ? '£6' : '-',
             'summary-meet-greet': meet_nd_greet ? '£12' : '-',
@@ -272,7 +276,7 @@
                 let dropoff_locations = [];
                 document.querySelectorAll('input[name="dropLocation[]"]').forEach((input, index) => {
                     if (input.value) {
-                        dropoff_locations.push(input.value + ' ,(' + droplocationss + ')');
+                        dropoff_locations.push(input.value);
                     }
                 });
                 if (dropoff_locations.length > 1) {
@@ -280,6 +284,14 @@
                 }
 
                 dropoff_location = dropoff_locations.join(', ');
+                let via_locationss = [];
+                document.querySelectorAll('input[name="via_locations[]"]').forEach((input, index) => {
+                    if (input.value) {
+                        via_locationss.push(input.value + ' ,');
+                    }
+                });
+                via_locations = via_locationss.join(', ');
+                console.log('update via loations',via_locations);
                 dates_times = document.getElementById('date-time').value;
                 flight_name = document.getElementById('flightName').value;
                 flight_time = document.getElementById('flight_time').value;
@@ -800,6 +812,7 @@
             fleet_id: Fleet_id,
             total_price: Total_price,
             payment_method: payment_method,
+            via_locations: via_locations,
 
         };
 

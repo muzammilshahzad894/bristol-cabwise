@@ -33,7 +33,14 @@
 
 
 @php
-    $userRole = auth()->user()->role;
+    $userLoggedIn = auth()->user() ? true : false;
+    $userRole = null;
+    // $userRole = auth()->user()->role;
+    if (!auth()->user()) {
+        $userRole = 'user';
+    } else {
+        $userRole = auth()->user()->role;
+    }
     $distance = 1;
     $totalPrice = 0;
 
@@ -63,7 +70,7 @@
 
 @section('content')
     <section class="banner-header section-padding bg-img" data-overlay-dark="4"
-        data-background="{{ asset('frontend-assets/img/slider/booking_img.jpeg') }}">
+        data-background="{{ asset('frontend-assets/img/slider/booking_img1.jpg') }}">
         <input type="hidden" id="login_user" value="{{ $userRole }}">
         <div class="v-middle">
             <div class="container">
@@ -174,12 +181,13 @@
                                 <div>
                                     <button class="plus_icon mt-1" type="button" id="addLocation" onclick="addMore();">Add
                                         Via Location</button>
-                                        <div id="via_locatoins_input"></div>
-                                        <label for="dropLocation">Drop Location:</label>
-                                        <div id="dropLocations">
+                                    <div id="via_locatoins_input"></div>
+                                    <label for="dropLocation">Drop Location:</label>
+                                    <div id="dropLocations">
                                         <div class="drop-location mb-2">
-                                            <input type="text" id="dropLocation0" name="dropLocation"
-                                                placeholder="Enter drop location" class="form-control border-radius-0 mb-0 dropoffLocations">
+                                            <input type="text" id="dropLocation0" name="dropLocation[]"
+                                                placeholder="Enter drop location"
+                                                class="form-control border-radius-0 mb-0 dropoffLocations">
                                             <div id="drop-error" class="error-message text-danger"></div>
                                         </div>
                                     </div>
@@ -330,6 +338,12 @@
                                     <div id="someone_else_email_error" class="error-message text-danger"></div>
                                 </div>
                             </div>
+                            {{-- @if (!auth()->user())
+
+
+
+
+                            @endif --}}
 
                             <div class="mt-2">
                                 <label for="comment">Comment (optional):</label>
@@ -353,6 +367,10 @@
                                 <div class="d-flex gap-4">
                                     <strong>Pickup Location:</strong>
                                     <p id="summary-pickup-location">London</p>
+                                </div>
+                                <div class="d-flex gap-4">
+                                    <strong>Via Location:</strong>
+                                    <p id="summary-via-location">Manchester</p>
                                 </div>
                                 <div class="d-flex gap-4">
                                     <strong>Drop Location:</strong>
@@ -625,6 +643,9 @@
 
 
     <script type="text/javascript">
+        var login_user = @json($userLoggedIn);
+        console.log(login_user);
+
         var payment_id = '{{ request('payment_id') }}';
         var stripeKey = '{{ config('services.stripe.key') }}';
         if (!stripeKey) {
@@ -637,45 +658,73 @@
                 if (coupon_apply !== '') {
                     StoreCouponCode();
                 }
-                fetch(`/create-checkout-session/${bookingId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        },
-                    })
-                    .then(function(response) {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(function(session) {
-                        if (stripe && typeof stripe.redirectToCheckout === 'function') {
-                            return stripe.redirectToCheckout({
-                                sessionId: session.id
-                            });
-                        } else {
-                            throw new Error(
-                                'Stripe object is not initialized correctly or redirectToCheckout is undefined');
-                        }
-                    })
-                    .then(function(result) {
-                        if (result.error) {
-                            alert(result.error.message);
-                        }
-                    })
-                    .catch(function(error) {
-                        console.error('Error:', error);
-                    });
-            }
+                if (login_user) {
+                    fetch(`/create-checkout-session/${bookingId}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            },
+                        })
+                        .then(function(response) {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(function(session) {
+                            if (stripe && typeof stripe.redirectToCheckout === 'function') {
+                                return stripe.redirectToCheckout({
+                                    sessionId: session.id
+                                });
+                            } else {
+                                throw new Error(
+                                    'Stripe object is not initialized correctly or redirectToCheckout is undefined');
+                            }
+                        })
+                        .then(function(result) {
+                            if (result.error) {
+                                alert(result.error.message);
+                            }
+                        })
+                        .catch(function(error) {
+                            console.error('Error:', error);
+                        });
+                } else {
+                    fetch('{{ route('prepare-for-registration') }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            },
+                        })
+                        .then(function(response) {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(function(data) {
+                            if (data.success) {
+                                console.log('Prepared for registration');
+                                window.location.href = '/register';
+                            } else {
+                                console.error('Failed to prepare for registration');
+                            }
+                        })
+                        .catch(function(error) {
+                            console.error('Error:', error);
+                        });
+                }
+            
+        }
 
-            if (payment_id) {
-                var button = document.getElementById('checkout-button');
-                button.addEventListener('click', function() {
-                    PayonStripe(payment_id);
-                });
-            }
+        // if (payment_id) {
+        //     var button = document.getElementById('checkout-button');
+        //     button.addEventListener('click', function() {
+        //         PayonStripe(payment_id);
+        //     });
+        // }
 
         }
     </script>
@@ -747,10 +796,10 @@
         }
 
         function handleDestinationPlaceChange(index) {
-        const className = `dropLocation${index}`;
-        console.log(className);
-        const input = document.querySelector(`#${className}`);
-        
+            const className = `dropLocation${index}`;
+            console.log(className);
+            const input = document.querySelector(`#${className}`);
+
             const autocomplete = new google.maps.places.Autocomplete(input, {
                 bounds: new google.maps.LatLngBounds(
                     new google.maps.LatLng(49.959999, -7.572168), // South West Corner of the UK
@@ -778,15 +827,15 @@
         function addMore() {
             const dropLocationsDiv = document.getElementById('via_locatoins_input');
             const newDropLocationDiv = document.createElement('div');
-            const newIndex = indexcount+1;
+            const newIndex = indexcount + 1;
             newDropLocationDiv.className = 'drop-location mb-2';
             newDropLocationDiv.innerHTML = `
                 <input type="text" id="dropLocation${newIndex}" name="via_locations[]" placeholder="Enter Via location" class="form-control border-radius-0 mb-0 dropoffLocations">
                 <div id="drop-error" class="error-message text-danger"></div>
             `;
-            
+
             dropLocationsDiv.appendChild(newDropLocationDiv);
-          
+
             handleDestinationPlaceChange(newIndex);
             indexcount++;
         }

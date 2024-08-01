@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['verify' => true]);
 
+$this->redirectIfAuthenticated();
 Route::get('/', [CarsController::class, 'index'])->name('frontend.index');
 Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
@@ -19,12 +20,12 @@ Route::get('/services', [FrontendController::class, 'services'])->name('frontend
 Route::get('/faqs', [FrontendController::class, 'faqs'])->name('frontend.faqs');
 Route::get('/term-condition', [FrontendController::class, 'termCondition'])->name('frontend.termCondition');
 Route::get('/fleet-Detail/{id}',[FrontendController::class, 'fleetDetailsFrontend'])->name('frontend.fleetDetailsFrontend');
-
-
+Route::get('/get-quote',[FrontendController::class, 'getquote'])->name('frontend.getquote');
+Route::post('/get-quote',[FrontendController::class, 'getquotePost'])->name('frontend.getquotePost');
 
 
 Route::get('/client-booking-payment', [BookingController::class, 'clientBookingPayment'])->name('frontend.clientBookingPayment');
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
     Route::get('/book-online', [BookingController::class, 'index'])->name('frontend.book-online');
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
     Route::get('/booking/success', [BookingController::class, 'bookingSuccess'])->name('booking.success');
@@ -41,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/review',[FrontendController::class, 'reviewget'])->name('frontend.reviewget');
     Route::post('/reviews',[FrontendController::class, 'reviewPost'])->name('frontend.reviewPost');
-});
+// });
 
 
 Route::get('/fleet-details/{id}', [BookingController::class, 'fleetDetails'])->name('frontend.fleetDetails');
@@ -64,6 +65,8 @@ Route::post('/create-checkout-session/{id}', [PaymentController::class, 'createC
 Route::get('/payment-success/{id}', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
 Route::get('/payment-cancel', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
 Route::get('/get-payment/{id}', [PaymentController::class, 'showStripePaymentPage'])->name('stripe.payment');
+Route::post('/prepare-for-registration', [PaymentController::class, 'prepareForRegistration'])->name('prepare-for-registration');
+
 
 
 Route::get('/generate-paypal-link/{booking}', [PaymentController::class, 'generatePayPalLink']);

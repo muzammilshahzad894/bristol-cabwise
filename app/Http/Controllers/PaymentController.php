@@ -107,5 +107,11 @@ class PaymentController extends Controller
     
     return response()->json(['paypal_link' => $paypalLink]);
 }
+public function prepareForRegistration(Request $request)
+    {
+        // $request->session()->flush();
+        $request->session()->put('ispayment', true);
+        return response()->json(['success' => true]);
+    }
     
 }
