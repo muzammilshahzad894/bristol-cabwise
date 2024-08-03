@@ -25,10 +25,14 @@ class CreateFleetsTable extends Migration
             $table->string('max_suitecases')->nullable();
             $table->string('max_hand_luggage')->nullable();
             $table->string('min_booking_price')->nullable();
+            $table->string('price_after_10_miles')->nullable();
+            $table->string('price_after_20_miles')->nullable();
+            $table->string('price_after_30_miles')->nullable();
+            $table->string('price_after_40_miles')->nullable();
             $table->string('price_after_50_miles')->nullable();
             $table->string('price_after_100_miles')->nullable();
+            $table->string('price_after_120_miles')->nullable();
             $table->string('price_after_150_miles')->nullable();
-            $table->string('price_after_200_miles')->nullable();
             $table->text('detail_page_description')->nullable();
             $table->text('features')->nullable();
             $table->timestamps();

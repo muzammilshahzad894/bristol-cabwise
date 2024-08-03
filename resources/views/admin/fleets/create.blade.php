@@ -75,6 +75,34 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
+                                    <label class="form-label">Price after 10 miles <span class="text-danger">*</span></label>
+                                    <input type="number" name="price_after_10_miles" class="form-control" placeholder="Price after 10 miles" value="{{ old('price_after_10_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('price_after_10_miles')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Price after 20 miles <span class="text-danger">*</span></label>
+                                    <input type="number" name="price_after_20_miles" class="form-control" placeholder="Price after 20 miles" value="{{ old('price_after_20_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('price_after_20_miles')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Price after 30 miles <span class="text-danger">*</span></label>
+                                    <input type="number" name="price_after_30_miles" class="form-control" placeholder="Price after 30 miles" value="{{ old('price_after_30_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('price_after_30_miles')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label class="form-label">Price after 40 miles <span class="text-danger">*</span></label>
+                                    <input type="number" name="price_after_40_miles" class="form-control" placeholder="Price after 40 miles" value="{{ old('price_after_40_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('price_after_40_miles')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3 col-md-6">
                                     <label class="form-label">Price after 50 miles <span class="text-danger">*</span></label>
                                     <input type="number" name="price_after_50_miles" class="form-control" placeholder="Price after 50 miles" value="{{ old('price_after_50_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                     @error('price_after_50_miles')
@@ -89,16 +117,16 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Price after 150 miles <span class="text-danger">*</span></label>
-                                    <input type="number" name="price_after_150_miles" class="form-control" placeholder="Price after 150 miles" value="{{ old('price_after_150_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                                    @error('price_after_150_miles')
+                                    <label class="form-label">Price after 120 miles <span class="text-danger">*</span></label>
+                                    <input type="number" name="price_after_120_miles" class="form-control" placeholder="Price after 120 miles" value="{{ old('price_after_120_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('price_after_120_miles')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="mb-3 col-md-6">
-                                    <label class="form-label">Price after 200 miles <span class="text-danger">*</span></label>
-                                    <input type="number" name="price_after_200_miles" class="form-control" placeholder="Price after 200 miles" value="{{ old('price_after_200_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                                    @error('price_after_200_miles')
+                                    <label class="form-label">Price after 150 miles <span class="text-danger">*</span></label>
+                                    <input type="number" name="price_after_150_miles" class="form-control" placeholder="Price after 150 miles" value="{{ old('price_after_150_miles') }}" required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    @error('price_after_150_miles')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>

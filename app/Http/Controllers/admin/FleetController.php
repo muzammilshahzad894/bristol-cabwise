@@ -56,10 +56,14 @@ class FleetController extends Controller
             $fleet->max_suitecases = $request->max_suitecases;
             $fleet->max_hand_luggage = $request->max_hand_luggage;
             $fleet->min_booking_price = $request->min_booking_price;
+            $fleet->price_after_10_miles = $request->price_after_10_miles;
+            $fleet->price_after_20_miles = $request->price_after_20_miles;
+            $fleet->price_after_30_miles = $request->price_after_30_miles;
+            $fleet->price_after_40_miles = $request->price_after_40_miles;
             $fleet->price_after_50_miles = $request->price_after_50_miles;
             $fleet->price_after_100_miles = $request->price_after_100_miles;
+            $fleet->price_after_120_miles = $request->price_after_120_miles;
             $fleet->price_after_150_miles = $request->price_after_150_miles;
-            $fleet->price_after_200_miles = $request->price_after_200_miles;
             
             $fleet->detail_page_description = $request->detail_page_description;
             $fleet->features = $request->features;
@@ -124,10 +128,14 @@ class FleetController extends Controller
             $fleet->max_suitecases = $request->max_suitecases;
             $fleet->max_hand_luggage = $request->max_hand_luggage;
             $fleet->min_booking_price = $request->min_booking_price;
+            $fleet->price_after_10_miles = $request->price_after_10_miles;
+            $fleet->price_after_20_miles = $request->price_after_20_miles;
+            $fleet->price_after_30_miles = $request->price_after_30_miles;
+            $fleet->price_after_40_miles = $request->price_after_40_miles;
             $fleet->price_after_50_miles = $request->price_after_50_miles;
             $fleet->price_after_100_miles = $request->price_after_100_miles;
+            $fleet->price_after_120_miles = $request->price_after_120_miles;
             $fleet->price_after_150_miles = $request->price_after_150_miles;
-            $fleet->price_after_200_miles = $request->price_after_200_miles;
             $fleet->detail_page_description = $request->detail_page_description;
             $fleet->features = $request->features;
             $fleet->save();
