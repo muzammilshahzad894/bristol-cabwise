@@ -203,10 +203,7 @@
                 <div class="col-md-6 padding-top order_1">
                     <div class="section-subtitle"></div>
                     <h4 class="section-title">24/7 <span>Availability:</span></h4>
-                    <p>Our services are available 24/7, ensuring that you can access our support at any time of the day.
-                        However, our business contact hours vary according to our opening times. If you need to reach us
-                        outside of these hours, please book an appointment online. For any other issues, feel free to email
-                        us or send us a message.
+                    <p>Our services are available 24/7, ensuring they are delivered whenever you need them. For any inquiries, you can contact us via phone during our business hours, which vary according to our opening times. Outside of these hours, feel free to send us an email or message for assistance.
                     </p>
                 </div>
                 <div class="col-md-6 padding-top  order_2">

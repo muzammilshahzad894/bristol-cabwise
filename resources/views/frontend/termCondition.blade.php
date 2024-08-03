@@ -33,16 +33,15 @@
     
     <h2>Charges and Payment</h2>
     <ul>
-        <li>1. All charges are as per the current BristolCabwise.com tariff and must be paid in advance unless you have an approved credit account or an approved credit card with us.</li>
-        <li>2. Value-added tax (VAT) will be added at the appropriate rate to all charges.</li>
-        <li>3. All hires commence when the vehicle leaves our garage and terminate upon its return to the garage.</li>
-        <li>4. We strive to provide the same vehicle and driver for the duration of your hire; however, we reserve the right to substitute any vehicle or driver if necessary.</li>
-        <li>5. Drivers will operate at reasonable speeds based on their judgement of road and traffic conditions at the time and will not be required to drive beyond their discretion.</li>
-        <li>6. We accept no responsibility for delays, regardless of the cause.</li>
-        <li>7. Only company employees are permitted to drive our vehicles unless a specific self-drive agreement is in place.</li>
-        <li>8. For specific destinations, drivers will choose the most suitable route based on their professional judgement. This may not always be the shortest route.</li>
-        <li>9. A reasonable amount of standard passenger luggage is allowed. If the driver deems the luggage excessive by weight or size, they may decline to carry it.</li>
-        <li>10. We are not liable for any loss or damage to luggage or personal property during transit.</li>
+        <li>1.Free Cancellation: You may cancel your booking free of charge up to 24 hours before your scheduled pick-up time. This allows you to make changes to your plans without incurring any fees if you notify us within this period.</li>
+        <li>2. Cancellation Within 24 Hours: If you cancel your booking within 24 hours of the scheduled pick-up time, the full amount of the booking will be charged. This policy ensures compensation for the driver’s time and resources, as cancellations close to the service time prevent us from reallocating the vehicle.</li>
+        <li>3. Cancellation After Driver Dispatch: If the driver has already been dispatched when you cancel, the full amount of the booking will be charged. This policy covers the costs associated with sending a driver to the location.</li>
+        <li>4.No-Show Policy: If you do not show up at the scheduled pick-up time and do not inform us of your cancellation, you will be charged the full amount of the booking. This policy addresses the situation where the service has been prepared but not utilized.</li>
+        <li>5.Refunds: Refunds for cancellations made in accordance with this policy will be processed according to our refund policy, which is available upon request. We aim to handle all refund requests promptly and fairly.</li>
+        <li>6. Modification of Booking: If you need to modify your booking, please contact us as soon as possible. Changes made within 24 hours of the scheduled pick-up time may incur additional charges due to the proximity of the service date.</li>
+        <li>7. Exceptional Circumstances: We recognize that unforeseen emergencies or severe weather conditions may arise. We reserve the right to consider exceptions to this policy on a case-by-case basis in such exceptional circumstances.</li>
+        <li>8.Contact Information: To cancel or modify your booking, please contact us directly using the contact details provided on our website. We are here to assist you with any changes or cancellations you need to make.</li>
+       
     </ul>
 
     <h2>Cancellation Policy</h2>

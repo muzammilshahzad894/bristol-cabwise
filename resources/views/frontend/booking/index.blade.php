@@ -27,6 +27,15 @@
     .pickupLocation {
         border-radius: 0px !important;
     }
+    .design_style{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .description{
+        font-size: 17px !important;
+        font-weight: 500 !important;
+    }
 </style>
 
 
@@ -74,7 +83,7 @@
         <input type="hidden" id="login_user" value="{{ $userRole }}">
         <div class="v-middle">
             <div class="container">
-                <div class="row">
+                <div class="row design_style">
                     <div class="col-lg-6 col-md-12 mt-30">
                         <div class="post-wrapper">
                             {{-- <a href="index-2.html">
@@ -83,8 +92,8 @@
                             <div class="divider"></div>
                             <div class="text-white"><a href="#">book online</a></div> --}}
                         </div>
-                        <h1>Book Your Ride.</h1>
-                        <p style="color: orange;">Reserve your cab here. We provide a reliable 24-hour cab service in Bristol and across the UK, featuring professional drivers and transparent pricing. Experience hassle-free booking and exceptional service</p>
+                        <h1 style="color: orange">Book Your Ride</h1>
+                        <p class="description" style="color: white;">Reserve your cab here. We provide a reliable 24-hour cab service in Bristol and across the UK, featuring professional drivers and transparent pricing. Experience hassle-free booking and exceptional service</p>
                     </div>
                 </div>
             </div>

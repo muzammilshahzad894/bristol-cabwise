@@ -9,6 +9,16 @@
     .custom_lable{
         color: white !important;
     }
+    .design_style{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .description{
+        font-size: 17px !important;
+        font-weight: 500 !important;
+    }
+
 </style>
 
 
@@ -27,12 +37,12 @@
         data-background="{{ asset('frontend-assets/img/slider/booking_img.png') }}">
         <div class="v-middle">
             <div class="container">
-                <div class="row">
+                <div class="row design_style">
                     <div class="col-lg-6 col-md-12 mt-30">
                         <div class="post-wrapper">
                         </div>
-                        <h1>Get A Quotation Here.</h1>
-                        <p style="color: orange">Get a quotation here for our 24-hour cab service in Bristol and across the UK. Fill out the details, and our representative will contact you promptly with pricing information.</p>
+                        <h1 style="color: orange">Get A Quotation Here.</h1>
+                        <p class="description" style="color: white">Get a quotation here for our 24-hour cab service in Bristol and across the UK. Fill out the details, and our representative will contact you promptly with pricing information.</p>
                     </div>
                 </div>
             </div>
@@ -104,9 +114,9 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label for="fleet_id">Select Vehicle</label>
+                            <label for="fleet_id">Select Fleet</label>
                             <select name="fleet_id" id="fleet_id" class="styled-input border-radius-0 mb-0 select select2">
-                                <option value="">Select Vehicle</option>
+                                <option value="">Select Fleet</option>
                                 @foreach ($fleets as $service)
                                     <option value="{{ $service->id }}" {{ old('fleet_id') == $service->id ? 'selected' : '' }}>
                                         {{ $service->name }}
@@ -125,10 +135,39 @@
                             @endif
                         </div>
                         <div class="col-md-12">
+                            <label class="custom_lable" for="pickup_postal_code">Pickup Postal Code</label>
+                            <input name="pickup_postal_code" type="text" value="{{ old('pickup_postal_code') }}" class="form-control" placeholder="Pickup Postal Code">
+                            @if ($errors->has('pickup_postal_code'))
+                                <span class="text-danger">{{ $errors->first('pickup_postal_code') }}</span>
+                            @endif
+                        </div>
+                        <div class="col-md-12">
+                            <label class="custom_lable" for="pickup_city">Pickup City/Town</label>
+                            <input name="pickup_city" type="text" value="{{ old('pickup_city') }}" class="form-control" placeholder="Pickup City/Town">
+                            @if ($errors->has('pickup_city'))
+                                <span class="text-danger">{{ $errors->first('pickup_city') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="col-md-12">
                             <label class="custom_lable" for="dropoff">Dropoff Location</label>
                             <input name="dropoff" type="text" value="{{ old('dropoff') }}" class="form-control" placeholder="Dropoff">
                             @if ($errors->has('dropoff'))
                                 <span class="text-danger">{{ $errors->first('dropoff') }}</span>
+                            @endif
+                        </div>
+                        <div class="col-md-12">
+                            <label class="custom_lable" for="dropoff_postal_code">Dropoff Postal Code</label>
+                            <input name="dropoff_postal_code" type="text" value="{{ old('dropoff_postal_code') }}" class="form-control" placeholder="Dropoff Postal Code">
+                            @if ($errors->has('dropoff_postal_code'))
+                                <span class="text-danger">{{ $errors->first('dropoff_postal_code') }}</span>
+                            @endif
+                        </div>
+                        <div class="col-md-12">
+                            <label class="custom_lable" for="dropoff_city">Dropoff City/Town</label>
+                            <input name="dropoff_city" type="text" value="{{ old('dropoff_city') }}" class="form-control" placeholder="Dropoff City/Town">
+                            @if ($errors->has('dropoff_city'))
+                                <span class="text-danger">{{ $errors->first('dropoff_city') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
@@ -143,7 +182,7 @@
                         </div>
                         <div class="col-md-12">
                             <label class="custom_lable" for="comment">Comment</label>
-                            <textarea name="comment" class="form-control" placeholder="Comment">{{ old('comment') }}</textarea>
+                            <textarea name="comment" class="form-control" placeholder="Feel free to tell us about your quotation">{{ old('comment') }}</textarea>
                             @if ($errors->has('comment'))
                                 <span class="text-danger">{{ $errors->first('comment') }}</span>
                             @endif

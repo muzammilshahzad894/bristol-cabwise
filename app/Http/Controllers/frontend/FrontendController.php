@@ -260,6 +260,10 @@ class FrontendController extends Controller
                 'fullname' => 'required',
                 'email' => 'required|email',
                 'phone' => 'required',
+                'pickup_postal_code' => 'required',
+                'dropoff_postal_code' => 'required',
+                'pickup_city' => 'required',
+                'dropoff_city' => 'required',
                 
             ]);
     
@@ -279,6 +283,10 @@ class FrontendController extends Controller
             $booking->fullname = $request->fullname;
             $booking->email = $request->email;
             $booking->phone = $request->phone;
+            $booking->pickup_postal_code = $request->pickup_postal_code;
+            $booking->dropoff_postal_code = $request->dropoff_postal_code;
+            $booking->pickup_city = $request->pickup_city;
+            $booking->dropoff_city = $request->dropoff_city;
             $booking->return_journey = intval($request->return_journey);
             $booking->comment = $request->comment;
             $booking->created_at = Carbon::now();
