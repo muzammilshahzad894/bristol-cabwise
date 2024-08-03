@@ -70,7 +70,7 @@
 
 @section('content')
     <section class="banner-header section-padding bg-img" data-overlay-dark="4"
-        data-background="{{ asset('frontend-assets/img/slider/booking_img1.jpg') }}">
+        data-background="{{ asset('frontend-assets/img/slider/booking_img2.jpeg') }}">
         <input type="hidden" id="login_user" value="{{ $userRole }}">
         <div class="v-middle">
             <div class="container">
@@ -84,6 +84,7 @@
                             <div class="text-white"><a href="#">book online</a></div> --}}
                         </div>
                         <h1>Book Your Ride.</h1>
+                        <p style="color: orange;">Reserve your cab here. We provide a reliable 24-hour cab service in Bristol and across the UK, featuring professional drivers and transparent pricing. Experience hassle-free booking and exceptional service</p>
                     </div>
                 </div>
             </div>
@@ -94,24 +95,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p>
-                        We are your trusted and punctual taxi service in Bristol. We pride ourselves on professionalism and
-                        reliability, offering a diverse fleet of vehicles and experienced drivers dedicated to meeting your
-                        transportation needs. Our pricing is competitive and transparent, with no hidden fees. Enjoy the
-                        convenience of free registration and flexible cancellation up to 48 hours before your scheduled
-                        pick-up time. For airport pickups, benefit from our complimentary 1-hour waiting time. Our drivers
-                        provide attentive luggage assistance, and at other pickups, enjoy a complimentary 15-minute waiting
-                        period. Booking is effortless through our intuitive website or mobile app, supported by dedicated
-                        customer service. Simply enter your pickup and drop-off details, select your vehicle, provide
-                        passenger information, review, confirm your booking, and receive instant confirmation.
-                    </p>
-                    {{-- <p>
-                        Nulla vitae metus tincidunt, varius nunc quis, porta nulla.
-                        Pellentesque vel dui nec libero auctor pretium id sed arcu. Nunc
-                        consequat diam id nisl blandit dignissim. Etiam commodo diam
-                        dolor, at scelerisque sem finibus sit amet. Curabitur id lectus
-                        eget purus finibus laoreet.
-                    </p> --}}
+                 
+                 
                 </div>
             </div>
         </div>

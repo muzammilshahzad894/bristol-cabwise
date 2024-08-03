@@ -287,10 +287,11 @@
                 let via_locationss = [];
                 document.querySelectorAll('input[name="via_locations[]"]').forEach((input, index) => {
                     if (input.value) {
+                        //add count 
                         via_locationss.push(input.value + ' ,');
                     }
                 });
-                via_locations = via_locationss.join(', ');
+                via_locations = via_locationss.join(',');
                 console.log('update via loations',via_locations);
                 dates_times = document.getElementById('date-time').value;
                 flight_name = document.getElementById('flightName').value;
