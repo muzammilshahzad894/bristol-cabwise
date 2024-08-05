@@ -49,6 +49,7 @@
                             <th>Email</th>
                             <th>Phone </th>
                             <th>Pickup </th>
+                            <th class="max-content-display">Via Locations</th>
                             <th>DropOff </th>
                             <th>Amount</th>
                             <th>Date</th>
@@ -64,6 +65,28 @@
                                     <td> {{ $draft->email }}</td>
                                     <td> {{ $draft->phone_number }}</td>
                                     <td> <div class="max-content-display">{{ $draft->pickup_location }} </div></td>
+                                    <td>
+                                        @if($draft->via_locations)
+                                            @php
+                                                $viaLocations = json_decode($draft->via_locations, true);
+                                            @endphp
+                                    
+                                            @if(is_array($viaLocations) && !empty($viaLocations))
+                                                @foreach($viaLocations as $index => $location)
+                                                    <div class="location-container">
+                                                        <div class="location-box">
+                                                            <strong>Location {{ $index + 1 }}:</strong>
+                                                            <p>{{ $location }}</p>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                <p>No via locations</p>
+                                            @endif
+                                        @else
+                                            <p>No via locations</p>
+                                        @endif
+                                    </td>
                                     <td> <div class="max-content-display">{{ $draft->dropoff_location }} </div></td>
                                     <td> £{{ $draft->total_price }}</td>
                                     <td> {{ formatDate($draft->booking_date) }}</td>
@@ -183,6 +206,9 @@ function copyToClipboardsecond() {
         background-color: orange;
 
     }
+    .location-container {
+    min-width: 250px;
+}
 
     #countdown h4 {
         color: orange;

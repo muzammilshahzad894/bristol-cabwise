@@ -169,7 +169,7 @@ class BookingController extends Controller
             $booking->service_id = $request->service_id;
             $booking->payment_method = $request->payment_method;
             $booking->is_extra_lauggage = $request->extra_lauggage;
-            $booking->via_locations = $request->via_locations;
+            $booking->via_locations = json_encode($request->via_locations);
             $booking->save();
 
             $bookingId = $booking->id;
@@ -213,7 +213,7 @@ class BookingController extends Controller
         $returnBooking->service_id = $request->service_id;
         $returnBooking->payment_method = $request->payment_method;
         $returnBooking->is_extra_lauggage = $request->extra_lauggage;
-        $returnBooking->via_locations = $request->via_locations;
+        $returnBooking->via_locations =json_encode($request->via_locations);
         $returnBooking->return_id = $bookingId;
         $returnBooking->save();
     

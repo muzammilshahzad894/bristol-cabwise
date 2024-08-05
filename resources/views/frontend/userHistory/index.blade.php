@@ -15,6 +15,12 @@
         .card-body {
             background-color:white !important; /* Lighter shade for body */
         }
+        th {
+    min-width: 120px;
+}
+.location-box{
+    min-width: 180px;
+}
     </style>
 
     <!-- User History -->
@@ -35,6 +41,7 @@
                                             <th scope="col">Email</th>
                                             <th scope="col">Phone</th>
                                             <th scope="col">Pickup</th>
+                                            <th scope="col">Via Locations</th>
                                             <th scope="col">Dropoff</th>
                                             <th scope="col">Date</th>
                                             <th scope="col">Time</th>
@@ -59,6 +66,30 @@
                                             <td>{{ $booking->email }}</td>
                                             <td>{{ $booking->phone_number }}</td>
                                             <td>{{ $booking->pickup_location }}</td>
+                                            <td>
+                                                @if($booking->via_locations)
+                                                    @php
+                                                        $viaLocations = json_decode($booking->via_locations, true);
+                                                    @endphp
+                                            
+                                                    @if(is_array($viaLocations) && !empty($viaLocations))
+                                                        @foreach($viaLocations as $index => $location)
+                                                            <div class="location-container">
+                                                                <div class="location-box">
+                                                                    <strong>Location {{ $index + 1 }}:</strong>
+                                                                    <p>{{ $location }}</p>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <p>No via locations</p>
+                                                    @endif
+                                                @else
+                                                    <p>No via locations</p>
+                                                @endif
+                                            </td>
+                                            
+                                            
                                             <td>{{ $booking->dropoff_location }}</td>
                                             <td>{{ $booking->booking_date }}</td>
                                             <td>{{ $booking->booking_time }}</td>

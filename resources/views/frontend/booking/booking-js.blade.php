@@ -411,6 +411,7 @@ window.onload = updateVia;
                         via_locationss.push(input.value + ' ,');
                     }
                 });
+                
                 via_locations = via_locationss.join(',');
                 dates_times = document.getElementById('date-time').value;
                 flight_name = document.getElementById('flightName').value;
@@ -931,7 +932,9 @@ window.onload = updateVia;
 
     function bookAndPay() {
         payment_method = "stripe";
-        var formData = {
+        
+        var viaLocationInputs = document.querySelectorAll('input[name="via_locations[]"]');
+        var viaLocations = Array.from(viaLocationInputs).map(input => input.value);        var formData = {
             name: getElementValue('name'),
             email: getElementValue('email'),
             phone_number: getElementValue('telephone'),
@@ -957,7 +960,7 @@ window.onload = updateVia;
             fleet_id: Fleet_id,
             total_price: Total_price,
             payment_method: payment_method,
-            via_locations: via_locations,
+            via_locations: viaLocations,
 
         };
 

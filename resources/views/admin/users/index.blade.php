@@ -59,6 +59,7 @@
                             <th>Email</th>
                             <th>Phone </th>
                             <th>Pickup </th>
+                            <th class="max-content-display">Via Locations</th>
                             <th>DropOff </th>
                             <th>Amount</th>
                             <th>Date</th>
@@ -76,6 +77,26 @@
                                     <td>{{ $draft->email }}</td>
                                     <td>{{ $draft->phone_number }}</td>
                                     <td> <div class="max-content-display">{{ $draft->pickup_location }}</div></td>
+                                    <td>
+                                         <div class="max-content-display">
+                                            @if($draft->via_locations)
+                                                @php
+                                                    $viaLocations = json_decode($draft->via_locations, true);
+                                                @endphp
+                                        
+                                                @if(is_array($viaLocations) && !empty($viaLocations))
+                                                    @foreach($viaLocations as $index => $location)
+                                                        <div class="location-container">
+                                                            <div class="location-box">
+                                                                <strong>Location {{ $index + 1 }}:</strong>
+                                                                <p>{{ $location }}</p>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            @endif
+                                        </div>
+                                    </td>
                                     <td> <div class="max-content-display">{{ $draft->dropoff_location }}</div></td>
                                     <td>£{{ $draft->total_price }}</td>
                                     <td>{{ formatDate($draft->booking_date) }}</td>
@@ -140,6 +161,9 @@
             display: block;
             margin-bottom: 5px;
         }
+        td {
+    font-size: 14px;
+}
 
         .filter-item input,
         .filter-item select {
