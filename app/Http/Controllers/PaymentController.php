@@ -24,7 +24,14 @@ class PaymentController extends Controller
     {
         Stripe::setApiKey(config('services.stripe.secret'));
         $booking = Booking::find($id);
+        $price = null;
+        if($booking->return_id){
+            $returnBooking = Booking::find($booking->return_id);
+            $price = $booking->total_price + $returnBooking->total_price;
+        }else{
+
         $price = $booking->total_price;
+        }
         $session = Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
@@ -53,6 +60,12 @@ class PaymentController extends Controller
     public function paymentSuccess($id)
     {
         $booking = Booking::find($id);
+        if($booking->return_id){
+            $returnBooking = Booking::find($booking->return_id);
+            $returnBooking->is_payment = 1;
+            $returnBooking->is_draft = 0;
+            $returnBooking->save();
+        }
         if ($booking) {
             $booking->is_payment = 1;
             $booking->is_draft = 0;

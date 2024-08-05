@@ -138,6 +138,15 @@ class BookingController extends Controller
                     $booking_detail->delete();
                 }
             }
+            $total_price = null;
+            if($request->return == 1) {
+                $total_price = $request->total_price/2;
+            }
+            else{
+                $total_price = $request->total_price;
+            }
+            
+            $bookingId= null;
 
 
             $booking = new Booking();
@@ -165,7 +174,7 @@ class BookingController extends Controller
             $booking->flight_name = $request->flight_name;
             $booking->flight_time = $request->flight_time;
             $booking->flight_type = $request->flight_type;
-            $booking->total_price = $request->total_price;
+            $booking->total_price = $total_price;
             $booking->service_id = $request->service_id;
             $booking->payment_method = $request->payment_method;
             $booking->is_extra_lauggage = $request->extra_lauggage;
@@ -174,7 +183,8 @@ class BookingController extends Controller
 
             $bookingId = $booking->id;
         if ($request->return == 1) {
-           $this->createReturnBooking($request, $user_id, $user_ip, $bookingId);
+            $bookingIds =  $this->createReturnBooking($request, $user_id, $user_ip, $bookingId, $total_price);
+            $bookingId = $bookingIds;
         }
             return response()->json(['booking_id' => $bookingId]);
         } catch (\Exception $e) {
@@ -182,7 +192,7 @@ class BookingController extends Controller
             return response()->json(['error' => 'An error occurred while booking'], 500); // HTTP status code 500 for server errors
         }
     }
-    public function createReturnBooking($request, $user_id, $user_ip, $bookingId)
+    public function createReturnBooking($request, $user_id, $user_ip, $bookingId, $total_price)
     {
         $returnBooking = new Booking();
         $returnBooking->name = $request->name;
@@ -209,7 +219,7 @@ class BookingController extends Controller
         $returnBooking->flight_name = $request->flight_name;
         $returnBooking->flight_time = $request->flight_time;
         $returnBooking->flight_type = $request->flight_type;
-        $returnBooking->total_price = $request->total_price;
+        $returnBooking->total_price = $total_price;
         $returnBooking->service_id = $request->service_id;
         $returnBooking->payment_method = $request->payment_method;
         $returnBooking->is_extra_lauggage = $request->extra_lauggage;
