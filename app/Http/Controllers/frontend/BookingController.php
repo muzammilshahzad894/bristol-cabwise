@@ -160,13 +160,55 @@ class BookingController extends Controller
             $booking->is_extra_lauggage = $request->extra_lauggage;
             $booking->via_locations = $request->via_locations;
             $booking->save();
+
             $bookingId = $booking->id;
+        if ($request->return == 1) {
+           $this->createReturnBooking($request, $user_id, $user_ip, $bookingId);
+        }
             return response()->json(['booking_id' => $bookingId]);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return response()->json(['error' => 'An error occurred while booking'], 500); // HTTP status code 500 for server errors
         }
     }
+    public function createReturnBooking($request, $user_id, $user_ip, $bookingId)
+    {
+        $returnBooking = new Booking();
+        $returnBooking->name = $request->name;
+        $returnBooking->email = $request->email;
+        $returnBooking->phone_number = $request->phone_number;
+        $returnBooking->fleet_id = $request->fleet_id;
+        $returnBooking->pickup_location = $request->dropoff_location;
+        $returnBooking->dropoff_location = $request->pickup_location;
+        $returnBooking->return_date = $request->return_date;
+        $returnBooking->return_time = $request->return_time;
+        $returnBooking->other_name = $request->other_name;
+        $returnBooking->other_email = $request->other_email;
+        $returnBooking->other_phone_number = $request->other_phone_number;
+        $returnBooking->is_childseat = $request->child_seat;
+        $returnBooking->is_meet_nd_greet = $request->meet_greet;
+        $returnBooking->summary = $request->summary;
+        $returnBooking->no_of_passenger = $request->no_of_passenger;
+        $returnBooking->no_suit_case = $request->no_suite_case;
+        $returnBooking->no_of_laugage = $request->no_hand_luggage;
+        $returnBooking->flight_name = $request->flight_name;
+        $returnBooking->flight_time = $request->flight_time;
+        $returnBooking->user_id = $user_id ?? '0';
+        $returnBooking->user_ip = $user_ip ?? '0';
+        $returnBooking->flight_name = $request->flight_name;
+        $returnBooking->flight_time = $request->flight_time;
+        $returnBooking->flight_type = $request->flight_type;
+        $returnBooking->total_price = $request->total_price;
+        $returnBooking->service_id = $request->service_id;
+        $returnBooking->payment_method = $request->payment_method;
+        $returnBooking->is_extra_lauggage = $request->extra_lauggage;
+        $returnBooking->via_locations = $request->via_locations;
+        $returnBooking->return_id = $bookingId;
+        $returnBooking->save();
+    
+        return $returnBooking->id;
+    }
+    
     
     public function bookingSuccess()
     {

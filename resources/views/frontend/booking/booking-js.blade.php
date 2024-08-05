@@ -34,6 +34,30 @@
     let current_booking_id = 0;
     let lessTimeError = false;
     let via_locations = '';
+    let is_return = 0;
+
+    function showReturn() {
+        var returnCheckbox = document.getElementById('return');
+        var returnLocation = document.getElementById('return_location');
+        var pickupLocation = document.getElementById('pickupLocation').value;
+        var dropLocation = document.getElementById('dropLocation0').value;
+        var dropoffvalue = document.getElementById('return_pickupLocation');
+        var dropoffLocation = document.getElementById('return_dropLocation');
+        if (returnCheckbox.checked) {
+            is_return = 1;
+            returnLocation.style.display = 'block';
+            if (pickupLocation && dropLocation) {
+                dropoffvalue.value = dropLocation;
+                dropoffLocation.value = pickupLocation;
+            }
+
+        } else {
+            is_return = 0;
+            returnLocation.style.display = 'none';
+            dropoffvalue.value = '';
+            dropoffLocation.value = '';
+        }
+    }
 
 
     $(document).ready(function() {
@@ -125,13 +149,15 @@
     }
 
     function updateSummary() {
+        updateVia();
         const ids = [
-            'summary-service-type', 'summary-pickup-location', 'summary-drop-location','summary-fleet-type',
-            'summary-date', 'summary-name', 'summary-telephone', 'summary-email','summary-via-location',
+            'summary-service-type', 'summary-pickup-location', 'summary-drop-location', 'summary-fleet-type',
+            'summary-date', 'summary-name', 'summary-telephone', 'summary-email',
             'summary-passengers', 'summary-child-seat', 'summary-suitcases',
             'summary-hand-luggage', 'summary-summary',
             'summary-other-name', 'summary-other-telephone', 'summary-other-email',
-            'summary-total-price', 'summary-child-seat_price', 'summary-meet-greet','summary-meets-greets', 'summary-fleet-price',
+            'summary-total-price', 'summary-child-seat_price', 'summary-meet-greet', 'summary-meets-greets',
+            'summary-fleet-price',
             'summary-child-seat_price_div', 'summary-meet-greet_price_div', 'summary-extra-lauggage_price_div',
             'summary-flight-type', 'summary-flight-name', 'summary-flight-time'
         ];
@@ -142,15 +168,14 @@
                 console.error(`Element with id '${id}' not found`);
             }
         });
-        console.log(via_locations);
 
         const elements = {
             'summary-service-type': service_type,
-            'summary-fleet-type' : Fleet_name,
+            'summary-fleet-type': Fleet_name,
             'summary-pickup-location': pickup_location,
             'summary-drop-location': dropoff_location,
-            'summary-via-location': via_locations,
-            
+            // 'summary-via-location': via_locations,
+
             'summary-date': dates_times,
             'summary-name': user_name,
             'summary-telephone': user_phone_number,
@@ -165,7 +190,7 @@
             'summary-other-telephone': other_phone_number ? other_phone_number : '-',
             'summary-other-email': other_email ? other_email : '-',
             'summary-total-price': '£' + Total_price,
-            'summary-child-seat_price': isChildSeat ? '£6' : '-',
+            'summary-child-seat_price': isChildSeat ? '£5' : '-',
             'summary-meet-greet': meet_nd_greet ? '£12' : '-',
             'summary-fleet-price': '£' + FleetPrice,
             'summary-extra-lauggage': extra_luggage ? '£' + extra_luggage : '-',
@@ -204,21 +229,62 @@
         }
     }
 
+    function updateVia() {
+    var viaLocationContainer = document.getElementById('via_locations');
+    var viaLocationInputs = document.querySelectorAll('input[name="via_locations[]"]');
+    viaLocationContainer.innerHTML = '';
+    viaLocationInputs.forEach(function(input, index) {
+        var value = input.value.trim();
+        if (value) {
+            var viaLocationDiv = document.createElement('div');
+            viaLocationDiv.className = 'd-flex gap-4';
+            var viaLocationLabel = document.createElement('strong');
+            viaLocationLabel.textContent = 'Via location ' + (index + 1) + ':';
+            var viaLocationP = document.createElement('p');
+            viaLocationP.id = 'summary-via-location-' + (index + 1);
+            viaLocationP.textContent = value;
+            viaLocationDiv.appendChild(viaLocationLabel);
+            viaLocationDiv.appendChild(viaLocationP);
+            viaLocationContainer.appendChild(viaLocationDiv);
+        }
+    });
+}
+
+document.querySelectorAll('input[name="via_locations[]"]').forEach(function(input) {
+    input.addEventListener('input', updateVia);
+});
+
+window.onload = updateVia;
+
+
+
+
 
     function nextStep() {
-        if(currentStep == 1){
+        if (currentStep == 1) {
             var maplocation = document.getElementById('mapMarkplaces');
             maplocation.style.display = 'block';
-        }else{
+        } else {
             var maplocation = document.getElementById('mapMarkplaces');
             maplocation.style.display = 'none';
+        }
+        var returnCheckbox = document.getElementById('return');
+        if (returnCheckbox.checked) {
+            var returnDateTime = document.getElementById('return_date_time').value;
+            console.log('returnDateTime3', returnDateTime);
+            if (returnDateTime == '') {
+                alert('Please choose the return date time ');
+                return;
+            }
         }
         if (currentStep < 4) {
 
             if (currentStep === 1) {
-                if(lessTimeError) {
+                showReturn();
+                if (lessTimeError) {
                     return;
                 }
+
                 if (!validateFirstStep()) {
                     return;
                 }
@@ -226,7 +292,7 @@
                     alert('Please select the correct locations.');
                     return;
                 }
-                if (distance > 130) {
+                if (distance > 150) {
                     var login_user = document.getElementById('login_user').value;
                     if (login_user == "user") {
                         alert('For you booking plese contact to supports.');
@@ -257,7 +323,7 @@
             }
             if (currentStep == 3) {
 
-                 childset = isChildSeat ? 6 : 0;
+                childset = isChildSeat ? 5 : 0;
                 meet_greet_price = meet_nd_greet ? 12 : 0;
                 extra_luggage = isExtraLauggage ? 6 : 0;
                 updatefleetPrice = parseFloat(FleetPrice);
@@ -292,7 +358,6 @@
                     }
                 });
                 via_locations = via_locationss.join(',');
-                console.log('update via loations',via_locations);
                 dates_times = document.getElementById('date-time').value;
                 flight_name = document.getElementById('flightName').value;
                 flight_time = document.getElementById('flight_time').value;
@@ -357,7 +422,7 @@
                             });
                     } else {
                         renderFleetHtml(fleet,
-                            index); // Render without service tax if service_id is not present
+                            index);
                     }
                 });
 
@@ -418,20 +483,33 @@
         let dist = Math.round(newdistancevalue);
         let fleetPrice = 0;
         let price = parseFloat(fleet.price);
-        let priceAfter50Miles = parseFloat(fleet.price_after_50_miles);
-        let priceAfter100Miles = parseFloat(fleet.price_after_100_miles);
-        let priceAfter150Miles = parseFloat(fleet.price_after_150_miles);
-        let priceAfter200Miles = parseFloat(fleet.price_after_200_miles);
+        let price_after_10_miles = parseFloat(fleet.price_after_10_miles);
+        let price_after_20_miles = parseFloat(fleet.price_after_20_miles);
+        let price_after_30_miles = parseFloat(fleet.price_after_30_miles);
+        let price_after_40_miles = parseFloat(fleet.price_after_40_miles);
+        let price_after_50_miles = parseFloat(fleet.price_after_50_miles);
+        let price_after_100_miles = parseFloat(fleet.price_after_100_miles);
+        let price_after_120_miles = parseFloat(fleet.price_after_120_miles);
+        let price_after_150_miles = parseFloat(fleet.price_after_150_miles);
+
         let min_booking_price = parseFloat(fleet.min_booking_price);
 
-        if (dist > 200) {
+        if (dist > 150) {
             fleetPrice = dist * priceAfter200Miles;
-        } else if (dist > 150) {
+        } else if (dist > 120) {
             fleetPrice = dist * priceAfter150Miles;
         } else if (dist > 100) {
-            fleetPrice = dist * priceAfter100Miles;
+            fleetPrice = dist * priceAfter120Miles;
         } else if (dist > 50) {
+            fleetPrice = dist * priceAfter100Miles;
+        } else if (dist > 40) {
             fleetPrice = dist * priceAfter50Miles;
+        } else if (dist > 30) {
+            fleetPrice = dist * priceAfter40Miles;
+        } else if (dist > 20) {
+            fleetPrice = dist * priceAfter30Miles;
+        } else if (dist > 10) {
+            fleetPrice = dist * priceAfter20Miles;
         } else {
             fleetPrice = dist * price;
         }
@@ -480,6 +558,12 @@
                 message: 'Flight Time is required'
             },
         ];
+        const returnValidation = [{
+            selector: '#return_date-time',
+            errorSelector: '#return-date-time-error',
+            message: 'Return Date and time is required'
+        }, ];
+
 
         let isValid = true;
         validations.forEach(({
@@ -616,10 +700,10 @@
     }
 
     function prevStep() {
-        if(currentStep == 1){
+        if (currentStep == 1) {
             var maplocation = document.getElementById('mapMarkplaces');
             maplocation.style.display = 'block';
-        }else{
+        } else {
             var maplocation = document.getElementById('mapMarkplaces');
             maplocation.style.display = 'none';
         }
@@ -690,7 +774,7 @@
         fleet.classList.add("selected-fleet");
         const fleetId = fleet.getAttribute("data-fleet-id");
         Fleet_name = fleet.getAttribute("data-fleet-name");
-        
+
         Fleet_id = fleetId;
 
         fetch(`/fleet-details/${fleetId}`)
@@ -805,10 +889,12 @@
             pickup_location: getElementValue('pickupLocation'),
             dropoff_location: dropoff_location,
             date_time: getElementValue('date-time'),
+            return_date_time: getElementValue('return_date_time'),
             flight_name: getElementValue('flightName'),
             flight_time: getElementValue('flight_time'),
             flight_type: getElementValue('carType'),
             extra_lauggage: document.getElementById('extra_lauggage').checked ? 1 : 0,
+            return: is_return,
             service_id: service_id,
             fleet_id: Fleet_id,
             total_price: Total_price,
@@ -820,6 +906,13 @@
         $fleet_id = document.querySelector('input[name="fleet_id"]:checked').value;
         if (formData.date_time) {
             var dateTimeArray = formData.date_time.split('T');
+            var date = dateTimeArray[0];
+            var time = dateTimeArray[1];
+            formData.return_date = date;
+            formData.return_time = time;
+        }
+        if (formData.return_date_time) {
+            var dateTimeArray = formData.return_date_time.split('T');
             var date = dateTimeArray[0];
             var time = dateTimeArray[1];
             formData.date = date;
@@ -845,7 +938,7 @@
                     $('#exampleModal').modal('show');
                     return;
                 } else {
-                   
+
 
                     var login_user = document.getElementById('login_user').value;
 
@@ -892,11 +985,6 @@
             return ''; // Return empty string if element not found
         }
     }
-
-
-    // function pad(number) {
-    //     return number < 10 ? '0' + number : number;
-    // }
     var bookingHours = @json($bookingHours); // Assuming $bookingHours is a number
 
 
@@ -907,7 +995,6 @@
     function setMinDateTime() {
         var blockDates = @json($blockDates); // Assuming this is an array of strings in 'YYYY-MM-DD' format
         var login_user = document.getElementById('login_user').value;
-
         var now = new Date();
         var year = now.getFullYear();
         var month = pad(now.getMonth() + 1);
@@ -916,56 +1003,63 @@
         var minutes = pad(now.getMinutes());
 
         var currentDateTime = new Date(year, now.getMonth(), day, hours, minutes);
-
         var minDateTime = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
-        document.getElementById('date-time').setAttribute('min', minDateTime);
 
-        // Disable past dates and block dates
-        var dateInput = document.getElementById('date-time');
-        dateInput.addEventListener('input', function() {
-            var selectedDate = new Date(this.value);
-            selectedDate.setSeconds(0);
-            selectedDate.setMilliseconds(0);
+        function validateDateTime(dateInput) {
+            dateInput.setAttribute('min', minDateTime);
 
-            // Check if selected date is in the blockDates array or in the past
-            var isBlocked = blockDates.some(function(blockDate) {
-                var blockDateObj = new Date(blockDate);
-                blockDateObj.setHours(0, 0, 0, 0);
-                return selectedDate.toDateString() === blockDateObj.toDateString();
-            });
+            dateInput.addEventListener('input', function() {
+                var selectedDate = new Date(this.value);
+                selectedDate.setSeconds(0);
+                selectedDate.setMilliseconds(0);
+                var isBlocked = blockDates.some(function(blockDate) {
+                    var blockDateObj = new Date(blockDate);
+                    blockDateObj.setHours(0, 0, 0, 0);
+                    return selectedDate.toDateString() === blockDateObj.toDateString();
+                });
 
-            // Check if the user is logged in and the selected date is less than minimum booking hours from now
-            if (login_user === "user") {
-                var minBookingTime = new Date(currentDateTime.getTime() + (bookingHours * 60 * 60 *
-                1000)); // Convert hours to milliseconds
-                if (selectedDate < minBookingTime) {
+                // Check if the user is logged in and the selected date is less than minimum booking hours from now
+                if (login_user === "user") {
+                    var minBookingTime = new Date(currentDateTime.getTime() + (bookingHours * 60 * 60 *
+                        1000)); // Convert hours to milliseconds
+                    if (selectedDate < minBookingTime) {
+                        $('#exampleModal').modal('show');
+                        document.getElementById('message').textContent =
+                            "Booking must be made at least " + bookingHours +
+                            " hours in advance. Please select another date or time.";
+                        this.value = '';
+                        return; // Exit function to prevent further processing
+                    }
+                }
+
+                var now = new Date();
+                now.setSeconds(0);
+                now.setMilliseconds(0);
+
+                if (selectedDate < now || isBlocked) {
                     $('#exampleModal').modal('show');
                     document.getElementById('message').textContent =
-                        "Booking must be made at least " + bookingHours +
-                        " hours in advance. Please select another date or time.";
+                        "Booking is not available at this time. Please contact support.";
                     this.value = '';
-                    lessTimeError = true; // Set lessTimeError to true
-                    return; // Exit function to prevent further processing
-                } else {
-                    lessTimeError = false; // Set lessTimeError to false if condition is not met
                 }
-            }
+            });
+        }
 
-            var now = new Date();
-            now.setSeconds(0);
-            now.setMilliseconds(0);
+        var dateInput = document.getElementById('date-time');
+        var returnDateInput = document.getElementById('return_date_time');
 
-            if (selectedDate < now || isBlocked) {
-                $('#exampleModal').modal('show');
-                document.getElementById('message').textContent =
-                    "Booking is not available at this time. Please contact support.";
-                this.value = '';
-            }
-        });
+        if (dateInput) {
+            validateDateTime(dateInput);
+        }
+
+        if (returnDateInput) {
+            validateDateTime(returnDateInput);
+        }
     }
 
     window.onload = setMinDateTime;
-   
+
+
 
 
     document.addEventListener('DOMContentLoaded', function() {

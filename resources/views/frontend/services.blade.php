@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-12 text-center mb-30">
                 <div class="section-subtitle"></div>
-                <h1 class="section-title">Other <span>Services</span></h1>
+                {{-- <h1 class="section-title">Other <span>Services</span></h1> --}}
 
             </div>
             {{-- <div class="col-md-12">

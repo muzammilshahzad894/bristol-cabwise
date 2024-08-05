@@ -198,10 +198,40 @@
                                 <div>
                                     <label for="date">Date & Time:</label>
                                     <input type="datetime-local"
-                                        class="input location styled-input timepicker border-radius-0 mb-0"
+                                        class="input location date-time styled-input timepicker border-radius-0 mb-0"
                                         placeholder="Return Date" id="date-time"
                                         value="{{ isset($booking_detail) ? (isset($booking_detail->booking_date) && isset($booking_detail->booking_time) ? $booking_detail->booking_date . 'T' . $booking_detail->booking_time : '') : '' }}" />
                                     <div id="date-time-error" class="error-message text-danger"></div>
+                                </div>
+                                <div class=" meet_greet d-flex" style="gap:10px;align-items:center"
+                                    onclick="showReturn();">
+                                        <input type="checkbox" id="return" name="return" value=""
+                                        class="mb-0" @if (isset($booking_detail) && $booking_detail->is_return == 1) checked @endif>
+                                        <label for="return">Return Journey</label>
+                                </div>
+                               
+                                <div id="return_location" style="display: none">
+                                    <div id="return_date">
+                                        <label for="return_date">Return Date & Time:</label>
+                                        <input type="datetime-local" name="return_date_time"
+                                            class="input  styled-input timepicker border-radius-0 mb-0"
+                                            placeholder="Return Date" id="return_date_time"
+                                            value="{{ isset($booking_detail) ? (isset($booking_detail->return_date) && isset($booking_detail->return_time) ? $booking_detail->return_date . 'T' . $booking_detail->return_time : '') : '' }}" />
+                                        <div id="return_date_time-error" class="error-message text-danger"></div>
+                                    </div>
+                                    <label for="return_pickupLocation">Return Pickup Location:</label>
+                                    <input type="text"  name="return_pickupLocation"
+                                        placeholder="" id="return_pickupLocation"
+                                        class="form-control  border-radius-0 mb-0" disabled>
+                                    <label for="return_dropLocation">Return Drop Location:</label>
+                                    <div id="return_dropLocations">
+                                        <div class="drop-location mb-2">
+                                            <input type="text" name="return_dropLocation" disabled
+                                            id="return_dropLocation"
+                                                placeholder=""
+                                                class="form-control border-radius-0 mb-0 ">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -281,7 +311,7 @@
                                     onclick="showChildSeat()">
                                     <input type="checkbox" id="child_seat" name="child_seat" value=""
                                         class="mb-0" @if (isset($booking_detail) && $booking_detail->is_childseat == 1) checked @endif>
-                                    <label for="child_seat" class="passenger_lebals">Child Seat (£6)</label>
+                                    <label for="child_seat" class="passenger_lebals">Child Seat (£5)</label>
                                 </div>
                                 <div class="d-none" style="" style="display: none">
                                     <input type="checkbox" id="extra_lauggage" name="extra_lauggage" value=""
@@ -362,9 +392,9 @@
                                     <strong>Pickup Location:</strong>
                                     <p id="summary-pickup-location">London</p>
                                 </div>
-                                <div class="d-flex gap-4">
-                                    <strong>Via Location:</strong>
-                                    <p id="summary-via-location">Manchester</p>
+                                <div class=" " id="via_locations">
+                                    {{-- <strong>Via Location:</strong>
+                                    <p id="summary-via-location">Manchester</p> --}}
                                 </div>
                                 <div class="d-flex gap-4">
                                     <strong>Drop Location:</strong>
