@@ -147,9 +147,63 @@
             meet_nd_greet = false;
         }
     }
+    function updateReturnSummary() {
+    var returnCheckbox = document.getElementById('return');
+    var returnSummaryContainer = document.getElementById('return_summary');
+    var returnDateTimeInput = document.getElementById('return_date_time');
+    
+    // Clear the container before adding new elements
+    if (returnSummaryContainer) {
+        returnSummaryContainer.innerHTML = '';
+    }
+
+    if (returnCheckbox && returnCheckbox.checked && returnDateTimeInput) {
+        var returnDateTimeValue = returnDateTimeInput.value.trim();
+        if (returnDateTimeValue) {
+            // Create the first div element with d-flex and gap-4 classes
+            var returnDiv1 = document.createElement('div');
+            returnDiv1.className = 'd-flex gap-4';
+
+            var returnStrong = document.createElement('strong');
+            returnStrong.textContent = 'Return:';
+
+            var returnP = document.createElement('p');
+            returnP.textContent = 'Yes';
+
+            returnDiv1.appendChild(returnStrong);
+            returnDiv1.appendChild(returnP);
+
+            // Create the second div element with d-flex and gap-4 classes
+            var returnDiv2 = document.createElement('div');
+            returnDiv2.className = 'd-flex gap-4';
+
+            var returnDateTimeStrong = document.createElement('strong');
+            returnDateTimeStrong.textContent = 'Return Date & Time:';
+
+            var returnDateTimeP = document.createElement('p');
+            returnDateTimeP.textContent = returnDateTimeValue;
+
+            returnDiv2.appendChild(returnDateTimeStrong);
+            returnDiv2.appendChild(returnDateTimeP);
+
+            // Append both div elements to the container
+            returnSummaryContainer.appendChild(returnDiv1);
+            returnSummaryContainer.appendChild(returnDiv2);
+        }
+    }
+}
+
+// Example usage: Call updateReturnSummary() whenever needed, e.g., when checkbox value or datetime input changes
+document.getElementById('return').addEventListener('change', updateReturnSummary);
+document.getElementById('return_date_time').addEventListener('input', updateReturnSummary);
+
+// Initial call to display the return summary on page load if return is checked
+window.onload = updateReturnSummary;
+
 
     function updateSummary() {
         updateVia();
+        updateReturnSummary();
         const ids = [
             'summary-service-type', 'summary-pickup-location', 'summary-drop-location', 'summary-fleet-type',
             'summary-date', 'summary-name', 'summary-telephone', 'summary-email',
@@ -493,28 +547,32 @@ window.onload = updateVia;
         let price_after_150_miles = parseFloat(fleet.price_after_150_miles);
 
         let min_booking_price = parseFloat(fleet.min_booking_price);
+        let returnPrice = 1;
+        if(is_return == 1){
+           returnPrice = 2;
+        }
 
         if (dist > 150) {
-            fleetPrice = dist * priceAfter200Miles;
+            fleetPrice = dist * priceAfter200Miles * returnPrice;
         } else if (dist > 120) {
-            fleetPrice = dist * priceAfter150Miles;
+            fleetPrice = dist * priceAfter150Miles * returnPrice;
         } else if (dist > 100) {
-            fleetPrice = dist * priceAfter120Miles;
+            fleetPrice = dist * priceAfter120Miles * returnPrice;
         } else if (dist > 50) {
-            fleetPrice = dist * priceAfter100Miles;
+            fleetPrice = dist * priceAfter100Miles * returnPrice;
         } else if (dist > 40) {
-            fleetPrice = dist * priceAfter50Miles;
+            fleetPrice = dist * priceAfter50Miles * returnPrice;
         } else if (dist > 30) {
-            fleetPrice = dist * priceAfter40Miles;
+            fleetPrice = dist * priceAfter40Miles * returnPrice;
         } else if (dist > 20) {
-            fleetPrice = dist * priceAfter30Miles;
+            fleetPrice = dist * priceAfter30Miles * returnPrice;
         } else if (dist > 10) {
-            fleetPrice = dist * priceAfter20Miles;
+            fleetPrice = dist * priceAfter20Miles * returnPrice;
         } else {
-            fleetPrice = dist * price;
+            fleetPrice = dist * price * returnPrice;
         }
         if (fleetPrice < min_booking_price) {
-            fleetPrice = min_booking_price;
+            fleetPrice = min_booking_price * returnPrice;
         }
 
         return fleetPrice;
@@ -908,15 +966,15 @@ window.onload = updateVia;
             var dateTimeArray = formData.date_time.split('T');
             var date = dateTimeArray[0];
             var time = dateTimeArray[1];
-            formData.return_date = date;
-            formData.return_time = time;
+            formData.date = date;
+            formData.time = time;
         }
         if (formData.return_date_time) {
             var dateTimeArray = formData.return_date_time.split('T');
             var date = dateTimeArray[0];
             var time = dateTimeArray[1];
-            formData.date = date;
-            formData.time = time;
+            formData.return_date = date;
+            formData.return_time = time;
         }
 
         fetch('/booking', {

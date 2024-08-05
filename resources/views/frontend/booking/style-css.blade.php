@@ -349,7 +349,7 @@
     .summary strong {
         color: orange;
         /* Set strong tag color to orange */
-        min-width: 100px;
+        min-width: 134px;
         /* Set minimum width for strong tag */
     }
 

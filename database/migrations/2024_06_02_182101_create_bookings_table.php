@@ -29,6 +29,7 @@ class CreateBookingsTable extends Migration
             $table->string('booking_time')->nullable();
             $table->string('fleet_id')->nullable();
             $table->string('service_id')->nullable();
+            $table->string('return_id')->nullable();
             $table->integer('no_of_passenger');
             $table->integer('no_suit_case')->nullable();
             $table->text('summary')->nullable();

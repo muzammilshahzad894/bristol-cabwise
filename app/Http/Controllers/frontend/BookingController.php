@@ -30,10 +30,10 @@ class BookingController extends Controller
             {
                 $blockDates = BlockDate::all();
                 if($user_id != null){
-                    $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
+                    $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->orderBy('id', 'desc')->first();
                 }
                 else{
-                    $booking_detail = Booking::where('user_ip', $user_ip)->where('is_draft', 1)->first();
+                    $booking_detail = Booking::where('user_ip', $user_ip)->where('is_draft', 1)->orderBy('id', 'desc')->first();
                     
                 }
                 $bookingHour = Setting::where('key', 'min_booking_hours')->first();
@@ -112,12 +112,23 @@ class BookingController extends Controller
                     }
                 }
                 if($user_id != null){
-                    $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->first();
+                    $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->orderBy('id', 'desc')->first();
+                  
                 }
                 else{
-                    $booking_detail = Booking::where('user_ip', $user_ip)->where('is_draft', 1)->first();
+                    $booking_detail = Booking::where('user_ip', $user_ip)->where('is_draft', 1)->orderBy('id', 'desc')->first();
                 }
-                if($booking_detail){
+                if ($booking_detail && $booking_detail->return_id != null) {
+                    
+                    $booking_id = intval($booking_detail->return_id);
+                    $next_booking = Booking::where('id', $booking_id)->first();
+    
+                    if ($next_booking) {
+                        $next_booking->delete();
+                    }
+    
+                    $booking_detail->delete();
+                } elseif ($booking_detail) {
                     $booking_detail->delete();
                 }
             }
@@ -180,8 +191,8 @@ class BookingController extends Controller
         $returnBooking->fleet_id = $request->fleet_id;
         $returnBooking->pickup_location = $request->dropoff_location;
         $returnBooking->dropoff_location = $request->pickup_location;
-        $returnBooking->return_date = $request->return_date;
-        $returnBooking->return_time = $request->return_time;
+        $returnBooking->booking_date = $request->return_date;
+        $returnBooking->booking_time = $request->return_time;
         $returnBooking->other_name = $request->other_name;
         $returnBooking->other_email = $request->other_email;
         $returnBooking->other_phone_number = $request->other_phone_number;

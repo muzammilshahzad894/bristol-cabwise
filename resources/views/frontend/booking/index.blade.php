@@ -210,7 +210,7 @@
                                         <label for="return">Return Journey</label>
                                 </div>
                                
-                                <div id="return_location" style="display: none">
+                                <div id="return_location" style="display: none;margin-top:24px;">
                                     <div id="return_date">
                                         <label for="return_date">Return Date & Time:</label>
                                         <input type="datetime-local" name="return_date_time"
@@ -225,7 +225,7 @@
                                         class="form-control  border-radius-0 mb-0" disabled>
                                     <label for="return_dropLocation">Return Drop Location:</label>
                                     <div id="return_dropLocations">
-                                        <div class="drop-location mb-2">
+                                        <div class=" mb-2">
                                             <input type="text" name="return_dropLocation" disabled
                                             id="return_dropLocation"
                                                 placeholder=""
@@ -403,6 +403,9 @@
                                 <div class="d-flex gap-4">
                                     <strong>Date & Time: </strong>
                                     <p id="summary-date">2022-03-09</p>
+                                </div>
+                                <div class="" id="return_summary">
+
                                 </div>
                                 <div class=" flightDetails gap-4" id="summary-flight-type-div">
                                     <strong>Flight Type:</strong>

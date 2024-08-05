@@ -162,9 +162,7 @@ class FrontendController extends Controller
     {    
         $user_id = auth()->user()->id;
         $role = auth()->user()->role;
-
-        $pending_bookings = Booking::where('user_id', $user_id)->where('status', 0)->get();
-
+        $pending_bookings = Booking::where('user_id', $user_id)->where('is_payment', 1)->get();
         return view('frontend.refund.index', compact('pending_bookings'));
     }
     public function refundRequest(Request $request)
@@ -173,9 +171,9 @@ class FrontendController extends Controller
             $user_id = auth()->user()->id;
             $booking_id = $request->booking_id;
             $check = Refund::where('user_id', $user_id)->where('booking_id', $booking_id)->first();
-            // if ($check) {
-            //     return redirect()->back()->with('error', 'You already sent the refund request for this booking');
-            // }
+            if ($check) {
+                return redirect()->back()->with('error', 'You already sent the refund request for this booking');
+            }
             $refund = new Refund();
             $refund->user_id = $user_id;
             $refund->booking_id = $booking_id;
