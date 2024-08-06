@@ -554,21 +554,21 @@ window.onload = updateVia;
         }
 
         if (dist > 150) {
-            fleetPrice = dist * priceAfter200Miles * returnPrice;
+            fleetPrice = dist * price_after_150_miles * returnPrice;
         } else if (dist > 120) {
-            fleetPrice = dist * priceAfter150Miles * returnPrice;
+            fleetPrice = dist * price_after_150_miles * returnPrice;
         } else if (dist > 100) {
-            fleetPrice = dist * priceAfter120Miles * returnPrice;
+            fleetPrice = dist * price_after_120_miles * returnPrice;
         } else if (dist > 50) {
-            fleetPrice = dist * priceAfter100Miles * returnPrice;
+            fleetPrice = dist * price_after_100_miles * returnPrice;
         } else if (dist > 40) {
-            fleetPrice = dist * priceAfter50Miles * returnPrice;
+            fleetPrice = dist * price_after_50_miles * returnPrice;
         } else if (dist > 30) {
-            fleetPrice = dist * priceAfter40Miles * returnPrice;
+            fleetPrice = dist * price_after_40_miles * returnPrice;
         } else if (dist > 20) {
-            fleetPrice = dist * priceAfter30Miles * returnPrice;
+            fleetPrice = dist * price_after_30_miles * returnPrice;
         } else if (dist > 10) {
-            fleetPrice = dist * priceAfter20Miles * returnPrice;
+            fleetPrice = dist * price_after_20_miles * returnPrice;
         } else {
             fleetPrice = dist * price * returnPrice;
         }

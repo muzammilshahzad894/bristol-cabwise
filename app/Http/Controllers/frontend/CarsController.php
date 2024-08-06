@@ -17,6 +17,7 @@ class CarsController extends Controller
     {
         $session = session()->all();
         $ispayment = $session['ispayment'] ?? null;
+        // dd($ispayment);
         if ($ispayment) {
             $clientIp = getHostByName(getHostName());
             $booking = Booking::where('user_ip', $clientIp)
