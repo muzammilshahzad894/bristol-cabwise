@@ -80,8 +80,11 @@ class PaymentController extends Controller
             $bookingDetails = (object) [
                 'serviceType' => $booking->service->name,
                 'pickupLocation' => $booking->pickup_location,
+                'via_locations' => $booking->via_locations ? json_decode($booking->via_locations) : [],
                 'dropoffLocation' => $booking->dropoff_location,
                 'dateAndTime' => formatDate($booking->booking_date) . ' ' . foramtTime($booking->booking_time),
+                'is_return' => $booking->return_id ? true : false,
+                'return_dateAndTime' => $booking->return_id ? formatDate($returnBooking->booking_date) . ' ' . foramtTime($returnBooking->booking_time) : null,
                 'name' => $booking->name,
                 'telephone' => $booking->phone_number,
                 'email' => $booking->email,

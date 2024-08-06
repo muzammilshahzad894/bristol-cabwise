@@ -30,6 +30,14 @@
                                     <th style="padding: 10px; text-align: left; width: 150px;">Pickup Location</th>
                                     <td style="padding: 10px;">{{ $pickupLocation }}</td>
                                 </tr>
+                                @if(!empty($via_locations))
+                                    @foreach($via_locations as $key => $via_location)
+                                        <tr>
+                                            <th style="padding: 10px; text-align: left; width: 150px;">Via Location {{ $key + 1 }}</th>
+                                            <td style="padding: 10px;">{{ $via_location }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 <tr>
                                     <th style="padding: 10px; text-align: left; width: 150px;">Drop Location</th>
                                     <td style="padding: 10px;">{{ $dropoffLocation }}</td>
@@ -38,6 +46,16 @@
                                     <th style="padding: 10px; text-align: left; width: 150px;">Date & Time</th>
                                     <td style="padding: 10px;">{{ $dateAndTime }}</td>
                                 </tr>
+                                @if($is_return)
+                                    <tr>
+                                        <th style="padding: 10px; text-align: left; width: 150px;">Return</th>
+                                        <td style="padding: 10px;">Yes</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="padding: 10px; text-align: left; width: 150px;">Return Date & Time</th>
+                                        <td style="padding: 10px;">{{ $return_dateAndTime }}</td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <th style="padding: 10px; text-align: left; width: 150px;">Name</th>
                                     <td style="padding: 10px;">{{ $name }}</td>
@@ -94,7 +112,7 @@
                             <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
                                 <tr style="background-color: #000000; color: #ffffff;">
                                     <th style="padding: 10px; text-align: left; width: 150px;">Fleet Price</th>
-                                    <td style="padding: 10px;">£{{ $fleet_price }}</td>
+                                    <td style="padding: 10px;">£{{ $is_return ? $fleet_price * 2 : $fleet_price }}</td>
                                 </tr>
                                 <tr>
                                     <th style="padding: 10px; text-align: left; width: 150px;">Child Seat</th>
@@ -114,7 +132,7 @@
                                 </tr>
                                 <tr>
                                     <th style="padding: 10px; text-align: left; width: 150px;">Total Price</th>
-                                    <td style="padding: 10px;">£{{ $fleet_price }}</td>
+                                    <td style="padding: 10px;">£{{ $is_return ? $fleet_price * 2 : $fleet_price }}</td>
                                 </tr>
                             </table>
                             <p style="color: #000000;">We will process your request and notify you once it has been completed. If you have any questions, please contact our support team at 07533225970.</p>
