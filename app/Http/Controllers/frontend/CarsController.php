@@ -17,19 +17,23 @@ class CarsController extends Controller
     {
         $session = session()->all();
         $ispayment = $session['ispayment'] ?? null;
-        // dd($ispayment);
+        
         if ($ispayment) {
             $clientIp = getHostByName(getHostName());
             $booking = Booking::where('user_ip', $clientIp)
                               ->where('is_draft', 1)
+                              ->orderBy('id', 'desc')
                               ->first();
+                             
             if ($booking) {
                 $booking->user_id = auth()->user()->id;
                 $booking->save();
                 session()->forget('ispayment');
-                if($booking->via_locations != ''){
+                $via_locations = json_decode($booking->via_locations, true);
+                if (!empty($via_locations)) {   
                     return redirect()->back()->with('error', 'Please select a valid location');
                 }
+                
                 return redirect('/client-booking-payment?payment_id=' . $booking->id);
             }
         }
