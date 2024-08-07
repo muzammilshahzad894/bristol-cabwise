@@ -20,13 +20,25 @@ class SendingEmailListSeeder extends Seeder
                 'label' => 'booking-confirmation'
             ],
             [
-                'name' => 'Driver Assign',
-                'label' => 'driver-assign'
+                'name' => 'Booking Cancellation',
+                'label' => 'booking-cancellation'
             ],
+            [
+                'name' => 'Booking Reminder',
+                'label' => 'booking-reminder'
+            ],
+            // [
+            //     'name' => 'Driver Assign',
+            //     'label' => 'driver-assign'
+            // ],
             [
                 'name' => 'Booking Status Change',
                 'label' => 'booking-status-change'
             ],
+            // [
+            //     'name' => 'Feedback Receive',
+            //     'label' => 'feedback-receive',
+            // ],
             [
                 'name' => 'Refund Request',
                 'label' => 'refund-request'

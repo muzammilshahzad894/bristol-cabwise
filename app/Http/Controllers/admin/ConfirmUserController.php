@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Exception;
 use App\Http\Requests\AddCouponRequest;
 use App\Http\Requests\UpdateCouponRequest;
+use App\Services\EmailService;
 use App\Models\Booking;
 use App\Models\FleetTax;
 use App\Models\User;
@@ -17,6 +18,11 @@ use App\Models\Status;
 
 class ConfirmUserController extends Controller
 {    
+    public function __construct(EmailService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
+
     public function index(Request $request)
     {
         try {
@@ -96,15 +102,46 @@ class ConfirmUserController extends Controller
     public function assign(Request $request, $id)
     {
         try {
-            $Booking = Booking::find($id);
+            $booking = Booking::find($id);
             
-            if (!$Booking) {
+            if (!$booking) {
                 return redirect()->back()->with('error', 'Booking not found');
             }
             $assigned_to = intval($request->input('assigned_to'));
-            if($Booking->assigned_to != $assigned_to){
-                $Booking->assigned_to = $assigned_to;
-                $Booking->save();
+            if($booking->assigned_to != $assigned_to){
+                $booking->assigned_to = $assigned_to;
+                $booking->save();
+
+                // send email to the driver
+                $driver = User::find($assigned_to);
+                if($booking->return_id){
+                    $returnBooking = Booking::find($booking->return_id);
+                }
+                $bookingDetails = (object) [
+                    'serviceType' => $booking->service->name,
+                    'pickupLocation' => $booking->pickup_location,
+                    'via_locations' => $booking->via_locations ? json_decode($booking->via_locations) : [],
+                    'dropoffLocation' => $booking->dropoff_location,
+                    'dateAndTime' => formatDate($booking->booking_date) . ' ' . foramtTime($booking->booking_time),
+                    'is_return' => $booking->return_id ? true : false,
+                    'return_dateAndTime' => $booking->return_id ? formatDate($returnBooking->booking_date) . ' ' . foramtTime($returnBooking->booking_time) : null,
+                    'name' => $booking->name,
+                    'telephone' => $booking->phone_number,
+                    'email' => $booking->email,
+                    'no_of_passenger' => $booking->no_of_passenger,
+                    'is_childseat' => $booking->is_childseat ? $booking->is_childseat : '-',
+                    'is_meet_greet' => $booking->is_meet_greet ? 'Yes' : '-',
+                    'no_suit_case' => $booking->no_suit_case,
+                    'no_of_laugage' => $booking->no_of_laugage,
+                    'summary' => $booking->summary ? $booking->summary : '-',
+                    'other_name' => $booking->other_name ? $booking->other_name : '-',
+                    'other_phone_number' => $booking->other_phone_number ? $booking->other_phone_number : '-',
+                    'other_email' => $booking->other_email ? $booking->other_email : '-',
+                    'is_extra_lauggage' => $booking->is_extra_lauggage ? 'Yes' : '-',
+                ];
+
+                $this->emailService->sendDriverAssign($driver, $bookingDetails);
+
                 return redirect()->back()->with('success', 'Booking assigned successfully');
             }
         } catch (Exception $e) {

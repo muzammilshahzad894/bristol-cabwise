@@ -11,6 +11,8 @@ use App\Mail\DriverWaitingEmail;
 use App\Mail\BookingStatusMail;
 use App\Mail\RefundStatusMail;
 use App\Mail\CustomEmail;
+use App\Mail\DriverAssignMail;
+use App\Models\EmailSetting;
 use Illuminate\Support\Facades\Mail;
 
 class EmailService
@@ -47,10 +49,12 @@ class EmailService
             'coupon_discount' => $bookingDetails->coupon_discount,
         ];
 
-        $emailAddresses = [
-            $user->email,
-            setting('admin_email'),
-        ];
+        $emailAddresses = [$user->email];
+        // In EmailSetting all the emails are stored that will receive the booking-confirmation email
+        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-confirmation%')->pluck('user_email');
+        if ($emailSetting->count() > 0) {
+            $emailAddresses = array_merge($emailAddresses, $emailSetting->toArray());
+        }
 
         Mail::to($emailAddresses)->send(new BookingConfirmationMail($data));
     }
@@ -65,12 +69,47 @@ class EmailService
             'dropoffDateTime' => $bookingDetails->dropoffDateTime,
         ];
 
-        $emailAddresses = [
-            $user->email,
-            setting('admin_email'),
-        ];
+        $emailAddresses = [$user->email];
+        // In EmailSetting all the emails are stored that will receive the booking-cancellation email
+        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-cancellation%')->pluck('user_email');
+        if ($emailSetting->count() > 0) {
+            $emailAddresses = array_merge($emailAddresses, $emailSetting->toArray());
+        }
 
         Mail::to($emailAddresses)->send(new BookingCancellationMail($data));
+    }
+
+    public function sendDriverAssign($driver, $bookingDetails)
+    {
+        $extraLaugage = "";
+        if($bookingDetails->is_extra_lauggage == 1) {
+            $extraLaugage = "6";
+        }
+        $data = [
+            'userName' => $driver->name,
+            'serviceType' => $bookingDetails->serviceType,
+            'pickupLocation' => $bookingDetails->pickupLocation,
+            'via_locations' => $bookingDetails->via_locations,
+            'dropoffLocation' => $bookingDetails->dropoffLocation,
+            'dateAndTime' => $bookingDetails->dateAndTime,
+            'is_return' => $bookingDetails->is_return,
+            'return_dateAndTime' => $bookingDetails->return_dateAndTime,
+            'name' => $bookingDetails->name,
+            'telephone' => $bookingDetails->telephone,
+            'email' => $bookingDetails->email,
+            'no_of_passenger' => $bookingDetails->no_of_passenger,
+            'is_childseat' => $bookingDetails->is_childseat,
+            'is_meet_greet' => $bookingDetails->is_meet_greet,
+            'no_suit_case' => $bookingDetails->no_suit_case,
+            'no_of_laugage' => $bookingDetails->no_of_laugage,
+            'summary' => $bookingDetails->summary,
+            'other_name' => $bookingDetails->other_name,
+            'other_phone_number' => $bookingDetails->other_phone_number,
+            'other_email' => $bookingDetails->other_email,
+            'is_extra_lauggage' => $extraLaugage,
+        ];
+
+        Mail::to($driver->email)->send(new DriverAssignMail($data));
     }
 
     public function sendBookingReminder($user, $bookingDetails)
@@ -83,10 +122,12 @@ class EmailService
             'dropoffDateTime' => $bookingDetails->dropoffDateTime,
         ];
 
-        $emailAddresses = [
-            $user->email,
-            setting('admin_email'),
-        ];
+        $emailAddresses = [$user->email];
+        // In EmailSetting all the emails are stored that will receive the booking-reminder email
+        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-reminder%')->pluck('user_email');
+        if ($emailSetting->count() > 0) {
+            $emailAddresses = array_merge($emailAddresses, $emailSetting->toArray());
+        }
 
         Mail::to($emailAddresses)->send(new BookingReminderMail($data));
     }
@@ -114,10 +155,12 @@ class EmailService
             'bookingId' => $feedbackLink->bookingId,
         ];
 
-        $emailAddresses = [
-            $user->email,
-            setting('admin_email'),
-        ];
+        $emailAddresses = [$user->email];
+        // In EmailSetting all the emails are stored that will receive the refund-request email
+        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%refund-request%')->pluck('user_email');
+        if ($emailSetting->count() > 0) {
+            $emailAddresses = array_merge($emailAddresses, $emailSetting->toArray());
+        }
 
         Mail::to($emailAddresses)->send(new RefundMail($data));
     }
@@ -153,10 +196,12 @@ class EmailService
             'status' => $bookingDetails['status'],
         ];
 
-        $emailAddresses = [
-            $bookingDetails['email'],
-            setting('admin_email'),
-        ];
+        $emailAddresses = [$bookingDetails['email']];
+        // In EmailSetting all the emails are stored that will receive the booking-status-change email
+        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-status-change%')->pluck('user_email');
+        if ($emailSetting->count() > 0) {
+            $emailAddresses = array_merge($emailAddresses, $emailSetting->toArray());
+        }
 
         Mail::to($emailAddresses)->send(new BookingStatusMail($data));
     }
@@ -195,7 +240,14 @@ class EmailService
             $data['amount'] = $emailData['amount'];
         }
 
-        Mail::to($emailData['user_email'])->send(new RefundStatusMail($data));
+        $emailAddresses = [$emailData['user_email']];
+        // In EmailSetting all the emails are stored that will receive the refund-status-change email
+        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%refund-status-change%')->pluck('user_email');
+        if ($emailSetting->count() > 0) {
+            $emailAddresses = array_merge($emailAddresses, $emailSetting->toArray());
+        }
+
+        Mail::to($emailAddresses)->send(new RefundStatusMail($data));
     }
 
     public function sendCustomEmail($emailData)
