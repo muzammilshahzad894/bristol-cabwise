@@ -325,7 +325,6 @@ window.onload = updateVia;
         var returnCheckbox = document.getElementById('return');
         if (returnCheckbox.checked) {
             var returnDateTime = document.getElementById('return_date_time').value;
-            console.log('returnDateTime3', returnDateTime);
             if (returnDateTime == '') {
                 alert('Please choose the return date time ');
                 return;
@@ -484,10 +483,9 @@ window.onload = updateVia;
                 function renderFleetHtml(fleet, index) {
                     var fleetPrice = calculateFleetPrice(fleet);
                     var totalTax = fleet.taxes.reduce((sum, tax) => sum + parseFloat(tax.price),
-                        0); // Convert tax.price to number
+                        0); 
                     var totalPrice = fleetPrice + totalTax;
                     if (isNaN(totalPrice)) {
-                        console.log('Total price is NaN.');
                         alert('An error occurred: Total price is not a number.');
                         location.reload();
                         return;
@@ -538,7 +536,7 @@ window.onload = updateVia;
         let dist = Math.round(newdistancevalue);
         let fleetPrice = 0;
         let price = parseFloat(fleet.price);
-        let price_after_10_miles = parseFloat(fleet.price_after_10_miles);
+        let price_after_10_miles = parseFloat(fleet.price_after_10_miles) ;
         let price_after_20_miles = parseFloat(fleet.price_after_20_miles);
         let price_after_30_miles = parseFloat(fleet.price_after_30_miles);
         let price_after_40_miles = parseFloat(fleet.price_after_40_miles);
@@ -554,28 +552,27 @@ window.onload = updateVia;
         }
 
         if (dist > 150) {
-            fleetPrice = dist * price_after_150_miles * returnPrice;
-        } else if (dist > 120) {
-            fleetPrice = dist * price_after_150_miles * returnPrice;
-        } else if (dist > 100) {
-            fleetPrice = dist * price_after_120_miles * returnPrice;
-        } else if (dist > 50) {
-            fleetPrice = dist * price_after_100_miles * returnPrice;
-        } else if (dist > 40) {
-            fleetPrice = dist * price_after_50_miles * returnPrice;
-        } else if (dist > 30) {
-            fleetPrice = dist * price_after_40_miles * returnPrice;
-        } else if (dist > 20) {
-            fleetPrice = dist * price_after_30_miles * returnPrice;
-        } else if (dist > 10) {
-            fleetPrice = dist * price_after_20_miles * returnPrice;
-        } else {
-            fleetPrice = dist * price * returnPrice;
-        }
+        fleetPrice = dist * (price_after_150_miles || 1) * returnPrice;
+    } else if (dist > 120) {
+        fleetPrice = dist * (price_after_150_miles || 1) * returnPrice;
+    } else if (dist > 100) {
+        fleetPrice = dist * (price_after_120_miles || 1) * returnPrice;
+    } else if (dist > 50) {
+        fleetPrice = dist * (price_after_100_miles || 1) * returnPrice;
+    } else if (dist > 40) {
+        fleetPrice = dist * (price_after_50_miles || 1) * returnPrice;
+    } else if (dist > 30) {
+        fleetPrice = dist * (price_after_40_miles || 1) * returnPrice;
+    } else if (dist > 20) {
+        fleetPrice = dist * (price_after_30_miles || 1) * returnPrice;
+    } else if (dist > 10) {
+        fleetPrice = dist * (price_after_20_miles || 1) * returnPrice;
+    } else {
+        fleetPrice = dist * (price || 1) * returnPrice;
+    }
         if (fleetPrice < min_booking_price) {
             fleetPrice = min_booking_price * returnPrice;
         }
-
         return fleetPrice;
     }
 
@@ -1184,7 +1181,6 @@ window.onload = updateVia;
             type: 'GET',
             success: function(data) {
                 if (data.error) {
-                    console.log(data.error)
                     $('#exampleModal').modal('show');
                     document.getElementById('message').textContent = "Coupon is not valid.";
                     return;
@@ -1217,7 +1213,6 @@ window.onload = updateVia;
 
     function StoreCouponCode() {
         if (coupon_apply !== '') {
-            console.log('hereee');
             $.ajax({
                 url: '/store-coupon',
                 type: 'POST',
@@ -1228,7 +1223,6 @@ window.onload = updateVia;
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    console.log(response);
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error); // Log the error to the console
