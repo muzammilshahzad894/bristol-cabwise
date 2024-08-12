@@ -1,4 +1,6 @@
 @extends('layouts.frontend.app')
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> --}}
+
 <style>
     @media (max-width: 767px) {
        .button-1{
@@ -30,7 +32,7 @@
             <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                 <div class="item"> <span class="icon omfi-envelope"></span>
                     <h5>Email us</h5>
-                    <p>info@bristolcabwise.com</p> <i class="numb omfi-envelope"></i>
+                   <a href="mailto:info@bristolcabwise.com"> <p>info@bristolcabwise.com</p> <i class="numb omfi-envelope"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
@@ -39,18 +41,37 @@
                     <p>81 Blackberry Hill Bristol Bs161df</p> <i class="numb omfi-location"></i>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
+            {{-- <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                 <div class="item"> <span class="icon ti-time"></span>
                     <h5>Opening Hours</h5>
                     <p>Open Hours 24/7</p> <i class="numb ti-time"></i>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
-                <div class="item active"> <span class="icon omfi-phone"></span>
-                    <h5>Call us</h5>
-                    <p> +44 7533 225970</p> <i class="numb omfi-phone"></i>
+                <div class="item active">
+                    <!-- Phone icon with clickable link -->
+                    <a href="tel:+441173322782">
+                        <span class="icon omfi-phone"></span>
+                        <h5>Call us</h5>
+                        <p>0117 332 2782</p>
+                    </a>
+                    <i class="numb omfi-phone"></i>
                 </div>
             </div>
+            
+            <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
+                <div class="item active">
+                    <!-- WhatsApp icon with clickable link -->
+                    <a href="https://wa.me/447533225970" target="_blank">
+                        <span class="fab fa-whatsapp"></span>
+                        <h5>WhatsApp us</h5>
+                        <p>+44 7533 225970</p>
+                    </a>
+                    <i class="numb fa fa-whatsapp"></i>
+                </div>
+            </div>
+            
+            
         </div>
     </div>
 </div>
@@ -118,7 +139,7 @@
             <div class="col-md-12 text-center">
                 <h6>BOOK YOUR RIDE</h6>
                 <h5>Interested in Booking?</h5>
-                <p>Don't hesitate and send us a message.</p> <a href="tel:+8001234567" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a href="contact.html" class="button-2 mt-15 mb-15">Contact Us <span class="ti-arrow-top-right"></span></a>
+                <p>Don't hesitate and send us a message.</p> <a href="https://wa.me/447533225970" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a href="contact" class="button-2 mt-15 mb-15">Contact Us <span class="ti-arrow-top-right"></span></a>
             </div>
         </div>
     </div>

@@ -4,19 +4,26 @@
         padding: 70px 0px 0px 0px;
     }
 
+    .home_heading {
+        font-size: 60px;
+    }
+
     .banner-header {
         min-height: 520px;
     }
-    .offer_img{
+
+    .offer_img {
         height: 300px;
         max-width: 450px !important;
 
     }
-    .img-fluid{
+
+    .img-fluid {
         height: 450px !important;
-        
+
     }
-    .padding-top{
+
+    .padding-top {
         margin-top: 4.5rem !important;
     }
 
@@ -26,6 +33,10 @@
             flex-direction: column;
             justify-content: center;
             text-align: center;
+        }
+
+        .home_heading {
+            font-size: 40px;
         }
 
         .order_1 {
@@ -50,7 +61,7 @@
 
 
                     <div class="col-md-12 text-center " style="">
-                        <h1 style="font-size: 60px;" class="home_heading">About Us </h1>
+                        <h1 style="" class="home_heading">About Us </h1>
                         <p class="home_p" style="max-width: 600px; margin: 0 auto; color:#ffc107;">
                             Your premier pre-booking platform for reliable taxi services in Bristol, UK. Enjoy seamless
                             travel from airport transfers to city tours. Book now for stress-free journeys!
@@ -63,19 +74,185 @@
     <section class="about-us section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="section-subtitle"></div>
-                    <h4 class="section-title">Pre-Booking Cab Service in Bristol and <span>Across the United Kingdom</span>
-                    </h4>
-                    <p>
-                        Welcome to our premier pre-booking cab service, serving Bristol and cities across the United
-                        Kingdom. We offer a range of transportation solutions tailored to your needs, ensuring comfort,
-                        convenience, and reliability at affordable rates.
-                    </p>
+                <div class="section-subtitle"></div>
+                <h4 class="section-title">Pre-Booking Cab Service in Bristol and <span>Across the United Kingdom</span>
+                </h4>
+                <p>
+                    Welcome to our premier pre-booking cab service, serving Bristol and cities across the United
+                    Kingdom. We offer a range of transportation solutions tailored to your needs, ensuring comfort,
+                    convenience, and reliability at affordable rates.
+                </p>
+            </div>
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="d-flex text-center" style="width:100%; justify-content:center; padding:20px 0px">
+
+                            <h4 class="section-title">Our Story – The Family <span> Business</span></h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 order_2">
+                                <div class="section-subtitle"></div>
+                                {{-- <h4 class="section-title">Competitive <span>Rates:</span></h4> --}}
+                                <p>At Bristol Cabwise, we take great pleasure in providing a premium, door-to-door cab
+                                    service
+                                    designed to make our passengers' lives easier. We do this by utilizing top-of-the-range
+                                    executive and comfort vehicles and experienced drivers who are dedicated to making your
+                                    journey a pleasure.
+                                </p>
+                            </div>
+                            <div class="col-md-6 order_2">
+                                <div class="item">
+                                    <img src="{{ asset('frontend-assets/img/about/about_1.webp') }}" alt="about"
+                                        style="max-height:  300px !important;" class="img-fluid offer_img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 padding-top  order_1">
+                                <div class="item">
+                                    <img src="{{ asset('frontend-assets/img/about/about_2.jpeg') }}" alt="about"
+                                        style="max-height:  300px !important;" class="img-fluid offer_img">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 padding-top order_2">
+                                <div class="section-subtitle"></div>
+                                {{-- <h4 class="section-title">Highly Professional <span>Staff:</span></h4> --}}
+                                <p> O*Bristol Cabwise was established in 2022* by M. Malik and Umair Riaz with a vision to
+                                    offer
+                                    a premium transportation service to business professionals, tourists, residents, and
+                                    many
+                                    others who require pre-booked cabs for airport transfers, business needs, and various
+                                    other
+                                    journeys. We launched the family business with a Mercedes E-Class, a Mercedes Vito, and
+                                    a VW
+                                    Transporter, supported by a small team of two drivers. This initial setup was driven by
+                                    a
+                                    commitment to providing high-quality, reliable transport services catering to a diverse
+                                    range of needs.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 padding-top order_1">
+                                <div class="section-subtitle"></div>
+                                {{-- <h4 class="section-title">24/7 <span>Availability:</span></h4> --}}
+                                <p>From the outset, our focus has been on delivering exceptional service and maintaining the
+                                    highest standards of professionalism. We believe that every journey should be
+                                    comfortable,
+                                    safe, and efficient, and our early success was built on these core principles. Our
+                                    dedication to quality quickly earned us the trust of our clients, leading to a steady
+                                    increase in demand for our services.
+                                </p>
+                            </div>
+                            <div class="col-md-6 padding-top  order_2">
+                                <div class="item">
+                                    <img src="{{ asset('frontend-assets/img/about/about_6.jpg') }}" alt="about"
+                                        style="max-height:  300px !important;" class="img-fluid offer_img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 padding-top order_1">
+                                <div class="item">
+                                    <img src="{{ asset('frontend-assets/img/about/about_5.jpg') }}" alt="about"
+                                        style="max-height:  300px !important;" class="img-fluid offer_img">
+                                </div>
+                            </div>
+                            <div class="col-md-6 padding-top order_2">
+                                <div class="section-subtitle"></div>
+                                {{-- <h4 class="section-title">Easy Booking <span> Process:</span></h4> --}}
+                                <p>Over time, we have experienced significant growth, which has allowed us to expand our
+                                    fleet
+                                    and services. We have added a variety of new vehicles to accommodate a broader range of
+                                    transportation needs, and our team of drivers has grown to ensure we continue to provide
+                                    exceptional service. This expansion has enabled us to offer an even more comprehensive
+                                    suite
+                                    of services, including city-to-city transfers, airport pickups and drop-offs, private
+                                    journeys, business transfers, and event transportation.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 order_2">
+                                <div class="section-subtitle"></div>
+                                {{-- <h4 class="section-title">Competitive <span>Rates:</span></h4> --}}
+                                <p>Today, Bristol Cabwise operates with a diverse fleet of executive and comfort vehicles,
+                                    each
+                                    meticulously maintained to ensure the highest levels of safety and comfort. Our team of
+                                    professional drivers are skilled, courteous, and attentive, ensuring that every trip is
+                                    a
+                                    pleasant experience. We continue to serve a broad range of clients, from business
+                                    professionals needing reliable transportation for meetings and events to tourists
+                                    exploring
+                                    new destinations and residents seeking dependable travel options.
+                                </p>
+                            </div>
+                            <div class="col-md-6 order_2">
+                                <div class="item">
+                                    <img src="{{ asset('frontend-assets/img/about/about_4.webp') }}" alt="about"
+                                        style="max-height:  300px !important;" class="img-fluid offer_img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 padding-top  order_1">
+                                <div class="item">
+                                    <img src="{{ asset('frontend-assets/img/about/about_7.jpg') }}" alt="about"
+                                        style="max-height:  300px !important;" class="img-fluid offer_img">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 padding-top order_2">
+                                <div class="section-subtitle"></div>
+                                {{-- <h4 class="section-title">Highly Professional <span>Staff:</span></h4> --}}
+                                <p>
+                                    Our premium transport services now include not only airport transfers and city-to-city
+                                    journeys but also specialized services for events, private tours, and business
+                                    functions.
+                                    Whether you're heading to a corporate event, planning a family outing, or requiring a
+                                    seamless airport transfer, we offer a range of options to suit your needs. Our
+                                    pre-booking
+                                    system is designed for convenience, allowing you to secure your ride with just a few
+                                    clicks
+                                    and ensuring that your transportation is taken care of well in advance.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 padding-top order_1">
+                                <div class="section-subtitle"></div>
+                                {{-- <h4 class="section-title">24/7 <span>Availability:</span></h4> --}}
+                                <p>
+                                    At Bristol Cabwise, we pride ourselves on our competitive rates, highly professional
+                                    staff,
+                                    and 24/7 availability. We are committed to making every journey with us a positive and
+                                    memorable experience. Book your ride today and experience the convenience, comfort, and
+                                    reliability of Bristol Cabwise. Let us take you where you need to go in style and
+                                    confidence, knowing that you are in the hands of a trusted and experienced
+                                    transportation
+                                    provider.
+                                </p>
+                            </div>
+                            <div class="col-md-6 padding-top  order_2">
+                                <div class="item">
+                                    <img src="{{ asset('frontend-assets/img/about/about_8.jpg') }}" alt="about"
+                                        style="max-height:  300px !important;" class="img-fluid offer_img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="row">
+
+
                 <div class="d-flex text-center" style="width:100%; justify-content:center; padding:20px 0px">
 
-                    <h4 class="section-title" >Services <span>Offered</span></h4>
+                    <h4 class="section-title">Services <span>Offered</span></h4>
                 </div>
 
                 <!-- Desktop version -->
@@ -171,7 +348,7 @@
 
 
                 <div class="d-flex text-center" style="width:100%; justify-content:center; padding:20px 0px">
-                    <h4 class="section-title"  >Why Choose <span>Us</span></h4>
+                    <h4 class="section-title">Why Choose <span>Us</span></h4>
                 </div>
 
 
@@ -184,12 +361,14 @@
                 </div>
                 <div class="col-md-6 order_2">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/about/low_rate.jpg') }}" alt="about" style="max-height:  300px !important;" class="img-fluid offer_img">
+                        <img src="{{ asset('frontend-assets/img/about/low_rate.jpg') }}" alt="about"
+                            style="max-height:  300px !important;" class="img-fluid offer_img">
                     </div>
                 </div>
                 <div class="col-md-6 padding-top  order_1">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/about/staff.jpg') }}" alt="about" style="max-height:  300px !important;" class="img-fluid offer_img">
+                        <img src="{{ asset('frontend-assets/img/about/staff.jpg') }}" alt="about"
+                            style="max-height:  300px !important;" class="img-fluid offer_img">
                     </div>
                 </div>
 
@@ -203,17 +382,21 @@
                 <div class="col-md-6 padding-top order_1">
                     <div class="section-subtitle"></div>
                     <h4 class="section-title">24/7 <span>Availability:</span></h4>
-                    <p>Our services are available 24/7, ensuring they are delivered whenever you need them. For any inquiries, you can contact us via phone during our business hours, which vary according to our opening times. Outside of these hours, feel free to send us an email or message for assistance.
+                    <p>Our services are available 24/7, ensuring they are delivered whenever you need them. For any
+                        inquiries, you can contact us via phone during our business hours, which vary according to our
+                        opening times. Outside of these hours, feel free to send us an email or message for assistance.
                     </p>
                 </div>
                 <div class="col-md-6 padding-top  order_2">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/about/247.jpeg') }}" alt="about" style="max-height:  300px !important;" class="img-fluid offer_img">
+                        <img src="{{ asset('frontend-assets/img/about/247.jpeg') }}" alt="about"
+                            style="max-height:  300px !important;" class="img-fluid offer_img">
                     </div>
                 </div>
                 <div class="col-md-6 padding-top order_1">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/about/booking.jpg') }}" alt="about" style="max-height:  300px !important;" class="img-fluid offer_img">
+                        <img src="{{ asset('frontend-assets/img/about/booking.jpg') }}" alt="about"
+                            style="max-height:  300px !important;" class="img-fluid offer_img">
                     </div>
                 </div>
                 <div class="col-md-6 padding-top order_2">
@@ -238,7 +421,7 @@
         @media (max-width: 767px) {
 
             .section-title {
-                font-size: 30px;
+                font-size: 19px;
             }
         }
     </style>

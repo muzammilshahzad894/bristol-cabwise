@@ -1,3 +1,14 @@
+<style>
+    .custom_icon_list li{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .custom_icon_list{
+        display: flex;
+    }
+</style>
+
 <footer class="footer clearfix">
     <div class="container">
         <!-- first footer -->
@@ -8,11 +19,17 @@
                         <div class="footer-contact-links-wrapper">
                             <div class="footer-contact-link-wrapper">
                                 <div class="image-wrapper footer-contact-link-icon">
-                                    <a href="tel:07533225970">   <div class="icon-footer"> <i class="flaticon-phone-call"></i> </div></a>
+                                    <a  href="tel:01173322782">   <div class="icon-footer">  <i class="flaticon-phone-call"></i> </div></a>
                                 </div>
+
+
+
+                                <h5><a href="tel:01173322782">01173322782</a></h5>
+
+
                                 <div class="footer-contact-link-content">
                                     <h6>Call us</h6>
-                                    <p><a href="tel:07533225970"> +44 7533 225970 </a></p>
+                                    <p><a href="tel:01173322782" target="_blank"> 01173322782 </a></p>
                                 </div>
                             </div>
                             <div class="footer-contact-links-divider"></div>
@@ -56,13 +73,13 @@
                         <!-- <div class="footer-logo"><h2>CARE<span>X</span></h2></div> -->
                         <div class="widget-text">
                             <p>Book a service with us to ensure smooth and comfortable travel.</p>
-                            {{-- <div class="social-icons">
-                                <ul class="list-inline">
+                            <div class="social-icons">
+                                <ul class="list-inline custom_icon_list">
                                     <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
                                     <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                                 </ul>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>

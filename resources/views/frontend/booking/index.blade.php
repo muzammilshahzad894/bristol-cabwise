@@ -611,7 +611,7 @@
                             <i class="fa-solid fa-exclamation"></i>
                             <p>
                                 Guest/laggage capacities must be abided by for safety reasons. if you are unsure select a
-                                large class as chauffeurs may turn down service when they are exceeded.
+                                large class as drivers may turn down service when they are exceeded.
                             </p>
                         </div>
                         <div class="icon_text">

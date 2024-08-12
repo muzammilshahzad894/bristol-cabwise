@@ -14,6 +14,18 @@
     border-bottom: 0;
     border-left: 0.3em solid transparent;
 }
+.navbar-right_mobile{
+    display: none !important;
+}
+@media (max-width: 767px) {
+.navbar-right_mobile{
+    display: block !important;
+    margin: 10px 0px;
+}
+.navbar .navbar-right .wrap{
+    margin-left: 0px !important;
+}
+}
 </style>
 
 
@@ -45,6 +57,7 @@
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.contact') ? 'active' : '' }}" href="{{ route('frontend.contact') }}">Contact</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.faqs') ? 'active' : '' }}" href="{{ route('frontend.faqs') }}">FAQs</a></li>
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('frontend.trustVoilet') ? 'active' : '' }}" href="{{ route('frontend.trustVoilet') }}">Reviews</a></li>
+               
 
 
                 @guest
@@ -89,7 +102,19 @@
 
 
 
-
+            <li class="nav-item">
+                        
+                <div class="navbar-right navbar-right_mobile">
+                    <div class="wrap">
+                        <div class="icon"><a href="tel:01173322782"> <i class="flaticon-phone-call"></i></a> </div>
+                        <div class="text">
+                            <p>Need help?</p>
+                            <h5><a href="tel:01173322782">01173322782</a></h5>
+                        </div>
+    
+                    </div>
+                </div>
+                        </li>
 
 
                 {{-- @if (Auth::check())
@@ -97,17 +122,31 @@
                 @else --}}
                 <li class="nav-item">
                     <a href="{{ route('frontend.book-online') }}" class="booking_online_btn">Book Now</a></li>
-            </ul>
+
+                    <li class="nav-item">
+                        
             <div class="navbar-right">
                 <div class="wrap">
-                    <div class="icon"><a href="tel:07533225970"> <i class="flaticon-phone-call"></i></a> </div>
+                    <div class="icon"><a href="tel:01173322782"> <i class="flaticon-phone-call"></i></a> </div>
                     <div class="text">
                         <p>Need help?</p>
-                        <h5><a href="tel:07533225970">07533225970</a></h5>
+                        <h5><a href="tel:01173322782">01173322782</a></h5>
                     </div>
 
                 </div>
             </div>
+                    </li>
+            </ul>
+            {{-- <div class="navbar-right">
+                <div class="wrap">
+                    <div class="icon"><a href="tel:01173322782"> <i class="flaticon-phone-call"></i></a> </div>
+                    <div class="text">
+                        <p>Need help?</p>
+                        <h5><a href="tel:01173322782">01173322782</a></h5>
+                    </div>
+
+                </div>
+            </div> --}}
         </div>
     </div>
 </nav>

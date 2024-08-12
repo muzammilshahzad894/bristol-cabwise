@@ -147,58 +147,59 @@
             meet_nd_greet = false;
         }
     }
+
     function updateReturnSummary() {
-    var returnCheckbox = document.getElementById('return');
-    var returnSummaryContainer = document.getElementById('return_summary');
-    var returnDateTimeInput = document.getElementById('return_date_time');
-    
-    // Clear the container before adding new elements
-    if (returnSummaryContainer) {
-        returnSummaryContainer.innerHTML = '';
-    }
+        var returnCheckbox = document.getElementById('return');
+        var returnSummaryContainer = document.getElementById('return_summary');
+        var returnDateTimeInput = document.getElementById('return_date_time');
 
-    if (returnCheckbox && returnCheckbox.checked && returnDateTimeInput) {
-        var returnDateTimeValue = returnDateTimeInput.value.trim();
-        if (returnDateTimeValue) {
-            // Create the first div element with d-flex and gap-4 classes
-            var returnDiv1 = document.createElement('div');
-            returnDiv1.className = 'd-flex gap-4';
+        // Clear the container before adding new elements
+        if (returnSummaryContainer) {
+            returnSummaryContainer.innerHTML = '';
+        }
 
-            var returnStrong = document.createElement('strong');
-            returnStrong.textContent = 'Return:';
+        if (returnCheckbox && returnCheckbox.checked && returnDateTimeInput) {
+            var returnDateTimeValue = returnDateTimeInput.value.trim();
+            if (returnDateTimeValue) {
+                // Create the first div element with d-flex and gap-4 classes
+                var returnDiv1 = document.createElement('div');
+                returnDiv1.className = 'd-flex gap-4';
 
-            var returnP = document.createElement('p');
-            returnP.textContent = 'Yes';
+                var returnStrong = document.createElement('strong');
+                returnStrong.textContent = 'Return:';
 
-            returnDiv1.appendChild(returnStrong);
-            returnDiv1.appendChild(returnP);
+                var returnP = document.createElement('p');
+                returnP.textContent = 'Yes';
 
-            // Create the second div element with d-flex and gap-4 classes
-            var returnDiv2 = document.createElement('div');
-            returnDiv2.className = 'd-flex gap-4';
+                returnDiv1.appendChild(returnStrong);
+                returnDiv1.appendChild(returnP);
 
-            var returnDateTimeStrong = document.createElement('strong');
-            returnDateTimeStrong.textContent = 'Return Date & Time:';
+                // Create the second div element with d-flex and gap-4 classes
+                var returnDiv2 = document.createElement('div');
+                returnDiv2.className = 'd-flex gap-4';
 
-            var returnDateTimeP = document.createElement('p');
-            returnDateTimeP.textContent = returnDateTimeValue;
+                var returnDateTimeStrong = document.createElement('strong');
+                returnDateTimeStrong.textContent = 'Return Date & Time:';
 
-            returnDiv2.appendChild(returnDateTimeStrong);
-            returnDiv2.appendChild(returnDateTimeP);
+                var returnDateTimeP = document.createElement('p');
+                returnDateTimeP.textContent = returnDateTimeValue;
 
-            // Append both div elements to the container
-            returnSummaryContainer.appendChild(returnDiv1);
-            returnSummaryContainer.appendChild(returnDiv2);
+                returnDiv2.appendChild(returnDateTimeStrong);
+                returnDiv2.appendChild(returnDateTimeP);
+
+                // Append both div elements to the container
+                returnSummaryContainer.appendChild(returnDiv1);
+                returnSummaryContainer.appendChild(returnDiv2);
+            }
         }
     }
-}
 
-// Example usage: Call updateReturnSummary() whenever needed, e.g., when checkbox value or datetime input changes
-document.getElementById('return').addEventListener('change', updateReturnSummary);
-document.getElementById('return_date_time').addEventListener('input', updateReturnSummary);
+    // Example usage: Call updateReturnSummary() whenever needed, e.g., when checkbox value or datetime input changes
+    document.getElementById('return').addEventListener('change', updateReturnSummary);
+    document.getElementById('return_date_time').addEventListener('input', updateReturnSummary);
 
-// Initial call to display the return summary on page load if return is checked
-window.onload = updateReturnSummary;
+    // Initial call to display the return summary on page load if return is checked
+    window.onload = updateReturnSummary;
 
 
     function updateSummary() {
@@ -284,31 +285,31 @@ window.onload = updateReturnSummary;
     }
 
     function updateVia() {
-    var viaLocationContainer = document.getElementById('via_locations');
-    var viaLocationInputs = document.querySelectorAll('input[name="via_locations[]"]');
-    viaLocationContainer.innerHTML = '';
-    viaLocationInputs.forEach(function(input, index) {
-        var value = input.value.trim();
-        if (value) {
-            var viaLocationDiv = document.createElement('div');
-            viaLocationDiv.className = 'd-flex gap-4';
-            var viaLocationLabel = document.createElement('strong');
-            viaLocationLabel.textContent = 'Via location ' + (index + 1) + ':';
-            var viaLocationP = document.createElement('p');
-            viaLocationP.id = 'summary-via-location-' + (index + 1);
-            viaLocationP.textContent = value;
-            viaLocationDiv.appendChild(viaLocationLabel);
-            viaLocationDiv.appendChild(viaLocationP);
-            viaLocationContainer.appendChild(viaLocationDiv);
-        }
+        var viaLocationContainer = document.getElementById('via_locations');
+        var viaLocationInputs = document.querySelectorAll('input[name="via_locations[]"]');
+        viaLocationContainer.innerHTML = '';
+        viaLocationInputs.forEach(function(input, index) {
+            var value = input.value.trim();
+            if (value) {
+                var viaLocationDiv = document.createElement('div');
+                viaLocationDiv.className = 'd-flex gap-4';
+                var viaLocationLabel = document.createElement('strong');
+                viaLocationLabel.textContent = 'Via location ' + (index + 1) + ':';
+                var viaLocationP = document.createElement('p');
+                viaLocationP.id = 'summary-via-location-' + (index + 1);
+                viaLocationP.textContent = value;
+                viaLocationDiv.appendChild(viaLocationLabel);
+                viaLocationDiv.appendChild(viaLocationP);
+                viaLocationContainer.appendChild(viaLocationDiv);
+            }
+        });
+    }
+
+    document.querySelectorAll('input[name="via_locations[]"]').forEach(function(input) {
+        input.addEventListener('input', updateVia);
     });
-}
 
-document.querySelectorAll('input[name="via_locations[]"]').forEach(function(input) {
-    input.addEventListener('input', updateVia);
-});
-
-window.onload = updateVia;
+    window.onload = updateVia;
 
 
 
@@ -410,7 +411,7 @@ window.onload = updateVia;
                         via_locationss.push(input.value + ' ,');
                     }
                 });
-                
+
                 via_locations = via_locationss.join(',');
                 dates_times = document.getElementById('date-time').value;
                 flight_name = document.getElementById('flightName').value;
@@ -483,7 +484,7 @@ window.onload = updateVia;
                 function renderFleetHtml(fleet, index) {
                     var fleetPrice = calculateFleetPrice(fleet);
                     var totalTax = fleet.taxes.reduce((sum, tax) => sum + parseFloat(tax.price),
-                        0); 
+                        0);
                     var totalPrice = fleetPrice + totalTax;
                     if (isNaN(totalPrice)) {
                         alert('An error occurred: Total price is not a number.');
@@ -536,7 +537,7 @@ window.onload = updateVia;
         let dist = Math.round(newdistancevalue);
         let fleetPrice = 0;
         let price = parseFloat(fleet.price);
-        let price_after_10_miles = parseFloat(fleet.price_after_10_miles) ;
+        let price_after_10_miles = parseFloat(fleet.price_after_10_miles);
         let price_after_20_miles = parseFloat(fleet.price_after_20_miles);
         let price_after_30_miles = parseFloat(fleet.price_after_30_miles);
         let price_after_40_miles = parseFloat(fleet.price_after_40_miles);
@@ -547,29 +548,29 @@ window.onload = updateVia;
 
         let min_booking_price = parseFloat(fleet.min_booking_price);
         let returnPrice = 1;
-        if(is_return == 1){
-           returnPrice = 2;
+        if (is_return == 1) {
+            returnPrice = 2;
         }
 
         if (dist > 150) {
-        fleetPrice = dist * (price_after_150_miles || 1) * returnPrice;
-    } else if (dist > 120) {
-        fleetPrice = dist * (price_after_150_miles || 1) * returnPrice;
-    } else if (dist > 100) {
-        fleetPrice = dist * (price_after_120_miles || 1) * returnPrice;
-    } else if (dist > 50) {
-        fleetPrice = dist * (price_after_100_miles || 1) * returnPrice;
-    } else if (dist > 40) {
-        fleetPrice = dist * (price_after_50_miles || 1) * returnPrice;
-    } else if (dist > 30) {
-        fleetPrice = dist * (price_after_40_miles || 1) * returnPrice;
-    } else if (dist > 20) {
-        fleetPrice = dist * (price_after_30_miles || 1) * returnPrice;
-    } else if (dist > 10) {
-        fleetPrice = dist * (price_after_20_miles || 1) * returnPrice;
-    } else {
-        fleetPrice = dist * (price || 1) * returnPrice;
-    }
+            fleetPrice = dist * (price_after_150_miles || 1) * returnPrice;
+        } else if (dist > 120) {
+            fleetPrice = dist * (price_after_150_miles || 1) * returnPrice;
+        } else if (dist > 100) {
+            fleetPrice = dist * (price_after_120_miles || 1) * returnPrice;
+        } else if (dist > 50) {
+            fleetPrice = dist * (price_after_100_miles || 1) * returnPrice;
+        } else if (dist > 40) {
+            fleetPrice = dist * (price_after_50_miles || 1) * returnPrice;
+        } else if (dist > 30) {
+            fleetPrice = dist * (price_after_40_miles || 1) * returnPrice;
+        } else if (dist > 20) {
+            fleetPrice = dist * (price_after_30_miles || 1) * returnPrice;
+        } else if (dist > 10) {
+            fleetPrice = dist * (price_after_20_miles || 1) * returnPrice;
+        } else {
+            fleetPrice = dist * (price || 1) * returnPrice;
+        }
         if (fleetPrice < min_booking_price) {
             fleetPrice = min_booking_price * returnPrice;
         }
@@ -929,9 +930,10 @@ window.onload = updateVia;
 
     function bookAndPay() {
         payment_method = "stripe";
-        
+
         var viaLocationInputs = document.querySelectorAll('input[name="via_locations[]"]');
-        var viaLocations = Array.from(viaLocationInputs).map(input => input.value);        var formData = {
+        var viaLocations = Array.from(viaLocationInputs).map(input => input.value);
+        var formData = {
             name: getElementValue('name'),
             email: getElementValue('email'),
             phone_number: getElementValue('telephone'),
@@ -1051,6 +1053,7 @@ window.onload = updateVia;
     }
 
     function setMinDateTime() {
+
         var blockDates = @json($blockDates); // Assuming this is an array of strings in 'YYYY-MM-DD' format
         var login_user = document.getElementById('login_user').value;
         var now = new Date();
@@ -1067,40 +1070,52 @@ window.onload = updateVia;
             dateInput.setAttribute('min', minDateTime);
 
             dateInput.addEventListener('input', function() {
-                var selectedDate = new Date(this.value);
-                selectedDate.setSeconds(0);
-                selectedDate.setMilliseconds(0);
-                var isBlocked = blockDates.some(function(blockDate) {
-                    var blockDateObj = new Date(blockDate);
-                    blockDateObj.setHours(0, 0, 0, 0);
-                    return selectedDate.toDateString() === blockDateObj.toDateString();
-                });
-
-                // Check if the user is logged in and the selected date is less than minimum booking hours from now
-                if (login_user === "user") {
-                    var minBookingTime = new Date(currentDateTime.getTime() + (bookingHours * 60 * 60 *
-                        1000)); // Convert hours to milliseconds
-                    if (selectedDate < minBookingTime) {
-                        $('#exampleModal').modal('show');
-                        document.getElementById('message').textContent =
-                            "Booking must be made at least " + bookingHours +
-                            " hours in advance. Please select another date or time.";
-                        this.value = '';
-                        return; // Exit function to prevent further processing
-                    }
-                }
-
-                var now = new Date();
-                now.setSeconds(0);
-                now.setMilliseconds(0);
-
-                if (selectedDate < now || isBlocked) {
-                    $('#exampleModal').modal('show');
-                    document.getElementById('message').textContent =
-                        "Booking is not available at this time. Please contact support.";
-                    this.value = '';
+                // Only trigger the validation if the input has a value
+                if (this.value) {
+                    handleInput.call(this);
                 }
             });
+
+            function handleInput() {
+                
+        var dateInput = document.getElementById('date-time').value;
+        var returnDateInput = document.getElementById('return_date_time').value;
+        
+        console.log('valeu is',returnDateInput,dateInput);
+                // if (returnDateInput != '' || dateInput != '') {
+                    var selectedDate = new Date(this.value);
+                    selectedDate.setSeconds(0);
+                    selectedDate.setMilliseconds(0);
+                    var isBlocked = blockDates.some(function(blockDate) {
+                        var blockDateObj = new Date(blockDate);
+                        blockDateObj.setHours(0, 0, 0, 0);
+                        return selectedDate.toDateString() === blockDateObj.toDateString();
+                    });
+
+                    if (login_user === "user") {
+                        var minBookingTime = new Date(currentDateTime.getTime() + (bookingHours * 60 * 60 * 1000));
+                        if (selectedDate < minBookingTime) {
+                            $('#exampleModal').modal('show');
+                            document.getElementById('message').textContent =
+                                "Booking must be made at least " + bookingHours +
+                                " hours in advance. Please select another date or time.";
+                            this.value = '';
+                            return;
+                        }
+                    }
+
+                    var now = new Date();
+                    now.setSeconds(0);
+                    now.setMilliseconds(0);
+
+                    if (selectedDate < now || isBlocked) {
+                        $('#exampleModal').modal('show');
+                        document.getElementById('message').textContent =
+                            "Booking is not available at this time. Please contact support.";
+                        this.value = '';
+                    }
+                // }
+            }
         }
 
         var dateInput = document.getElementById('date-time');
@@ -1116,6 +1131,8 @@ window.onload = updateVia;
     }
 
     window.onload = setMinDateTime;
+
+
 
 
 
@@ -1222,8 +1239,7 @@ window.onload = updateVia;
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-                success: function(response) {
-                },
+                success: function(response) {},
                 error: function(xhr, status, error) {
                     console.error('Error:', error); // Log the error to the console
                 }
