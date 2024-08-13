@@ -70,7 +70,7 @@
                             <p>Book a service with us to ensure smooth and comfortable travel.</p>
                             <div class="social-icons">
                                 <ul class="list-inline custom_icon_list">
-                                    <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
+                                    <li><a href="https://wa.me/447533225970" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
                                     <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
                                     <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                                 </ul>

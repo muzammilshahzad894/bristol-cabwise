@@ -246,7 +246,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center " style="">
-                        <h6>* Welcome To</h6>
+                        <h6>Welcome To</h6>
                         <h1 style="font-size: 60px;" class="home_heading">Bristol Cabwise </h1>
                         <p class="home_p" style="max-width: 600px; margin: 0 auto; color:#ffc107;">
                             Your premier pre-booking platform for reliable taxi services in Bristol, UK. Enjoy seamless travel from airport transfers to city tours. Book now for stress-free journeys!
@@ -645,7 +645,7 @@
             <div class="col-md-12 text-center">
                 <h6>Book Your Ride</h6>
                 <h5>Interested in booking?</h5>
-                <p>Don’t hesitate to call or send us a message instead.</p> <a href="https://wa.me/01173322782" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a href="{{ route('frontend.contact') }}" class="button-2 mt-15 mb-15">Contact Us <span class="ti-arrow-top-right"></span></a>
+                <p>Don’t hesitate to call or send us a message instead.</p> <a href="https://wa.me/447533225970" target="_blank" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a href="{{ route('frontend.contact') }}" class="button-2 mt-15 mb-15">Contact Us <span class="ti-arrow-top-right"></span></a>
             </div>
         </div>
     </div>

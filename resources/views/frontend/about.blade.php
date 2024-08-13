@@ -27,6 +27,12 @@
         margin-top: 4.5rem !important;
     }
 
+    .inner-title {
+        font-weight: bold;
+        color: #fff;
+        font-size: 17px;
+    }
+
     @media (max-width: 767px) {
         .mobile_screen {
             display: flex;
@@ -83,7 +89,29 @@
                     convenience, and reliability at affordable rates.
                 </p>
             </div>
-            <div class="container-fluid">
+            <div class="container-fluid about-section">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <div class="about-card">
+                            <div class="d-flex text-center" style="width:100%; justify-content:center; padding:20px 0px">
+                                <h4 class="section-title">Our Story – The Family <span> Business</span></h4>
+                            </div>
+                            <div class="section-text">
+                                <p class="highlight">At Bristol Cabwise, we take pride in delivering a premium door-to-door cab service that emphasizes comfort and convenience. Our fleet consists of top-of-the-range executive and comfort vehicles, operated by experienced drivers dedicated to making every journey enjoyable.</p>
+                                <p class="highlight">
+                                    <span class="inner-title">Established in 2022,</span> Bristol Cabwise was founded with the vision of providing high-quality transportation services tailored to the needs of business professionals, tourists, residents, and others requiring reliable pre-booked cabs. We began with a small fleet, including a Mercedes E-Class, a Mercedes Vito, and a VW Transporter, supported by a team of two drivers. From the start, our focus was on delivering exceptional service, ensuring that every journey was safe, comfortable, and efficient.
+                                </p>
+                                <p>Our dedication to quality earned us a loyal customer base, leading to increased demand for our services. As a result, we expanded our fleet and team. Today, Bristol Cabwise operates a diverse range of executive and comfort vehicles, all meticulously maintained to meet the highest standards of safety and comfort.</p>
+                                <p>We offer a comprehensive range of services to meet the diverse needs of our clients. These include city-to-city transfers, airport pickups and drop-offs, private journeys, business transfers, and event transportation. Additionally, we provide specialized services for events, private tours, and corporate functions. Whether you need a ride to a business meeting, a family outing, or a seamless airport transfer, we have a solution to fit your needs.</p>
+                                <p>Our user-friendly pre-booking system allows customers to secure their rides with just a few clicks, and our highly professional staff is available 24/7 to ensure top-notch service. We offer competitive rates without compromising on quality.</p>
+                                <p class="highlight">At Bristol Cabwise, our mission is to make every journey a positive and memorable experience. We believe that transportation should be more than just getting from point A to point B, it should be an experience you look forward to. As we continue to grow, we remain committed to providing reliable, comfortable, and high-quality transportation services that you can trust.</p>
+                                <p>Book your ride with Bristol Cabwise today and experience the convenience and reliability our clients have come to expect. Let us take you where you need to go with confidence and style.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="container-fluid">
 
                 <div class="row">
                     <div class="col-md-12">
@@ -246,12 +274,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
+
             <div class="row">
-
-
                 <div class="d-flex text-center" style="width:100%; justify-content:center; padding:20px 0px">
-
                     <h4 class="section-title">Services <span>Offered</span></h4>
                 </div>
 
@@ -410,7 +437,6 @@
                     </p>
                 </div>
             </div>
-
         </div>
     </section>
     <style>
