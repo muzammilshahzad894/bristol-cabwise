@@ -394,7 +394,7 @@
                 </div>
                 <div class="col-md-6 padding-top  order_1">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/about/staff.jpg') }}" alt="about"
+                        <img src="{{ asset('frontend-assets/img/about/professional-staff.jpg') }}" alt="about"
                             style="max-height:  300px !important;" class="img-fluid offer_img">
                     </div>
                 </div>
