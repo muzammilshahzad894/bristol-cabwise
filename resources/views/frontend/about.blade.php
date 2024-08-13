@@ -62,10 +62,10 @@
 
                     <div class="col-md-12 text-center " style="">
                         <h1 style="" class="home_heading">About Us </h1>
-                        <p class="home_p" style="max-width: 600px; margin: 0 auto; color:#ffc107;">
+                        <!-- <p class="home_p" style="max-width: 600px; margin: 0 auto; color:#ffc107;">
                             Your premier pre-booking platform for reliable taxi services in Bristol, UK. Enjoy seamless
                             travel from airport transfers to city tours. Book now for stress-free journeys!
-                        </p>
+                        </p> -->
                     </div>
                 </div>
             </div>

@@ -1,8 +1,8 @@
 @extends('layouts.frontend.app')
 
 <style>
-  
-  
+
+
     h1, h2 {
         color: #f5b754 !important;
     }
@@ -30,8 +30,8 @@
 
 <div class="container">
     <h1 style="text-align: center;margin-bottom:90px;">Terms and Conditions</h1>
-    
-    <h2>Charges and Payment</h2>
+
+    <h2>Cancellation, Charges and Payment</h2>
     <ul>
         <li>1.Free Cancellation: You may cancel your booking free of charge up to 24 hours before your scheduled pick-up time. This allows you to make changes to your plans without incurring any fees if you notify us within this period.</li>
         <li>2. Cancellation Within 24 Hours: If you cancel your booking within 24 hours of the scheduled pick-up time, the full amount of the booking will be charged. This policy ensures compensation for the driver’s time and resources, as cancellations close to the service time prevent us from reallocating the vehicle.</li>
@@ -41,10 +41,10 @@
         <li>6. Modification of Booking: If you need to modify your booking, please contact us as soon as possible. Changes made within 24 hours of the scheduled pick-up time may incur additional charges due to the proximity of the service date.</li>
         <li>7. Exceptional Circumstances: We recognize that unforeseen emergencies or severe weather conditions may arise. We reserve the right to consider exceptions to this policy on a case-by-case basis in such exceptional circumstances.</li>
         <li>8.Contact Information: To cancel or modify your booking, please contact us directly using the contact details provided on our website. We are here to assist you with any changes or cancellations you need to make.</li>
-       
+
     </ul>
 
-    <h2>Cancellation Policy</h2>
+    <!-- <h2>Cancellation Policy</h2>
     <p><strong>Airport Transfers</strong></p>
     <ul>
         <li>If you cancel 24 hours or more before the scheduled pick-up, there will be no charge.</li>
@@ -56,11 +56,11 @@
         <li>If you cancel 24 hours or more before the scheduled pick-up, there will be no charge.</li>
         <li>If you cancel between 24 and 12 hours before the scheduled pick-up, a maximum of 2 hours' hire will be charged.</li>
         <li>If you cancel less than 12 hours before the scheduled pick-up, the full charge up to a maximum of 8 hours will apply.</li>
-    </ul>
+    </ul> -->
 
     <h2>Privacy Policy</h2>
     <h3>Section 1 – Information Collection</h3>
-    <p>When you request our services, we collect personal information such as your name, address, email address, and phone number. We also collect your computer’s IP address when you browse our website to understand your browser and operating system.</p>
+    <p>When you request our services, we collect personal information such as your name, address, email address, and phone number.</p>
     <p>Email marketing (if applicable): With your permission, we may send you emails about our services and updates. You can opt-out at any time by letting us know.</p>
 
     <h3>Section 2 – Consent</h3>
@@ -94,7 +94,7 @@
 
     <h2>Questions and Contacting Us</h2>
     <p>If you want to access, correct, amend, or delete personal information we have about you, or if you have any questions, please contact us via our contact page.</p>
-    <p>For further information regarding our terms and conditions, please call 07533225970.</p>
+    <p>For further information regarding our terms and conditions, please call 01173322782.</p>
 </div>
 
 @endsection

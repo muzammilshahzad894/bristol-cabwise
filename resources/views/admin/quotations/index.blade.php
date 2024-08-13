@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
- 
+
 
     <div class="row">
         @include('partials.messages')
@@ -15,10 +15,10 @@
                             <th>Email</th>
                             <th>Phone </th>
                             <th>Pickup </th>
-                            <th>Postal Code </th>
+                            <th>Postcode </th>
                             <th>Pickup City/town</th>
                             <th>DropOff </th>
-                            <th>Postal Code </th>
+                            <th>Postcode </th>
                             <th>DropOff City/town</th>
                             <th>Date & time</th>
                             <th>Fleet</th>
@@ -39,7 +39,7 @@
                                     <td> <div class="max-content-display">{{ $quote->dropoff_postal_code }}</div></td>
                                     <td> <div class="max-content-display">{{ $quote->dropoff_city }}</div></td>
                                     <td>{{ $quote->date_time }}</td>
-                                  
+
                                     <td>
                                         {{ $quote->fleet->name }}
                                     </td>

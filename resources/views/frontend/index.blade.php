@@ -252,7 +252,7 @@
                             Your premier pre-booking platform for reliable taxi services in Bristol, UK. Enjoy seamless travel from airport transfers to city tours. Book now for stress-free journeys!
                         </p>
                         <a href="{{ route('frontend.getquote') }}" class="button-1 mt-15 mb-15 mr-15">Get A Quote</a>
-                        
+
 
                         <a href="{{ route('frontend.book-online') }}" class="button-2 mt-15 mb-15">Book Online</a>
                     </div>
@@ -645,7 +645,7 @@
             <div class="col-md-12 text-center">
                 <h6>Book Your Ride</h6>
                 <h5>Interested in booking?</h5>
-                <p>Don’t hesitate to call or send us a message instead.</p> <a href="tel:+8001234567" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a href="contact.html" class="button-2 mt-15 mb-15">Contact Us <span class="ti-arrow-top-right"></span></a>
+                <p>Don’t hesitate to call or send us a message instead.</p> <a href="https://wa.me/01173322782" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a href="{{ route('frontend.contact') }}" class="button-2 mt-15 mb-15">Contact Us <span class="ti-arrow-top-right"></span></a>
             </div>
         </div>
     </div>
