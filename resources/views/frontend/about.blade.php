@@ -388,7 +388,7 @@
                 </div>
                 <div class="col-md-6 order_2">
                     <div class="item">
-                        <img src="{{ asset('frontend-assets/img/about/low_rate.jpg') }}" alt="about"
+                        <img src="{{ asset('frontend-assets/img/about/competitive-rates1.jpg') }}" alt="about"
                             style="max-height:  300px !important;" class="img-fluid offer_img">
                     </div>
                 </div>
