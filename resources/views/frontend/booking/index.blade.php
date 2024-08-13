@@ -189,6 +189,7 @@
                                     placeholder="Enter drop location" class="form-control pickupLocation" /> --}}
 
                                 </div>
+                                
                                 @php
                                     $datetime = isset($booking_detail->booking_date, $booking_detail->booking_time)
                                         ? $booking_detail->booking_date . 'T' . $booking_detail->booking_time
@@ -199,7 +200,8 @@
                                     <label for="date">Date & Time:</label>
                                     <input type="datetime-local"
                                         class="input location date-time styled-input timepicker border-radius-0 mb-0"
-                                        placeholder="Return Date" id="date-time"
+                                        placeholder="Return Date"
+                                         id="date-time"
                                         value="{{ isset($booking_detail) ? (isset($booking_detail->booking_date) && isset($booking_detail->booking_time) ? $booking_detail->booking_date . 'T' . $booking_detail->booking_time : '') : '' }}" />
                                     <div id="date-time-error" class="error-message text-danger"></div>
                                 </div>
@@ -617,7 +619,7 @@
                         <div class="icon_text">
                             <i class="fa-solid fa-exclamation"></i>
                             <p>
-                                The Vichle images above are examples.You may get a different vehicle of the similar quality.
+                                The Vehicle images above are examples.You may get a different vehicle of the similar quality.
                             </p>
                         </div>
 

@@ -242,7 +242,7 @@
                         <div class="icon_text">
                             <i class="fa-solid fa-exclamation"></i>
                             <p>
-                                The Vichle images above are examples.You may get a different vehicle of the similar quality.
+                                The Vehicle images above are examples.You may get a different vehicle of the similar quality.
                             </p>
                         </div>
 

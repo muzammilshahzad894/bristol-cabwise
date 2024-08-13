@@ -21,12 +21,6 @@
                                 <div class="image-wrapper footer-contact-link-icon">
                                     <a  href="tel:01173322782">   <div class="icon-footer">  <i class="flaticon-phone-call"></i> </div></a>
                                 </div>
-
-
-
-                                <h5><a href="tel:01173322782">01173322782</a></h5>
-
-
                                 <div class="footer-contact-link-content">
                                     <h6>Call us</h6>
                                     <p><a href="tel:01173322782" target="_blank"> 01173322782 </a></p>

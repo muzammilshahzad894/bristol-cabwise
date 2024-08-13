@@ -35,6 +35,8 @@
     let lessTimeError = false;
     let via_locations = '';
     let is_return = 0;
+    let message = '';
+    let isMessage = false;
 
     function showReturn() {
         var returnCheckbox = document.getElementById('return');
@@ -1077,43 +1079,45 @@
             });
 
             function handleInput() {
-                
-        var dateInput = document.getElementById('date-time').value;
-        var returnDateInput = document.getElementById('return_date_time').value;
-        
-        console.log('valeu is',returnDateInput,dateInput);
+
+                var dateInput = document.getElementById('date-time');
+                var returnDateInput = document.getElementById('return_date_time').value;
+
                 // if (returnDateInput != '' || dateInput != '') {
-                    var selectedDate = new Date(this.value);
-                    selectedDate.setSeconds(0);
-                    selectedDate.setMilliseconds(0);
-                    var isBlocked = blockDates.some(function(blockDate) {
-                        var blockDateObj = new Date(blockDate);
-                        blockDateObj.setHours(0, 0, 0, 0);
-                        return selectedDate.toDateString() === blockDateObj.toDateString();
-                    });
+                var selectedDate = new Date(this.value);
+                selectedDate.setSeconds(0);
+                selectedDate.setMilliseconds(0);
+                var isBlocked = blockDates.some(function(blockDate) {
+                    var blockDateObj = new Date(blockDate);
+                    blockDateObj.setHours(0, 0, 0, 0);
+                    return selectedDate.toDateString() === blockDateObj.toDateString();
+                });
 
-                    if (login_user === "user") {
-                        var minBookingTime = new Date(currentDateTime.getTime() + (bookingHours * 60 * 60 * 1000));
-                        if (selectedDate < minBookingTime) {
-                            $('#exampleModal').modal('show');
-                            document.getElementById('message').textContent =
-                                "Booking must be made at least " + bookingHours +
-                                " hours in advance. Please select another date or time.";
-                            this.value = '';
-                            return;
-                        }
-                    }
+                if (login_user === "user") {
+                    var minBookingTime = new Date(currentDateTime.getTime() + (bookingHours * 60 * 60 * 1000));
+                    if (selectedDate < minBookingTime) {
+                        // $('#exampleModal').modal('show');
+                        // document.getElementById('message').textContent =
+                        //     "Booking must be made at least " + bookingHours +
+                        //     " hours in advance. Please select another date or time.";
+                        dateInput.placeholder = "Please select a time at least " + bookingHours + " hours in advance";
 
-                    var now = new Date();
-                    now.setSeconds(0);
-                    now.setMilliseconds(0);
-
-                    if (selectedDate < now || isBlocked) {
-                        $('#exampleModal').modal('show');
-                        document.getElementById('message').textContent =
-                            "Booking is not available at this time. Please contact support.";
                         this.value = '';
+                        return;
                     }
+                }
+
+                var now = new Date();
+                now.setSeconds(0);
+                now.setMilliseconds(0);
+
+                if (selectedDate < now || isBlocked) {
+                    
+                    // $('#exampleModal').modal('show');
+                    // document.getElementById('message').textContent =
+                    //     "Booking is not available at this time. Please contact support.";
+                    this.value = '';
+                }
                 // }
             }
         }
@@ -1129,8 +1133,7 @@
             validateDateTime(returnDateInput);
         }
     }
-
-    window.onload = setMinDateTime;
+    setMinDateTime();
 
 
 
