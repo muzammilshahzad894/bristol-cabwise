@@ -29,10 +29,10 @@
                                     <td>
                                         <img src="{{ asset('uploads/fleets/'.$fleet->image) }}" alt="{{ $fleet->image }}" class="img-fluid" width="70">
                                     </td>
-                                    <td>$ {{ $fleet->price }}</td>
+                                    <td>£{{ $fleet->price }}</td>
                                     <td>
                                         <a href="{{ route('admin.fleets.edit', $fleet->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                        <a href="{{ route('admin.fleets.delete', $fleet->id) }}" 
+                                        <a href="{{ route('admin.fleets.delete', $fleet->id) }}"
                                         class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete, all related cars will be deleted?')"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
