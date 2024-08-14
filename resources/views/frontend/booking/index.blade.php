@@ -463,7 +463,7 @@
                                     <p id="summary-hand-luggage">0</p>
                                 </div>
                                 <div class="d-flex gap-4">
-                                    <strong>Summary:</strong>
+                                    <strong>Comments:</strong>
                                     <p id="summary-summary">You need any help!.</p>
                                 </div>
                                 <h3 class="color color_theme">Other Details:</h3>
@@ -499,11 +499,7 @@
                                         <p id="summary-meet-greet"></p>
                                     </div>
                                 </div>
-                                <div  id="summary-service_texas" >
-                                    <div class="d-flex gap-4">
-
-                                    </div>
-                                
+                                <div  id="summary-service_texas" style="display: unset;">
                                 </div>
                                 <div class="d-none gap-4 " id="summary-meet-greet_price_div" style="display: none">
                                     <strong>Extra Lauggage:</strong>

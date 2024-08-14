@@ -227,6 +227,8 @@
             }
         });
 
+        let formattedDateTime = dates_times.replace('T', ',time:');
+
         const elements = {
             'summary-service-type': service_type,
             'summary-fleet-type': Fleet_name,
@@ -234,7 +236,7 @@
             'summary-drop-location': dropoff_location,
             // 'summary-via-location': via_locations,
 
-            'summary-date': dates_times,
+            'summary-date': formattedDateTime,
             'summary-name': user_name,
             'summary-telephone': user_phone_number,
             'summary-email': user_email,
@@ -296,6 +298,8 @@
             console.log(response);
             // Handle the response and update the div
             var texasServiceDiv = document.getElementById('summary-service_texas');
+            texasServiceDiv.style.display = '';
+
             
             // Clear previous content
             texasServiceDiv.innerHTML = '';
