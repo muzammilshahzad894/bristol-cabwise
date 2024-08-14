@@ -12,6 +12,11 @@
         padding: 0;
         margin: 0;
     }
+    .minimum_hours{
+        font-size: 12px;
+        color: orange;
+
+    }
 
     .about_car {
         font-size: 12px;
@@ -199,10 +204,11 @@
                                 <div>
                                     <label for="date">Date & Time:</label>
                                     <input type="datetime-local"
-                                        class="input location date-time styled-input timepicker border-radius-0 mb-0"
+                                        class="styled-input timepicker border-radius-0 mb-0"
                                         placeholder="Return Date"
                                          id="date-time"
                                         value="{{ isset($booking_detail) ? (isset($booking_detail->booking_date) && isset($booking_detail->booking_time) ? $booking_detail->booking_date . 'T' . $booking_detail->booking_time : '') : '' }}" />
+                                        <p class="minimum_hours"></p>
                                     <div id="date-time-error" class="error-message text-danger"></div>
                                 </div>
                                 <div class=" meet_greet d-flex" style="gap:10px;align-items:center"
@@ -216,9 +222,10 @@
                                     <div id="return_date">
                                         <label for="return_date">Return Date & Time:</label>
                                         <input type="datetime-local" name="return_date_time"
-                                            class="input  styled-input timepicker border-radius-0 mb-0"
+                                            class="styled-input timepicker border-radius-0 mb-0"
                                             placeholder="Return Date" id="return_date_time"
                                             value="{{ isset($booking_detail) ? (isset($booking_detail->return_date) && isset($booking_detail->return_time) ? $booking_detail->return_date . 'T' . $booking_detail->return_time : '') : '' }}" />
+                                            <p class="minimum_hours"></p>
                                         <div id="return_date_time-error" class="error-message text-danger"></div>
                                     </div>
                                     <label for="return_pickupLocation">Return Pickup Location:</label>

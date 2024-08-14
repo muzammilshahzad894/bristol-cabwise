@@ -1048,6 +1048,7 @@
         }
     }
     var bookingHours = @json($bookingHours); // Assuming $bookingHours is a number
+    console.log(bookingHours);
 
 
     function pad(n) {
@@ -1064,9 +1065,18 @@
         var day = pad(now.getDate());
         var hours = pad(now.getHours());
         var minutes = pad(now.getMinutes());
+        if(bookingHours){
+            bookingHours = bookingHours;
+        }else{
+            bookingHours = 0;
+        }
 
         var currentDateTime = new Date(year, now.getMonth(), day, hours, minutes);
         var minDateTime = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+        document.querySelectorAll('.minimum_hours').forEach(function(element) {
+        element.textContent = "Please select a time at least " + bookingHours + " hours in advance";
+    });        // dateInput.placeholder = "Please select a time at least " + bookingHours + " hours in advance";
+
 
         function validateDateTime(dateInput) {
             dateInput.setAttribute('min', minDateTime);
