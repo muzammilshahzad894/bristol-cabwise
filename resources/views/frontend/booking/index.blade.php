@@ -98,7 +98,7 @@
                             <div class="text-white"><a href="#">book online</a></div> --}}
                         </div>
                         <h1 style="color: orange">Book Your Ride</h1>
-                        <p class="description" style="color: white;">Reserve your cab here. We provide a reliable 24-hour cab service in Bristol and across the UK, featuring professional drivers and transparent pricing. Experience hassle-free booking and exceptional service</p>
+                        <p class="description" style="color: white;">Reserve your cab here. We provide a reliable 24-hour cab service in Bristol and across the UK, featuring professional drivers and transparent pricing. Experience hassle-free booking and exceptional service.</p>
                     </div>
                 </div>
             </div>
@@ -109,8 +109,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                 
-                 
+
+
                 </div>
             </div>
         </div>
@@ -194,7 +194,7 @@
                                     placeholder="Enter drop location" class="form-control pickupLocation" /> --}}
 
                                 </div>
-                                
+
                                 @php
                                     $datetime = isset($booking_detail->booking_date, $booking_detail->booking_time)
                                         ? $booking_detail->booking_date . 'T' . $booking_detail->booking_time
@@ -217,7 +217,7 @@
                                         class="mb-0" @if (isset($booking_detail) && $booking_detail->is_return == 1) checked @endif>
                                         <label for="return">Return Journey</label>
                                 </div>
-                               
+
                                 <div id="return_location" style="display: none;margin-top:24px;">
                                     <div id="return_date">
                                         <label for="return_date">Return Date & Time:</label>
@@ -626,7 +626,7 @@
                         <div class="icon_text">
                             <i class="fa-solid fa-exclamation"></i>
                             <p>
-                                The Vehicle images above are examples.You may get a different vehicle of the similar quality.
+                                The vehicle images above are examples.You may get a different vehicle of the similar quality.
                             </p>
                         </div>
 
@@ -752,7 +752,7 @@
                             console.error('Error:', error);
                         });
                 }
-            
+
         }
 
         // if (payment_id) {
@@ -996,7 +996,7 @@
         let directionsService;
         let directionsRenderer;
         let infoWindow;
-    
+
         $(document).ready(function() {
             // Initialize Google Maps centered on Bristol, UK
             const bristolLocation = { lat: 51.4545, lng: -2.5879 };
@@ -1004,13 +1004,13 @@
                 center: bristolLocation,
                 zoom: 13
             });
-    
+
             directionsService = new google.maps.DirectionsService();
             directionsRenderer = new google.maps.DirectionsRenderer();
             directionsRenderer.setMap(map);
-    
+
             infoWindow = new google.maps.InfoWindow();
-    
+
             const pickupInput = document.getElementById('pickupLocation');
             originAutocomplete = new google.maps.places.Autocomplete(pickupInput, {
                 bounds: new google.maps.LatLngBounds(
@@ -1021,14 +1021,14 @@
                 types: ['geocode']
             });
             originAutocomplete.addListener('place_changed', handleOriginPlaceChange);
-    
+
             geocoder = new google.maps.Geocoder();
             distanceService = new google.maps.DistanceMatrixService();
-    
+
             // Initialize the first drop location autocomplete
             handleDestinationPlaceChange(0);
         });
-    
+
         function handleOriginPlaceChange() {
             originPlace = originAutocomplete.getPlace();
             if (!originPlace || !originPlace.geometry || !isPlaceInUK(originPlace)) {
@@ -1039,10 +1039,10 @@
             addMarker(originPlace.geometry.location, originPlace.formatted_address);
             checkAndCalculateDistances();
         }
-    
+
         function handleDestinationPlaceChange(index) {
             const input = document.querySelectorAll('#dropLocations input')[index];
-         
+
             const autocomplete = new google.maps.places.Autocomplete(input, {
                 bounds: new google.maps.LatLngBounds(
                     new google.maps.LatLng(49.959999, -7.572168), // South West Corner of the UK
@@ -1051,7 +1051,7 @@
                 componentRestrictions: { country: 'uk' },
                 types: ['geocode']
             });
-    
+
             autocomplete.addListener('place_changed', () => {
                 const place = autocomplete.getPlace();
                 if (!place || !place.geometry || !isPlaceInUK(place)) {
@@ -1064,49 +1064,49 @@
                 checkAndCalculateDistances();
             });
         }
-    
+
         function addMore() {
             const dropLocationsDiv = document.getElementById('dropLocations');
             const newDropLocationDiv = document.createElement('div');
             const newIndex = destinationPlaces.length;
-    
+
             newDropLocationDiv.className = 'drop-location mb-2';
             newDropLocationDiv.innerHTML = `
                 <input type="text" id="dropLocation${newIndex}" name="dropLocation[]" placeholder="Enter drop location" class="form-control border-radius-0 mb-0">
                 <div id="drop-error" class="error-message text-danger"></div>
             `;
-    
+
             dropLocationsDiv.appendChild(newDropLocationDiv);
             handleDestinationPlaceChange(newIndex);
         }
-    
+
         function checkAndCalculateDistances() {
             if (!originPlace || destinationPlaces.length === 0) {
                 return;
             }
-    
+
             const allPlaces = [originPlace, ...destinationPlaces].filter(place => place);
             if (allPlaces.length < 2) {
                 return;
             }
-    
+
             totalDistance = 0;
             distances = [];
             clearMarkers();
             for (let i = 0; i < allPlaces.length - 1; i++) {
                 const originLatLng = allPlaces[i].geometry.location;
                 const destinationLatLng = allPlaces[i + 1].geometry.location;
-    
+
                 addMarker(originLatLng, allPlaces[i].formatted_address);
                 addMarker(destinationLatLng, allPlaces[i + 1].formatted_address);
-    
+
                 calculateDistance(originLatLng, destinationLatLng, i);
             }
-    
+
             drawRoute(allPlaces);
             adjustMapViewport(allPlaces); // Adjust the map to fit all markers
         }
-    
+
         function calculateDistance(origin, destination, index) {
             distanceService.getDistanceMatrix({
                 origins: [origin],
@@ -1123,13 +1123,13 @@
                 }
             });
         }
-    
+
         function updateTotalDistance() {
             totalDistance = distances.reduce((acc, distance) => acc + distance, 0);
             const totalDistanceInMiles = totalDistance.toFixed(2);
             console.log(`Total Distance: ${totalDistanceInMiles} miles`);
         }
-    
+
         function isPlaceInUK(place) {
             const ukBounds = new google.maps.LatLngBounds(
                 new google.maps.LatLng(49.959999, -7.572168), // South West Corner of the UK
@@ -1137,7 +1137,7 @@
             );
             return ukBounds.contains(place.geometry.location);
         }
-    
+
         function addMarker(location, title) {
             const marker = new google.maps.Marker({
                 position: location,
@@ -1150,18 +1150,18 @@
             });
             markers.push(marker);
         }
-    
+
         function clearMarkers() {
             markers.forEach(marker => marker.setMap(null));
             markers = [];
         }
-    
+
         function adjustMapViewport(places) {
             const bounds = new google.maps.LatLngBounds();
             places.forEach(place => bounds.extend(place.geometry.location));
             map.fitBounds(bounds);
         }
-    
+
         function drawRoute(places) {
             const waypoints = places.slice(1, -1).map(place => ({ location: place.geometry.location, stopover: true }));
             directionsService.route({

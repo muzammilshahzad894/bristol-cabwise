@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-     
+
 
         <div class="container">
             @if(session('success'))
@@ -64,13 +64,13 @@
                 {{ session('success') }}
             </div>
         @endif
-        
+
         @if(session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
         @endif
-        
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -135,8 +135,8 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="pickup_postal_code">Pickup Postal Code</label>
-                            <input name="pickup_postal_code" type="text" value="{{ old('pickup_postal_code') }}" class="form-control" placeholder="Pickup Postal Code">
+                            <label class="custom_lable" for="pickup_postal_code">Pickup Postcode</label>
+                            <input name="pickup_postal_code" type="text" value="{{ old('pickup_postal_code') }}" class="form-control" placeholder="Pickup Postcode">
                             @if ($errors->has('pickup_postal_code'))
                                 <span class="text-danger">{{ $errors->first('pickup_postal_code') }}</span>
                             @endif
@@ -157,8 +157,8 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="dropoff_postal_code">Dropoff Postal Code</label>
-                            <input name="dropoff_postal_code" type="text" value="{{ old('dropoff_postal_code') }}" class="form-control" placeholder="Dropoff Postal Code">
+                            <label class="custom_lable" for="dropoff_postal_code">Dropoff Postcode</label>
+                            <input name="dropoff_postal_code" type="text" value="{{ old('dropoff_postal_code') }}" class="form-control" placeholder="Dropoff Postcode">
                             @if ($errors->has('dropoff_postal_code'))
                                 <span class="text-danger">{{ $errors->first('dropoff_postal_code') }}</span>
                             @endif
@@ -182,7 +182,7 @@
                         </div>
                         <div class="col-md-12">
                             <label class="custom_lable" for="comment">Comment</label>
-                            <textarea name="comment" class="form-control" placeholder="Feel free to tell us about your quotation">{{ old('comment') }}</textarea>
+                            <textarea name="comment" class="form-control" placeholder="Feel free to tell us about your inquiry">{{ old('comment') }}</textarea>
                             @if ($errors->has('comment'))
                                 <span class="text-danger">{{ $errors->first('comment') }}</span>
                             @endif
@@ -191,7 +191,7 @@
                             <button class="button-1 mt-15 mb-15 cutom_button" id="submit">Submit</button>
                         </div>
                     </form>
-                    
+
                 </div>
                 <div class="col-md-4" style="border-left: 1px solid #ccc">
 
@@ -236,13 +236,13 @@
                             <i class="fa-solid fa-exclamation"></i>
                             <p>
                                 Guest/laggage capacities must be abided by for safety reasons. if you are unsure select a
-                                large class as chauffeurs may turn down service when they are exceeded.
+                                large class as driver may turn down service when they are exceeded.
                             </p>
                         </div>
                         <div class="icon_text">
                             <i class="fa-solid fa-exclamation"></i>
                             <p>
-                                The Vehicle images above are examples.You may get a different vehicle of the similar quality.
+                                The vehicle images above are examples.You may get a different vehicle of the similar quality.
                             </p>
                         </div>
 

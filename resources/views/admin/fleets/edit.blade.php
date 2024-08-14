@@ -81,9 +81,8 @@
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Price / mile <span class="text-danger">*</span></label>
-                                        <input type="number" name="price" class="form-control" placeholder="Price"
-                                            value="{{ $fleet->price }}" required
-                                            onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                        <input type="text" name="price" class="form-control" placeholder="Price"
+                                        value="{{ $fleet->price }}" oninput="validateDecimal(this)">
                                         @error('price')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -91,9 +90,9 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Price after 10 miles <span
                                                 class="text-danger">*</span></label>
-                                        <input type="number" name="price_after_10_miles" class="form-control"
+                                        <input type="text" name="price_after_10_miles" class="form-control"
                                             placeholder="Price after 10 miles" value="{{ $fleet->price_after_10_miles }}"
-                                            required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                            oninput="validateDecimal(this)">
                                         @error('price_after_10_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -101,9 +100,9 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Price after 20 miles <span
                                                 class="text-danger">*</span></label>
-                                        <input type="number" name="price_after_20_miles" class="form-control"
+                                        <input type="text" name="price_after_20_miles" class="form-control"
                                             placeholder="Price after 20 miles" value="{{ $fleet->price_after_20_miles }}"
-                                            required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                            oninput="validateDecimal(this)">
                                         @error('price_after_20_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -111,9 +110,9 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Price after 30 miles <span
                                                 class="text-danger">*</span></label>
-                                        <input type="number" name="price_after_30_miles" class="form-control"
+                                        <input type="text" name="price_after_30_miles" class="form-control"
                                             placeholder="Price after 30 miles" value="{{ $fleet->price_after_30_miles }}"
-                                            required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                            oninput="validateDecimal(this)">
                                         @error('price_after_30_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -121,9 +120,9 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Price after 40 miles <span
                                                 class="text-danger">*</span></label>
-                                        <input type="number" name="price_after_40_miles" class="form-control"
+                                        <input type="text" name="price_after_40_miles" class="form-control"
                                             placeholder="Price after 40 miles" value="{{ $fleet->price_after_40_miles }}"
-                                            required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                            oninput="validateDecimal(this)">
                                         @error('price_after_40_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -131,9 +130,9 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Price after 50 miles <span
                                                 class="text-danger">*</span></label>
-                                        <input type="number" name="price_after_50_miles" class="form-control"
+                                        <input type="text" name="price_after_50_miles" class="form-control"
                                             placeholder="Price after 50 miles" value="{{ $fleet->price_after_50_miles }}"
-                                            required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                            oninput="validateDecimal(this)">
                                         @error('price_after_50_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -141,9 +140,9 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Price after 100 miles <span
                                                 class="text-danger">*</span></label>
-                                        <input type="number" name="price_after_100_miles" class="form-control"
+                                        <input type="text" name="price_after_100_miles" class="form-control"
                                             placeholder="Price after 100 miles" value="{{ $fleet->price_after_100_miles }}"
-                                            required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                            oninput="validateDecimal(this)">
                                         @error('price_after_100_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -151,9 +150,9 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Price after 120 miles <span
                                                 class="text-danger">*</span></label>
-                                        <input type="number" name="price_after_120_miles" class="form-control"
+                                        <input type="text" name="price_after_120_miles" class="form-control"
                                             placeholder="Price after 120 miles" value="{{ $fleet->price_after_120_miles }}"
-                                            required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                            oninput="validateDecimal(this)">
                                         @error('price_after_120_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -161,10 +160,9 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Price after 150 miles <span
                                                 class="text-danger">*</span></label>
-                                        <input type="number" name="price_after_150_miles" class="form-control"
-                                            placeholder="Price after 150 miles"
-                                            value="{{ $fleet->price_after_150_miles }}" required
-                                            onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                        <input type="text" name="price_after_150_miles" class="form-control"
+                                            placeholder="Price after 150 miles" value="{{ $fleet->price_after_150_miles }}"
+                                            oninput="validateDecimal(this)">
                                         @error('price_after_150_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -172,9 +170,9 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Minimum Booking Price <span
                                                 class="text-danger">*</span></label>
-                                        <input type="number" name="min_booking_price" class="form-control"
+                                        <input type="text" name="min_booking_price" class="form-control"
                                             placeholder="Minimum Booking Price" value="{{ $fleet->min_booking_price }}"
-                                            required onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                            oninput="validateDecimal(this)">
                                         @error('min_booking_price')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -205,7 +203,7 @@
                                                     <input type="text" name="taxes[{{ $index }}][price]"
                                                         class="form-control" placeholder="Tax Price"
                                                         value="{{ $tax->price }}"
-                                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                                        oninput="validateDecimal(this)">
                                                 </div>
                                                 <div class="col-md-2">
                                                     <button type="button" class="btn btn-danger mt-4"
@@ -238,7 +236,7 @@
                                     <!-- End Meet and Greet Section -->
                                     <hr>
                                     <!-- Features Section -->
-                                   
+
                                     <h4>Features</h4>
                                     <div class="mb-3">
                                         <input type="text" data-role="tagsinput" name="features" class="form-control"
@@ -274,7 +272,7 @@
             </div>
             <div class="mb-3 col-md-5">
                 <label class="form-label">Tax Price</label>
-                <input type="text" name="taxes[${taxIndex}][price]" class="form-control" placeholder="Tax Price" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <input type="text" name="taxes[${taxIndex}][price]" class="form-control" placeholder="Tax Price" oninput="validateDecimal(this)">
             </div>
             <div class="col-md-2">
                 <button type="button" class="btn btn-danger mt-4" onclick="removeTaxRow(this)">Remove</button>
@@ -293,5 +291,19 @@
             const meetGreetPriceSec = document.getElementById('meet_greet_price_sec');
             meetGreetPriceSec.style.display = this.checked ? '' : 'none';
         });
+
+        function validateDecimal(input) {
+            // Remove any non-numeric characters except for a dot
+            let value = input.value.replace(/[^0-9.]/g, '');
+
+            // Ensure only one dot is allowed
+            const dotIndex = value.indexOf('.');
+            if (dotIndex !== -1) {
+                value = value.slice(0, dotIndex + 1) + value.slice(dotIndex + 1).replace(/\./g, '');
+            }
+
+            // Update the input field value
+            input.value = value;
+        }
     </script>
 @endsection
