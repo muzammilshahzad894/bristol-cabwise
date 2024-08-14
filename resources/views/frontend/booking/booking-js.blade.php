@@ -315,9 +315,6 @@
                 </div>
                 `;
             });
-            
-            // Make sure the div is visible
-            texasServiceDiv.style.display = 'flex'; // or 'block' depending on your layout
         },
         error: function(error) {
             console.error('Error fetching service tax:', error);
