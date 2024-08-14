@@ -91,6 +91,8 @@ class ServicesController extends Controller
             $service->detail_page_description = $request->detail_page_description;
             $service->detail_page_features = $request->detail_page_features;
             $service->save();
+            
+            FleetTax::where('service_id', $id)->delete();
             $this->storeTaxes($request, $service);
             return redirect()->route('admin.services.index')->with('success', 'Service updated successfully');
         } catch (Exception $e) {
