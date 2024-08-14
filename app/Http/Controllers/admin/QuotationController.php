@@ -20,7 +20,7 @@ class QuotationController extends Controller
             $quotations = Quotation::with('fleet')
             ->orderBy('created_at', 'desc') // or any other column to sort by
             ->paginate(10);
-            // dd($quotations);
+            // dd($quotations)
             return view('admin.quotations.index', compact('quotations'));
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());

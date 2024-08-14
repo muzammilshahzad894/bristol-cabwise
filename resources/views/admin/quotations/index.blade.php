@@ -1,5 +1,6 @@
 @extends('layouts.admin.app')
 
+
 @section('content')
 <div class="container-fluid">
 
@@ -34,8 +35,8 @@
                                     <td>{{ $quote->phone }}</td>
                                     <td> <div class="max-content-display">{{ $quote->pickup }}</div></td>
                                     <td> <div class="max-content-display">{{ $quote->pickup_postal_code }}</div></td>
-                                    <td></td> <div class="max-content-display">{{ $quote->pickup_city }}</div></td>
-                                    <td> <div class="max-content-display">{{ $quote->dropoff }}</div></td>
+                                    <td> <div class="max-content-display">{{ $quote->pickup_city }}</div></td>
+                                    <td> <div class="max-content-display">{{$quote->dropoff}}</div></td>
                                     <td> <div class="max-content-display">{{ $quote->dropoff_postal_code }}</div></td>
                                     <td> <div class="max-content-display">{{ $quote->dropoff_city }}</div></td>
                                     <td>{{ $quote->date_time }}</td>
