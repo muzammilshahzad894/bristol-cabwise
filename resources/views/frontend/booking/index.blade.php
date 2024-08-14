@@ -181,11 +181,11 @@
                                     <button class="plus_icon mt-1" type="button" id="addLocation" onclick="addMore();">Add
                                         Via Location</button>
                                     <div id="via_locatoins_input"></div>
-                                    <label for="dropLocation">Drop Location:</label>
+                                    <label for="dropLocation">Dropoff Location:</label>
                                     <div id="dropLocations">
                                         <div class="drop-location mb-2">
                                             <input type="text" id="dropLocation0" name="dropLocation[]"
-                                                placeholder="Enter drop location"
+                                                placeholder="Enter dropoff location"
                                                 class="form-control border-radius-0 mb-0 dropoffLocations">
                                             <div id="drop-error" class="error-message text-danger"></div>
                                         </div>
@@ -232,7 +232,7 @@
                                     <input type="text"  name="return_pickupLocation"
                                         placeholder="" id="return_pickupLocation"
                                         class="form-control  border-radius-0 mb-0" disabled>
-                                    <label for="return_dropLocation">Return Drop Location:</label>
+                                    <label for="return_dropLocation">Return Dropoff Location:</label>
                                     <div id="return_dropLocations">
                                         <div class=" mb-2">
                                             <input type="text" name="return_dropLocation" disabled
@@ -406,7 +406,7 @@
                                     <p id="summary-via-location">Manchester</p> --}}
                                 </div>
                                 <div class="d-flex gap-4">
-                                    <strong>Drop Location:</strong>
+                                    <strong>Dropoff Location:</strong>
                                     <p id="summary-drop-location">Manchester</p>
                                 </div>
                                 <div class="d-flex gap-4">
