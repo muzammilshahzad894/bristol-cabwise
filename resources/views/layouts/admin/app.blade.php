@@ -151,9 +151,6 @@
     <script src="{{ asset('admin-assets/js/custom.min.js') }}"></script>
     <script src="{{ asset('admin-assets/js/dlabnav-init.js') }}"></script>
 
-    <script src="{{ asset('admin-assets/vendor/global/global.min.js') }}"></script>
-	<script src="{{ asset('admin-assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-
     <script>
         function JobickCarousel() {
 
