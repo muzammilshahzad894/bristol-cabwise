@@ -34,7 +34,7 @@
     <h2>Cancellation, Charges and Payment</h2>
     <ul>
         <li>1.Free Cancellation: You may cancel your booking free of charge up to 24 hours before your scheduled pick-up time. This allows you to make changes to your plans without incurring any fees if you notify us within this period.</li>
-        <li>2. Cancellation Within 24 Hours: If you cancel your booking within 24 hours of the scheduled pick-up time, the full amount of the booking will be charged. This policy ensures compensation for the driver’s time and resources, as cancellations close to the service time prevent us from reallocating the vehicle.</li>
+        <li>2. Cancellation Within 24 Hours: If you cancel your booking within 24 hours of the scheduled pick-up time, cancellation fee equivalent to 50% of the total booking will be charged.. This policy ensures compensation for the driver’s time and resources, as cancellations close to the service time prevent us from reallocating the vehicle.</li>
         <li>3. Cancellation After Driver Dispatch: If the driver has already been dispatched when you cancel, the full amount of the booking will be charged. This policy covers the costs associated with sending a driver to the location.</li>
         <li>4.No-Show Policy: If you do not show up at the scheduled pick-up time and do not inform us of your cancellation, you will be charged the full amount of the booking. This policy addresses the situation where the service has been prepared but not utilized.</li>
         <li>5.Refunds: Refunds for cancellations made in accordance with this policy will be processed according to our refund policy, which is available upon request. We aim to handle all refund requests promptly and fairly.</li>
