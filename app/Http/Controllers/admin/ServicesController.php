@@ -61,7 +61,7 @@ class ServicesController extends Controller
     public function edit($id)
     {
         try {
-            
+
             $fleetTaxes = FleetTax::where('service_id', $id)->get();
             $service = Service::find($id);
             return view('admin.services.edit', compact('service', 'fleetTaxes'));
@@ -91,6 +91,8 @@ class ServicesController extends Controller
             $service->detail_page_description = $request->detail_page_description;
             $service->detail_page_features = $request->detail_page_features;
             $service->save();
+
+            FleetTax::where('service_id', $service->id)->delete();
             $this->storeTaxes($request, $service);
             return redirect()->route('admin.services.index')->with('success', 'Service updated successfully');
         } catch (Exception $e) {
@@ -103,6 +105,7 @@ class ServicesController extends Controller
     {
         try {
             $service = Service::find($id);
+            FleetTax::where('service_id', $service->id)->delete();
             $service->delete();
             return redirect()->route('admin.services.index')->with('success', 'Service deleted successfully');
         } catch (Exception $e) {
@@ -110,12 +113,12 @@ class ServicesController extends Controller
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
-    
+
     private function storeTaxes($request, $service)
     {
         if ($request->has('taxes')) {
             foreach ($request->taxes as $tax) {
-                
+
                 if (!empty($tax['name']) && !empty($tax['price'])) {
                     $fleetTax = new FleetTax();
                     $fleetTax->service_id = $service->id;
