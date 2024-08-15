@@ -255,4 +255,10 @@ class BookingController extends Controller
         $fleetTax = FleetTax::where('fleet_id', $id)->get();
         return response()->json([ 'fleetTax' => $fleetTax]);
     }
+    public function getSelectServiceTax($id) {
+        $serviceTaxes = FleetTax::where('service_id', $id)->get();
+    
+        return response()->json($serviceTaxes);
+    }
+    
 }

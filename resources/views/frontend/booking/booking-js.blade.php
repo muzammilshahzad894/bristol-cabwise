@@ -206,6 +206,7 @@
 
     function updateSummary() {
         updateVia();
+        updateTexas();
         updateReturnSummary();
         const ids = [
             'summary-service-type', 'summary-pickup-location', 'summary-drop-location', 'summary-fleet-type',
@@ -226,6 +227,8 @@
             }
         });
 
+        let formattedDateTime = dates_times.replace('T', ',time:');
+
         const elements = {
             'summary-service-type': service_type,
             'summary-fleet-type': Fleet_name,
@@ -233,7 +236,7 @@
             'summary-drop-location': dropoff_location,
             // 'summary-via-location': via_locations,
 
-            'summary-date': dates_times,
+            'summary-date': formattedDateTime,
             'summary-name': user_name,
             'summary-telephone': user_phone_number,
             'summary-email': user_email,
@@ -285,6 +288,39 @@
             element.style.display = condition ? 'flex' : 'none';
         }
     }
+    function updateTexas() {
+        serviceId= service_id;
+    // Make the AJAX call
+    $.ajax({
+        url: `/get-select-service-tax/${serviceId}`, 
+        type: 'GET',
+        success: function(response) {
+            console.log(response);
+            // Handle the response and update the div
+            var texasServiceDiv = document.getElementById('summary-service_texas');
+            texasServiceDiv.style.display = '';
+
+            
+            // Clear previous content
+            texasServiceDiv.innerHTML = '';
+            
+            // Loop through the response and append to the div
+            response.forEach(function(serviceTax) {
+                texasServiceDiv.innerHTML += `
+                 <div class="d-flex gap-4">
+                    <strong>${serviceTax.name}:</strong>
+                    <div>
+                        <p>${serviceTax.price}</p>
+                    </div>
+                </div>
+                `;
+            });
+        },
+        error: function(error) {
+            console.error('Error fetching service tax:', error);
+        }
+    });
+}
 
     function updateVia() {
         var viaLocationContainer = document.getElementById('via_locations');
@@ -1065,17 +1101,20 @@
         var day = pad(now.getDate());
         var hours = pad(now.getHours());
         var minutes = pad(now.getMinutes());
-        if(bookingHours){
-            bookingHours = bookingHours;
-        }else{
-            bookingHours = 0;
-        }
+        // if(bookingHours){
+        //     bookingHours = bookingHours;
+        // }else{
+        //     bookingHours = 0;
+        // }
 
         var currentDateTime = new Date(year, now.getMonth(), day, hours, minutes);
         var minDateTime = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
-        document.querySelectorAll('.minimum_hours').forEach(function(element) {
-        element.textContent = "Please select a time at least " + bookingHours + " hours in advance";
-    });        // dateInput.placeholder = "Please select a time at least " + bookingHours + " hours in advance";
+        if(bookingHours){
+            document.querySelectorAll('.minimum_hours').forEach(function(element) {
+            element.textContent = "Please select a time at least " + bookingHours + " hours in advance";
+        });     
+        }
+               // dateInput.placeholder = "Please select a time at least " + bookingHours + " hours in advance";
 
 
         function validateDateTime(dateInput) {

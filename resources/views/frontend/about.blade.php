@@ -290,6 +290,7 @@
                             <!-- Normal order -->
                             <div class="col-lg-6 col-md-12 mb-30 mt-2">
                                 <div class="content">
+                                    <div class="section-subtitle">{{$service->detail_page_tag}}</div>
                                     <div class="section-title">{{ $service->detail_page_first_heading }}
                                         <span>{{ $service->detail_page_second_heading }}</span>
                                     </div>
@@ -322,6 +323,8 @@
                             </div>
                             <div class="col-lg-6 offset-lg-1 col-md-12 mt-2">
                                 <div class="content">
+                                    
+                                    <div class="section-subtitle">{{$service->detail_page_tag}}</div>
                                     <div class="section-title">{{ $service->detail_page_first_heading }}
                                         <span>{{ $service->detail_page_second_heading }}</span>
                                     </div>
