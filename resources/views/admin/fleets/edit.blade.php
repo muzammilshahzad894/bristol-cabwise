@@ -82,8 +82,18 @@
                                     <div class="mb-3 col-md-6">
                                         <label class="form-label">Price / mile <span class="text-danger">*</span></label>
                                         <input type="text" name="price" class="form-control" placeholder="Price"
-                                        value="{{ $fleet->price }}" oninput="validateDecimal(this)">
+                                        value="{{ $fleet->price }}" oninput="validateDecimal(this)" required>
                                         @error('price')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Minimum Booking Price <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="min_booking_price" class="form-control"
+                                            placeholder="Minimum Booking Price" value="{{ $fleet->min_booking_price }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('min_booking_price')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -92,7 +102,7 @@
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="price_after_10_miles" class="form-control"
                                             placeholder="Price after 10 miles" value="{{ $fleet->price_after_10_miles }}"
-                                            oninput="validateDecimal(this)">
+                                            oninput="validateDecimal(this)" required>
                                         @error('price_after_10_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -102,7 +112,7 @@
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="price_after_20_miles" class="form-control"
                                             placeholder="Price after 20 miles" value="{{ $fleet->price_after_20_miles }}"
-                                            oninput="validateDecimal(this)">
+                                            oninput="validateDecimal(this)" required>
                                         @error('price_after_20_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -112,7 +122,7 @@
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="price_after_30_miles" class="form-control"
                                             placeholder="Price after 30 miles" value="{{ $fleet->price_after_30_miles }}"
-                                            oninput="validateDecimal(this)">
+                                            oninput="validateDecimal(this)" required>
                                         @error('price_after_30_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -122,7 +132,7 @@
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="price_after_40_miles" class="form-control"
                                             placeholder="Price after 40 miles" value="{{ $fleet->price_after_40_miles }}"
-                                            oninput="validateDecimal(this)">
+                                            oninput="validateDecimal(this)" required>
                                         @error('price_after_40_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -132,8 +142,48 @@
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="price_after_50_miles" class="form-control"
                                             placeholder="Price after 50 miles" value="{{ $fleet->price_after_50_miles }}"
-                                            oninput="validateDecimal(this)">
+                                            oninput="validateDecimal(this)" required>
                                         @error('price_after_50_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 60 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="price_after_60_miles" class="form-control"
+                                            placeholder="Price after 60 miles" value="{{ $fleet->price_after_60_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('price_after_60_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 70 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="price_after_70_miles" class="form-control"
+                                            placeholder="Price after 70 miles" value="{{ $fleet->price_after_70_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('price_after_70_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 80 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="price_after_80_miles" class="form-control"
+                                            placeholder="Price after 80 miles" value="{{ $fleet->price_after_80_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('price_after_80_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 90 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="price_after_90_miles" class="form-control"
+                                            placeholder="Price after 90 miles" value="{{ $fleet->price_after_90_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('price_after_90_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -142,8 +192,18 @@
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="price_after_100_miles" class="form-control"
                                             placeholder="Price after 100 miles" value="{{ $fleet->price_after_100_miles }}"
-                                            oninput="validateDecimal(this)">
+                                            oninput="validateDecimal(this)" required>
                                         @error('price_after_100_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 110 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="price_after_110_miles" class="form-control"
+                                            placeholder="Price after 110 miles" value="{{ $fleet->price_after_110_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('price_after_110_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -152,8 +212,28 @@
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="price_after_120_miles" class="form-control"
                                             placeholder="Price after 120 miles" value="{{ $fleet->price_after_120_miles }}"
-                                            oninput="validateDecimal(this)">
+                                            oninput="validateDecimal(this)" required>
                                         @error('price_after_120_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 130 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="price_after_130_miles" class="form-control"
+                                            placeholder="Price after 130 miles" value="{{ $fleet->price_after_130_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('price_after_130_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 140 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="price_after_140_miles" class="form-control"
+                                            placeholder="Price after 140 miles" value="{{ $fleet->price_after_140_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('price_after_140_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -162,18 +242,177 @@
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="price_after_150_miles" class="form-control"
                                             placeholder="Price after 150 miles" value="{{ $fleet->price_after_150_miles }}"
-                                            oninput="validateDecimal(this)">
+                                            oninput="validateDecimal(this)" required>
                                         @error('price_after_150_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    <!-- Rates for Airport Transfers Service -->
+                                    <div class="mb-3 col-md-12">
+                                        <h4 class="card-title">Rates for Airport Transfers Service</h4>
+                                    </div>
                                     <div class="mb-3 col-md-6">
-                                        <label class="form-label">Minimum Booking Price <span
+                                        <label class="form-label">Price after 10 miles <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name="min_booking_price" class="form-control"
-                                            placeholder="Minimum Booking Price" value="{{ $fleet->min_booking_price }}"
-                                            oninput="validateDecimal(this)">
-                                        @error('min_booking_price')
+                                        <input type="text" name="airport_price_after_10_miles" class="form-control"
+                                            placeholder="Price after 10 miles"
+                                            value="{{ $fleet->airport_price_after_10_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_10_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 20 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_20_miles" class="form-control"
+                                            placeholder="Price after 20 miles"
+                                            value="{{ $fleet->airport_price_after_20_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_20_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 30 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_30_miles" class="form-control"
+                                            placeholder="Price after 30 miles"
+                                            value="{{ $fleet->airport_price_after_30_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_30_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 40 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_40_miles" class="form-control"
+                                            placeholder="Price after 40 miles"
+                                            value="{{ $fleet->airport_price_after_40_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_40_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 50 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_50_miles" class="form-control"
+                                            placeholder="Price after 50 miles"
+                                            value="{{ $fleet->airport_price_after_50_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_50_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 60 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_60_miles" class="form-control"
+                                            placeholder="Price after 60 miles"
+                                            value="{{ $fleet->airport_price_after_60_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_60_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 70 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_70_miles" class="form-control"
+                                            placeholder="Price after 70 miles"
+                                            value="{{ $fleet->airport_price_after_70_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_70_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 80 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_80_miles" class="form-control"
+                                            placeholder="Price after 80 miles"
+                                            value="{{ $fleet->airport_price_after_80_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_80_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 90 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_90_miles" class="form-control"
+                                            placeholder="Price after 90 miles"
+                                            value="{{ $fleet->airport_price_after_90_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_90_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 100 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_100_miles" class="form-control"
+                                            placeholder="Price after 100 miles"
+                                            value="{{ $fleet->airport_price_after_100_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_100_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 110 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_110_miles" class="form-control"
+                                            placeholder="Price after 110 miles"
+                                            value="{{ $fleet->airport_price_after_110_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_110_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 120 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_120_miles" class="form-control"
+                                            placeholder="Price after 120 miles"
+                                            value="{{ $fleet->airport_price_after_120_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_120_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 130 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_130_miles" class="form-control"
+                                            placeholder="Price after 130 miles"
+                                            value="{{ $fleet->airport_price_after_130_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_130_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 140 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_140_miles" class="form-control"
+                                            placeholder="Price after 140 miles"
+                                            value="{{ $fleet->airport_price_after_140_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_140_miles')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">Price after 150 miles <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="airport_price_after_150_miles" class="form-control"
+                                            placeholder="Price after 150 miles"
+                                            value="{{ $fleet->airport_price_after_150_miles }}"
+                                            oninput="validateDecimal(this)" required>
+                                        @error('airport_price_after_150_miles')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>

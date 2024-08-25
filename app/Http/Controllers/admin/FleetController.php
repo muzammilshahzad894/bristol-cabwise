@@ -61,9 +61,32 @@ class FleetController extends Controller
             $fleet->price_after_30_miles = $request->price_after_30_miles;
             $fleet->price_after_40_miles = $request->price_after_40_miles;
             $fleet->price_after_50_miles = $request->price_after_50_miles;
+            $fleet->price_after_60_miles = $request->price_after_60_miles;
+            $fleet->price_after_70_miles = $request->price_after_70_miles;
+            $fleet->price_after_80_miles = $request->price_after_80_miles;
+            $fleet->price_after_90_miles = $request->price_after_90_miles;
             $fleet->price_after_100_miles = $request->price_after_100_miles;
+            $fleet->price_after_110_miles = $request->price_after_110_miles;
             $fleet->price_after_120_miles = $request->price_after_120_miles;
+            $fleet->price_after_130_miles = $request->price_after_130_miles;
+            $fleet->price_after_140_miles = $request->price_after_140_miles;
             $fleet->price_after_150_miles = $request->price_after_150_miles;
+            
+            $fleet->airport_price_after_10_miles = $request->airport_price_after_10_miles;
+            $fleet->airport_price_after_20_miles = $request->airport_price_after_20_miles;
+            $fleet->airport_price_after_30_miles = $request->airport_price_after_30_miles;
+            $fleet->airport_price_after_40_miles = $request->airport_price_after_40_miles;
+            $fleet->airport_price_after_50_miles = $request->airport_price_after_50_miles;
+            $fleet->airport_price_after_60_miles = $request->airport_price_after_60_miles;
+            $fleet->airport_price_after_70_miles = $request->airport_price_after_70_miles;
+            $fleet->airport_price_after_80_miles = $request->airport_price_after_80_miles;
+            $fleet->airport_price_after_90_miles = $request->airport_price_after_90_miles;
+            $fleet->airport_price_after_100_miles = $request->airport_price_after_100_miles;
+            $fleet->airport_price_after_110_miles = $request->airport_price_after_110_miles;
+            $fleet->airport_price_after_120_miles = $request->airport_price_after_120_miles;
+            $fleet->airport_price_after_130_miles = $request->airport_price_after_130_miles;
+            $fleet->airport_price_after_140_miles = $request->airport_price_after_140_miles;
+            $fleet->airport_price_after_150_miles = $request->airport_price_after_150_miles;
             
             $fleet->detail_page_description = $request->detail_page_description;
             $fleet->features = $request->features;
@@ -133,9 +156,33 @@ class FleetController extends Controller
             $fleet->price_after_30_miles = $request->price_after_30_miles;
             $fleet->price_after_40_miles = $request->price_after_40_miles;
             $fleet->price_after_50_miles = $request->price_after_50_miles;
+            $fleet->price_after_60_miles = $request->price_after_60_miles;
+            $fleet->price_after_70_miles = $request->price_after_70_miles;
+            $fleet->price_after_80_miles = $request->price_after_80_miles;
+            $fleet->price_after_90_miles = $request->price_after_90_miles;
             $fleet->price_after_100_miles = $request->price_after_100_miles;
+            $fleet->price_after_110_miles = $request->price_after_110_miles;
             $fleet->price_after_120_miles = $request->price_after_120_miles;
+            $fleet->price_after_130_miles = $request->price_after_130_miles;
+            $fleet->price_after_140_miles = $request->price_after_140_miles;
             $fleet->price_after_150_miles = $request->price_after_150_miles;
+            
+            $fleet->airport_price_after_10_miles = $request->airport_price_after_10_miles;
+            $fleet->airport_price_after_20_miles = $request->airport_price_after_20_miles;
+            $fleet->airport_price_after_30_miles = $request->airport_price_after_30_miles;
+            $fleet->airport_price_after_40_miles = $request->airport_price_after_40_miles;
+            $fleet->airport_price_after_50_miles = $request->airport_price_after_50_miles;
+            $fleet->airport_price_after_60_miles = $request->airport_price_after_60_miles;
+            $fleet->airport_price_after_70_miles = $request->airport_price_after_70_miles;
+            $fleet->airport_price_after_80_miles = $request->airport_price_after_80_miles;
+            $fleet->airport_price_after_90_miles = $request->airport_price_after_90_miles;
+            $fleet->airport_price_after_100_miles = $request->airport_price_after_100_miles;
+            $fleet->airport_price_after_110_miles = $request->airport_price_after_110_miles;
+            $fleet->airport_price_after_120_miles = $request->airport_price_after_120_miles;
+            $fleet->airport_price_after_130_miles = $request->airport_price_after_130_miles;
+            $fleet->airport_price_after_140_miles = $request->airport_price_after_140_miles;
+            $fleet->airport_price_after_150_miles = $request->airport_price_after_150_miles;
+            
             $fleet->detail_page_description = $request->detail_page_description;
             $fleet->features = $request->features;
             $fleet->save();
