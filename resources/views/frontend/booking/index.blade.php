@@ -499,7 +499,7 @@
                                         <p id="summary-meet-greet"></p>
                                     </div>
                                 </div>
-                                <div  id="summary-service_texas" style="display: unset;">
+                                <div  id="summary-service_texas" style="">
                                 </div>
                                 <div class="d-none gap-4 " id="summary-meet-greet_price_div" style="display: none">
                                     <strong>Extra Lauggage:</strong>
@@ -925,6 +925,7 @@
             totalDistance = distances.reduce((acc, distance) => acc + distance, 0);
             const totalDistanceInMiles = totalDistance.toFixed(2);
             distance = totalDistanceInMiles;
+            console.log('distance is', distance);
         }
 
         function isPlaceInSargodha(place) {

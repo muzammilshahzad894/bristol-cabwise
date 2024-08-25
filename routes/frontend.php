@@ -33,7 +33,8 @@ Route::get('/client-booking-payment', [BookingController::class, 'clientBookingP
     Route::post('/store-coupon', [ApplyCouponController::class, 'store'])->name('apply.coupon.store');
     Route::get('/all-fleets', [BookingController::class, 'allFleets'])->name('frontend.allFleets');
     Route::get('/get-service-tax', [BookingController::class, 'getServiceTax']);
-    Route::get('/get-select-service-tax/{id}', [BookingController::class, 'getSelectServiceTax']);
+    Route::get('/get-select-service-tax', [BookingController::class, 'getSelectServiceTax']);
+
 
     Route::get('/fleet-details/{id}', [BookingController::class, 'fleettaxDetails'])->name('frontend.fleetDetails');
     

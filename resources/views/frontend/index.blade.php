@@ -239,7 +239,18 @@
         <!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
         <div class="video-fullscreen-video" data-overlay-dark="2" style="height: 800px;">
 
-            <video preload="auto" autoplay muted playsinline loop alt="Senior Adult, People, Lifestyles, Lu" poster="{{ asset('frontend-assets/img/home-video.jpg') }}" src="{{ asset('frontend-assets/img/home-video.mp4') }}" style="width: 100%; height: 100%;"></video>
+            <video 
+            preload="auto" 
+            autoplay 
+            muted 
+            playsinline 
+            loop 
+            alt="Senior Adult, People, Lifestyles, Lu" 
+            poster="{{ asset('frontend-assets/img/home-video.jpg') }}" 
+            style="width: 100%; height: 100%;">
+            <source src="{{ asset('frontend-assets/img/homevideo.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
 
         </div>
         <div class="v-middle" style="margin-top: 90px;">

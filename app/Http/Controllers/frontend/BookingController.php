@@ -13,6 +13,13 @@ use App\Models\Setting;
 
 class BookingController extends Controller
 {
+    public function getSelectServiceTax(Request $request){
+        $servieId = $request->service_id;
+        dd($servieId);
+        $serviceTaxes = FleetTax::where('service_id', $request->service_id)->get();
+        dd($serviceTaxes);
+        return response()->json($serviceTaxes);
+    }
     public function index()
     {
         try {    
@@ -242,7 +249,7 @@ class BookingController extends Controller
     }
     public function allFleets()
     {
-        $fleets = Fleet::all();
+        $fleets = Fleet::orderBy('id', 'asc')->get();
         foreach ($fleets as $fleet) {
             $fleet->taxes = FleetTax::where('fleet_id', $fleet->id)->get();
         }
@@ -255,10 +262,6 @@ class BookingController extends Controller
         $fleetTax = FleetTax::where('fleet_id', $id)->get();
         return response()->json([ 'fleetTax' => $fleetTax]);
     }
-    public function getSelectServiceTax($id) {
-        $serviceTaxes = FleetTax::where('service_id', $id)->get();
-    
-        return response()->json($serviceTaxes);
-    }
+
     
 }

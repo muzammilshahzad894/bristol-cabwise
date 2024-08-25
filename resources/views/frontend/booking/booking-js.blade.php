@@ -161,7 +161,9 @@
         }
 
         if (returnCheckbox && returnCheckbox.checked && returnDateTimeInput) {
-            var returnDateTimeValue = returnDateTimeInput.value.trim();
+
+            var formattedDateTime = returnDateTimeInput.value.trim();
+            let returnDateTimeValue = formattedDateTime.replace('T', ',Time:');
             if (returnDateTimeValue) {
                 // Create the first div element with d-flex and gap-4 classes
                 var returnDiv1 = document.createElement('div');
@@ -227,7 +229,7 @@
             }
         });
 
-        let formattedDateTime = dates_times.replace('T', ',time:');
+        let formattedDateTime = dates_times.replace('T', ',Time:');
 
         const elements = {
             'summary-service-type': service_type,
@@ -288,25 +290,26 @@
             element.style.display = condition ? 'flex' : 'none';
         }
     }
-    function updateTexas() {
-        serviceId= service_id;
-    // Make the AJAX call
-    $.ajax({
-        url: `/get-select-service-tax/${serviceId}`, 
-        type: 'GET',
-        success: function(response) {
-            console.log(response);
-            // Handle the response and update the div
-            var texasServiceDiv = document.getElementById('summary-service_texas');
-            texasServiceDiv.style.display = '';
 
-            
-            // Clear previous content
-            texasServiceDiv.innerHTML = '';
-            
-            // Loop through the response and append to the div
-            response.forEach(function(serviceTax) {
-                texasServiceDiv.innerHTML += `
+    function updateTexas() {
+        serviceId = service_id;
+        console.log(serviceId);
+        $.ajax({
+            url: `/get-select-service-tax?service_id=${serviceId}`,
+            type: 'GET',
+            success: function(response) {
+                console.log(response);
+                // Handle the response and update the div
+                var texasServiceDiv = document.getElementById('summary-service_texas');
+                texasServiceDiv.style.display = '';
+
+
+                // Clear previous content
+                texasServiceDiv.innerHTML = '';
+
+                // Loop through the response and append to the div
+                response.forEach(function(serviceTax) {
+                    texasServiceDiv.innerHTML += `
                  <div class="d-flex gap-4">
                     <strong>${serviceTax.name}:</strong>
                     <div>
@@ -314,13 +317,13 @@
                     </div>
                 </div>
                 `;
-            });
-        },
-        error: function(error) {
-            console.error('Error fetching service tax:', error);
-        }
-    });
-}
+                });
+            },
+            error: function(error) {
+                console.error('Error fetching service tax:', error);
+            }
+        });
+    }
 
     function updateVia() {
         var viaLocationContainer = document.getElementById('via_locations');
@@ -591,24 +594,34 @@
         }
 
         if (dist > 150) {
+            console.log('150');
             fleetPrice = dist * (price_after_150_miles || 1) * returnPrice;
         } else if (dist > 120) {
-            fleetPrice = dist * (price_after_150_miles || 1) * returnPrice;
-        } else if (dist > 100) {
+            console.log('120');
             fleetPrice = dist * (price_after_120_miles || 1) * returnPrice;
-        } else if (dist > 50) {
+        } else if (dist > 100) {
+            console.log('100');
             fleetPrice = dist * (price_after_100_miles || 1) * returnPrice;
-        } else if (dist > 40) {
+        } else if (dist > 50) {
+            console.log('50');
             fleetPrice = dist * (price_after_50_miles || 1) * returnPrice;
-        } else if (dist > 30) {
+        } else if (dist > 40) {
+            console.log('40'); 
             fleetPrice = dist * (price_after_40_miles || 1) * returnPrice;
-        } else if (dist > 20) {
+        } else if (dist > 30) {
+            console.log('30');
             fleetPrice = dist * (price_after_30_miles || 1) * returnPrice;
-        } else if (dist > 10) {
+        } else if (dist > 20) {
+            console.log('20');
             fleetPrice = dist * (price_after_20_miles || 1) * returnPrice;
+        } else if (dist > 10) {
+            console.log('10');
+            fleetPrice = dist * (price_after_10_miles || 1) * returnPrice;
         } else {
             fleetPrice = dist * (price || 1) * returnPrice;
         }
+        console.log('fleetPrice', fleetPrice);
+        console.log('dis', dist);
         if (fleetPrice < min_booking_price) {
             fleetPrice = min_booking_price * returnPrice;
         }
@@ -1109,12 +1122,12 @@
 
         var currentDateTime = new Date(year, now.getMonth(), day, hours, minutes);
         var minDateTime = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
-        if(bookingHours){
+        if (bookingHours) {
             document.querySelectorAll('.minimum_hours').forEach(function(element) {
-            element.textContent = "Please select a time at least " + bookingHours + " hours in advance";
-        });     
+                element.textContent = "Please select a time at least " + bookingHours + " hours in advance";
+            });
         }
-               // dateInput.placeholder = "Please select a time at least " + bookingHours + " hours in advance";
+        // dateInput.placeholder = "Please select a time at least " + bookingHours + " hours in advance";
 
 
         function validateDateTime(dateInput) {
@@ -1161,7 +1174,7 @@
                 now.setMilliseconds(0);
 
                 if (selectedDate < now || isBlocked) {
-                    
+
                     // $('#exampleModal').modal('show');
                     // document.getElementById('message').textContent =
                     //     "Booking is not available at this time. Please contact support.";
