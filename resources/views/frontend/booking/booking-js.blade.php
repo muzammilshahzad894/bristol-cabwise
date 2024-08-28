@@ -526,7 +526,10 @@
                     var fleetPrice = calculateFleetPrice(fleet);
                     var totalTax = fleet.taxes.reduce((sum, tax) => sum + parseFloat(tax.price),
                         0);
-                    var totalPrice = fleetPrice + totalTax;
+                    let returnPrice = is_return == 1 ? 2 : 1;
+                    console.log(returnPrice);
+                    var totalPrice = fleetPrice + totalTax * returnPrice;
+                    console.log('total price is ',totalPrice);
                     if (isNaN(totalPrice)) {
                         alert('An error occurred: Total price is not a number.');
                         location.reload();
