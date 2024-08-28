@@ -575,7 +575,7 @@
 
     function calculateFleetPrice(fleet) {
         let newdistancevalue = parseFloat(distance.replace('km', '').trim());
-        let dist = Math.round(newdistancevalue);
+        let dist = newdistancevalue;    
         let fleetPrice = 0;
         let price = parseFloat(fleet.price);
         let price_after_10_miles = parseFloat(fleet.price_after_10_miles);
@@ -587,41 +587,62 @@
         let price_after_120_miles = parseFloat(fleet.price_after_120_miles);
         let price_after_150_miles = parseFloat(fleet.price_after_150_miles);
 
+        let airport_after_10_miles = parseFloat(fleet.airport_after_10_miles);
+        let airport_after_20_miles = parseFloat(fleet.airport_after_20_miles);
+        let airport_after_30_miles = parseFloat(fleet.airport_after_30_miles);
+        let airport_after_40_miles = parseFloat(fleet.airport_after_40_miles);
+        let airport_after_50_miles = parseFloat(fleet.airport_after_50_miles);
+        let airport_after_100_miles = parseFloat(fleet.airport_after_100_miles);
+        let airport_after_120_miles = parseFloat(fleet.airport_after_120_miles);
+        let airport_after_150_miles = parseFloat(fleet.airport_after_150_miles);
+
+
         let min_booking_price = parseFloat(fleet.min_booking_price);
         let returnPrice = 1;
         if (is_return == 1) {
             returnPrice = 2;
         }
-
+        if(service_type == 'Airport transfers') {
+            if (dist > 150) {
+                fleetPrice = dist * (airport_after_150_miles || 1) * returnPrice;
+            } else if (dist > 120) {
+                fleetPrice = dist * (airport_after_120_miles || 1) * returnPrice;
+            } else if (dist > 100) {
+                fleetPrice = dist * (airport_after_100_miles || 1) * returnPrice;
+            } else if (dist > 50) {
+                fleetPrice = dist * (airport_after_50_miles || 1) * returnPrice;
+            } else if (dist > 40) {
+                fleetPrice = dist * (airport_after_40_miles || 1) * returnPrice;
+            } else if (dist > 30) {
+                fleetPrice = dist * (airport_after_30_miles || 1) * returnPrice;
+            } else if (dist > 20) {
+                fleetPrice = dist * (airport_after_20_miles || 1) * returnPrice;
+            } else if (dist > 10) {
+                fleetPrice = dist * (airport_after_10_miles || 1) * returnPrice;
+            } else {
+                fleetPrice = dist * (price || 1) * returnPrice;
+            }
+        } else{
         if (dist > 150) {
-            console.log('150');
             fleetPrice = dist * (price_after_150_miles || 1) * returnPrice;
         } else if (dist > 120) {
-            console.log('120');
             fleetPrice = dist * (price_after_120_miles || 1) * returnPrice;
         } else if (dist > 100) {
-            console.log('100');
             fleetPrice = dist * (price_after_100_miles || 1) * returnPrice;
         } else if (dist > 50) {
-            console.log('50');
             fleetPrice = dist * (price_after_50_miles || 1) * returnPrice;
         } else if (dist > 40) {
-            console.log('40'); 
             fleetPrice = dist * (price_after_40_miles || 1) * returnPrice;
         } else if (dist > 30) {
-            console.log('30');
             fleetPrice = dist * (price_after_30_miles || 1) * returnPrice;
         } else if (dist > 20) {
-            console.log('20');
             fleetPrice = dist * (price_after_20_miles || 1) * returnPrice;
         } else if (dist > 10) {
-            console.log('10');
             fleetPrice = dist * (price_after_10_miles || 1) * returnPrice;
         } else {
             fleetPrice = dist * (price || 1) * returnPrice;
         }
-        console.log('fleetPrice', fleetPrice);
-        console.log('dis', dist);
+    }
         if (fleetPrice < min_booking_price) {
             fleetPrice = min_booking_price * returnPrice;
         }
