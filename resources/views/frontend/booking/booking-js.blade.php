@@ -293,12 +293,10 @@
 
     function updateTexas() {
         serviceId = service_id;
-        console.log(serviceId);
         $.ajax({
             url: `/get-select-service-tax?service_id=${serviceId}`,
             type: 'GET',
             success: function(response) {
-                console.log(response);
                 // Handle the response and update the div
                 var texasServiceDiv = document.getElementById('summary-service_texas');
                 texasServiceDiv.style.display = '';
@@ -524,12 +522,19 @@
 
                 function renderFleetHtml(fleet, index) {
                     var fleetPrice = calculateFleetPrice(fleet);
+                    // console.log(fleetPrice);
                     var totalTax = fleet.taxes.reduce((sum, tax) => sum + parseFloat(tax.price),
                         0);
+
                     let returnPrice = is_return == 1 ? 2 : 1;
-                    console.log(returnPrice);
                     var totalPrice = fleetPrice + totalTax * returnPrice;
-                    console.log('total price is ',totalPrice);
+                    // console.log(totalPrice);
+                    const decimalPart = totalPrice.toString().split('.')[1]; // Get the decimal part, if any
+
+                    if (decimalPart && decimalPart.length > 2) {
+                        totalPrice = Number(totalPrice).toFixed(2);
+                    }
+                    
                     if (isNaN(totalPrice)) {
                         alert('An error occurred: Total price is not a number.');
                         location.reload();
@@ -578,40 +583,70 @@
 
     function calculateFleetPrice(fleet) {
         let newdistancevalue = parseFloat(distance.replace('km', '').trim());
-        let dist = newdistancevalue;    
+        let dist = newdistancevalue;
         let fleetPrice = 0;
         let price = parseFloat(fleet.price);
         let price_after_10_miles = parseFloat(fleet.price_after_10_miles);
+        // console.log(price_after_10_miles);
         let price_after_20_miles = parseFloat(fleet.price_after_20_miles);
+        // console.log(price_after_20_miles);
         let price_after_30_miles = parseFloat(fleet.price_after_30_miles);
         let price_after_40_miles = parseFloat(fleet.price_after_40_miles);
         let price_after_50_miles = parseFloat(fleet.price_after_50_miles);
+        let price_after_60_miles = parseFloat(fleet.price_after_60_miles);
+        let price_after_70_miles = parseFloat(fleet.price_after_70_miles);
+        let price_after_80_miles = parseFloat(fleet.price_after_80_miles);
+        let price_after_90_miles = parseFloat(fleet.price_after_90_miles);
         let price_after_100_miles = parseFloat(fleet.price_after_100_miles);
+        let price_after_110_miles = parseFloat(fleet.price_after_110_miles);
         let price_after_120_miles = parseFloat(fleet.price_after_120_miles);
+        let price_after_130_miles = parseFloat(fleet.price_after_130_miles);
+        let price_after_140_miles = parseFloat(fleet.price_after_140_miles);
         let price_after_150_miles = parseFloat(fleet.price_after_150_miles);
 
-        let airport_after_10_miles = parseFloat(fleet.airport_after_10_miles);
-        let airport_after_20_miles = parseFloat(fleet.airport_after_20_miles);
-        let airport_after_30_miles = parseFloat(fleet.airport_after_30_miles);
-        let airport_after_40_miles = parseFloat(fleet.airport_after_40_miles);
-        let airport_after_50_miles = parseFloat(fleet.airport_after_50_miles);
-        let airport_after_100_miles = parseFloat(fleet.airport_after_100_miles);
-        let airport_after_120_miles = parseFloat(fleet.airport_after_120_miles);
-        let airport_after_150_miles = parseFloat(fleet.airport_after_150_miles);
-
+        let airport_after_10_miles = parseFloat(fleet.airport_price_after_10_miles);
+        let airport_after_20_miles = parseFloat(fleet.airport_price_after_20_miles);
+        let airport_after_30_miles = parseFloat(fleet.airport_price_after_30_miles);
+        let airport_after_40_miles = parseFloat(fleet.airport_price_after_40_miles);
+        let airport_after_50_miles = parseFloat(fleet.airport_price_after_50_miles);
+        let airport_after_60_miles = parseFloat(fleet.airport_price_after_60_miles);
+        let airport_after_70_miles = parseFloat(fleet.airport_price_after_70_miles);
+        let airport_after_80_miles = parseFloat(fleet.airport_price_after_80_miles);
+        let airport_after_90_miles = parseFloat(fleet.airport_price_after_90_miles);
+        let airport_after_100_miles = parseFloat(fleet.airport_price_after_100_miles);
+        let airport_after_110_miles = parseFloat(fleet.airport_price_after_110_miles);
+        let airport_after_120_miles = parseFloat(fleet.airport_price_after_120_miles);
+        let airport_after_130_miles = parseFloat(fleet.airport_price_after_130_miles);
+        let airport_after_140_miles = parseFloat(fleet.airport_price_after_140_miles);
+        let airport_after_150_miles = parseFloat(fleet.airport_price_after_150_miles);
 
         let min_booking_price = parseFloat(fleet.min_booking_price);
         let returnPrice = 1;
         if (is_return == 1) {
             returnPrice = 2;
         }
-        if(service_type == 'Airport transfers') {
+
+        if (service_type == 'Airport transfers') {
             if (dist > 150) {
                 fleetPrice = dist * (airport_after_150_miles || 1) * returnPrice;
+            } else if (dist > 140) {
+                fleetPrice = dist * (airport_after_140_miles || 1) * returnPrice;
+            } else if (dist > 130) {
+                fleetPrice = dist * (airport_after_130_miles || 1) * returnPrice;
             } else if (dist > 120) {
                 fleetPrice = dist * (airport_after_120_miles || 1) * returnPrice;
+            } else if (dist > 110) {
+                fleetPrice = dist * (airport_after_110_miles || 1) * returnPrice;
             } else if (dist > 100) {
                 fleetPrice = dist * (airport_after_100_miles || 1) * returnPrice;
+            } else if (dist > 90) {
+                fleetPrice = dist * (airport_after_90_miles || 1) * returnPrice;
+            } else if (dist > 80) {
+                fleetPrice = dist * (airport_after_80_miles || 1) * returnPrice;
+            } else if (dist > 70) {
+                fleetPrice = dist * (airport_after_70_miles || 1) * returnPrice;
+            } else if (dist > 60) {
+                fleetPrice = dist * (airport_after_60_miles || 1) * returnPrice;
             } else if (dist > 50) {
                 fleetPrice = dist * (airport_after_50_miles || 1) * returnPrice;
             } else if (dist > 40) {
@@ -625,32 +660,50 @@
             } else {
                 fleetPrice = dist * (price || 1) * returnPrice;
             }
-        } else{
-        if (dist > 150) {
-            fleetPrice = dist * (price_after_150_miles || 1) * returnPrice;
-        } else if (dist > 120) {
-            fleetPrice = dist * (price_after_120_miles || 1) * returnPrice;
-        } else if (dist > 100) {
-            fleetPrice = dist * (price_after_100_miles || 1) * returnPrice;
-        } else if (dist > 50) {
-            fleetPrice = dist * (price_after_50_miles || 1) * returnPrice;
-        } else if (dist > 40) {
-            fleetPrice = dist * (price_after_40_miles || 1) * returnPrice;
-        } else if (dist > 30) {
-            fleetPrice = dist * (price_after_30_miles || 1) * returnPrice;
-        } else if (dist > 20) {
-            fleetPrice = dist * (price_after_20_miles || 1) * returnPrice;
-        } else if (dist > 10) {
-            fleetPrice = dist * (price_after_10_miles || 1) * returnPrice;
         } else {
-            fleetPrice = dist * (price || 1) * returnPrice;
+            if(dist > 150) {
+                fleetPrice = dist * (price_after_150_miles || 1) * returnPrice;
+            } else if (dist > 140) {
+                fleetPrice = dist * (price_after_140_miles || 1) * returnPrice;
+            } else if (dist > 130) {
+                fleetPrice = dist * (price_after_130_miles || 1) * returnPrice;
+            } else if (dist > 120) {
+                fleetPrice = dist * (price_after_120_miles || 1) * returnPrice;
+            } else if (dist > 110) {
+                fleetPrice = dist * (price_after_110_miles || 1) * returnPrice;
+            } else if (dist > 100) {
+                fleetPrice = dist * (price_after_100_miles || 1) * returnPrice;
+            } else if (dist > 90) {
+                fleetPrice = dist * (price_after_90_miles || 1) * returnPrice;
+            } else if (dist > 80) {
+                fleetPrice = dist * (price_after_80_miles || 1) * returnPrice;
+            } else if (dist > 70) {
+                fleetPrice = dist * (price_after_70_miles || 1) * returnPrice;
+            } else if (dist > 60) {
+                fleetPrice = dist * (price_after_60_miles || 1) * returnPrice;
+            } else if (dist > 50) {
+                fleetPrice = dist * (price_after_50_miles || 1) * returnPrice;
+            } else if (dist > 40) {
+                fleetPrice = dist * (price_after_40_miles || 1) * returnPrice;
+            } else if (dist > 30) {
+                fleetPrice = dist * (price_after_30_miles || 1) * returnPrice;
+            } else if (dist > 20) {
+                fleetPrice = dist * (price_after_20_miles || 1) * returnPrice;
+            } else if (dist > 10) {
+                fleetPrice = dist * (price_after_10_miles || 1) * returnPrice;
+            } else {
+                fleetPrice = dist * (price || 1) * returnPrice;
+            }
+           
         }
-    }
+
         if (fleetPrice < min_booking_price) {
             fleetPrice = min_booking_price * returnPrice;
         }
+
         return fleetPrice;
     }
+
 
 
 

@@ -1,6 +1,6 @@
 @extends('layouts.frontend.app')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFnXfbd7cYC4CknS2DpDvO6EskP95Z_7M&libraries=places">
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcjCI02QAojCYEkhWCugFSjn3OLsMiEf8&libraries=places">
 </script>
 <style>
     #map {
@@ -812,7 +812,6 @@
                 componentRestrictions: {
                     country: 'uk'
                 },
-                types: ['geocode']
             });
             originAutocomplete.addListener('place_changed', handleOriginPlaceChange);
 
@@ -846,7 +845,6 @@
                 componentRestrictions: {
                     country: 'uk'
                 },
-                types: ['geocode']
             });
 
             autocomplete.addListener('place_changed', () => {
