@@ -78,6 +78,7 @@ class PaymentController extends Controller
                 $coupon = Coupon::where('id', $couponDiscount->coupon_id)->first(); 
             }
             $bookingDetails = (object) [
+                'bookingId' => $booking->id,
                 'serviceType' => $booking->service->name,
                 'pickupLocation' => $booking->pickup_location,
                 'via_locations' => $booking->via_locations ? json_decode($booking->via_locations) : [],

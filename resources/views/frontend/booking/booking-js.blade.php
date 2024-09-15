@@ -528,11 +528,8 @@
 
                     let returnPrice = is_return == 1 ? 2 : 1;
                     var totalPrice = fleetPrice + totalTax * returnPrice;
-                    // console.log(totalPrice);
-                    const decimalPart = totalPrice.toString().split('.')[1]; // Get the decimal part, if any
-
-                    if (decimalPart && decimalPart.length > 2) {
-                        totalPrice = Number(totalPrice).toFixed(2);
+                    if(totalPrice % 1 !== 0) {
+                        totalPrice = parseFloat(totalPrice.toFixed(2));
                     }
                     
                     if (isNaN(totalPrice)) {

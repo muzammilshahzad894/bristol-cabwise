@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Mail\BookingConfirmationMail;
+use App\Mail\BookingConfirmationAdminMail;
 use App\Mail\BookingCancellationMail;
 use App\Mail\BookingReminderMail;
 use App\Mail\ThankYouFeedbackMail;
@@ -24,6 +25,7 @@ class EmailService
             $extraLaugage = "6";
         }
         $data = [
+            'bookingId' => $bookingDetails->bookingId,
             'userName' => $user->name,
             'serviceType' => $bookingDetails->serviceType,
             'pickupLocation' => $bookingDetails->pickupLocation,
@@ -50,13 +52,20 @@ class EmailService
         ];
 
         $emailAddresses = [$user->email];
-        // In EmailSetting all the emails are stored that will receive the booking-confirmation email
-        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-confirmation%')->pluck('user_email');
-        if ($emailSetting->count() > 0) {
-            $emailAddresses = array_merge($emailAddresses, $emailSetting->toArray());
-        }
 
         Mail::to($emailAddresses)->send(new BookingConfirmationMail($data));
+        
+        // In EmailSetting all the emails are stored that will receive the booking-confirmation email
+        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-confirmation%')->get();
+        if ($emailSetting->count() > 0) {
+            foreach ($emailSetting as $email) {
+                $dataForAdmin = $data;
+                $dataForAdmin['adminName'] = $email->user_name;
+                
+                $adminEmailAddresses = $email->user_email;
+                Mail::to($adminEmailAddresses)->send(new BookingConfirmationAdminMail($dataForAdmin));
+            }
+        }
     }
 
     public function sendBookingCancellation($user, $bookingDetails)
