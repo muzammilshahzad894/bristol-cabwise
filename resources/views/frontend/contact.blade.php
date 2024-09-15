@@ -83,11 +83,17 @@
             <div class="col-lg-6 col-md-12 mb-30">
                 <div class="form-box">
                     <h5>Get in touch</h5>
-                    <form method="post" class="contact__form" action="https://duruthemes.com/demo/html/renax/dark/mail.php">
+                    <form method="post" action="{{ route('frontend.contactPost') }}">
+                        @csrf
                         <!-- form message -->
                         <div class="row">
                             <div class="col-12">
-                                <div class="alert alert-success contact__msg" style="display: none" role="alert"> Your message was sent successfully. </div>
+                                @if(session('success'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ session('success') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <!-- form elements -->
@@ -108,7 +114,7 @@
                                 <textarea name="message" id="message" cols="30" rows="4" placeholder="Message *" required></textarea>
                             </div>
                             <div class="col-md-12">
-                                <input name="submit" type="submit" value="Send Message">
+                                <input name="submit" type="submit" id="submit" value="Send Message">
                             </div>
                         </div>
                     </form>

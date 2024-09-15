@@ -52,6 +52,34 @@ class FrontendController extends Controller
         };
         return view('frontend.contact');
     }
+    
+    public function contactPost(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required',
+                'subject' => 'required',
+                'message' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'subject' => $request->subject,
+                'message' => $request->message,
+            ];
+            $this->emailService->sendContactEmail($data);
+            return redirect()->back()->with('success', 'Message sent successfully');
+        } catch (\Exception $e) {
+            Log::error('Contact Post Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong while processing your request');
+        }
+    }
 
     public function services()
     {

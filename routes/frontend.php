@@ -16,6 +16,7 @@ Auth::routes(['verify' => true]);
 Route::get('/', [CarsController::class, 'index'])->name('frontend.index');
 Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('frontend.contact');
+Route::post('/contact', [FrontendController::class, 'contactPost'])->name('frontend.contactPost');
 Route::get('/services', [FrontendController::class, 'services'])->name('frontend.services');
 Route::get('/faqs', [FrontendController::class, 'faqs'])->name('frontend.faqs');
 Route::get('/term-condition', [FrontendController::class, 'termCondition'])->name('frontend.termCondition');

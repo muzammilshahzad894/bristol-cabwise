@@ -16,6 +16,8 @@ use App\Mail\RefundStatusMail;
 use App\Mail\RefundStatusAdminMail;
 use App\Mail\CustomEmail;
 use App\Mail\DriverAssignMail;
+use App\Mail\ContactEmail;
+use App\Mail\ContactEmailAdmin;
 use App\Models\EmailSetting;
 use Illuminate\Support\Facades\Mail;
 
@@ -294,5 +296,22 @@ class EmailService
         ];
 
         Mail::to($data['email'])->send(new CustomEmail($data));
+    }
+    
+    public function sendContactEmail($emailData)
+    {
+        $data = [
+            'name' => $emailData['name'],
+            'email' => $emailData['email'],
+            'phone' => $emailData['phone'],
+            'subject' => $emailData['subject'],
+            'customerMessage' => $emailData['message'],
+        ];
+        
+        Mail::to($data['email'])->send(new ContactEmail($data));
+        
+        if(setting('admin_email')) {
+            Mail::to('muzammilshahzad894@gmail.com')->send(new ContactEmailAdmin($data));
+        }
     }
 }
