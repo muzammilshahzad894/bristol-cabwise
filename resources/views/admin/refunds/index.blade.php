@@ -100,7 +100,7 @@
                             <label for="amount" class="form-label">Amount</label>
                             <div class="input-group">
                                 <span class="input-group-text">£</span>
-                                <input type="number" name="amount" class="form-control" placeholder="" id="amount">
+                                <input type="text" name="amount" class="form-control" placeholder="" oninput="validateDecimal(this)">
                             </div>
                             <p class="m-0 p-0 text-danger" id="amount_error"></p>
                         </div>
@@ -258,6 +258,20 @@
         } else {
             $(element).text('');
         }
+    }
+    
+    function validateDecimal(input) {
+        // Remove any non-numeric characters except for a dot
+        let value = input.value.replace(/[^0-9.]/g, '');
+
+        // Ensure only one dot is allowed
+        const dotIndex = value.indexOf('.');
+        if (dotIndex !== -1) {
+            value = value.slice(0, dotIndex + 1) + value.slice(dotIndex + 1).replace(/\./g, '');
+        }
+
+        // Update the input field value
+        input.value = value;
     }
 </script>
 @endsection

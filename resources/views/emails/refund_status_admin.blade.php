@@ -17,15 +17,11 @@
                     </tr>
                     <tr>
                         <td style="background-color: #ef8e1c; padding: 20px; color: #ffffff;">
-                            <h3 style="text-align: center; color: #ffffff;">Update: Your Bristol Cabwise Refund Status</h3>
-                            <p style="color: #ffffff;">Dear {{ $userName }},</p>
-                            <p style="color: #ffffff;">The status of your refund request for the following booking has been updated:</p>
+                            <h3 style="text-align: center; color: #ffffff;">Refund Status Updated – [#{{ $bookingId }}]</h3>
+                            <p style="color: #ffffff;">Dear {{ $adminName }},</p>
+                            <p style="color: #ffffff;">The status of the refund request for the following booking has been updated:</p>
                             <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
                                 <tr style="background-color: #000000; color: #ffffff;">
-                                    <th style="padding: 10px; text-align: left; width: 150px;">Booking Reference</th>
-                                    <td style="padding: 10px;">#{{ $bookingId }}</td>
-                                </tr>
-                                <tr>
                                     <th style="padding: 10px; text-align: left; width: 150px;">Service Type</th>
                                     <td style="padding: 10px;">{{ $serviceType }}</td>
                                 </tr>
@@ -124,13 +120,13 @@
                             @if(isset($amount))
                                 <p style="color: #ffffff;">Amount: £{{ $amount }}</p>
                             @endif
-                            <p style="margin-bottom: 0px; padding: 0px;">If you have any questions, feel free to contact us at *0117 332 2782*.</p>
+                            <p style="margin-bottom: 0px; padding: 0px;">Please update your records accordingly. If you need further information, call us at *0117 332 2782*.</p>
                         </td>
                     </tr>
                     <tr>
                         <td style="background-color: #000000; color: #ffffff; text-align: center; padding: 10px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
                             <p style="font-size: 12px; margin: 0;">Best regards</p>
-                            <p style="font-size: 12px; margin: 0;">The Bristol Cabwise Team</p>
+                            <p style="font-size: 12px; margin: 0;">Bristol Cabwise Admin Team</p>
                         </td>
                     </tr>
                 </table>

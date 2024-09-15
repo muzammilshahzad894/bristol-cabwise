@@ -13,6 +13,7 @@ use App\Mail\DriverWaitingEmail;
 use App\Mail\BookingStatusMail;
 use App\Mail\BookingStatusAdminMail;
 use App\Mail\RefundStatusMail;
+use App\Mail\RefundStatusAdminMail;
 use App\Mail\CustomEmail;
 use App\Mail\DriverAssignMail;
 use App\Models\EmailSetting;
@@ -239,6 +240,7 @@ class EmailService
             $extraLaugage = "6";
         }
         $data = [
+            'bookingId' => $emailData['bookingId'],
             'adminMessage' => $emailData['admin_message'],
             'user_email' => $emailData['user_email'],
             'userName' => $emailData['user_name'],
@@ -267,13 +269,19 @@ class EmailService
         }
 
         $emailAddresses = [$emailData['user_email']];
-        // In EmailSetting all the emails are stored that will receive the refund-status-change email
-        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%refund-status-change%')->pluck('user_email');
-        if ($emailSetting->count() > 0) {
-            $emailAddresses = array_merge($emailAddresses, $emailSetting->toArray());
-        }
-
         Mail::to($emailAddresses)->send(new RefundStatusMail($data));
+        
+        // In EmailSetting all the emails are stored that will receive the refund-status-change email
+        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%refund-status-change%')->get();
+        if ($emailSetting->count() > 0) {
+            foreach ($emailSetting as $email) {
+                $dataForAdmin = $data;
+                $dataForAdmin['adminName'] = $email->user_name;
+                
+                $adminEmailAddresses = $email->user_email;
+                Mail::to($adminEmailAddresses)->send(new RefundStatusAdminMail($dataForAdmin));
+            }
+        }
     }
 
     public function sendCustomEmail($emailData)

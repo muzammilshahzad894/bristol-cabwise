@@ -55,6 +55,7 @@ class RefundController extends Controller
             
             // pending = 0, approved = 1, rejected = 2, refunded = 3
             $emailData = [
+                'bookingId' => $booking->id,
                 'admin_message' => $data['admin_message'],
                 'user_email' => $refund->user_email,
                 'user_name' => $refund->user_name,
