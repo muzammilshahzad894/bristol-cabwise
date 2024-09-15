@@ -32,7 +32,7 @@
                                             @php
                                                 $sendEmail = \App\Models\SendingEmailList::where('label', $email)->first()->name;
                                             @endphp
-                                            <span class="badge bg-primary">{{ $sendEmail }}</span>
+                                            <span class="badge bg-primary m-2">{{ $sendEmail }}</span>
                                         @endforeach
                                     </td>
                                     <td>

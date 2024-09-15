@@ -76,6 +76,7 @@ class BookingController extends Controller
             $statusDetails = getStatusDetails($statusId);
 
             $data = [
+                'bookingId' => $booking->id,
                 'userName' => $booking->name,
                 'email' => $booking->email,
                 'pickupLocation' => $booking->pickup_location,

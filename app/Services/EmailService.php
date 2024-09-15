@@ -10,6 +10,7 @@ use App\Mail\ThankYouFeedbackMail;
 use App\Mail\RefundMail;
 use App\Mail\DriverWaitingEmail;
 use App\Mail\BookingStatusMail;
+use App\Mail\BookingStatusAdminMail;
 use App\Mail\RefundStatusMail;
 use App\Mail\CustomEmail;
 use App\Mail\DriverAssignMail;
@@ -196,6 +197,7 @@ class EmailService
     public function sendBookingStatusEmail($bookingDetails)
     {
         $data = [
+            'bookingId' => $bookingDetails['bookingId'],
             'userName' => $bookingDetails['userName'],
             'pickupLocation' => $bookingDetails['pickupLocation'],
             'dropoffLocation' => $bookingDetails['dropoffLocation'],
@@ -206,13 +208,21 @@ class EmailService
         ];
 
         $emailAddresses = [$bookingDetails['email']];
-        // In EmailSetting all the emails are stored that will receive the booking-status-change email
-        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-status-change%')->pluck('user_email');
-        if ($emailSetting->count() > 0) {
-            $emailAddresses = array_merge($emailAddresses, $emailSetting->toArray());
-        }
-
         Mail::to($emailAddresses)->send(new BookingStatusMail($data));
+        
+        
+        // In EmailSetting all the emails are stored that will receive the booking-status-change email
+        // $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-status-change%')->pluck('user_email');
+        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-status-change%')->get();
+        if ($emailSetting->count() > 0) {
+            foreach ($emailSetting as $email) {
+                $dataForAdmin = $data;
+                $dataForAdmin['adminName'] = $email->user_name;
+                
+                $adminEmailAddresses = $email->user_email;
+                Mail::to($adminEmailAddresses)->send(new BookingStatusAdminMail($dataForAdmin));
+            }
+        }
     }
 
     public function sendRefundStatusEmail($emailData)

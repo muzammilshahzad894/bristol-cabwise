@@ -23,6 +23,10 @@
                             <h3 style="color: #000000;">Summary:</h3>
                             <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
                                 <tr style="background-color: #000000; color: #ffffff;">
+                                    <th style="padding: 10px; text-align: left; width: 150px;">Booking Reference</th>
+                                    <td style="padding: 10px;">#{{ $bookingId }}</td>
+                                </tr>
+                                <tr>
                                     <th style="padding: 10px; text-align: left; width: 150px;">Service Type</th>
                                     <td style="padding: 10px;">{{ $serviceType }}</td>
                                 </tr>
