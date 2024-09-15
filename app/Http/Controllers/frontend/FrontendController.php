@@ -190,6 +190,7 @@ class FrontendController extends Controller
             $refund_amount = $booking->total_price;
             
             $bookingDetails = (object) [
+                'bookingId' => $booking->id,
                 'userName' => $user->name,
                 'bookingId' => $booking->id,
                 'email' => $request->email,

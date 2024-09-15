@@ -8,6 +8,7 @@ use App\Mail\BookingCancellationMail;
 use App\Mail\BookingReminderMail;
 use App\Mail\ThankYouFeedbackMail;
 use App\Mail\RefundMail;
+use App\Mail\RefundMailAdmin;
 use App\Mail\DriverWaitingEmail;
 use App\Mail\BookingStatusMail;
 use App\Mail\BookingStatusAdminMail;
@@ -155,6 +156,7 @@ class EmailService
     public function sendRefundRequest($user, $feedbackLink)
     {
         $data = [
+            'bookingId' => $feedbackLink->bookingId,
             'userName' => $feedbackLink->userName,
             'email' => $feedbackLink->email,
             'accountNumber' => $feedbackLink->accountNumber,
@@ -166,13 +168,19 @@ class EmailService
         ];
 
         $emailAddresses = [$user->email];
-        // In EmailSetting all the emails are stored that will receive the refund-request email
-        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%refund-request%')->pluck('user_email');
-        if ($emailSetting->count() > 0) {
-            $emailAddresses = array_merge($emailAddresses, $emailSetting->toArray());
-        }
-
         Mail::to($emailAddresses)->send(new RefundMail($data));
+        
+        // In EmailSetting all the emails are stored that will receive the refund-request email
+        $emailSetting = EmailSetting::where('receiving_emails', 'like', '%refund-request%')->get();
+        if ($emailSetting->count() > 0) {
+            foreach ($emailSetting as $email) {
+                $dataForAdmin = $data;
+                $dataForAdmin['adminName'] = $email->user_name;
+                
+                $adminEmailAddresses = $email->user_email;
+                Mail::to($adminEmailAddresses)->send(new RefundMailAdmin($dataForAdmin));
+            }
+        }
     }
 
     public function sendDriverWaitingEmail($bookingDetails)
@@ -212,7 +220,6 @@ class EmailService
         
         
         // In EmailSetting all the emails are stored that will receive the booking-status-change email
-        // $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-status-change%')->pluck('user_email');
         $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-status-change%')->get();
         if ($emailSetting->count() > 0) {
             foreach ($emailSetting as $email) {
