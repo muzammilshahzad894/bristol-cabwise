@@ -18,6 +18,8 @@ use App\Mail\CustomEmail;
 use App\Mail\DriverAssignMail;
 use App\Mail\ContactEmail;
 use App\Mail\ContactEmailAdmin;
+use App\Mail\QuoteRequest;
+use App\Mail\QuoteRequestAdmin;
 use App\Models\EmailSetting;
 use Illuminate\Support\Facades\Mail;
 
@@ -311,7 +313,32 @@ class EmailService
         Mail::to($data['email'])->send(new ContactEmail($data));
         
         if(setting('admin_email')) {
-            Mail::to('muzammilshahzad894@gmail.com')->send(new ContactEmailAdmin($data));
+            Mail::to(setting('admin_email'))->send(new ContactEmailAdmin($data));
+        }
+    }
+    
+    public function sendQuoteRequest($emailData)
+    {
+        $data = [
+            'pickup' => $emailData['pickup'],
+            'dropoff' => $emailData['dropoff'],
+            'dateTime' => $emailData['dateTime'],
+            'fleetId' => $emailData['fleetId'],
+            'userName' => $emailData['userName'],
+            'email' => $emailData['email'],
+            'phone' => $emailData['phone'],
+            'pickupPostalCode' => $emailData['pickupPostalCode'],
+            'dropoffPostalCode' => $emailData['dropoffPostalCode'],
+            'pickupCity' => $emailData['pickupCity'],
+            'dropoffCity' => $emailData['dropoffCity'],
+            'returnJourney' => $emailData['returnJourney'],
+            'comment' => $emailData['comment'],
+        ];
+        
+        Mail::to(setting('admin_email'))->send(new QuoteRequest($data));
+        
+        if(setting('admin_email')) {
+            Mail::to(setting('admin_email'))->send(new QuoteRequestAdmin($data));
         }
     }
 }

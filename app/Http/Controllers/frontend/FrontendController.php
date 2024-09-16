@@ -295,9 +295,9 @@ class FrontendController extends Controller
             ]);
     
             
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
     
             $pickup_date = Carbon::parse($request->date)->format('Y-m-d');
             $pickup_time = Carbon::parse($request->date)->format('H:i:s');
@@ -319,6 +319,25 @@ class FrontendController extends Controller
             $booking->created_at = Carbon::now();
             $booking->updated_at = Carbon::now();
             $booking->save();
+            
+            $bookingDetails = [
+                'pickup' => $request->pickup,
+                'dropoff' => $request->dropoff,
+                'dateTime' => $pickup,
+                'fleetId' => $request->fleet_id,
+                'userName' => $request->fullname,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'pickupPostalCode' => $request->pickup_postal_code,
+                'dropoffPostalCode' => $request->dropoff_postal_code,
+                'pickupCity' => $request->pickup_city,
+                'dropoffCity' => $request->dropoff_city,
+                'returnJourney' => $request->return_journey,
+                'comment' => $request->comment,
+            ];
+            
+            $this->emailService->sendQuoteRequest($bookingDetails);
+            
             return redirect()->back()->with('success', 'Quote sent successfully');
         } catch (\Exception $e) {
             Log::error('Quote Post Error: ' . $e->getMessage());
