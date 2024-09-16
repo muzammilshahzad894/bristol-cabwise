@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<title>BRISTOL CABWISE</title>
-	<link rel="shortcut icon" href="img/favicon.png" />
+	<link rel="shortcut icon" href="{{ asset('frontend-assets/img/favicon.ico') }}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
 	<link rel="stylesheet" href="{{ asset('frontend-assets/css/plugins.css') }}" />
 	<link rel="stylesheet" href="{{ asset('frontend-assets/css/style.css') }}" />

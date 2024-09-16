@@ -11,7 +11,7 @@
     <title>Login</title>
 
     <!-- Favicon icon -->
-    <link rel="shortcut icon" type="image/png" href="{{ asset('admin-assets/images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('frontend-assets/img/favicon.ico') }}" />
     <link href="{{ asset('admin-assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin-assets/css/style.css') }}" rel="stylesheet">
 

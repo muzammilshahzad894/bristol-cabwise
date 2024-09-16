@@ -13,7 +13,7 @@
     <title>Dashboard</title>
 
     <!-- Favicon icon -->
-    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link rel="shortcut icon" href="{{ asset('frontend-assets/img/favicon.ico') }}" />
 
     <!-- All StyleSheet -->
     <link href="{{ asset('admin-assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
