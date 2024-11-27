@@ -123,7 +123,7 @@
                                         <div class="btn-group" role="group" aria-label="Action Buttons">
                                             <a href="{{ route('admin.confirm.edit', $draft->id) }}"
                                              class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="btn btn-danger btn-sm mx-sm-1"><i class="fas fa-trash"></i></a>
+                                            <a href="{{ route('admin.confirm.delete', $draft->id) }}" class="btn btn-danger btn-sm mx-sm-1" onclick="return confirm('Are you sure you want to delete this booking?')"><i class="fas fa-trash"></i></a>
                                         </div>
                                     </td>
                                    

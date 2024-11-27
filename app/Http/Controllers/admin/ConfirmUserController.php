@@ -69,7 +69,7 @@ class ConfirmUserController extends Controller
     {
         try {
             Booking::find($id)->delete();
-            return redirect()->route('admin.coupons.index')->with('success', 'block date deleted successfully');
+            return redirect()->route('admin.confirm.index')->with('success', 'Booking deleted successfully');
         } catch (Exception $e) {
             Log::error(__CLASS__ . '::' . __LINE__ . ' Exception: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');

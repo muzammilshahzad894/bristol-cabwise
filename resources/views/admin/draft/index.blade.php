@@ -96,7 +96,7 @@
                                             Payment Link
                                          </button>
                                         <div class="btn-group" role="group" aria-label="Action Buttons">
-                                            <a href="{{ route('admin.draft.delete', $draft->id) }}" class="btn btn-danger btn-sm mx-sm-1" onclick="return confirm('Are you sure to delete this draft booking?')"><i class="fas fa-trash"></i></a>
+                                            <a href="{{ route('admin.draft.delete', $draft->id) }}" class="btn btn-danger btn-sm mx-sm-1" onclick="return confirm('Are you sure you want to delete this draft booking?')"><i class="fas fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>
