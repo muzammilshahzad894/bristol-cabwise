@@ -15,9 +15,8 @@ class BookingController extends Controller
 {
     public function getSelectServiceTax(Request $request){
         $servieId = $request->service_id;
-        dd($servieId);
         $serviceTaxes = FleetTax::where('service_id', $request->service_id)->get();
-        dd($serviceTaxes);
+       
         return response()->json($serviceTaxes);
     }
     public function index()

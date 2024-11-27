@@ -10,6 +10,8 @@ use App\Http\Controllers\PayPalController;
 use Illuminate\Support\Facades\Auth;
 
 
+
+
 Auth::routes(['verify' => true]);
 
 // $this->redirectIfAuthenticated();

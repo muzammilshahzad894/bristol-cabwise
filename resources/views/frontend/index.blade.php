@@ -238,7 +238,7 @@
         }
 
         [data-overlay-dark]::before {
-            background: url('https://testing.bristolcabwise.com/frontend-assets/img/homevideo.mp4') no-repeat center center !important;
+            background: url('/frontend-assets/img/homevideo.mp4') no-repeat center center !important;
         }
 
     </style>

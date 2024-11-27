@@ -6,10 +6,37 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<title>BRISTOL CABWISE</title>
+	
+	<!-- Favicon -->
 	<link rel="shortcut icon" href="{{ asset('frontend-assets/img/favicon.ico') }}" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
+
+	<!-- Meta Tags for SEO -->
+	<meta name="description" content="BRISTOL CABWISE offers reliable and convenient cab services in Bristol. Book your ride today!">
+	<meta name="keywords" content="Bristol, Cab, Taxi, Ride, Transportation, Booking">
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="BRISTOL CABWISE - Reliable Cab Service in Bristol">
+	<meta property="og:description" content="BRISTOL CABWISE offers reliable and convenient cab services in Bristol. Book your ride today!">
+	<meta property="og:image" content="{{ asset('frontend-assets/img/logo-light.png') }}">
+	<meta property="og:url" content="{{ url('/') }}">
+	<meta property="og:site_name" content="BRISTOL CABWISE">
+
+	<!-- Twitter Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="BRISTOL CABWISE - Reliable Cab Service in Bristol">
+	<meta name="twitter:description" content="BRISTOL CABWISE offers reliable and convenient cab services in Bristol. Book your ride today!">
+	<meta name="twitter:image" content="{{ asset('frontend-assets/img/logo-light.png') }}">
+	<meta name="twitter:site" content="@yourtwitterhandle"> <!-- Replace with your Twitter handle -->
+
+	<!-- Google Fonts -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
+
+	<!-- CSS Files -->
 	<link rel="stylesheet" href="{{ asset('frontend-assets/css/plugins.css') }}" />
 	<link rel="stylesheet" href="{{ asset('frontend-assets/css/style.css') }}" />
+
+	<!-- Stripe JS -->
 	<script src="https://js.stripe.com/v3/"></script>
 </head>
 
