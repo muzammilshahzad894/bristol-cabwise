@@ -30,7 +30,7 @@
                 </div>
                 <div class="card-body">
                     <div class="basic-form">
-                        <form action="{{ route('admin.confirm.bookingupdate', $booking->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.confirm.bookingupdate', $booking->id) }}" method="POST" enctype="multipart/form-data" onsubmit="document.getElementById('submit').disabled = true; document.getElementById('submit').innerHTML = 'Updating...';">
                             @csrf
                             <div class="row">
                                 <div class="mb-3 col-md-6">
@@ -162,7 +162,7 @@
                             
 
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit" class="btn btn-primary" id="submit">Update</button>
                                 </div>
                             </div>
                         </form>

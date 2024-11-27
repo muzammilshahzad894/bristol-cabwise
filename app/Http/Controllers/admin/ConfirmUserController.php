@@ -15,6 +15,7 @@ use App\Models\FleetTax;
 use App\Models\User;
 use App\Models\Coupon;
 use App\Models\Status;
+use App\Models\UsedCoupon;
 
 class ConfirmUserController extends Controller
 {    
@@ -183,35 +184,74 @@ class ConfirmUserController extends Controller
             'is_childseat' => 'nullable|boolean',
             'is_meet_nd_greet' => 'nullable|boolean',
         ]);
-    $booking = Booking::findOrFail($id);
-     $booking->name = $request->name;
-     $booking->email = $request->email;
-     $booking->phone_number = $request->phone_number;
-     $booking->other_name = $request->other_name;
-     $booking->other_email = $request->other_email;
-     $booking->other_phone_number = $request->other_phone_number;
-     $booking->booking_date = $request->booking_date;
-     $booking->booking_time = $request->booking_time;
-     $booking->no_of_passenger = $request->no_of_passenger;
-     $booking->no_suit_case = $request->no_suit_case;
-     $booking->summary = $request->summary;
-     $booking->no_of_laugage = $request->no_of_laugage;
-     $booking->flight_time = $request->flight_time ?? "";
-     $booking->flight_name = $request->flight_name ?? "";
-     $booking->flight_type = $request->flight_type ?? "";
-     $booking->total_price = $request->total_price;
-     $booking->is_extra_lauggage = $request->is_extra_lauggage ? 1:0;
-     $booking->is_childseat = $request->is_childseat ? 1 : 0;
-     $booking->is_meet_nd_greet = $request->is_meet_nd_greet ? 1: 0;
-     if($request->is_payment == 1){
-         $booking->is_draft = 0;
-         $booking->is_payment = 1;
-     }
- 
-     $booking->save();
- 
-
-
+        $booking = Booking::findOrFail($id);
+        $booking->name = $request->name;
+        $booking->email = $request->email;
+        $booking->phone_number = $request->phone_number;
+        $booking->other_name = $request->other_name;
+        $booking->other_email = $request->other_email;
+        $booking->other_phone_number = $request->other_phone_number;
+        $booking->booking_date = $request->booking_date;
+        $booking->booking_time = $request->booking_time;
+        $booking->no_of_passenger = $request->no_of_passenger;
+        $booking->no_suit_case = $request->no_suit_case;
+        $booking->summary = $request->summary;
+        $booking->no_of_laugage = $request->no_of_laugage;
+        $booking->flight_time = $request->flight_time ?? "";
+        $booking->flight_name = $request->flight_name ?? "";
+        $booking->flight_type = $request->flight_type ?? "";
+        $booking->total_price = $request->total_price;
+        $booking->is_extra_lauggage = $request->is_extra_lauggage ? 1:0;
+        $booking->is_childseat = $request->is_childseat ? 1 : 0;
+        $booking->is_meet_nd_greet = $request->is_meet_nd_greet ? 1: 0;
+        if($request->is_payment == 1){
+            $booking->is_draft = 0;
+            $booking->is_payment = 1;
+        }
+        
+        $booking->save();
+        
+        if($request->is_payment == 1) {
+            $user = User::find($booking->user_id);
+            if($booking->return_id){
+                $returnBooking = Booking::find($booking->return_id);
+                $returnBooking->is_payment = 1;
+                $returnBooking->is_draft = 0;
+                $returnBooking->save();
+            }
+            $couponDiscount = UsedCoupon::where('user_id', $user->id)->first();
+            $coupon = null;
+            if($couponDiscount){
+                $coupon = Coupon::where('id', $couponDiscount->coupon_id)->first(); 
+            }
+            $bookingDetails = (object) [
+                'bookingId' => $booking->id,
+                'serviceType' => $booking->service->name,
+                'pickupLocation' => $booking->pickup_location,
+                'via_locations' => $booking->via_locations ? json_decode($booking->via_locations) : [],
+                'dropoffLocation' => $booking->dropoff_location,
+                'dateAndTime' => formatDate($booking->booking_date) . ' ' . foramtTime($booking->booking_time),
+                'is_return' => $booking->return_id ? true : false,
+                'return_dateAndTime' => $booking->return_id ? formatDate($returnBooking->booking_date) . ' ' . foramtTime($returnBooking->booking_time) : null,
+                'name' => $booking->name,
+                'telephone' => $booking->phone_number,
+                'email' => $booking->email,
+                'no_of_passenger' => $booking->no_of_passenger,
+                'is_childseat' => $booking->is_childseat ? $booking->is_childseat : '-',
+                'is_meet_greet' => $booking->is_meet_greet ? 'Yes' : '-',
+                'no_suit_case' => $booking->no_suit_case,
+                'no_of_laugage' => $booking->no_of_laugage,
+                'summary' => $booking->summary ? $booking->summary : '-',
+                'other_name' => $booking->other_name ? $booking->other_name : '-',
+                'other_phone_number' => $booking->other_phone_number ? $booking->other_phone_number : '-',
+                'other_email' => $booking->other_email ? $booking->other_email : '-',
+                'fleet_price' => $booking->total_price,
+                'is_extra_lauggage' => $booking->is_extra_lauggage ? 'Yes' : '-',
+                'coupon_discount' => $coupon ? $coupon->discount : 0,
+            ];
+            
+            $this->emailService->sendBookingConfirmation($user, $bookingDetails);
+        }
         return redirect()->route('admin.confirm.index', $booking->id)->with('success', 'Booking updated successfully.');
     }
 }

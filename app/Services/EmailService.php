@@ -33,7 +33,7 @@ class EmailService
         }
         $data = [
             'bookingId' => $bookingDetails->bookingId,
-            'userName' => $user->name,
+            'userName' => $bookingDetails->name,
             'serviceType' => $bookingDetails->serviceType,
             'pickupLocation' => $bookingDetails->pickupLocation,
             'via_locations' => $bookingDetails->via_locations,
@@ -58,7 +58,7 @@ class EmailService
             'coupon_discount' => $bookingDetails->coupon_discount,
         ];
 
-        $emailAddresses = [$user->email];
+        $emailAddresses = [$bookingDetails->email];
 
         Mail::to($emailAddresses)->send(new BookingConfirmationMail($data));
         
