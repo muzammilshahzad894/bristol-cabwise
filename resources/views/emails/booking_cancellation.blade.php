@@ -18,7 +18,7 @@
                     <tr>
                         <td style="background-color: #ef8e1c; padding: 20px; color: #ffffff;">
                             <h3 style="text-align: center; color: #ffffff;">Booking Alert</h3>
-                            <p style="color: #ffffff;">Dear Shoaib,</p>
+                            <p style="color: #ffffff;">Dear {{ $userName }},</p>
                             <p style="color: #ffffff;">We regret to inform you that your booking has been cancelled. Here are the details:</p>
                             <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
                                 <tr style="background-color: #000000; color: #ffffff;">

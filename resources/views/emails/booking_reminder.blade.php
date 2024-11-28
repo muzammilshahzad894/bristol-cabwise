@@ -47,19 +47,19 @@
                 <p>This is a friendly reminder for your upcoming car pick-up and drop-off service. Here are the details:</p>
                 <table class="table">
                     <tr>
-                        <th>Booking ID</th>
-                        <td>{{ $bookingId }}</td>
+                        <th style="padding: 10px; text-align: left; width: 150px;">Pickup Location</th>
+                        <td style="padding: 10px;">{{ $pickupLocation }}</td>
                     </tr>
                     <tr>
-                        <th>Reason</th>
-                        <td>{{ $reason }}</td>
+                        <th style="padding: 10px; text-align: left; width: 150px;">Drop Location</th>
+                        <td style="padding: 10px;">{{ $dropoffLocation }}</td>
                     </tr>
                     <tr>
-                        <th>Request Date</th>
-                        <td>{{ $requestDate }}</td>
+                        <th style="padding: 10px; text-align: left; width: 150px;">Date & Time</th>
+                        <td style="padding: 10px;">{{ $dateAndTime }}</td>
                     </tr>
                 </table>
-                <p>We will process your request and notify you once it has been completed. If you have any questions, please contact our support team at 07533225970.</p>
+                <p>If you have any questions, please contact our support team at 07533225970.</p>
             </div>
             <div class="footer">
                 <p class="copyText">&copy; {{ date('Y') }} BristolCabwise Service. All rights reserved.</p>

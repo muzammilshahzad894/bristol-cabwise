@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Mail\BookingConfirmationMail;
 use App\Mail\BookingConfirmationAdminMail;
 use App\Mail\BookingCancellationMail;
+use App\Mail\BookingCancellationAdminMail;
 use App\Mail\BookingReminderMail;
 use App\Mail\ThankYouFeedbackMail;
 use App\Mail\RefundMail;
@@ -84,15 +85,23 @@ class EmailService
             'pickupDateTime' => $bookingDetails->pickupDateTime,
             'dropoffDateTime' => $bookingDetails->dropoffDateTime,
         ];
-
+        
         $emailAddresses = [$user->email];
+        Mail::to($emailAddresses)->send(new BookingCancellationMail($data));
+
         // In EmailSetting all the emails are stored that will receive the booking-cancellation email
         $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-cancellation%')->pluck('user_email');
         if ($emailSetting->count() > 0) {
-            $emailAddresses = array_merge($emailAddresses, $emailSetting->toArray());
+            foreach ($emailSetting as $email) {
+                $dataForAdmin = $data;
+                $dataForAdmin['adminName'] = $email->user_name;
+                
+                $adminEmailAddresses = $email->user_email;
+                Mail::to($adminEmailAddresses)->send(new BookingCancellationAdminMail($dataForAdmin));
+            }
         }
 
-        Mail::to($emailAddresses)->send(new BookingCancellationMail($data));
+
     }
 
     public function sendDriverAssign($driver, $bookingDetails)

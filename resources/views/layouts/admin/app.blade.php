@@ -147,9 +147,37 @@
 
     <script src="{{ asset('admin-assets/vendor/owl-carousel/owl.carousel.js') }}"></script>
 
-    <script src="{{ asset('admin-assets/vendor/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('admin-assets/js/custom.min.js') }}"></script>
     <script src="{{ asset('admin-assets/js/dlabnav-init.js') }}"></script>
+    <script src="{{url('/')}}/plugins/tiny_mce/tinymce.min.js"></script>
+    
+    <script type="text/javascript">
+        tinymce.init({
+            theme: "modern",
+            mode : "specific_textareas",
+            editor_selector : "mceEditor",
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "emoticons template paste textcolor colorpicker textpattern imagetools moxiemanager",
+                "insertdatetime media table contextmenu jbimages"
+            ],
+
+        relative_urls : false,
+        remove_script_host : false,
+        convert_urls : true,
+        document_base_url : "{{url('/')}}",
+
+            image_advtab: true,
+            templates: [
+                {title: 'Test template 1', content: 'Test 1'},
+                {title: 'Test template 2', content: 'Test 2'}
+            ]
+        });
+
+        var g_readTerms = false;
+    </script>
 
     <script>
         function JobickCarousel() {

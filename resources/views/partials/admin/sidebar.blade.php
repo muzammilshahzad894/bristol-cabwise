@@ -72,7 +72,7 @@
                         <span class="nav-text">Quotations</span>
                     </a>
                 </li>
-                <li class="{{ request()->routeIs('admin.custom-email.index') || request()->routeIs('admin.email-settings.index') ? 'mm-active' : '' }}">
+                <li class="{{ request()->routeIs('admin.custom-email.index') || request()->routeIs('admin.email-settings.index') || request()->routeIs('admin.email-content-settings.index') ? 'mm-active' : '' }}">
                     <a class="has-arrow " href="javascript:void()" aria-expanded="false">
                         <i class="fa fa-envelope"></i>
                         <span class="nav-text">Emails</span>
@@ -80,6 +80,7 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ route('admin.custom-email.index') }}">Custom Email</a></li>
                         <li><a href="{{ route('admin.email-settings.index') }}">Email Settings</a></li>
+                        <li><a href="{{ route('admin.email-content-settings.index') }}">Content Settings</a></li>
                     </ul>
                 </li>
                 <li class="{{ request()->routeIs('admin.settings.index') ? 'mm-active' : '' }}">

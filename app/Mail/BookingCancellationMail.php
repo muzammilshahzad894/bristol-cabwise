@@ -30,6 +30,6 @@ class BookingCancellationMail extends Mailable
     {
         return $this->view('emails.booking_cancellation')
             ->with($this->data)
-            ->subject('Booking Confirmation');
+            ->subject('Booking Cancelled');
     }
 }

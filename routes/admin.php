@@ -137,5 +137,10 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/update/{id}', [EmailController::class, 'updateEmailSettings'])->name('admin.email-settings.update');
         Route::get('/delete/{id}', [EmailController::class, 'deleteEmailSettings'])->name('admin.email-settings.delete');
     });
+    Route::prefix('admin/email-content-settings')->group(function () {
+        Route::get('/', [EmailController::class, 'emailContentSettings'])->name('admin.email-content-settings.index');
+        Route::get('/edit/{id}', [EmailController::class, 'editEmailContentSettings'])->name('admin.email-content-settings.edit');
+        Route::post('/update/{id}', [EmailController::class, 'updateEmailContentSettings'])->name('admin.email-content-settings.update');
+    });
     Route::get('/get-quotes', [QuotationController::class, 'getquote'])->name('admin.getquote');
 });

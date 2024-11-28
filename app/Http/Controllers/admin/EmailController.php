@@ -7,6 +7,7 @@ use App\Services\EmailService;
 use App\Http\Requests\SendCustomEmailRequest;
 use App\Http\Requests\StoreEmailSettingRequest;
 use App\Http\Requests\UpdateEmailSettingRequest;
+use App\Http\Requests\UpdateEmailContentRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
@@ -14,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Models\SendingEmailList;
 use App\Models\EmailSetting;
+use App\Models\EmailContentSetting;
 
 class EmailController extends Controller
 {
@@ -192,6 +194,36 @@ class EmailController extends Controller
         } catch (Exception $e) {
             Log::error('Error deleting email settings: ' . $e->getMessage());
             return back()->with('error', 'Error deleting email settings');
+        }
+    }
+    
+    public function emailContentSettings()
+    {
+        $emailContentSettings = EmailContentSetting::get();
+        return view('admin.email-content-settings.index', compact('emailContentSettings'));
+    }
+    
+    public function editEmailContentSettings($id)
+    {
+        try {
+            $emailContentSetting = EmailContentSetting::find($id);
+            return view('admin.email-content-settings.edit', compact('emailContentSetting'));
+        } catch (Exception $e) {
+            Log::error('Error editing email content settings: ' . $e->getMessage());
+            return back()->with('error', 'Error editing email content settings');
+        }
+    }
+    
+    public function updateEmailContentSettings(UpdateEmailContentRequest $request, $id)
+    {
+        try {
+            $data = $request->validated();
+
+            EmailContentSetting::find($id)->update($data);
+            return redirect()->route('admin.email-content-settings.index')->with('success', 'Email content updated successfully');
+        } catch (Exception $e) {
+            Log::error('Error updating email content settings: ' . $e->getMessage());
+            return back()->with('error', 'Error updating email content settings');
         }
     }
 }
