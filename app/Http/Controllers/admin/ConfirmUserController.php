@@ -227,9 +227,9 @@ class ConfirmUserController extends Controller
             $bookingDetails = (object) [
                 'bookingId' => $booking->id,
                 'serviceType' => $booking->service->name,
-                'pickupLocation' => $booking->pickup_location,
+                'pickupLocation' => $booking->return_id ? $returnBooking->pickup_location : $booking->pickup_location,
                 'via_locations' => $booking->via_locations ? json_decode($booking->via_locations) : [],
-                'dropoffLocation' => $booking->dropoff_location,
+                'dropoffLocation' => $booking->return_id ? $returnBooking->dropoff_location : $booking->dropoff_location,
                 'dateAndTime' => $booking->return_id ? formatDate($returnBooking->booking_date) . ' ' . foramtTime($returnBooking->booking_date) : formatDate($booking->booking_date) . ' ' . foramtTime($booking->booking_time),
                 'is_return' => $booking->return_id ? true : false,
                 'return_dateAndTime' => $booking->return_id ? formatDate($booking->booking_date) . ' ' . foramtTime($booking->booking_time) : null,
