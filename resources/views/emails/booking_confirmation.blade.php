@@ -17,9 +17,11 @@
                     </tr>
                     <tr>
                         <td style="background-color: #ef8e1c; padding: 20px; color: #ffffff;">
-                            <h3 style="text-align: center; color: #ffffff;">Your Booking with Bristol Cabwise is Confirmed!</h3>
+                            <h3 style="text-align: center; color: #ffffff;">{{ @$emailContent->subject }}</h3>
                             <p style="color: #ffffff;">Dear {{ $userName }},</p>
-                            <p style="color: #ffffff;">Thank you for choosing Bristol Cabwise for your upcoming journey! We are pleased to confirm your booking:</p>
+                            <p style="color: #ffffff;">
+                                {!! @$emailContent->introductory_message !!}
+                            </p>
                             <h3 style="color: #000000;">Summary:</h3>
                             <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
                                 <tr style="background-color: #000000; color: #ffffff;">
@@ -139,20 +141,14 @@
                                     <td style="padding: 10px;">£{{ $is_return ? $fleet_price * 2 : $fleet_price }}</td>
                                 </tr>
                             </table>
-                            <p>If you have any questions or need to make changes to your booking, please don't hesitate to contact us at *0117 332 2782*.</p>
-                            <p>Wishing you a safe and pleasant journey!</p>
-                            <p style="margin-bottom: 0;">
-                                To view our terms and condition, please click on the link given below
-                            </p>
-                            <p style="margin-top: 2px;">
-                                <a href="{{ url('term-condition') }}" style="text-decoration: none;">Terms and Conditions</a>
+                            <p>
+                                {!! @$emailContent->note !!}
                             </p>
                         </td>
                     </tr>
                     <tr>
-                        <td style="background-color: #000000; color: #ffffff; text-align: center; padding: 10px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
-                            <p style="font-size: 12px; margin: 0;">Best regards</p>
-                            <p style="font-size: 12px; margin: 0;">The Bristol Cabwise Team</p>
+                        <td style="background-color: #000000; color: #ffffff; text-align: center; padding: 10px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;" class="closing_text">
+                            {!! @$emailContent->closing_text !!}
                         </td>
                     </tr>
                 </table>

@@ -108,15 +108,68 @@ class PaymentController extends Controller
             Log::info('Payment successful, redirecting to booking success page.');
             return redirect()->route('booking.success')->with('success', 'Payment successful.');
         } else {
+            dd('Booking not found');
             // If the booking does not exist, redirect back with an error message
             return redirect()->back()->with('error', 'Booking not found.');
         }
     }
     
 
-    public function paymentCancel()
+    public function paymentCancel($id)
     {
-        return view('frontend.booking.cancel');
+        $booking = Booking::find($id);
+        if($booking->return_id){
+            $returnBooking = Booking::find($booking->return_id);
+            $returnBooking->is_payment = 0;
+            $returnBooking->is_draft = 1;
+            $returnBooking->save();
+        }
+        if ($booking) {
+            $booking->is_payment = 0;
+            $booking->is_draft = 1;
+            $booking->save();
+            $bookingName =$booking->pickup_location;
+            $user = User::find($booking->user_id);
+            $couponDiscount = UsedCoupon::where('user_id', $user->id)->first();
+            $coupon = null;
+            if($couponDiscount){
+                $coupon = Coupon::where('id', $couponDiscount->coupon_id)->first(); 
+            }
+            $bookingDetails = (object) [
+                'bookingId' => $booking->id,
+                'serviceType' => $booking->service->name,
+                'pickupLocation' => $booking->pickup_location,
+                'via_locations' => $booking->via_locations ? json_decode($booking->via_locations) : [],
+                'dropoffLocation' => $booking->dropoff_location,
+                'dateAndTime' => $booking->return_id ? formatDate($returnBooking->booking_date) . ' ' . foramtTime($returnBooking->booking_date) : formatDate($booking->booking_date) . ' ' . foramtTime($booking->booking_time),
+                'is_return' => $booking->return_id ? true : false,
+                'return_dateAndTime' => $booking->return_id ? formatDate($booking->booking_date) . ' ' . foramtTime($booking->booking_time) : null,
+                'name' => $booking->name,
+                'telephone' => $booking->phone_number,
+                'email' => $booking->email,
+                'no_of_passenger' => $booking->no_of_passenger,
+                'is_childseat' => $booking->is_childseat ? $booking->is_childseat : '-',
+                'is_meet_greet' => $booking->is_meet_greet ? 'Yes' : '-',
+                'no_suit_case' => $booking->no_suit_case,
+                'no_of_laugage' => $booking->no_of_laugage,
+                'summary' => $booking->summary ? $booking->summary : '-',
+                'other_name' => $booking->other_name ? $booking->other_name : '-',
+                'other_phone_number' => $booking->other_phone_number ? $booking->other_phone_number : '-',
+                'other_email' => $booking->other_email ? $booking->other_email : '-',
+                'fleet_price' => $booking->total_price,
+                'is_extra_lauggage' => $booking->is_extra_lauggage ? 'Yes' : '-',
+                'coupon_discount' => $coupon ? $coupon->discount : 0,
+            ];
+
+            $this->emailService->sendBookingCancellation($user, $bookingDetails);
+            
+            Log::info('Payment successful, redirecting to booking success page.');
+            return view('frontend.booking.cancel');
+        } else {
+            dd('Booking not found');
+            // If the booking does not exist, redirect back with an error message
+            return redirect()->back()->with('error', 'Booking not found.');
+        }
     }
     public function generatePayPalLink($bookingId)
 {

@@ -68,7 +68,7 @@ Route::get('/paypal/cancel', [PayPalController::class, 'cancelPayment'])->name('
 
 Route::post('/create-checkout-session/{id}', [PaymentController::class, 'createCheckoutSession'])->name('create.checkout.session');
 Route::get('/payment-success/{id}', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
-Route::get('/payment-cancel', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
+Route::get('/payment-cancel/{id}', [PaymentController::class, 'paymentCancel'])->name('payment.cancel');
 Route::get('/get-payment/{id}', [PaymentController::class, 'showStripePaymentPage'])->name('stripe.payment');
 Route::post('/prepare-for-registration', [PaymentController::class, 'prepareForRegistration'])->name('prepare-for-registration');
 
