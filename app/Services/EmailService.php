@@ -215,13 +215,14 @@ class EmailService
         
         // In EmailSetting all the emails are stored that will receive the refund-request email
         $emailSetting = EmailSetting::where('receiving_emails', 'like', '%refund-request%')->get();
+        $emailContentAdmin = EmailContentSetting::where('title', 'refund-request-admin')->first();
         if ($emailSetting->count() > 0) {
             foreach ($emailSetting as $email) {
                 $dataForAdmin = $data;
                 $dataForAdmin['adminName'] = $email->user_name;
                 
                 $adminEmailAddresses = $email->user_email;
-                Mail::to($adminEmailAddresses)->send(new RefundMailAdmin($dataForAdmin));
+                Mail::to($adminEmailAddresses)->send(new RefundMailAdmin($dataForAdmin, $emailContentAdmin));
             }
         }
     }
