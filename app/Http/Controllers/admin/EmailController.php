@@ -199,7 +199,8 @@ class EmailController extends Controller
     
     public function emailContentSettings()
     {
-        $emailContentSettings = EmailContentSetting::get();
+        $notGetTitle = ['booking-reminder'];
+        $emailContentSettings = EmailContentSetting::whereNotIn('title', $notGetTitle)->get();
         return view('admin.email-content-settings.index', compact('emailContentSettings'));
     }
     

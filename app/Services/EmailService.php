@@ -256,19 +256,20 @@ class EmailService
             'status' => $bookingDetails['status'],
         ];
 
+        $emailContent = EmailContentSetting::where('title', 'booking-status-update')->first();
         $emailAddresses = [$bookingDetails['email']];
-        Mail::to($emailAddresses)->send(new BookingStatusMail($data));
-        
+        Mail::to($emailAddresses)->send(new BookingStatusMail($data, $emailContent));
         
         // In EmailSetting all the emails are stored that will receive the booking-status-change email
         $emailSetting = EmailSetting::where('receiving_emails', 'like', '%booking-status-change%')->get();
+        $emailContentAdmin = EmailContentSetting::where('title', 'booking-status-update-admin')->first();
         if ($emailSetting->count() > 0) {
             foreach ($emailSetting as $email) {
                 $dataForAdmin = $data;
                 $dataForAdmin['adminName'] = $email->user_name;
                 
                 $adminEmailAddresses = $email->user_email;
-                Mail::to($adminEmailAddresses)->send(new BookingStatusAdminMail($dataForAdmin));
+                Mail::to($adminEmailAddresses)->send(new BookingStatusAdminMail($dataForAdmin, $emailContentAdmin));
             }
         }
     }
