@@ -160,8 +160,9 @@ class EmailService
             'other_email' => $bookingDetails->other_email,
             'is_extra_lauggage' => $extraLaugage,
         ];
-
-        Mail::to($driver->email)->send(new DriverAssignMail($data));
+        
+        $emailContent = EmailContentSetting::where('title', 'driver-assign')->first();
+        Mail::to($driver->email)->send(new DriverAssignMail($data, $emailContent));
     }
 
     public function sendBookingReminder($user, $bookingDetails)
