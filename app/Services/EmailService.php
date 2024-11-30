@@ -378,10 +378,13 @@ class EmailService
             'comment' => $emailData['comment'],
         ];
         
-        Mail::to(setting('admin_email'))->send(new QuoteRequest($data));
+        $emailContent = EmailContentSetting::where('title', 'quote-request')->first();
+        $emailAddresses = [$emailData['email']];
+        Mail::to($emailAddresses)->send(new QuoteRequest($data, $emailContent));
         
+        $emailContentAdmin = EmailContentSetting::where('title', 'quote-request-admin')->first();
         if(setting('admin_email')) {
-            Mail::to(setting('admin_email'))->send(new QuoteRequestAdmin($data));
+            Mail::to(setting('admin_email'))->send(new QuoteRequestAdmin($data, $emailContentAdmin));
         }
     }
 }
