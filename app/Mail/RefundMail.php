@@ -10,15 +10,19 @@ use Illuminate\Queue\SerializesModels;
 class RefundMail extends Mailable
 {
     use Queueable, SerializesModels;
+    
+    public $data;
+    public $emailContent;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data, $emailContent)
     {
         $this->data = $data;
+        $this->emailContent = $emailContent;
     }
 
     /**
@@ -29,7 +33,7 @@ class RefundMail extends Mailable
     public function build()
     {
         return $this->view('emails.refund')
-            ->with($this->data)
+            ->with($this->data, $this->emailContent)
             ->subject('Refund Confirmation');
     }
 }

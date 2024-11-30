@@ -209,8 +209,9 @@ class EmailService
             'bookingId' => $feedbackLink->bookingId,
         ];
 
+        $emailContent = EmailContentSetting::where('title', 'refund-request')->first();
         $emailAddresses = [$user->email];
-        Mail::to($emailAddresses)->send(new RefundMail($data));
+        Mail::to($emailAddresses)->send(new RefundMail($data, $emailContent));
         
         // In EmailSetting all the emails are stored that will receive the refund-request email
         $emailSetting = EmailSetting::where('receiving_emails', 'like', '%refund-request%')->get();
