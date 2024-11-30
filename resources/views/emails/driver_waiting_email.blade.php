@@ -17,9 +17,11 @@
                     </tr>
                     <tr>
                         <td style="background-color: #ef8e1c; padding: 20px; color: #ffffff;">
-                            <h3 style="text-align: center; color: #ffffff;">Your Driver Has Arrived!</h3>
+                            <h3 style="text-align: center; color: #ffffff;">{{ @$emailContent->subject }}</h3>
                             <p style="color: #ffffff;">Dear {{ $userName }},</p>
-                            <p style="color: #ffffff;">We are pleased to inform you that your driver has arrived and is waiting for you at the designated pickup location. Here are the details of your ride:</p>
+                            <p style="color: #ffffff;">
+                                {!! @$emailContent->introductory_message !!}
+                            </p>
                             <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
                                 <tr style="background-color: #000000; color: #ffffff;">
                                     <th style="padding: 10px; text-align: left; width: 150px;">Pickup Location</th>
@@ -42,15 +44,14 @@
                                     <td style="padding: 10px;">{{ $driverContact }}</td>
                                 </tr>
                             </table>
-                            <p style="margin-bottom: 0px; padding: 0px; color: #ffffff;">Please proceed to the pickup location at your earliest convenience. If you need to contact your driver, you can reach them at the provided contact number.</p>
-                            <p style="margin: 0px; padding: 0px; color: #ffffff;">Thank you for choosing our service. We wish you a pleasant journey!</p>
-                            <p style="margin-bottom: 0px; padding: 0px; color: #ffffff;">Best regards,</p>
-                            <p style="margin: 0px; padding: 0px; color: #ffffff;"><strong>BristolCabwise Team</strong></p>
+                            <p style="margin-bottom: 0px; padding: 0px; color: #ffffff;">
+                                {!! @$emailContent->note !!}
+                            </p>
                         </td>
                     </tr>
                     <tr>
                         <td style="background-color: #000000; color: #ffffff; text-align: center; padding: 10px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
-                            <p style="font-size: 12px; margin: 0;">&copy; {{ date('Y') }} BristolCabwise Service. All rights reserved.</p>
+                            {!! @$emailContent->closing_text !!}
                         </td>
                     </tr>
                 </table>

@@ -241,7 +241,8 @@ class EmailService
             setting('admin_email'),
         ];
 
-        Mail::to($emailAddresses)->send(new DriverWaitingEmail($data));
+        $emailContent = EmailContentSetting::where('title', 'driver-waiting')->first();
+        Mail::to($emailAddresses)->send(new DriverWaitingEmail($data, $emailContent));
     }
 
     public function sendBookingStatusEmail($bookingDetails)
