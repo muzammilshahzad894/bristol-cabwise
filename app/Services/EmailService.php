@@ -313,18 +313,20 @@ class EmailService
             $data['amount'] = $emailData['amount'];
         }
 
+        $emailContent = EmailContentSetting::where('title', 'refund-status-update')->first();
         $emailAddresses = [$emailData['user_email']];
-        Mail::to($emailAddresses)->send(new RefundStatusMail($data));
+        Mail::to($emailAddresses)->send(new RefundStatusMail($data, $emailContent));
         
         // In EmailSetting all the emails are stored that will receive the refund-status-change email
         $emailSetting = EmailSetting::where('receiving_emails', 'like', '%refund-status-change%')->get();
+        $emailContentAdmin = EmailContentSetting::where('title', 'refund-status-update-admin')->first();
         if ($emailSetting->count() > 0) {
             foreach ($emailSetting as $email) {
                 $dataForAdmin = $data;
                 $dataForAdmin['adminName'] = $email->user_name;
                 
                 $adminEmailAddresses = $email->user_email;
-                Mail::to($adminEmailAddresses)->send(new RefundStatusAdminMail($dataForAdmin));
+                Mail::to($adminEmailAddresses)->send(new RefundStatusAdminMail($dataForAdmin, $emailContentAdmin));
             }
         }
     }
