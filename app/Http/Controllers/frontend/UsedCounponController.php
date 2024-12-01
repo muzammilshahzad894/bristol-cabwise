@@ -13,7 +13,7 @@ use App\Models\FleetTax;
 
 use App\Models\Coupon;
 use App\Models\UsedCoupon;
-class UsedCouponController extends Controller
+class UsedCounponController extends Controller
 {
     
     public function index($code)

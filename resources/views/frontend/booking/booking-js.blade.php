@@ -37,6 +37,7 @@
     let is_return = 0;
     let message = '';
     let isMessage = false;
+    let vialocation_charges = 0;
 
     function showReturn() {
         var returnCheckbox = document.getElementById('return');
@@ -60,6 +61,54 @@
             dropoffLocation.value = '';
         }
     }
+
+
+    function addMore() {
+        const dropLocationsDiv = document.getElementById('via_locatoins_input');
+        const newDropLocationDiv = document.createElement('div');
+        const newIndex = indexcount + 1;
+
+        newDropLocationDiv.className = 'drop-location mb-2 d-flex align-items-center';
+        newDropLocationDiv.innerHTML = `
+        <input type="text" id="dropLocation${newIndex}" name="via_locations[]" placeholder="Enter Via location" class="form-control border-radius-0 mb-0 dropoffLocations">
+        <button type="button" class="btn btn-danger btn-sm ms-2 remove-btn">✖</button>
+        <div id="drop-error" class="error-message text-danger"></div>
+    `;
+
+        // Append the new div to the parent container
+        dropLocationsDiv.appendChild(newDropLocationDiv);
+
+        // Recalculate vialocation_charges
+        updateViaLocationCharges();
+
+        // Add event listener to the remove button
+        const removeButton = newDropLocationDiv.querySelector('.remove-btn');
+        removeButton.addEventListener('click', function() {
+            // Remove the via location
+            dropLocationsDiv.removeChild(newDropLocationDiv);
+
+            // Recalculate vialocation_charges
+            updateViaLocationCharges();
+        });
+
+        // Initialize the new location input
+        handleDestinationPlaceChange(newIndex);
+        indexcount++;
+    }
+
+    // Function to calculate vialocation_charges dynamically
+    function updateViaLocationCharges() {
+        const dropLocationsDiv = document.getElementById('via_locatoins_input');
+        const locationCount = dropLocationsDiv.children.length;
+        console.log('Current locationCount:', locationCount); // For debugging purpose
+        if (locationCount > 0) {
+            vialocation_charges = 5;
+        } else if (locationCount == 0) {
+            vialocation_charges = 0;
+        }
+        console.log('Updated Vialocation Charges:', vialocation_charges); // For debugging purpose
+    }
+
 
 
     $(document).ready(function() {
@@ -356,6 +405,7 @@
 
     function nextStep() {
         if (currentStep == 1) {
+            checkAndCalculateDistances();
             var maplocation = document.getElementById('mapMarkplaces');
             maplocation.style.display = 'block';
         } else {
@@ -459,7 +509,11 @@
                 total_price = Total_price;
 
                 updateSummary();
+                
+                var login_user = document.getElementById('login_user').value;
+                if(login_user !== 'admin'){
                 bookAndPay();
+                }
             }
 
             currentStep++;
@@ -528,10 +582,10 @@
 
                     let returnPrice = is_return == 1 ? 2 : 1;
                     var totalPrice = fleetPrice + totalTax * returnPrice;
-                    if(totalPrice % 1 !== 0) {
+                    if (totalPrice % 1 !== 0) {
                         totalPrice = parseFloat(totalPrice.toFixed(2));
                     }
-                    
+
                     if (isNaN(totalPrice)) {
                         alert('An error occurred: Total price is not a number.');
                         location.reload();
@@ -625,77 +679,79 @@
 
         if (service_type == 'Airport transfers') {
             if (dist > 150) {
-                fleetPrice = dist * (airport_after_150_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_150_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 140) {
-                fleetPrice = dist * (airport_after_140_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_140_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 130) {
-                fleetPrice = dist * (airport_after_130_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_130_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 120) {
-                fleetPrice = dist * (airport_after_120_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_120_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 110) {
-                fleetPrice = dist * (airport_after_110_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_110_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 100) {
-                fleetPrice = dist * (airport_after_100_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_100_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 90) {
-                fleetPrice = dist * (airport_after_90_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_90_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 80) {
-                fleetPrice = dist * (airport_after_80_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_80_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 70) {
-                fleetPrice = dist * (airport_after_70_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_70_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 60) {
-                fleetPrice = dist * (airport_after_60_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_60_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 50) {
-                fleetPrice = dist * (airport_after_50_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_50_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 40) {
-                fleetPrice = dist * (airport_after_40_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_40_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 30) {
-                fleetPrice = dist * (airport_after_30_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_30_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 20) {
-                fleetPrice = dist * (airport_after_20_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_20_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 10) {
-                fleetPrice = dist * (airport_after_10_miles || 1) * returnPrice;
+                fleetPrice = dist * (airport_after_10_miles || 1) * returnPrice + vialocation_charges;
             } else {
-                fleetPrice = dist * (price || 1) * returnPrice;
+                fleetPrice = dist * (price || 1) * returnPrice + vialocation_charges;
             }
         } else {
-            if(dist > 150) {
-                fleetPrice = dist * (price_after_150_miles || 1) * returnPrice;
+            if (dist > 150) {
+                fleetPrice = dist * (price_after_150_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 140) {
-                fleetPrice = dist * (price_after_140_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_140_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 130) {
-                fleetPrice = dist * (price_after_130_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_130_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 120) {
-                fleetPrice = dist * (price_after_120_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_120_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 110) {
-                fleetPrice = dist * (price_after_110_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_110_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 100) {
-                fleetPrice = dist * (price_after_100_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_100_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 90) {
-                fleetPrice = dist * (price_after_90_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_90_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 80) {
-                fleetPrice = dist * (price_after_80_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_80_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 70) {
-                fleetPrice = dist * (price_after_70_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_70_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 60) {
-                fleetPrice = dist * (price_after_60_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_60_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 50) {
-                fleetPrice = dist * (price_after_50_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_50_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 40) {
-                fleetPrice = dist * (price_after_40_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_40_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 30) {
-                fleetPrice = dist * (price_after_30_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_30_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 20) {
-                fleetPrice = dist * (price_after_20_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_20_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 10) {
-                fleetPrice = dist * (price_after_10_miles || 1) * returnPrice;
+                fleetPrice = dist * (price_after_10_miles || 1) * returnPrice + vialocation_charges;
             } else {
-                fleetPrice = dist * (price || 1) * returnPrice;
+                fleetPrice = dist * (price || 1) * returnPrice + vialocation_charges;
             }
-           
+
         }
 
         if (fleetPrice < min_booking_price) {
-            fleetPrice = min_booking_price * returnPrice;
+
+            console.log('Return Price:', vialocation_charges);
+            fleetPrice = min_booking_price * returnPrice + vialocation_charges;
         }
 
         return fleetPrice;
@@ -1082,7 +1138,7 @@
             return: is_return,
             service_id: service_id,
             fleet_id: Fleet_id,
-            total_price: Total_price,
+            total_price: FleetPrice,
             payment_method: payment_method,
             via_locations: viaLocations,
 
@@ -1143,15 +1199,21 @@
                         var Debitcard = window.location.origin + '/client-booking-payment?payment_id=' + data
                             .booking_id;
 
-
+                        current_booking_id = data.booking_id;
                         var modalStyleElements = document.getElementsByClassName('modal_style_p');
                         for (var i = 0; i < modalStyleElements.length; i++) {
                             modalStyleElements[i].style.display = 'block';
                         }
                         document.getElementById('client_url').textContent = Debitcard;
-
+                      
                     } else {
                         current_booking_id = data.booking_id;
+                    }
+                }
+
+                if(login_user == 'admin'){
+                    if (coupon_apply !== '') {
+                            StoreCouponCode();
                     }
                 }
             })
@@ -1373,12 +1435,15 @@
                 url: '/store-coupon',
                 type: 'POST',
                 data: {
-                    coupon: coupon_apply
+                    coupon: coupon_apply,
+                    booking_id: current_booking_id
                 },
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-                success: function(response) {},
+                success: function(response) {
+                    console.log('Coupon code stored successfully:', response);
+                },
                 error: function(xhr, status, error) {
                     console.error('Error:', error); // Log the error to the console
                 }

@@ -12,7 +12,8 @@
         padding: 0;
         margin: 0;
     }
-    .minimum_hours{
+
+    .minimum_hours {
         font-size: 12px;
         color: orange;
 
@@ -32,12 +33,14 @@
     .pickupLocation {
         border-radius: 0px !important;
     }
-    .design_style{
+
+    .design_style {
         display: flex;
         justify-content: center;
         text-align: center;
     }
-    .description{
+
+    .description {
         font-size: 17px !important;
         font-weight: 500 !important;
     }
@@ -98,7 +101,9 @@
                             <div class="text-white"><a href="#">book online</a></div> --}}
                         </div>
                         <h1 style="color: orange">Book Your Ride</h1>
-                        <p class="description" style="color: white;">Reserve your cab here. We provide a reliable 24-hour cab service in Bristol and across the UK, featuring professional drivers and transparent pricing. Experience hassle-free booking and exceptional service.</p>
+                        <p class="description" style="color: white;">Reserve your cab here. We provide a reliable 24-hour
+                            cab service in Bristol and across the UK, featuring professional drivers and transparent
+                            pricing. Experience hassle-free booking and exceptional service.</p>
                     </div>
                 </div>
             </div>
@@ -203,41 +208,37 @@
                                 @endphp
                                 <div>
                                     <label for="date">Date & Time:</label>
-                                    <input type="datetime-local"
-                                        class="styled-input timepicker border-radius-0 mb-0"
-                                        placeholder="Return Date"
-                                         id="date-time"
+                                    <input type="datetime-local" class="styled-input timepicker border-radius-0 mb-0"
+                                        placeholder="Return Date" id="date-time"
                                         value="{{ isset($booking_detail) ? (isset($booking_detail->booking_date) && isset($booking_detail->booking_time) ? $booking_detail->booking_date . 'T' . $booking_detail->booking_time : '') : '' }}" />
-                                        <p class="minimum_hours"></p>
+                                    <p class="minimum_hours"></p>
                                     <div id="date-time-error" class="error-message text-danger"></div>
                                 </div>
                                 <div class=" meet_greet d-flex" style="gap:10px;align-items:center"
                                     onclick="showReturn();">
-                                        <input type="checkbox" id="return" name="return" value=""
-                                        class="mb-0" @if (isset($booking_detail) && $booking_detail->is_return == 1) checked @endif>
-                                        <label for="return">Return Journey</label>
+                                    <input type="checkbox" id="return" name="return" value="" class="mb-0"
+                                        @if (isset($booking_detail) && $booking_detail->is_return == 1) checked @endif>
+                                    <label for="return">Return Journey</label>
                                 </div>
 
                                 <div id="return_location" style="display: none;margin-top:24px;">
                                     <div id="return_date">
                                         <label for="return_date">Return Date & Time:</label>
                                         <input type="datetime-local" name="return_date_time"
-                                            class="styled-input timepicker border-radius-0 mb-0"
-                                            placeholder="Return Date" id="return_date_time"
+                                            class="styled-input timepicker border-radius-0 mb-0" placeholder="Return Date"
+                                            id="return_date_time"
                                             value="{{ isset($booking_detail) ? (isset($booking_detail->return_date) && isset($booking_detail->return_time) ? $booking_detail->return_date . 'T' . $booking_detail->return_time : '') : '' }}" />
-                                            <p class="minimum_hours"></p>
+                                        <p class="minimum_hours"></p>
                                         <div id="return_date_time-error" class="error-message text-danger"></div>
                                     </div>
                                     <label for="return_pickupLocation">Return Pickup Location:</label>
-                                    <input type="text"  name="return_pickupLocation"
-                                        placeholder="" id="return_pickupLocation"
-                                        class="form-control  border-radius-0 mb-0" disabled>
+                                    <input type="text" name="return_pickupLocation" placeholder=""
+                                        id="return_pickupLocation" class="form-control  border-radius-0 mb-0" disabled>
                                     <label for="return_dropLocation">Return Dropoff Location:</label>
                                     <div id="return_dropLocations">
                                         <div class=" mb-2">
                                             <input type="text" name="return_dropLocation" disabled
-                                            id="return_dropLocation"
-                                                placeholder=""
+                                                id="return_dropLocation" placeholder=""
                                                 class="form-control border-radius-0 mb-0 ">
                                         </div>
                                     </div>
@@ -499,7 +500,7 @@
                                         <p id="summary-meet-greet"></p>
                                     </div>
                                 </div>
-                                <div  id="summary-service_texas" style="">
+                                <div id="summary-service_texas" style="">
                                 </div>
                                 <div class="d-none gap-4 " id="summary-meet-greet_price_div" style="display: none">
                                     <strong>Extra Lauggage:</strong>
@@ -628,7 +629,8 @@
                         <div class="icon_text">
                             <i class="fa-solid fa-exclamation"></i>
                             <p>
-                                The vehicle images above are examples.You may get a different vehicle of the similar quality.
+                                The vehicle images above are examples.You may get a different vehicle of the similar
+                                quality.
                             </p>
                         </div>
 
@@ -682,8 +684,6 @@
 
     <script type="text/javascript">
         var login_user = @json($userLoggedIn);
-        console.log(login_user);
-
         var payment_id = '{{ request('payment_id') }}';
         var stripeKey = '{{ config('services.stripe.key') }}';
         if (!stripeKey) {
@@ -755,14 +755,14 @@
                         });
                 }
 
-        }
+            }
 
-        // if (payment_id) {
-        //     var button = document.getElementById('checkout-button');
-        //     button.addEventListener('click', function() {
-        //         PayonStripe(payment_id);
-        //     });
-        // }
+            // if (payment_id) {
+            //     var button = document.getElementById('checkout-button');
+            //     button.addEventListener('click', function() {
+            //         PayonStripe(payment_id);
+            //     });
+            // }
 
         }
     </script>
@@ -860,21 +860,9 @@
             });
         }
 
-        function addMore() {
-            const dropLocationsDiv = document.getElementById('via_locatoins_input');
-            const newDropLocationDiv = document.createElement('div');
-            const newIndex = indexcount + 1;
-            newDropLocationDiv.className = 'drop-location mb-2';
-            newDropLocationDiv.innerHTML = `
-                <input type="text" id="dropLocation${newIndex}" name="via_locations[]" placeholder="Enter Via location" class="form-control border-radius-0 mb-0 dropoffLocations">
-                <div id="drop-error" class="error-message text-danger"></div>
-            `;
 
-            dropLocationsDiv.appendChild(newDropLocationDiv);
 
-            handleDestinationPlaceChange(newIndex);
-            indexcount++;
-        }
+
 
         function checkAndCalculateDistances() {
             if (!originPlace || destinationPlaces.length === 0) {
@@ -983,208 +971,9 @@
                 }
             });
         }
+
+   
     </script>
-    {{-- <script>
-        let geocoder;
-        let distanceService;
-        let originAutocomplete;
-        let map;
-        let originPlace = null;
-        let destinationPlaces = [];
-        let distances = [];
-        let totalDistance = 0;
-        let markers = [];
-        let directionsService;
-        let directionsRenderer;
-        let infoWindow;
-
-        $(document).ready(function() {
-            // Initialize Google Maps centered on Bristol, UK
-            const bristolLocation = { lat: 51.4545, lng: -2.5879 };
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: bristolLocation,
-                zoom: 13
-            });
-
-            directionsService = new google.maps.DirectionsService();
-            directionsRenderer = new google.maps.DirectionsRenderer();
-            directionsRenderer.setMap(map);
-
-            infoWindow = new google.maps.InfoWindow();
-
-            const pickupInput = document.getElementById('pickupLocation');
-            originAutocomplete = new google.maps.places.Autocomplete(pickupInput, {
-                bounds: new google.maps.LatLngBounds(
-                    new google.maps.LatLng(49.959999, -7.572168), // South West Corner
-                    new google.maps.LatLng(58.635000, 1.681530) // North East Corner
-                ),
-                componentRestrictions: { country: 'uk' },
-                types: ['geocode']
-            });
-            originAutocomplete.addListener('place_changed', handleOriginPlaceChange);
-
-            geocoder = new google.maps.Geocoder();
-            distanceService = new google.maps.DistanceMatrixService();
-
-            // Initialize the first drop location autocomplete
-            handleDestinationPlaceChange(0);
-        });
-
-        function handleOriginPlaceChange() {
-            originPlace = originAutocomplete.getPlace();
-            if (!originPlace || !originPlace.geometry || !isPlaceInUK(originPlace)) {
-                alert('Invalid pickup location. Please select a valid location within the UK.');
-                originPlace = null; // Reset originPlace if it's invalid
-                return;
-            }
-            addMarker(originPlace.geometry.location, originPlace.formatted_address);
-            checkAndCalculateDistances();
-        }
-
-        function handleDestinationPlaceChange(index) {
-            const input = document.querySelectorAll('#dropLocations input')[index];
-
-            const autocomplete = new google.maps.places.Autocomplete(input, {
-                bounds: new google.maps.LatLngBounds(
-                    new google.maps.LatLng(49.959999, -7.572168), // South West Corner of the UK
-                    new google.maps.LatLng(58.635000, 1.681530) // North East Corner of the UK
-                ),
-                componentRestrictions: { country: 'uk' },
-                types: ['geocode']
-            });
-
-            autocomplete.addListener('place_changed', () => {
-                const place = autocomplete.getPlace();
-                if (!place || !place.geometry || !isPlaceInUK(place)) {
-                    alert('Invalid drop location. Please select a valid location within the UK.');
-                    destinationPlaces[index] = null; // Reset the invalid destination place
-                    return;
-                }
-                destinationPlaces[index] = place;
-                addMarker(place.geometry.location, place.formatted_address);
-                checkAndCalculateDistances();
-            });
-        }
-
-        function addMore() {
-            const dropLocationsDiv = document.getElementById('dropLocations');
-            const newDropLocationDiv = document.createElement('div');
-            const newIndex = destinationPlaces.length;
-
-            newDropLocationDiv.className = 'drop-location mb-2';
-            newDropLocationDiv.innerHTML = `
-                <input type="text" id="dropLocation${newIndex}" name="dropLocation[]" placeholder="Enter drop location" class="form-control border-radius-0 mb-0">
-                <div id="drop-error" class="error-message text-danger"></div>
-            `;
-
-            dropLocationsDiv.appendChild(newDropLocationDiv);
-            handleDestinationPlaceChange(newIndex);
-        }
-
-        function checkAndCalculateDistances() {
-            if (!originPlace || destinationPlaces.length === 0) {
-                return;
-            }
-
-            const allPlaces = [originPlace, ...destinationPlaces].filter(place => place);
-            if (allPlaces.length < 2) {
-                return;
-            }
-
-            totalDistance = 0;
-            distances = [];
-            clearMarkers();
-            for (let i = 0; i < allPlaces.length - 1; i++) {
-                const originLatLng = allPlaces[i].geometry.location;
-                const destinationLatLng = allPlaces[i + 1].geometry.location;
-
-                addMarker(originLatLng, allPlaces[i].formatted_address);
-                addMarker(destinationLatLng, allPlaces[i + 1].formatted_address);
-
-                calculateDistance(originLatLng, destinationLatLng, i);
-            }
-
-            drawRoute(allPlaces);
-            adjustMapViewport(allPlaces); // Adjust the map to fit all markers
-        }
-
-        function calculateDistance(origin, destination, index) {
-            distanceService.getDistanceMatrix({
-                origins: [origin],
-                destinations: [destination],
-                travelMode: google.maps.TravelMode.DRIVING
-            }, (response, status) => {
-                if (status === 'OK') {
-                    const distanceValueInMeters = response.rows[0].elements[0].distance.value;
-                    const distanceValueInMiles = distanceValueInMeters / 1609.34; // Convert meters to miles
-                    distances[index] = distanceValueInMiles;
-                    updateTotalDistance();
-                } else {
-                    console.error('Error:', status);
-                }
-            });
-        }
-
-        function updateTotalDistance() {
-            totalDistance = distances.reduce((acc, distance) => acc + distance, 0);
-            const totalDistanceInMiles = totalDistance.toFixed(2);
-            console.log(`Total Distance: ${totalDistanceInMiles} miles`);
-        }
-
-        function isPlaceInUK(place) {
-            const ukBounds = new google.maps.LatLngBounds(
-                new google.maps.LatLng(49.959999, -7.572168), // South West Corner of the UK
-                new google.maps.LatLng(58.635000, 1.681530) // North East Corner of the UK
-            );
-            return ukBounds.contains(place.geometry.location);
-        }
-
-        function addMarker(location, title) {
-            const marker = new google.maps.Marker({
-                position: location,
-                map: map,
-                title: title
-            });
-            marker.addListener('click', () => {
-                infoWindow.setContent(title);
-                infoWindow.open(map, marker);
-            });
-            markers.push(marker);
-        }
-
-        function clearMarkers() {
-            markers.forEach(marker => marker.setMap(null));
-            markers = [];
-        }
-
-        function adjustMapViewport(places) {
-            const bounds = new google.maps.LatLngBounds();
-            places.forEach(place => bounds.extend(place.geometry.location));
-            map.fitBounds(bounds);
-        }
-
-        function drawRoute(places) {
-            const waypoints = places.slice(1, -1).map(place => ({ location: place.geometry.location, stopover: true }));
-            directionsService.route({
-                origin: places[0].geometry.location,
-                destination: places[places.length - 1].geometry.location,
-                waypoints: waypoints,
-                travelMode: google.maps.TravelMode.DRIVING
-            }, (response, status) => {
-                if (status === 'OK') {
-                    directionsRenderer.setDirections(response);
-                } else {
-                    console.error('Directions request failed due to ' + status);
-                }
-            });
-        }
-    </script> --}}
-
-
-
-
-
-
     @include('frontend.booking.booking-js')
     @include('frontend.booking.style-css')
 @endsection

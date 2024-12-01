@@ -25,25 +25,34 @@ class PaymentController extends Controller
         Stripe::setApiKey(config('services.stripe.secret'));
         $booking = Booking::find($id);
         $price = null;
-        if($booking->return_id){
+        if ($booking->return_id) {
             $returnBooking = Booking::find($booking->return_id);
-            $price = $booking->total_price + $returnBooking->total_price;
-        }else{
-
-        $price = $booking->total_price;
+            if ($booking->discount_price) {
+                $price = $booking->discount_price + $returnBooking->discount_price;
+            } else {
+                $price = $booking->total_price + $returnBooking->total_price;
+            }
+        } else {
+            if ($booking->discount_price) {
+                $price = $booking->discount_price;
+            } else {
+                $price = $booking->total_price;
+            }
         }
         $session = Session::create([
             'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'gbp',
-                    'product_data' => [
-                        'name' => 'Booking Car',
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'gbp',
+                        'product_data' => [
+                            'name' => 'Booking Car',
+                        ],
+                        'unit_amount' => $price * 100,
                     ],
-                    'unit_amount' => $price * 100,
-                ],
-                'quantity' => 1,
-            ]],
+                    'quantity' => 1,
+                ]
+            ],
             'mode' => 'payment',
             'success_url' => route('payment.success', ['id' => $id]),
             'cancel_url' => route('payment.cancel', ['id' => $id]),
@@ -51,7 +60,7 @@ class PaymentController extends Controller
 
         return response()->json(['id' => $session->id]);
     }
-    
+
     public function showStripePaymentPage($id)
     {
         return view('create-checkout-session', ['bookingId' => $id]);
@@ -60,7 +69,7 @@ class PaymentController extends Controller
     public function paymentSuccess($id)
     {
         $booking = Booking::find($id);
-        if($booking->return_id){
+        if ($booking->return_id) {
             $returnBooking = Booking::find($booking->return_id);
             $returnBooking->is_payment = 1;
             $returnBooking->is_draft = 0;
@@ -70,12 +79,12 @@ class PaymentController extends Controller
             $booking->is_payment = 1;
             $booking->is_draft = 0;
             $booking->save();
-            $bookingName =$booking->pickup_location;
+            $bookingName = $booking->pickup_location;
             $user = User::find($booking->user_id);
             $couponDiscount = UsedCoupon::where('user_id', $user->id)->first();
             $coupon = null;
-            if($couponDiscount){
-                $coupon = Coupon::where('id', $couponDiscount->coupon_id)->first(); 
+            if ($couponDiscount) {
+                $coupon = Coupon::where('id', $couponDiscount->coupon_id)->first();
             }
             $bookingDetails = (object) [
                 'bookingId' => $booking->id,
@@ -104,7 +113,7 @@ class PaymentController extends Controller
             ];
 
             $this->emailService->sendBookingConfirmation($user, $bookingDetails);
-            
+
             Log::info('Payment successful, redirecting to booking success page.');
             return redirect()->route('booking.success')->with('success', 'Payment successful.');
         } else {
@@ -112,23 +121,23 @@ class PaymentController extends Controller
             return redirect()->back()->with('error', 'Booking not found.');
         }
     }
-    
+
 
     public function paymentCancel()
     {
         return view('frontend.booking.cancel');
     }
     public function generatePayPalLink($bookingId)
-{
-    $paypalLink = "https://www.paypal.com/checkoutnow?token=" . $bookingId;
-    
-    return response()->json(['paypal_link' => $paypalLink]);
-}
-public function prepareForRegistration(Request $request)
+    {
+        $paypalLink = "https://www.paypal.com/checkoutnow?token=" . $bookingId;
+
+        return response()->json(['paypal_link' => $paypalLink]);
+    }
+    public function prepareForRegistration(Request $request)
     {
         // $request->session()->flush();
         $request->session()->put('ispayment', true);
         return response()->json(['success' => true]);
     }
-    
+
 }

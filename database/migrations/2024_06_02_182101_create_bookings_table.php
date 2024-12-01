@@ -44,6 +44,9 @@ class CreateBookingsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('user_ip')->nullable();
             $table->string('total_price')->nullable();
+            $table->integer('coupon_id')->default(0);
+            $table->integer('discount_percentage')->default(0);
+            $table->string('discount_price')->nullable();
             $table->boolean('reminder_sent')->default(false);
             $table->integer('assigned_to')->nullable();
             $table->integer('status_id')->default(1);

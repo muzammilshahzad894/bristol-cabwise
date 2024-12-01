@@ -140,9 +140,9 @@ class BookingController extends Controller
             }
             if($role == "admin"){
                 $booking_detail = Booking::where('user_id', $user_id)->where('is_draft', 1)->where('other_email', $request->other_email)->first();
-                if($booking_detail){
-                    $booking_detail->delete();
-                }
+                // if($booking_detail){
+                //     $booking_detail->delete();
+                // }
             }
             $total_price = null;
             if($request->return == 1) {
