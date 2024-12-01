@@ -17,9 +17,11 @@
                     </tr>
                     <tr>
                         <td style="background-color: #ef8e1c; padding: 20px; color: #ffffff;">
-                            <h3 style="text-align: center; color: #ffffff;">Ride Assigned</h3>
+                            <h3 style="text-align: center; color: #ffffff;">{{ @$emailContent->subject }}</h3>
                             <p style="color: #ffffff;">Dear {{ $userName }},</p>
-                            <p style="color: #ffffff;">You have been assigned a driver for your booking. Please find the details below:</p>
+                            <p style="color: #ffffff;">
+                                {!! @$emailContent->introductory_message !!}
+                            </p>
                             <h3 style="color: #000000;">Summary:</h3>
                             <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
                                 <tr style="background-color: #000000; color: #ffffff;">
@@ -123,12 +125,14 @@
                                     <td style="padding: 10px;">{{ $is_extra_lauggage }}</td>
                                 </tr>
                             </table>
-                            <p style="color: #000000;">If you have any questions, please contact our support team at 07533225970.</p>
+                            <p style="color: #fff;">
+                                {!! @$emailContent->note !!}
+                            </p>
                         </td>
                     </tr>
                     <tr>
                         <td style="background-color: #000000; color: #ffffff; text-align: center; padding: 10px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
-                            <p style="font-size: 12px; margin: 0;">&copy; {{ date('Y') }} BristolCabwise Service. All rights reserved.</p>
+                            {!! @$emailContent->closing_text !!}
                         </td>
                     </tr>
                 </table>

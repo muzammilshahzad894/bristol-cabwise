@@ -12,16 +12,18 @@ class QuoteRequestAdmin extends Mailable
     use Queueable, SerializesModels;
 
     public $data;
+    public $emailContent;
 
-    public function __construct($data)
+    public function __construct($data, $emailContent)
     {
         $this->data = $data;
+        $this->emailContent = $emailContent;
     }
 
     public function build()
     {
         return $this->view('emails.quote_request_admin')
-            ->with($this->data)
+            ->with($this->data, $this->emailContent)
             ->subject('New Quote Request');
     }
 }

@@ -17,9 +17,11 @@
                     </tr>
                     <tr>
                         <td style="background-color: #ef8e1c; padding: 20px; color: #ffffff;">
-                            <h3 style="text-align: center; color: #ffffff;">Refund Request Received for Your Bristol Cabwise Booking</h3>
+                            <h3 style="text-align: center; color: #ffffff;">{{ @$emailContent->subject }}</h3>
                             <p style="color: #ffffff;">Dear {{ $userName }},</p>
-                            <p style="color: #ffffff;">We have received your refund request for the following booking:</p>
+                            <p style="color: #ffffff;">
+                                {!! @$emailContent->introductory_message !!}
+                            </p>
                             <table width="100%" cellpadding="10" cellspacing="0" border="1" bordercolor="#dddddd" style="border-collapse: collapse; color: #000000;">
                                 <tr style="background-color: #000000; color: #ffffff;">
                                     <th style="padding: 10px; text-align: left; width: 150px;">Booking Reference</th>
@@ -54,14 +56,14 @@
                                     <td style="padding: 10px;">{{ $reason }}</td>
                                 </tr>
                             </table>
-                            <p style="margin-bottom: 0px; padding: 0px;">Our team is currently processing your request. You will be updated on the status shortly. For any questions, please contact us at *0117 332 2782*.</p>
-                            <p style="margin: 0px; padding: 0px;">Thank you for your patience.</p>
+                            <p style="margin-bottom: 0px; padding: 0px; color: #fff;">
+                                {!! @$emailContent->note !!}
+                            </p>
                         </td>
                     </tr>
                     <tr>
                         <td style="background-color: #000000; color: #ffffff; text-align: center; padding: 10px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
-                            <p style="font-size: 12px; margin: 0;">Best regards</p>
-                            <p style="font-size: 12px; margin: 0;">The Bristol Cabwise Team</p>
+                            {!! @$emailContent->closing_text !!}
                         </td>
                     </tr>
                 </table>
