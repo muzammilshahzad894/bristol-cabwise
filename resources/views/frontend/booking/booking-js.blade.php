@@ -579,13 +579,18 @@
                     // console.log(fleetPrice);
                     var totalTax = fleet.taxes.reduce((sum, tax) => sum + parseFloat(tax.price),
                         0);
-
                     let returnPrice = is_return == 1 ? 2 : 1;
                     var totalPrice = fleetPrice + totalTax * returnPrice;
+                    console.log('totalPrice',totalPrice);
                     if (totalPrice % 1 !== 0) {
-                        totalPrice = parseFloat(totalPrice.toFixed(2));
+                        totalPrice = parseFloat(totalPrice.toFixed(2)); // Pehle 2 decimal tak round karo
+
+                        if (totalPrice % 1 >= 0.99) {
+                            totalPrice = Math.ceil(totalPrice); // Agar decimal part 0.99 ya zyada hai to next whole number
+                        }
                     }
 
+                    console.log('totalPrice',totalPrice);
                     if (isNaN(totalPrice)) {
                         alert('An error occurred: Total price is not a number.');
                         location.reload();
@@ -1391,8 +1396,7 @@
     function applyCoupon() {
         var coupon = document.getElementById('coupon').value;
         var applyButton = document.getElementById('add_coupon');
-        applyButton.disabled = true;
-        applyButton.removeAttribute('onclick');
+       
 
         $.ajax({
             url: `/apply-coupon/${coupon}`,
@@ -1414,6 +1418,8 @@
 
                         Total_price = Math.ceil(Total_price);
                     }
+                    applyButton.disabled = true;
+                    applyButton.removeAttribute('onclick');
 
                     document.getElementById('summary-total-price').innerText = '£' + Total_price;
                     $('#exampleModal').modal('show');
