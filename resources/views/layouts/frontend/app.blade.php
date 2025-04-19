@@ -38,6 +38,8 @@
 
 	<!-- Stripe JS -->
 	<script src="https://js.stripe.com/v3/"></script>
+	
+	@yield('css')
 </head>
 
 <body>

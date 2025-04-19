@@ -56,7 +56,7 @@ class BookingController extends Controller
                 $blockDates = null;
             }
             
-            return view('frontend.booking.index', compact('fleets', 'booking_detail', 'blockDates', 'bookingHours'));
+            return view('frontend.booking.booking', compact('fleets', 'booking_detail', 'blockDates', 'bookingHours'));
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while fetching bookings');
