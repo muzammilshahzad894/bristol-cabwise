@@ -88,7 +88,7 @@
                                         @endif
                                     </td>
                                     <td> <div class="max-content-display">{{ $draft->dropoff_location }} </div></td>
-                                    <td> £{{ $draft->total_price }}</td>
+                                    <td> £{{ $draft->discount_price ? $draft->discount_price : $draft->total_price }}</td>
                                     <td> {{ formatDate($draft->booking_date) }}</td>
                                     <td> {{ foramtTime($draft->booking_time) }}</td>
                                     <td class="text-nowrap">

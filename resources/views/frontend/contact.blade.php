@@ -18,7 +18,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h6>Get in touch</h6>
+                    <!--<h6>Get in touch</h6>-->
                     <h1>Contact <span>Us</span></h1>
                 </div>
             </div>
@@ -38,7 +38,7 @@
             <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
                 <div class="item"> <span class="icon omfi-location"></span>
                     <h5>Our address</h5>
-                    <p>81 Blackberry Hill Bristol Bs161df</p> <i class="numb omfi-location"></i>
+                    <p>Bristol, UK</p> <i class="numb omfi-location"></i>
                 </div>
             </div>
             {{-- <div class="col-lg-3 col-md-6 animate-box" data-animate-effect="fadeInUp">
@@ -113,6 +113,7 @@
                             <div class="col-md-12 form-group">
                                 <textarea name="message" id="message" cols="30" rows="4" placeholder="Message *" required></textarea>
                             </div>
+                               <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
                             <div class="col-md-12">
                                 <input name="submit" type="submit" id="submit" value="Send Message">
                             </div>
@@ -150,4 +151,14 @@
         </div>
     </div>
 </section>
+
+
+ <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', {action: 'submit'}).then(function(token) {
+            document.getElementById('g-recaptcha-response').value = token;
+        });
+    });
+</script>
 @endsection

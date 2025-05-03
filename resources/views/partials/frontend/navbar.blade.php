@@ -109,7 +109,7 @@
                         <div class="icon"><a href="tel:01173322782"> <i class="flaticon-phone-call"></i></a> </div>
                         <div class="text">
                             <p>Need help?</p>
-                            <h5><a href="tel:01173322782">01173322782</a></h5>
+                            <h5><a href="tel:01173322782">0117 332 2782</a></h5>
                         </div>
     
                     </div>
@@ -130,7 +130,7 @@
                     <div class="icon"><a href="tel:01173322782"> <i class="flaticon-phone-call"></i></a> </div>
                     <div class="text">
                         <p>Need help?</p>
-                        <h5><a href="tel:01173322782">01173322782</a></h5>
+                        <h5><a href="tel:01173322782">0117 332 2782</a></h5>
                     </div>
 
                 </div>
@@ -142,7 +142,7 @@
                     <div class="icon"><a href="tel:01173322782"> <i class="flaticon-phone-call"></i></a> </div>
                     <div class="text">
                         <p>Need help?</p>
-                        <h5><a href="tel:01173322782">01173322782</a></h5>
+                        <h5><a href="tel:01173322782">0117 332 2782</a></h5>
                     </div>
 
                 </div>

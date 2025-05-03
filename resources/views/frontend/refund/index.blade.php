@@ -47,7 +47,7 @@
 </style>
 
 <section class="banner-header section-padding bg-img" data-overlay-dark="4"
-data-background="{{ asset('frontend-assets/img/slider/booking_img.jpeg') }}">
+data-background="{{ asset('frontend-assets/img/slider/about.jpeg') }}">
 <div class="v-middle">
     <div class="container">
         <div class="row">

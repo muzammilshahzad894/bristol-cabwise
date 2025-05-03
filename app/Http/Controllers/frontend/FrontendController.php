@@ -18,6 +18,7 @@ use App\Services\EmailService;
 use App\Http\Controllers\frontend\CarsController;
 use Carbon\Carbon;
 use League\CommonMark\Extension\SmartPunct\Quote;
+use Illuminate\Support\Facades\Http;
 
 class FrontendController extends Controller
 {
@@ -62,10 +63,26 @@ class FrontendController extends Controller
                 'phone' => 'required',
                 'subject' => 'required',
                 'message' => 'required',
-            ]);
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
+                'g-recaptcha-response' => 'required',
+           ], [
+        'g-recaptcha-response.required' => 'reCAPTCHA verification failed. Please complete the captcha.',
+    ]);
+             if ($validator->fails()) {
+        return back()->withErrors($validator)->withInput();
+    }
+
+    // Verify reCAPTCHA response with Google API
+    $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+        'secret' => env('RECAPTCHA_SECRET_KEY'),
+        'response' => $request->input('g-recaptcha-response'),
+        'remoteip' => $request->ip(),
+    ]);
+
+    $body = $response->json();
+
+    if (!$body['success']) {
+        return back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
+    }
             $data = [
                 'name' => $request->name,
                 'email' => $request->email,
@@ -269,7 +286,9 @@ class FrontendController extends Controller
             $redirection->redirection();
         };
             $fleets = Fleet::all();
-            return view('frontend.getquote.index', compact('fleets'));
+            
+            $services = Service::all();
+            return view('frontend.getquote.index',compact('fleets', 'services'));
         } catch (\Exception $e) {
             Log::error('Review Post Error: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong while processing your request');
@@ -277,13 +296,15 @@ class FrontendController extends Controller
         }
 
     }
-    public function getquotePost(Request $request){
+     public function getquotePost(Request $request){
+        //  dd($request->all());
         try {
             $validator = Validator::make($request->all(), [
                 'pickup' => 'required',
                 'dropoff' => 'required',
                 'date' => 'required|date',
                 'fleet_id' => 'required',
+                'service_id' => 'required',
                 'fullname' => 'required',
                 'email' => 'required|email',
                 'phone' => 'required',
@@ -291,13 +312,27 @@ class FrontendController extends Controller
                 'dropoff_postal_code' => 'required',
                 'pickup_city' => 'required',
                 'dropoff_city' => 'required',
+                'g-recaptcha-response' => 'required',
                 
-            ]);
-    
-            
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
+            ], [
+        'g-recaptcha-response.required' => 'reCAPTCHA verification failed. Please complete the captcha.',
+    ]);
+                  if ($validator->fails()) {
+        return back()->withErrors($validator)->withInput();
+    }
+
+    // Verify reCAPTCHA response with Google API
+    $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+        'secret' => env('RECAPTCHA_SECRET_KEY'),
+        'response' => $request->input('g-recaptcha-response'),
+        'remoteip' => $request->ip(),
+    ]);
+
+    $body = $response->json();
+
+    if (!$body['success']) {
+        return back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
+    }
     
             $pickup_date = Carbon::parse($request->date)->format('Y-m-d');
             $pickup_time = Carbon::parse($request->date)->format('H:i:s');
@@ -307,6 +342,7 @@ class FrontendController extends Controller
             $booking->dropoff = $request->dropoff;
             $booking->date_time = $pickup;
             $booking->fleet_id = intval($request->fleet_id);
+            $booking->service_id = intval($request->service_id);
             $booking->fullname = $request->fullname;
             $booking->email = $request->email;
             $booking->phone = $request->phone;

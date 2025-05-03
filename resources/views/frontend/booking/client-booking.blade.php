@@ -709,6 +709,7 @@
     </section>
  
    
+    <script src="https://js.stripe.com/v3/"></script>
     <script type="text/javascript">
       
         var payment_id = '{{ request('payment_id') }}';
@@ -843,13 +844,11 @@
 
 @endsection
 
-@section('scripts')
-    <script src="https://js.stripe.com/v3/"></script>
+{{-- @section('scripts')
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtRWAKC7UW3kK8VNLlDe1EBHQQKu6ZTFo&libraries=places&callback=initMap">
     </script>
     <script src="{{ asset('frontend-assets/js/google-map.js') }}"></script>
     <script src="{{ asset('frontend-assets/js/distance.js') }}"></script>
 
-    {{-- @include('frontend.booking.booking-js') --}}
-@endsection
+@endsection --}}

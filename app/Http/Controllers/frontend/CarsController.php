@@ -10,13 +10,15 @@ use App\Models\Coupon;
 use App\Models\Booking;
 use App\Models\Service;
 use App\Models\Fleet;
+use Illuminate\Support\Facades\Artisan;
 
 class CarsController extends Controller
 {
     public function redirection()
     {
-
+        // Artisan::call('optimize:clear');
         $session = session()->all();
+        // dd($session);
         $ispayment = $session['ispayment'] ?? null;
         if ($ispayment) {
             $clientIp = getHostByName(getHostName());

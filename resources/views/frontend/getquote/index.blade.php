@@ -128,6 +128,20 @@
                             @endif
                         </div>
                         <div class="col-md-12">
+                            <label for="service_id">Select Service</label>
+                            <select name="service_id" id="service_id" class="form-control styled-input border-radius-0 mb-0 select select2">
+                                <option value="">Select Service</option>
+                                @foreach ($services as $service)
+                                    <option value="{{ $service->id }}" {{ old('service') == $service->id ? 'selected' : '' }}>
+                                        {{ $service->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('service'))
+                                <span class="text-danger">{{ $errors->first('service_id') }}</span>
+                            @endif
+                        </div>
+                        <div class="col-md-12">
                             <label class="custom_lable" for="pickup">Pickup Location</label>
                             <input name="pickup" type="text" value="{{ old('pickup') }}" class="form-control" placeholder="Pickup">
                             @if ($errors->has('pickup'))
@@ -187,6 +201,10 @@
                                 <span class="text-danger">{{ $errors->first('comment') }}</span>
                             @endif
                         </div>
+                       <!--<div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>-->
+                       <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+
+
                         <div class="col-md-12">
                             <button class="button-1 mt-15 mb-15 cutom_button" id="submit">Submit</button>
                         </div>
@@ -275,6 +293,16 @@
         </div>
 
     </section>
+  <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('{{ env('RECAPTCHA_SITE_KEY') }}', {action: 'submit'}).then(function(token) {
+            document.getElementById('g-recaptcha-response').value = token;
+        });
+    });
+</script>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const url = new URL(window.location.href);

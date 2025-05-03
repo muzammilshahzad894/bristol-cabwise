@@ -124,7 +124,7 @@
 
             var airportServiceElements = document.querySelectorAll('.airportservice');
 
-            if (selectedServiceName === 'Airport transfers') {
+            if (selectedServiceName == 'Airport Transfers') {
                 airportServiceElements.forEach(element => element.style.display = 'flex');
                 document.getElementById("flight_type").style.display = "block";
             } else {
@@ -452,7 +452,7 @@
                 if (!validateSecondStep()) {
                     return;
                 }
-                if (service_type != 'Airport transfers') {
+                if (service_type != 'Airport Transfers') {
                     document.getElementById('child_seat').checked = false;
                     document.getElementById('meet_greet').checked = false;
                 }
@@ -682,7 +682,7 @@
             returnPrice = 2;
         }
 
-        if (service_type == 'Airport transfers') {
+        if (service_type == 'Airport Transfers') {
             if (dist > 150) {
                 fleetPrice = dist * (airport_after_150_miles || 1) * returnPrice + vialocation_charges;
             } else if (dist > 140) {
@@ -1372,7 +1372,7 @@
         service_id = selectedServiceId;
         var airportServiceElements = document.querySelectorAll('.airportservice');
 
-        if (selectedServiceName == 'Airport transfers') {
+        if (selectedServiceName == 'Airport Transfers') {
             airportServiceElements.forEach(element => element.style.display = 'flex');
             document.getElementById("flight_type").style.display = "block";
         } else {
@@ -1411,13 +1411,8 @@
                     coupon_apply = coupon;
                     Total_price = Total_price - (Total_price * data.discount / 100);
 
-                    if (Total_price % 1 <= 0.5) {
-
-                        Total_price = Math.floor(Total_price);
-                    } else {
-
-                        Total_price = Math.ceil(Total_price);
-                    }
+                //   Total_price = parseFloat(Total_price.toFixed(2));
+                   Total_price = Total_price.toFixed(2);
                     applyButton.disabled = true;
                     applyButton.removeAttribute('onclick');
 

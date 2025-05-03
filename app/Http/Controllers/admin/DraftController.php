@@ -85,6 +85,7 @@ class DraftController extends Controller
             }
 
             $bookByAdmin = $bookByAdmin->paginate(10);
+           
 
             return view('admin.draft.bookByAdmin', compact('bookByAdmin', 'drivers', 'statuses'));
         } catch (Exception $e) {

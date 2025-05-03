@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h6>Our Fleet</h6>
+                        <!--<h6>Our Fleet</h6>-->
                         {{-- <h1>Our <span>Services</span></h1> --}}
                         <h1>{{ $fleet->name }}</h1>
                     </div>

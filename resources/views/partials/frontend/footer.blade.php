@@ -24,7 +24,7 @@
                                 <!-- <h5><a href="tel:01173322782">01173322782</a></h5> -->
                                 <div class="footer-contact-link-content">
                                     <h6>Call us</h6>
-                                    <p><a href="tel:01173322782"> 01173322782 </a></p>
+                                    <p><a href="tel:01173322782"> 0117 332 2782 </a></p>
                                 </div>
                             </div>
                             <div class="footer-contact-links-divider"></div>
@@ -44,9 +44,7 @@
                                 </div>
                                 <div class="footer-contact-link-content">
                                     <h6>Address</h6>
-                                    <p>81 Blackberry Hill
-                                        Bristol
-                                        Bs161df</p>
+                                    <p>Bristol, UK</p>
                                 </div>
                             </div>
                         </div>
@@ -71,8 +69,8 @@
                             <div class="social-icons">
                                 <ul class="list-inline custom_icon_list">
                                     <li><a href="https://wa.me/447533225970" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="https://www.facebook.com/share/1JYweaDxVf/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                    <li><a href="https://www.instagram.com/bristolcabwise?igsh=MWx4cmo4ajR0Y202dg==" target="_blank"><i class="fab fa-instagram"></i></a></li>
                                 </ul>
                             </div>
                         </div>
