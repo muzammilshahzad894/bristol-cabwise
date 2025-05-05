@@ -13,9 +13,6 @@
         </div>
     </div>
 </section>
-<!-- divider line -->
-<div class="line-vr-section"></div>
-<!-- Services Box 2 -->
 
 
 <section class="testimonials section-padding mt-15">

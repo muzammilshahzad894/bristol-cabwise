@@ -5678,3 +5678,11 @@ height: 100% !important;
     border-radius: 10px;
     padding: 30px;
 }
+
+.primary-text {
+    color: #f5b754;
+}
+
+.primary-text:hover {
+    color: #f5b754;
+}

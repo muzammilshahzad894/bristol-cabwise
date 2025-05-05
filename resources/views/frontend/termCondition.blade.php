@@ -94,7 +94,7 @@
 
     <h2>Questions and Contacting Us</h2>
     <p>If you want to access, correct, amend, or delete personal information we have about you, or if you have any questions, please contact us via our contact page.</p>
-    <p>For further information regarding our terms and conditions, please call 01173322782.</p>
+    <p>For further information regarding our terms and conditions, please call <a href="tel:01173322782" class="primary-text">0117 332 2782</a>.</p>
 </div>
 
 @endsection

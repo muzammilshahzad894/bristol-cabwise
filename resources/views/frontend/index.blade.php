@@ -393,7 +393,6 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 text-center mb-30">
-                    <div class="section-subtitle">Steps</div>
                     <div class="section-title white">Booking <span>Process</span></div>
                 </div>
             </div>
@@ -403,7 +402,7 @@
                         <div class="text">
                             <h5>Book Online or Get a Quote</h5>
                             <p>Make your booking online or request a quote through our user-friendly website, ensuring safe
-                                payments, date protections, and customer safety.</p>
+                                payments, data protection, and customer safety.</p>
                         </div>
                         <div class="numb">
                             <div class="numb-curv">
@@ -431,7 +430,7 @@
                 <div class="col-md-4 mb-30">
                     <div class="item">
                         <div class="text">
-                            <h5>Choose a Service</h5>
+                            <h5>Choose Your Vehicle</h5>
                             <p>Explore Bristol Cabwise's diverse fleet and service options for a seamless and enjoyable
                                 ride.</p>
                         </div>

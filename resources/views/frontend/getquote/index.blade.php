@@ -86,35 +86,35 @@
                     <form action="{{ route('frontend.getquotePost') }}" method="POST" id="booking_form">
                         @csrf
                         <div class="col-md-12">
-                            <label class="custom_lable" for="fullname">Full Name</label>
-                            <input name="fullname" type="text" value="{{ old('fullname') }}" class="form-control" placeholder="Full Name">
+                            <label class="custom_lable" for="fullname">Name</label>
+                            <input name="fullname" type="text" value="{{ old('fullname') }}" class="form-control" placeholder="Enter your name">
                             @if ($errors->has('fullname'))
                                 <span class="text-danger">{{ $errors->first('fullname') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
                             <label class="custom_lable" for="email">Email</label>
-                            <input name="email" type="email" value="{{ old('email') }}" class="form-control" placeholder="Email">
+                            <input name="email" type="email" value="{{ old('email') }}" class="form-control" placeholder="ex: myname@example.com">
                             @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="phone">Phone</label>
-                            <input name="phone" type="text" value="{{ old('phone') }}" class="form-control" placeholder="Phone">
+                            <label class="custom_lable" for="phone">Mobile</label>
+                            <input name="phone" type="text" value="{{ old('phone') }}" class="form-control" placeholder="">
                             @if ($errors->has('phone'))
                                 <span class="text-danger">{{ $errors->first('phone') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="date">Date & Time</label>
-                            <input name="date" type="datetime-local" value="{{ old('date') }}" class="input location styled-input timepicker border-radius-0 mb-0" placeholder="Date">
+                            <label class="custom_lable" for="date">Pickup date</label>
+                            <input name="date" type="datetime-local" value="{{ old('date') }}" class="input location styled-input timepicker border-radius-0 mb-0" placeholder="">
                             @if ($errors->has('date'))
                                 <span class="text-danger">{{ $errors->first('date') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label for="fleet_id">Select Fleet</label>
+                            <label for="fleet_id">Fleet</label>
                             <select name="fleet_id" id="fleet_id" class="styled-input border-radius-0 mb-0 select select2">
                                 <option value="">Select Fleet</option>
                                 @foreach ($fleets as $service)
@@ -128,7 +128,7 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label for="service_id">Select Service</label>
+                            <label for="service_id">Service</label>
                             <select name="service_id" id="service_id" class="form-control styled-input border-radius-0 mb-0 select select2">
                                 <option value="">Select Service</option>
                                 @foreach ($services as $service)
@@ -142,44 +142,44 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="pickup">Pickup Location</label>
-                            <input name="pickup" type="text" value="{{ old('pickup') }}" class="form-control" placeholder="Pickup">
+                            <label class="custom_lable" for="pickup">Pickup address</label>
+                            <input name="pickup" type="text" value="{{ old('pickup') }}" class="form-control" placeholder="Enter pickup address">
                             @if ($errors->has('pickup'))
                                 <span class="text-danger">{{ $errors->first('pickup') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
                             <label class="custom_lable" for="pickup_postal_code">Pickup Postcode</label>
-                            <input name="pickup_postal_code" type="text" value="{{ old('pickup_postal_code') }}" class="form-control" placeholder="Pickup Postcode">
+                            <input name="pickup_postal_code" type="text" value="{{ old('pickup_postal_code') }}" class="form-control" placeholder="Enter pickup postcode">
                             @if ($errors->has('pickup_postal_code'))
                                 <span class="text-danger">{{ $errors->first('pickup_postal_code') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
                             <label class="custom_lable" for="pickup_city">Pickup City/Town</label>
-                            <input name="pickup_city" type="text" value="{{ old('pickup_city') }}" class="form-control" placeholder="Pickup City/Town">
+                            <input name="pickup_city" type="text" value="{{ old('pickup_city') }}" class="form-control" placeholder="Enter pickup city/town">
                             @if ($errors->has('pickup_city'))
                                 <span class="text-danger">{{ $errors->first('pickup_city') }}</span>
                             @endif
                         </div>
 
                         <div class="col-md-12">
-                            <label class="custom_lable" for="dropoff">Dropoff Location</label>
-                            <input name="dropoff" type="text" value="{{ old('dropoff') }}" class="form-control" placeholder="Dropoff">
+                            <label class="custom_lable" for="dropoff">Destination address</label>
+                            <input name="dropoff" type="text" value="{{ old('dropoff') }}" class="form-control" placeholder="Enter destination address">
                             @if ($errors->has('dropoff'))
                                 <span class="text-danger">{{ $errors->first('dropoff') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="dropoff_postal_code">Dropoff Postcode</label>
-                            <input name="dropoff_postal_code" type="text" value="{{ old('dropoff_postal_code') }}" class="form-control" placeholder="Dropoff Postcode">
+                            <label class="custom_lable" for="dropoff_postal_code">Destination Postcode</label>
+                            <input name="dropoff_postal_code" type="text" value="{{ old('dropoff_postal_code') }}" class="form-control" placeholder="Enter destination postcode">
                             @if ($errors->has('dropoff_postal_code'))
                                 <span class="text-danger">{{ $errors->first('dropoff_postal_code') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="dropoff_city">Dropoff City/Town</label>
-                            <input name="dropoff_city" type="text" value="{{ old('dropoff_city') }}" class="form-control" placeholder="Dropoff City/Town">
+                            <label class="custom_lable" for="dropoff_city">Destination City/Town</label>
+                            <input name="dropoff_city" type="text" value="{{ old('dropoff_city') }}" class="form-control" placeholder="Enter destination city/town">
                             @if ($errors->has('dropoff_city'))
                                 <span class="text-danger">{{ $errors->first('dropoff_city') }}</span>
                             @endif
@@ -214,37 +214,47 @@
                 <div class="col-md-4" style="border-left: 1px solid #ccc">
 
                     <h3 class="color color_theme">Location</h3>
+                    <div class="google-map">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24312.81061564066!2d-2.602046251494366!3d51.45451429765481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48719c0a15db7f05%3A0x3d1d0c49b5b7e08d!2sBristol%2C%20UK!5e0!3m2!1sen!2suk!4v1646760525018!5m2!1sen!2suk" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
 
                     <div style="padding: 10px;margin-top:10px">
                         <h5 class="color">All classes include:</h5>
                         <div class="icon_text">
                             <i class="fa-solid fa-check"></i>
                             <p>
-                                Free registration
+                                Free registration.
                             </p>
                         </div>
                         <div class="icon_text">
                             <i class="fa-solid fa-check"></i>
                             <p>
-                                Free cancellation up to 24 hours before your scheduled pick-up
+                                Free cancellation up to 24 hours before your scheduled pick-up.
                             </p>
                         </div>
                         <div class="icon_text">
                             <i class="fa-solid fa-check"></i>
                             <p>
-                                Enjoy complimentary 1 hour waiting time for airport pickups
+                                Enjoy complimentary 1 hour waiting time for airport pickups.
                             </p>
                         </div>
                         <div class="icon_text">
                             <i class="fa-solid fa-check"></i>
                             <p>
-                                Luggage assistance
+                                Luggage assistance.
                             </p>
                         </div>
                         <div class="icon_text">
                             <i class="fa-solid fa-check"></i>
                             <p>
-                                Complimentary 15 min waiting period at all other pickups
+                                Complimentary 15 min waiting period at all other pickups.
                             </p>
                         </div>
                     </div>

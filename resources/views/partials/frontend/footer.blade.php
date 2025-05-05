@@ -3,10 +3,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
     }
     .custom_icon_list{
         display: flex;
     }
+
+    .custom_icon_list li a.full-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 15px; /* optional for spacing */
+        text-align: center;
+    }
+
 </style>
 
 <footer class="footer clearfix">
@@ -68,9 +78,9 @@
                             <p>Book a service with us to ensure smooth and comfortable travel.</p>
                             <div class="social-icons">
                                 <ul class="list-inline custom_icon_list">
-                                    <li><a href="https://wa.me/447533225970" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
-                                    <li><a href="https://www.facebook.com/share/1JYweaDxVf/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="https://www.instagram.com/bristolcabwise?igsh=MWx4cmo4ajR0Y202dg==" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="https://wa.me/447533225970" target="_blank" class="full-link"><i class="fa-brands fa-whatsapp"></i></a></li>
+                                    <li><a href="https://www.facebook.com/share/1JYweaDxVf/" target="_blank" class="full-link"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                    <li><a href="https://www.instagram.com/bristolcabwise?igsh=MWx4cmo4ajR0Y202dg==" target="_blank" class="full-link"><i class="fab fa-instagram"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -88,7 +98,6 @@
                             <li><a class="nav-link"  href="{{ route('frontend.trustVoilet') }}">Reviews</a></li>
                             <li><a href="{{ route('frontend.faqs') }}">FAQs</a></li>
                             <li><a href="{{ route('frontend.termCondition') }}">Term and Condition</a></li>
-                            <!-- <li><a href="{{ route('frontend.services') }}" class="booking_online_btn">Book Now</a></li> -->
                         </ul>
                     </div>
                 </div>

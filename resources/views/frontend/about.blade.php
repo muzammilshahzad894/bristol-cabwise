@@ -385,8 +385,8 @@
                 <div class="col-md-6 order_2">
                     <div class="section-subtitle"></div>
                     <h4 class="section-title">Competitive <span>Rates:</span></h4>
-                    <p>We offer competitive rates without compromising on the quality of service, making transportation
-                        accessible for all budgets.
+                    <p>
+                        We offer competitive rates without compromising on the quality of service, making transportation accessible for all budgets. Our transparent pricing structure ensures there are no hidden fees, and we strive to provide the best value for your money. Whether you're booking a short trip or a long-distance journey, you can count on us for affordability, reliability, and exceptional service every step of the way.
                     </p>
                 </div>
                 <div class="col-md-6 order_2">
@@ -405,8 +405,8 @@
                 <div class="col-md-6 padding-top order_2">
                     <div class="section-subtitle"></div>
                     <h4 class="section-title">Highly Professional <span>Staff:</span></h4>
-                    <p> Our team of experienced drivers undergo rigorous training and background checks to ensure
-                        professionalism, courtesy, and safety at all times.
+                    <p>
+                        Our team of experienced drivers undergo rigorous training and background checks to ensure professionalism, courtesy, and safety at all times. They are not only skilled behind the wheel but are also committed to delivering exceptional customer service. Each member of our team is trained to handle a variety of travel needs with efficiency and care, ensuring a smooth and pleasant experience from pickup to drop-off.
                     </p>
                 </div>
                 <div class="col-md-6 padding-top order_1">
