@@ -2740,7 +2740,7 @@ font-family: 'Outfit', sans-serif;
 }
 .car-types1 .item {
     position: relative;
-    border-radius: 20px 20px 20px 0;
+    border-radius: 20px 20px 20px 20px;
     overflow: hidden;
     margin-bottom: 15px;
 }

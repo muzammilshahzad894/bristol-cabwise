@@ -243,6 +243,28 @@
             background: url('/frontend-assets/img/homevideo.mp4') no-repeat center center !important;
         }
 
+        .fleet-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fleet-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+            z-index: 1;
+        }
+
+        .fleet-item .title {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 2;
+        }
+
     </style>
     <header class="header">
         <div class="video-fullscreen-wrap">
@@ -353,31 +375,11 @@
                     <div class="owl-carousel owl-theme">
                         @if ($fleets->count() > 0)
                             @foreach ($fleets as $fleet)
-                                <div class="item"> <img src="{{ asset('uploads/fleets/' . $fleet->image) }}"
-                                        class="img-fluid" alt="">
-                                    <div class="title">
-                                        <h4>{{ $fleet->name }}</h4>
-                                    </div>
-                                    <div class="curv-butn icon-bg">
-                                        <a href="{{ route('frontend.fleetDetailsFrontend', $fleet->id) }}" class="vid">
-                                            <div class="icon"> <i class="ti-arrow-top-right"></i> </div>
-                                        </a>
-                                        <div class="br-left-top">
-                                            <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                                class="w-11 h-11">
-                                                <path
-                                                    d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z"
-                                                    fill="#1b1b1b"></path>
-                                            </svg>
-                                        </div>
-                                        <div class="br-right-bottom">
-                                            <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                                class="w-11 h-11">
-                                                <path
-                                                    d="M11 1.54972e-06L0 0L2.38419e-07 11C1.65973e-07 4.92487 4.92487 1.62217e-06 11 1.54972e-06Z"
-                                                    fill="#1b1b1b"></path>
-                                            </svg>
-                                        </div>
+                                <div class="item position-relative fleet-item">
+                                    <img src="{{ asset('uploads/fleets/' . $fleet->image) }}" class="img-fluid" alt="">
+                                    <div class="overlay"></div>
+                                    <div class="title text-white">
+                                        <h4 class="primary-white">{{ $fleet->name }}</h4>
                                     </div>
                                 </div>
                             @endforeach

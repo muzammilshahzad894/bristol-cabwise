@@ -13,7 +13,6 @@
         display: block;
         width: 100%;
         height: 100%;
-        padding: 15px; /* optional for spacing */
         text-align: center;
     }
 
@@ -120,7 +119,7 @@
         <div class="bottom-footer-text">
             <div class="row copyright">
                 <div class="col-md-12">
-                    <p class="mb-0">&copy;2024 <a href="#">Bristol cabwise</a>. All rights reserved.</p>
+                    <p class="mb-0">&copy;{{ date('Y') }} <a href="#">Bristol cabwise</a>. All rights reserved.</p>
                 </div>
             </div>
         </div>

@@ -57,7 +57,7 @@
 @section('content')
     <!-- Header Banner -->
     <section class="banner-header section-padding bg-img" data-overlay-dark="4"
-        data-background="{{ asset('frontend-assets/img/slider/3.jpg') }}">
+        data-background="https://media.istockphoto.com/id/1502994715/photo/happy-crowdsorced-taxi.jpg?s=612x612&w=0&k=20&c=tOG_f2ZNkKYAyMbrJKrN9BV1CHQo4QfEZcDKFT98NuY=">
         <div class="v-middle">
             <div class="container">
                 <div class="row">
