@@ -20,13 +20,13 @@
                         <span class="nav-text">Fleets</span>
                     </a>
                 </li>
-                <li class="{{ request()->routeIs('admin.drivers.index') || request()->routeIs('admin.drivers.create') ? 'mm-active' : '' }} || request()->routeIs('admin.drivers.edit')">
+                <!-- <li class="{{ request()->routeIs('admin.drivers.index') || request()->routeIs('admin.drivers.create') ? 'mm-active' : '' }} || request()->routeIs('admin.drivers.edit')">
                     <a href="{{ route('admin.drivers.index') }}" class="" aria-expanded="false">
                         <i class="fa fa-taxi"></i>
                         <span class="nav-text">Drivers</span>
                     </a>
-                </li>
-                <li class="{{ request()->routeIs('admin.block-dates.index') || request()->routeIs('admin.block-dates.index') ? 'mm-active' : '' }} || request()->routeIs('admin.block-dates.edit')">
+                </li> -->
+                <!-- <li class="{{ request()->routeIs('admin.block-dates.index') || request()->routeIs('admin.block-dates.index') ? 'mm-active' : '' }} || request()->routeIs('admin.block-dates.edit')">
                     <a href="{{ route('admin.block-dates.index') }}" class="" aria-expanded="false">
                     
                         <i class="fa fa-calendar">
@@ -34,14 +34,14 @@
                         </i>
                         <span class="nav-text">Block Dates</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="{{ request()->routeIs('admin.coupons.index') || request()->routeIs('admin.coupons.create') ? 'mm-active' : '' }} || request()->routeIs('admin.coupons.edit')">
                     <a href="{{ route('admin.coupons.index') }}" class="" aria-expanded="false">
                         <i class="fa fa-list-ul"></i>
                         <span class="nav-text">Coupon</span>
                     </a>
                 </li>
-                <li class="{{ request()->routeIs('admin.booking') ? 'mm-active' : '' }}">
+                <!-- <li class="{{ request()->routeIs('admin.booking') ? 'mm-active' : '' }}">
                     <a href="{{ route('admin.booking') }}" class="" aria-expanded="false">
                         <i class="fa fa-user"></i>
                         <span class="nav-text">Booking by Admin</span>
@@ -71,8 +71,8 @@
                         <i class="fa fa-envelope"></i>
                         <span class="nav-text">Quotations</span>
                     </a>
-                </li>
-                <li class="{{ request()->routeIs('admin.custom-email.index') || request()->routeIs('admin.email-settings.index') || request()->routeIs('admin.email-content-settings.index') ? 'mm-active' : '' }}">
+                </li> -->
+                <!-- <li class="{{ request()->routeIs('admin.custom-email.index') || request()->routeIs('admin.email-settings.index') || request()->routeIs('admin.email-content-settings.index') ? 'mm-active' : '' }}">
                     <a class="has-arrow " href="javascript:void()" aria-expanded="false">
                         <i class="fa fa-envelope"></i>
                         <span class="nav-text">Emails</span>
@@ -82,8 +82,14 @@
                         <li><a href="{{ route('admin.email-settings.index') }}">Email Settings</a></li>
                         <li><a href="{{ route('admin.email-content-settings.index') }}">Content Settings</a></li>
                     </ul>
+                </li> -->
+                <li class="{{ request()->routeIs('admin.custom-email.index') ? 'mm-active' : '' }}">
+                    <a href="{{ route('admin.custom-email.index') }}" class="" aria-expanded="false">
+                        <i class="fa fa-envelope"></i>
+                        <span class="nav-text">Custom Email</span>
+                    </a>
                 </li>
-                <li class="{{ request()->routeIs('admin.settings.index') ? 'mm-active' : '' }}">
+                <!-- <li class="{{ request()->routeIs('admin.settings.index') ? 'mm-active' : '' }}">
                     <a href="{{ route('admin.settings.index') }}" class="" aria-expanded="false">
                         <i class="fa fa-cog"></i>
                         <span class="nav-text">Settings</span>
@@ -96,7 +102,7 @@
                             <span class="nav-text">Emails</span>
                         </a>
                     </li>
-                @endif
+                @endif -->
             </ul>
         @endif
         @if(Auth::user()->role == 'driver')

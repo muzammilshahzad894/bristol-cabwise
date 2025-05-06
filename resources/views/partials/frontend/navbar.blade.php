@@ -69,7 +69,7 @@
 
 
 
-                @auth
+                <!-- @auth
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
@@ -95,7 +95,7 @@
                         </form>
                     </div>
                 </li>
-            @endauth
+            @endauth -->
 
 
 

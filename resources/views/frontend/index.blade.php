@@ -901,14 +901,14 @@
 
     <!-- Lets Talk -->
     <section class="lets-talk bg-img bg-fixed section-padding" data-overlay-dark="5"
-        data-background="{{ asset('frontend-assets/img/slider/3.jpg') }}">
+        data-background="{{ asset('frontend-assets/img/slider/25.png') }}">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h6>Book Your Ride</h6>
                     <h5>Interested in booking?</h5>
                     <p>Don’t hesitate to call or send us a message instead.</p> <a href="https://wa.me/447533225970"
-                        target="_blank" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i>
+                        target="_blank" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp text-white"></i>
                         WhatsApp</a> <a href="{{ route('frontend.contact') }}" class="button-2 mt-15 mb-15">Contact Us
                         <span class="ti-arrow-top-right"></span></a>
                 </div>

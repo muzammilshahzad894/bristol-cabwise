@@ -140,13 +140,13 @@
     </div>
 </section>
 <!-- Lets Talk -->
-<section class="lets-talk bg-img bg-fixed section-padding" data-overlay-dark="6" data-background="{{ asset('frontend-assets/img/slider/3.jpg') }}">
+<section class="lets-talk bg-img bg-fixed section-padding" data-overlay-dark="6" data-background="{{ asset('frontend-assets/img/slider/25.png') }}">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
                 <h6>BOOK YOUR RIDE</h6>
                 <h5>Interested in Booking?</h5>
-                <p>Don't hesitate and send us a message.</p> <a href="https://wa.me/447533225970" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a> <a href="contact" class="button-2 mt-15 mb-15">Contact Us <span class="ti-arrow-top-right"></span></a>
+                <p>Don't hesitate and send us a message.</p> <a href="https://wa.me/447533225970" class="button-1 mt-15 mb-15 mr-10"><i class="fa-brands fa-whatsapp text-white"></i> WhatsApp</a> <a href="contact" class="button-2 mt-15 mb-15">Contact Us <span class="ti-arrow-top-right"></span></a>
             </div>
         </div>
     </div>
