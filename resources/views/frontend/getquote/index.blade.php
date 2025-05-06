@@ -86,35 +86,35 @@
                     <form action="{{ route('frontend.getquotePost') }}" method="POST" id="booking_form">
                         @csrf
                         <div class="col-md-12">
-                            <label class="custom_lable" for="fullname">Name</label>
-                            <input name="fullname" type="text" value="{{ old('fullname') }}" class="form-control" placeholder="Enter your name">
+                            <label class="custom_lable" for="fullname">NAME *</label>
+                            <input name="fullname" type="text" value="{{ old('fullname') }}" class="form-control" placeholder="Full Name">
                             @if ($errors->has('fullname'))
                                 <span class="text-danger">{{ $errors->first('fullname') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="email">Email</label>
-                            <input name="email" type="email" value="{{ old('email') }}" class="form-control" placeholder="ex: myname@example.com">
+                            <label class="custom_lable" for="email">EMAIL *</label>
+                            <input name="email" type="email" value="{{ old('email') }}" class="form-control" placeholder="Email">
                             @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="phone">Mobile</label>
-                            <input name="phone" type="text" value="{{ old('phone') }}" class="form-control" placeholder="">
+                            <label class="custom_lable" for="phone">TELEPHONE *</label>
+                            <input name="phone" type="text" value="{{ old('phone') }}" class="form-control" placeholder="Telephone">
                             @if ($errors->has('phone'))
                                 <span class="text-danger">{{ $errors->first('phone') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="date">Pickup date</label>
+                            <label class="custom_lable" for="date">COLLECTION DATE *</label>
                             <input name="date" type="datetime-local" value="{{ old('date') }}" class="input location styled-input timepicker border-radius-0 mb-0" placeholder="">
                             @if ($errors->has('date'))
                                 <span class="text-danger">{{ $errors->first('date') }}</span>
                             @endif
                         </div>
-                        <div class="col-md-12">
-                            <label for="fleet_id">Fleet</label>
+                        <div class="col-md-12 mt-3">
+                            <label for="fleet_id" class="custom_lable">FLEET *</label>
                             <select name="fleet_id" id="fleet_id" class="styled-input border-radius-0 mb-0 select select2">
                                 <option value="">Select Fleet</option>
                                 @foreach ($fleets as $service)
@@ -128,7 +128,7 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label for="service_id">Service</label>
+                            <label for="service_id" class="custom_lable">SERVICE *</label>
                             <select name="service_id" id="service_id" class="form-control styled-input border-radius-0 mb-0 select select2">
                                 <option value="">Select Service</option>
                                 @foreach ($services as $service)
@@ -142,51 +142,58 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="pickup">Pickup address</label>
-                            <input name="pickup" type="text" value="{{ old('pickup') }}" class="form-control" placeholder="Enter pickup address">
+                            <h3 class="color color_theme" style="font-size: 20px;">COLLECTION ADDRESS</h3>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="custom_lable" for="pickup">ADDRESS *</label>
+                            <input name="pickup" type="text" value="{{ old('pickup') }}" class="form-control" placeholder="Collection Address">
                             @if ($errors->has('pickup'))
                                 <span class="text-danger">{{ $errors->first('pickup') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="pickup_postal_code">Pickup Postcode</label>
-                            <input name="pickup_postal_code" type="text" value="{{ old('pickup_postal_code') }}" class="form-control" placeholder="Enter pickup postcode">
+                            <label class="custom_lable" for="pickup_postal_code">POSTCODE *</label>
+                            <input name="pickup_postal_code" type="text" value="{{ old('pickup_postal_code') }}" class="form-control" placeholder="Postcode">
                             @if ($errors->has('pickup_postal_code'))
                                 <span class="text-danger">{{ $errors->first('pickup_postal_code') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="pickup_city">Pickup City/Town</label>
-                            <input name="pickup_city" type="text" value="{{ old('pickup_city') }}" class="form-control" placeholder="Enter pickup city/town">
+                            <label class="custom_lable" for="pickup_city">TOWN / CITY *</label>
+                            <input name="pickup_city" type="text" value="{{ old('pickup_city') }}" class="form-control" placeholder="Town / City *">
                             @if ($errors->has('pickup_city'))
                                 <span class="text-danger">{{ $errors->first('pickup_city') }}</span>
                             @endif
                         </div>
-
+                        
                         <div class="col-md-12">
-                            <label class="custom_lable" for="dropoff">Destination address</label>
-                            <input name="dropoff" type="text" value="{{ old('dropoff') }}" class="form-control" placeholder="Enter destination address">
+                            <h3 class="color color_theme" style="font-size: 20px;">DESTINATION ADDRESS</h3>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="custom_lable" for="dropoff">ADDRESS LINE 1 *</label>
+                            <input name="dropoff" type="text" value="{{ old('dropoff') }}" class="form-control" placeholder="Destination Address">
                             @if ($errors->has('dropoff'))
                                 <span class="text-danger">{{ $errors->first('dropoff') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="dropoff_postal_code">Destination Postcode</label>
-                            <input name="dropoff_postal_code" type="text" value="{{ old('dropoff_postal_code') }}" class="form-control" placeholder="Enter destination postcode">
+                            <label class="custom_lable" for="dropoff_postal_code">POSTCODE *</label>
+                            <input name="dropoff_postal_code" type="text" value="{{ old('dropoff_postal_code') }}" class="form-control" placeholder="Postcode">
                             @if ($errors->has('dropoff_postal_code'))
                                 <span class="text-danger">{{ $errors->first('dropoff_postal_code') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="dropoff_city">Destination City/Town</label>
-                            <input name="dropoff_city" type="text" value="{{ old('dropoff_city') }}" class="form-control" placeholder="Enter destination city/town">
+                            <label class="custom_lable" for="dropoff_city">TOWN / CITY *</label>
+                            <input name="dropoff_city" type="text" value="{{ old('dropoff_city') }}" class="form-control" placeholder="Town / City">
                             @if ($errors->has('dropoff_city'))
                                 <span class="text-danger">{{ $errors->first('dropoff_city') }}</span>
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="return_journey">Return Journey</label>
+                            <label class="custom_lable" for="return_journey">DO YOU REQUIRE A RETURN JOURNEY? *</label>
                             <select name="return_journey" id="return_journey" class="styled-input border-radius-0 mb-0 select select2">
+                                <option value="">-- Please choose an option --</option>
                                 <option value="0" {{ old('return_journey') == '0' ? 'selected' : '' }}>No</option>
                                 <option value="1" {{ old('return_journey') == '1' ? 'selected' : '' }}>Yes</option>
                             </select>
@@ -195,8 +202,8 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <label class="custom_lable" for="comment">Comment</label>
-                            <textarea name="comment" class="form-control" placeholder="Feel free to tell us about your inquiry">{{ old('comment') }}</textarea>
+                            <label class="custom_lable" for="comment">COMMENTS AND FURTHER REQUIREMENTS</label>
+                            <textarea name="comment" class="form-control" placeholder="via addresses, waiting time or any additional information." rows="5">{{ old('comment') }}</textarea>
                             @if ($errors->has('comment'))
                                 <span class="text-danger">{{ $errors->first('comment') }}</span>
                             @endif
@@ -206,7 +213,7 @@
 
 
                         <div class="col-md-12">
-                            <button class="button-1 mt-15 mb-15 cutom_button" id="submit">Submit</button>
+                            <button class="button-1 mt-15 mb-15 cutom_button" id="submit">REQUEST A QUOTE</button>
                         </div>
                     </form>
 
